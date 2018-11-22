@@ -12,4 +12,4 @@ To be done.
 
 # License
 
-Code provided in this repository is distributed under Apache License, Version 2.0. Please refer [LICENSE](../blob/master/LICENSE) file for details.
+Code provided in this repository is distributed under Apache License, Version 2.0. Please refer [LICENSE](../master/LICENSE) file for details.
