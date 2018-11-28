@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2018 and Confidential to Pegasystems Inc. All rights reserved.
+# Copyright (c) 2018 Pegasystems Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
