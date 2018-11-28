@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Vehicle Damage</string>
+    <string name="vulkan_triangle">Vulkan API sample - triangle.</string>
+    <string name="open">Open</string>
+</resources>

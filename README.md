@@ -8,7 +8,29 @@ iOS project uses [Metal Framework](https://developer.apple.com/metal/) for rende
 
 ## Android
 
-To be done.
+Android project uses [Vulkan Graphics API](https://developer.android.com/ndk/guides/graphics/) for high-performance, 3D graphics. Based on _android-vulkan-tutorials_ from Google ([tutorial05_triangle](https://github.com/googlesamples/android-vulkan-tutorials/tree/master/tutorial05_triangle/)).
+
+#### Prerequisites
+
+ - __Android Studio__: 3.2.0 or higher.
+ - __Android SDK__: Android N or higher (24 API)
+ - __Android NDK__ and __CMake__ build tools
+
+#### Import project
+
+ 1. __Build shaderc in the NDK__ - go to `${ANDROID_HOME}/ndk-bundle/sources/third_party/shaderc` and run following command:
+
+    ```
+    ../../../ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=Android.mk APP_STL:=c++_static APP_ABI=armeabi-v7a libshaderc_combined -j16
+    ```
+
+ 2. Install [Ninja](https://ninja-build.org/) build system (using Homebrew):
+
+    ```
+    brew install ninja
+    ```
+
+3. Import project using Android Studio.
 
 # License
 
