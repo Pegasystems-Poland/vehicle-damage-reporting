@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pega.android.vehicledamagemodeling">
+
+    <application>
+        <activity
+            android:name=".VehicleDamageModelingActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout" />
+    </application>
+
+</manifest>
