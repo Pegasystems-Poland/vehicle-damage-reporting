@@ -27,8 +27,8 @@ extension MTLDevice {
         return self.makeBuffer(bytes: data, length: dataSize, options: [])!
     }
 
-    func makeBasicPipelineState() throws -> MTLRenderPipelineState {
-        let library = self.makeDefaultLibrary()!
+    func makeBasicPipelineState(_ library: MTLLibrary) throws -> MTLRenderPipelineState {
+        //let library = self.makeDefaultLibrary()!
         // See VertexShaders.metal file for implementation of this functions
         let fragmentFunc = library.makeFunction(name: "basic_fragment")
         let vertexFunc = library.makeFunction(name: "basic_vertex")

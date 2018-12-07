@@ -14,7 +14,7 @@
 
 import Foundation
 
-enum BodyPart {
+public enum BodyPart:String {
     case Hood, Mirror, TrunkLid, TailLights, StepBumper, Door,
          Headlights, Bumpers, Grilles
 }
