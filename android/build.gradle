@@ -1,27 +1,34 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     repositories {
-        google()
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         jcenter()
-        
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
-        
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:3.3.0-rc01'
     }
 }
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-        
+    version = '1.0'
+    ext {
+        appName = "vehicle-damage-modeling"
+        gdxVersion = '1.9.8'
+        roboVMVersion = '2.3.5'
+        box2DLightsVersion = '1.4'
+        ashleyVersion = '1.7.0'
+        aiVersion = '1.8.0'
     }
-}
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        jcenter()
+        google()
+    }
 }

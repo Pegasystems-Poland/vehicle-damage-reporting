@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Vehicle Damage</string>
-    <string name="vulkan_triangle">Vulkan API sample - triangle.</string>
-    <string name="open">Open</string>
+    <string name="app_name">Vehicle Damage Modeling</string>
+    <string name="report_vehicle_damage">Report vehicle damage</string>
 </resources>
