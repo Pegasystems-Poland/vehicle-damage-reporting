@@ -4,6 +4,19 @@ This repository contains template projects for Vehicle Damage Modeling project.
 
 ## iOS
 
+### Requirements
+
+ - XCode 10.1
+ - Developer Profile
+ - Physical device with iOS 10.0 or newer
+
+### Structure
+There are two projects:
+
+ - _VehicleDamageModeling_ - template for developing framework with UI component for choosing damaged parts of vehicle
+ - _SampleApp_ - sample application which demonstrates how to import and use _VehicleDamageModeling_ framework
+
+### Notice
 iOS project uses [Metal Framework](https://developer.apple.com/metal/) for rendering. As some of required classes (like `CAMetalLayer`) is not available on iOS Simulator - please use iOS Device as compilation target.
 
 ## Android
