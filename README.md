@@ -19,6 +19,12 @@ There are two projects:
 ### Notice
 iOS project uses [Metal Framework](https://developer.apple.com/metal/) for rendering. As some of required classes (like `CAMetalLayer`) is not available on iOS Simulator - please use iOS Device as compilation target.
 
+### Run sample project
+1. Open project from ```iOS/SampleApp/SampleApp.xcodeproj```
+2. Select ```SampleApp``` project in XCodes Project Navigator and set your Team in Signing settings
+3. Set Active Scheme to ```SampleApp``` and select your device as build destination
+4. Click 'Play' (build and run) button.
+
 ## Android
 
 Android project uses [Vulkan Graphics API](https://developer.android.com/ndk/guides/graphics/) for high-performance, 3D graphics. Based on _android-vulkan-tutorials_ from Google ([tutorial05_triangle](https://github.com/googlesamples/android-vulkan-tutorials/tree/master/tutorial05_triangle/)).
