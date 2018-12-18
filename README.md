@@ -37,3 +37,4 @@ Android project uses [libGDX](https://libgdx.badlogicgames.com/) game developmen
 # License
 
 Code provided in this repository is distributed under Apache License, Version 2.0. Please refer [LICENSE](../master/LICENSE) file for details.
+.
