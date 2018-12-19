@@ -13,21 +13,16 @@
 // limitations under the License.
 
 import UIKit
-import FVM
+import VehicleDamageModeling
 
-// TODO: use controller from FVM
 class ViewController: UIViewController {
-  //  @IBOutlet var damageSelector: VehicleDamageSelectorView!
-  
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-  /*  @IBAction func showParts(_ sender: UIButton) {
+    @IBOutlet var damageSelector: VehicleDamageSelectorView!
+
+    @IBAction func showParts(_ sender: UIButton) {
         let alert = UIAlertController(title: "Selected parts",
                                       message: damageSelector.selectedPartsJSON,
                                       preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel))
         self.present(alert, animated: true)
-    } */
+    }
 }
