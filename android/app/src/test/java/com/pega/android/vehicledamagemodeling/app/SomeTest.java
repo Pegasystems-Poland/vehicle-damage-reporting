@@ -18,16 +18,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class SomeCalcTest {
-    private SomeCalc someCalc = new SomeCalc();
+public class SomeTest {
 
     @Test
-    public void sum() {
-        assertEquals(someCalc.sum(2,3), 5);
-    }
-
-    @Test
-    public void sub() {
-        assertEquals(someCalc.sub(6,1), 5);
+    public void exampleTest() {
+        assertTrue(true);
     }
 }
