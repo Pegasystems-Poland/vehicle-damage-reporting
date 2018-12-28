@@ -28,11 +28,11 @@ open class FVMCarModelViewController : SCNView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         self.addGestureRecognizer(tapGesture)
         setupScene()
-        drawSphereGrid(xAmount: 5, yAmount: 5, radius: 0.5)
+        //drawSphereGrid(xAmount: 5, yAmount: 5, radius: 0.5)
     }
 
     func setupScene() {
-        scnScene = SCNScene()
+        scnScene = SCNScene(named: "art.scnassets/model.scn")
         self.scene = scnScene
         
         scnCamera = SCNNode()
