@@ -54,7 +54,6 @@ dependencies {
     natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"
 
     implementation 'junit:junit:4.12'
-    testImplementation 'junit:junit:4.12'
 }
 
 // called every time gradle gets executed, takes the native dependencies of
