@@ -1,0 +1,13 @@
+language: android
+    android:
+      components:
+      - build-tools
+      - android
+      - extra
+      licenses:
+      - 'android-.+'
+      - 'google-.+'
+    before_script: 
+    - cd android
+    - yes | sdkmanager "build-tools;28.0.3"
+    script: ./gradlew test
