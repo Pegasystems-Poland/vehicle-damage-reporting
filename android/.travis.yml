@@ -1,13 +1,13 @@
 language: android
-    android:
-      components:
-      - build-tools
-      - android
-      - extra
-      licenses:
-      - 'android-.+'
-      - 'google-.+'
-    before_script: 
-    - cd android
-    - yes | sdkmanager "build-tools;28.0.3"
-    script: ./gradlew test
+	android:
+	  components:
+	    - build-tools-28.0.3
+
+	    - android-28
+
+	    - extra-google-google_play_services
+	    - extra-google-m2repository
+	    - extra-android-m2repository
+
+	    - sys-img-x86-android-26
+	    - sys-img-armeabi-v7a-android-17
