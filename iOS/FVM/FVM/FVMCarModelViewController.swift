@@ -21,7 +21,6 @@ open class FVMCarModelViewController : SCNView {
     var highlightedParts = [SCNNode]()
     
     public func onStartup() {
-     //   self.backgroundColor = UIColor.darkGray
         self.allowsCameraControl = true
         self.autoenablesDefaultLighting = true
         
@@ -33,12 +32,6 @@ open class FVMCarModelViewController : SCNView {
     func setupScene() {
         scnScene = SCNScene(named: "art.scnassets/model.scn")
         self.scene = scnScene
-        
-        scnCamera = SCNNode()
-        scnCamera.camera = SCNCamera()
-        scnCamera.position = SCNVector3(x: 0, y: 0, z: 10)
-        scnCamera.camera?.zFar = 50
-        scnScene.rootNode.addChildNode(scnCamera)
     }
     
     @objc
@@ -73,11 +66,5 @@ open class FVMCarModelViewController : SCNView {
             SCNTransaction.commit()
         }
         highlightedParts.removeAll()
-    }
-    
-    func positionCameraAccordingly(xAmount : Int, yAmount : Int, radius : CGFloat) {
-        let x : Float = Float(xAmount - 1) * Float(radius)
-        let y : Float = Float(yAmount - 1) * Float(radius)
-        scnCamera.position = SCNVector3(x: x, y: y, z: 10)
     }
 }
