@@ -27,19 +27,16 @@ open class FVMCarModelViewController : SCNView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         self.addGestureRecognizer(tapGesture)
         setupScene()
+        setupLights()
     }
 
     func setupScene() {
         scnScene = SCNScene(named: "art.scnassets/model.scn")
         scnScene.background.contents = "art.scnassets/background.png"
         self.scene = scnScene
-        
-        scnCamera = SCNNode()
-        scnCamera.camera = SCNCamera()
-        scnCamera.position = SCNVector3(x: 0, y: 0, z: 10)
-        scnCamera.camera?.zFar = 50
-        scnScene.rootNode.addChildNode(scnCamera)
-        
+    }
+    
+    func setupLights() {
         let topLight = SCNNode()
         topLight.light = SCNLight()
         topLight.light?.type = .directional
