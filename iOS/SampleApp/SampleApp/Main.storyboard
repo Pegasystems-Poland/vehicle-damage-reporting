@@ -18,12 +18,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-G7-Qhx" customClass="FVMCarModelViewController" customModule="FVM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-G7-Qhx" customClass="FVMCarModelViewController" customModule="FVM">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9rb-G7-Qhx" firstAttribute="leading" secondItem="Nhr-ZC-ubh" secondAttribute="leading" id="3Pn-D6-HaO"/>
+                            <constraint firstItem="Nhr-ZC-ubh" firstAttribute="trailing" secondItem="9rb-G7-Qhx" secondAttribute="trailing" id="7Wa-lD-Gsk"/>
+                            <constraint firstItem="Nhr-ZC-ubh" firstAttribute="bottom" secondItem="9rb-G7-Qhx" secondAttribute="bottom" id="T1y-50-zgo"/>
+                            <constraint firstItem="9rb-G7-Qhx" firstAttribute="top" secondItem="Nhr-ZC-ubh" secondAttribute="top" id="lgB-q6-eoD">
+                                <variation key="heightClass=compact" constant="20"/>
+                            </constraint>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Nhr-ZC-ubh"/>
                     </view>
                     <connections>
@@ -32,7 +39,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRo-9X-vxN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="125.4872563718141"/>
+            <point key="canvasLocation" x="130.40000000000001" y="123.68815592203899"/>
         </scene>
     </scenes>
 </document>
