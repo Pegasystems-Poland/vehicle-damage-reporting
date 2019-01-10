@@ -57,11 +57,11 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     public void create () {
         modelBatch = new ModelBatch();
         environment = new Environment();
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.6f, 0.6f, 0.6f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        cam.position.set(20f, 20f, 20f);
+        cam.position.set(30f, 30f, 30f);
         cam.lookAt(0,0,0);
         cam.near = 1f;
         cam.far = 300f;
@@ -84,8 +84,9 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
     @Override
     public void render () {
-        if (loading && assets.update())
+        if (loading && assets.update()) {
             doneLoading();
+        }
         camController.update();
 
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
