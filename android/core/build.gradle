@@ -6,10 +6,10 @@ dependencies {
     implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
 
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'junit:junit:4.12'
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-sourceSets.main.java.srcDirs = [ "src/" ]
 
 
 jacocoTestReport {
