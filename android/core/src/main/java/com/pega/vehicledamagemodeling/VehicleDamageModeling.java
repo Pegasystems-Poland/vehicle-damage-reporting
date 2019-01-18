@@ -40,6 +40,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Array<ModelInstance> instances = new Array<>();
     private Environment environment;
     private boolean loading;
+    private static final String MODEL_FILE_NAME = "modelK.obj";
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
@@ -71,12 +72,12 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         Gdx.input.setInputProcessor(camController);
 
         assets = new AssetManager();
-        assets.load("modelFF.obj", Model.class);
+        assets.load(MODEL_FILE_NAME, Model.class);
         loading = true;
     }
 
     private void doneLoading() {
-        Model car = assets.get("modelFF.obj", Model.class);
+        Model car = assets.get(MODEL_FILE_NAME, Model.class);
         ModelInstance shipInstance = new ModelInstance(car);
         instances.add(shipInstance);
         loading = false;
