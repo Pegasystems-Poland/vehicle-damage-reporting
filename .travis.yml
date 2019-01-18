@@ -19,4 +19,7 @@ matrix:
     before_script: 
     - cd android
     - yes | sdkmanager "build-tools;28.0.3"
-    script: ./gradlew test
+    script: ./gradlew test jacocoTestReport
+    after_success:
+    - cd android
+    - bash <(curl -s https://codecov.io/bash)
