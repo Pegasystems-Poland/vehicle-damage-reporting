@@ -25,7 +25,6 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonObject;
 
@@ -34,7 +33,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private final VehicleDamageReportCallback callback;
 
     private PerspectiveCamera cam;
-    private CameraInputController camController;
+    private LimitedCameraInputController camController;
     private ModelBatch modelBatch;
     private AssetManager assets;
     private Array<ModelInstance> instances = new Array<>();
@@ -59,16 +58,14 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         modelBatch = new ModelBatch();
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.6f, 0.6f, 0.6f, 1f));
-        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.8f, -0.8f, -0.8f));
 
-        cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        cam.position.set(30f, 30f, 30f);
+        cam = new PerspectiveCamera(60, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        cam.position.set(20f, 20f, 20f);
         cam.lookAt(0,0,0);
-        cam.near = 1f;
-        cam.far = 300f;
         cam.update();
 
-        camController = new CameraInputController(cam);
+        camController = new LimitedCameraInputController(cam);
         Gdx.input.setInputProcessor(camController);
 
         assets = new AssetManager();
