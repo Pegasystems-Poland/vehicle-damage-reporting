@@ -18,23 +18,20 @@ import SceneKit
 open class FVMCarModelViewController : SCNView {
     var scnScene: SCNScene!
     var scnCamera: SCNNode!
-    
-    var scnCarNode: SCNNode!
-    let minScale: Float = 0.4
-    let maxScale: Float = 2.3
-    var minSizeOfCar: SCNVector3!
-    var maxSizeOfCar: SCNVector3!
+
+    let minFOV: CGFloat = 30
+    let maxFOV: CGFloat = 120
     
     var highlightedParts = [(node: SCNNode, material: Any?)]()
     
     public func onStartup() {
-        self.allowsCameraControl = true
+        self.allowsCameraControl = false
         self.autoenablesDefaultLighting = true
     
         setupGestures()
         setupScene()
+        setupCamera()
         setupLights()
-        configureCarZoomLimits()
     }
     
     func setupGestures(){
@@ -48,6 +45,10 @@ open class FVMCarModelViewController : SCNView {
         scnScene = SCNScene(named: "art.scnassets/model.scn")
         scnScene.background.contents = "art.scnassets/background.png"
         self.scene = scnScene
+    }
+    
+    func setupCamera() {
+        scnCamera = scnScene.rootNode.childNode(withName: "camera", recursively: false)
     }
     
     func setupLights() {
@@ -65,12 +66,6 @@ open class FVMCarModelViewController : SCNView {
         bottomLight.position = SCNVector3(x: 0, y: -50, z: 0)
         bottomLight.eulerAngles = SCNVector3Make(Float(-Double.pi / 2), 0, 0)
         scnScene.rootNode.addChildNode(bottomLight)
-    }
-    
-    func configureCarZoomLimits(){
-        scnCarNode = scnScene.rootNode.childNode(withName: "carModel", recursively: false)
-        minSizeOfCar = SCNVector3(scnCarNode.scale.x * minScale, scnCarNode.scale.y * minScale, scnCarNode.scale.z * minScale)
-        maxSizeOfCar = SCNVector3(scnCarNode.scale.x * maxScale, scnCarNode.scale.y * maxScale, scnCarNode.scale.z * maxScale)
     }
     
     @objc
@@ -110,25 +105,17 @@ open class FVMCarModelViewController : SCNView {
     }
     
     @objc
-    func handlePinchGesture(_ gestureRecognizer: UIPinchGestureRecognizer){
-        let scale = gestureRecognizer.scale
-        
-        if updateCarIsInCorrectRange(resize: Float(scale), car: scnCarNode.scale){
-            scnCarNode.runAction(SCNAction.scale(by: scale, duration: 0.05))
-        }
-        else{
-            if scale > 1 {
-                scnCarNode.runAction(SCNAction.scale(to: CGFloat(maxScale), duration: 0.05))
+    func handlePinchGesture(_ gestureRecognizer: UIPinchGestureRecognizer) {
+        switch gestureRecognizer.state {
+        case .changed: fallthrough
+        case .ended:
+            let scale = gestureRecognizer.scale
+            let currentFOV = scnCamera.camera!.fieldOfView
+            if currentFOV * scale < maxFOV && currentFOV * scale > minFOV {
+                scnCamera.camera?.fieldOfView *= scale
             }
-            else{
-                scnCarNode.runAction(SCNAction.scale(to: CGFloat(minScale), duration: 0.05))
-            }
+            gestureRecognizer.scale = 1.0
+        default: break
         }
     }
-    
-    func updateCarIsInCorrectRange(resize: Float, car: SCNVector3) -> Bool{
-        let afterUpdateCar = SCNVector3(car.x * resize, car.y * resize, car.z * resize)
-        return afterUpdateCar.x >= minSizeOfCar.x && afterUpdateCar.y >= minSizeOfCar.y && afterUpdateCar.z >= minSizeOfCar.z && afterUpdateCar.x <= maxSizeOfCar.x && afterUpdateCar.y <= maxSizeOfCar.y && afterUpdateCar.z <= maxSizeOfCar.z
-    }
-    
 }
