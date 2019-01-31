@@ -15,12 +15,12 @@
 import UIKit
 import SceneKit
 
-open class FVMCarModelViewController : SCNView {
+public class FVMCarModelViewController : SCNView {
     var scnScene: SCNScene!
     var scnCamera: SCNNode!
 
-    let minFOV: CGFloat = 30
-    let maxFOV: CGFloat = 120
+    let minFOV: CGFloat = 20
+    let maxFOV: CGFloat = 60
     
     var highlightedParts = [(node: SCNNode, material: Any?)]()
     
@@ -109,10 +109,19 @@ open class FVMCarModelViewController : SCNView {
         switch gestureRecognizer.state {
         case .changed: fallthrough
         case .ended:
-            let scale = gestureRecognizer.scale
-            let currentFOV = scnCamera.camera!.fieldOfView
+            let scale = 2 - gestureRecognizer.scale
+            var currentFOV: CGFloat
+            if #available(iOS 11.0, *) {
+                currentFOV = scnCamera.camera!.fieldOfView
+            } else {
+                currentFOV = CGFloat(scnCamera.camera!.yFov)
+            }
             if currentFOV * scale < maxFOV && currentFOV * scale > minFOV {
-                scnCamera.camera?.fieldOfView *= scale
+                if #available(iOS 11.0, *) {
+                    scnCamera.camera!.fieldOfView *= scale
+                } else {
+                    scnCamera.camera!.yFov *= Double(scale)
+                }
             }
             gestureRecognizer.scale = 1.0
         default: break
