@@ -8,10 +8,9 @@ public class LimitedCameraInputController extends CameraInputController {
     private static final float ZOOM_IN_LIMIT = 18f;
     private static final float ZOOM_OUT_LIMIT = 40f;
 
-    private static final float pinchZoomFactor = 15f;
-
     public LimitedCameraInputController(final Camera camera) {
         super(camera);
+        super.pinchZoomFactor = 15f;
     }
 
     @Override
