@@ -1,5 +1,14 @@
-apply plugin: 'com.android.application'
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
+    }
+}
 
+apply plugin: 'com.android.application'
+apply plugin: 'jacoco-android'
 android {
     compileSdkVersion 28
 

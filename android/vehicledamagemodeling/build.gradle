@@ -1,41 +1,49 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
+    }
+}
+
 apply plugin: 'com.android.library'
+apply plugin: 'jacoco-android'
 
 android {
+    compileSdkVersion 28
+
     defaultConfig {
-        buildToolsVersion "28.0.3"
         minSdkVersion 14
         targetSdkVersion 28
-        compileSdkVersion 28
         versionCode 1
         versionName "1.0"
-    }
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
-            aidl.srcDirs = ['src']
-            renderscript.srcDirs = ['src']
-            res.srcDirs = ['res']
-            assets.srcDirs = ['assets']
-            jniLibs.srcDirs = ['libs']
-        }
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
-    packagingOptions {
-        exclude 'META-INF/robovm/ios/robovm.xml'
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 configurations { natives }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":core")
+
     implementation 'com.google.code.gson:gson:2.8.5'
 
     // LibGDX
@@ -53,7 +61,6 @@ dependencies {
     natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86"
     natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"
 
-    implementation 'junit:junit:4.12'
     testImplementation 'junit:junit:4.12'
 }
 
