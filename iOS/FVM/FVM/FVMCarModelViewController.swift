@@ -16,13 +16,9 @@ import UIKit
 import SceneKit
 
 public class FVMCarModelViewController : SCNView {
-    var scnScene: SCNScene!
-    var scnCamera: SCNNode!
-
-    let minFOV: CGFloat = 20
-    let maxFOV: CGFloat = 60
-    
-    var highlightedParts = [(node: SCNNode, material: Any?)]()
+    internal var scnScene: SCNScene!
+    internal var scnCamera: SCNNode!
+    internal let highlightHandler = HighlightHandler()
     
     public func onStartup() {
         self.allowsCameraControl = false
@@ -34,67 +30,7 @@ public class FVMCarModelViewController : SCNView {
         setupLights()
     }
     
-    @objc
-    internal func handlePinchGesture(_ gestureRecognizer: UIPinchGestureRecognizer) {
-        switch gestureRecognizer.state {
-        case .changed: fallthrough
-        case .ended:
-            let scale = 2 - gestureRecognizer.scale
-            var currentFOV: CGFloat
-            if #available(iOS 11.0, *) {
-                currentFOV = scnCamera.camera!.fieldOfView
-            } else {
-                currentFOV = CGFloat(scnCamera.camera!.yFov)
-            }
-            if currentFOV * scale < maxFOV && currentFOV * scale > minFOV {
-                if #available(iOS 11.0, *) {
-                    scnCamera.camera!.fieldOfView *= scale
-                } else {
-                    scnCamera.camera!.yFov *= Double(scale)
-                }
-            }
-            gestureRecognizer.scale = 1.0
-        default: break
-        }
-    }
-    
-    @objc
-    internal func handleTapGesture(_ gestureRecognizer: UIGestureRecognizer) {
-        let p = gestureRecognizer.location(in: self)
-        let hitResults = self.hitTest(p, options: [:])
-        if hitResults.count > 0 {
-            let result = hitResults.first!
-            let highlightedNodes = highlightedParts.map { $0.0 }
-            if highlightedNodes.contains(result.node) {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.5
-                let hitPartIndex = highlightedNodes.firstIndex(of: result.node)
-                result.node.geometry?.firstMaterial?.diffuse.contents = highlightedParts[hitPartIndex!].material
-                highlightedParts.remove(at: highlightedNodes.firstIndex(of: result.node)!)
-                SCNTransaction.commit()
-            } else {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.5
-                highlightedParts.append((node: result.node, material: result.node.geometry?.firstMaterial?.diffuse.contents))
-                result.node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-                SCNTransaction.commit()
-            }
-        } else {
-            setHighlightsOff()
-        }
-    }
-    
-    private func setHighlightsOff() {
-        for tuple in highlightedParts {
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 0.5
-            tuple.node.geometry?.firstMaterial?.diffuse.contents = tuple.material
-            SCNTransaction.commit()
-        }
-        highlightedParts.removeAll()
-    }
-    
-    private func setupGestures(){
+    private func setupGestures() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(_:)))
         self.addGestureRecognizer(tapGesture)
