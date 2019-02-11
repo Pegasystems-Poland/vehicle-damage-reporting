@@ -14,7 +14,7 @@
 
 fileprivate struct ZoomConstraint {
     static let minFOV: CGFloat = 20
-    static let maxFOV: CGFloat = 60
+    static let maxFOV: CGFloat = 50
 }
 
 extension FVMCarModelViewController {
