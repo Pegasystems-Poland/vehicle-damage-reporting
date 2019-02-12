@@ -26,14 +26,14 @@ extension FVMCarModelViewController {
     @objc
     internal func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: self)
-        let widthRatio = Float(translation.x) / Float(gestureRecognizer.view!.frame.size.width) + LastRatio.width
-        var heightRatio = Float(translation.y) / Float(gestureRecognizer.view!.frame.size.height) + LastRatio.height
+        let widthRatio = Float(translation.x) / Float(self.frame.size.width) + LastRatio.width
+        var heightRatio = Float(translation.y) / Float(self.frame.size.height) + LastRatio.height
     
         heightRatio = heightRatio >= RotateConstraint.maxHeightRatioXUp ? RotateConstraint.maxHeightRatioXUp : heightRatio
         heightRatio = heightRatio <= RotateConstraint.maxHeightRatioXDown ? RotateConstraint.maxHeightRatioXDown : heightRatio
         
-        scnCameraOrbit.eulerAngles.y = Float(-2 * Float.pi) * widthRatio
-        scnCameraOrbit.eulerAngles.x = Float(-Float.pi) * heightRatio
+        scnCameraOrbit.eulerAngles.y = -2 * Float.pi * widthRatio
+        scnCameraOrbit.eulerAngles.x = -Float.pi * heightRatio
         
         if gestureRecognizer.state == .ended {
             LastRatio.width = widthRatio

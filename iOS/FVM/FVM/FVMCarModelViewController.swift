@@ -53,7 +53,7 @@ public class FVMCarModelViewController : SCNView {
         scnCamera = scnScene.rootNode.childNode(withName: "camera", recursively: false)
         
         scnCameraOrbit = SCNNode()
-        scnCameraOrbit.eulerAngles.x = -0.6283185
+        scnCameraOrbit.eulerAngles.x = 0.0
         scnCameraOrbit.eulerAngles.y = 0.0
         
         scnCameraOrbit.addChildNode(scnCamera)
