@@ -30,14 +30,6 @@ internal class MaterialProcessor {
         setHighlightedMaterial(for: nodeName)
     }
     
-    internal func setHighlightedMaterial(for nodeName: String) {
-        guard let node = materialStore[nodeName]?.node else {
-            print("Node \(nodeName) not found")
-            return
-        }
-        node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-    }
-    
     internal func restoreMaterial(for nodeName: String) {
         guard let tuple = materialStore[nodeName] else {
             print("Node \(nodeName) not found")
@@ -55,5 +47,13 @@ internal class MaterialProcessor {
     
     internal func hasKeyFor(_ key: String) -> Bool {
         return materialStore.keys.contains(key)
+    }
+    
+    private func setHighlightedMaterial(for nodeName: String) {
+        guard let node = materialStore[nodeName]?.node else {
+            print("Node \(nodeName) not found")
+            return
+        }
+        node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
     }
 }
