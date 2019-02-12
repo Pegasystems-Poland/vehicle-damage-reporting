@@ -34,10 +34,8 @@ public class FVMCarModelViewController : SCNView {
     private func setupGestures() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(_:)))
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-        panGesture.minimumNumberOfTouches = 1
-        panGesture.maximumNumberOfTouches = 2
-        
+        var panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        configurePanGestureRecognizer(&panGesture)
         self.addGestureRecognizer(tapGesture)
         self.addGestureRecognizer(pinchGesture)
         self.addGestureRecognizer(panGesture)

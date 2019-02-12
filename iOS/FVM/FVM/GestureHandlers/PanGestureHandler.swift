@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+fileprivate struct NumberOfTouches {
+    static let min: Int = 1
+    static let max: Int = 2
+}
+
 fileprivate struct RotateConstraint {
     static let maxHeightRatioXDown: Float = 0.0
     static let maxHeightRatioXUp: Float = 0.45
@@ -28,9 +33,7 @@ extension FVMCarModelViewController {
         let translation = gestureRecognizer.translation(in: self)
         let widthRatio = Float(translation.x) / Float(self.frame.size.width) + LastRatio.width
         var heightRatio = Float(translation.y) / Float(self.frame.size.height) + LastRatio.height
-    
-        heightRatio = heightRatio >= RotateConstraint.maxHeightRatioXUp ? RotateConstraint.maxHeightRatioXUp : heightRatio
-        heightRatio = heightRatio <= RotateConstraint.maxHeightRatioXDown ? RotateConstraint.maxHeightRatioXDown : heightRatio
+        truncateRatioConstraintsOverflow(&heightRatio)
         
         scnCameraOrbit.eulerAngles.y = -2 * Float.pi * widthRatio
         scnCameraOrbit.eulerAngles.x = -Float.pi * heightRatio
@@ -39,5 +42,15 @@ extension FVMCarModelViewController {
             LastRatio.width = widthRatio
             LastRatio.height = heightRatio
         }
+    }
+    
+    internal func configurePanGestureRecognizer(_ panGestureRecognizer: inout UIPanGestureRecognizer) {
+        panGestureRecognizer.minimumNumberOfTouches = NumberOfTouches.min
+        panGestureRecognizer.maximumNumberOfTouches = NumberOfTouches.max
+    }
+    
+    private func truncateRatioConstraintsOverflow(_ heightRatio: inout Float) {
+        heightRatio = heightRatio >= RotateConstraint.maxHeightRatioXUp ? RotateConstraint.maxHeightRatioXUp : heightRatio
+        heightRatio = heightRatio <= RotateConstraint.maxHeightRatioXDown ? RotateConstraint.maxHeightRatioXDown : heightRatio
     }
 }
