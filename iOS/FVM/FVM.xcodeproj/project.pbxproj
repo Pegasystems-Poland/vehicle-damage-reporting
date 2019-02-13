@@ -10,6 +10,7 @@
 		051E317521C43E5F0067C7F3 /* FVMCarModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E317421C43E5F0067C7F3 /* FVMCarModelViewController.swift */; };
 		0535F32421C4389F00CD6C44 /* FVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0535F31A21C4389F00CD6C44 /* FVM.framework */; };
 		0535F32B21C4389F00CD6C44 /* FVM.h in Headers */ = {isa = PBXBuildFile; fileRef = 0535F31D21C4389F00CD6C44 /* FVM.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05CDF820221034F400069640 /* PanGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CDF81F221034F400069640 /* PanGestureHandler.swift */; };
 		BA1FBE0C220780E400DBFB9E /* MaterialProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1FBE0B220780E400DBFB9E /* MaterialProcessor.swift */; };
 		BA1FBE122208CB0800DBFB9E /* MaterialProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1FBE112208CB0800DBFB9E /* MaterialProcessorTests.swift */; };
 		BA9E20A621D58B830013E388 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = BA9E20A521D58B830013E388 /* art.scnassets */; };
@@ -35,6 +36,7 @@
 		0535F31E21C4389F00CD6C44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0535F32321C4389F00CD6C44 /* FVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FVMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0535F32A21C4389F00CD6C44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05CDF81F221034F400069640 /* PanGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanGestureHandler.swift; sourceTree = "<group>"; };
 		BA1FBE0B220780E400DBFB9E /* MaterialProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialProcessor.swift; sourceTree = "<group>"; };
 		BA1FBE112208CB0800DBFB9E /* MaterialProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialProcessorTests.swift; sourceTree = "<group>"; };
 		BA9E20A521D58B830013E388 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -83,9 +85,9 @@
 		0535F31C21C4389F00CD6C44 /* FVM */ = {
 			isa = PBXGroup;
 			children = (
+				051E317421C43E5F0067C7F3 /* FVMCarModelViewController.swift */,
 				BA1FBE0D220780F000DBFB9E /* Highlighting */,
 				BA1FBE0A22077D2800DBFB9E /* GestureHandlers */,
-				051E317421C43E5F0067C7F3 /* FVMCarModelViewController.swift */,
 				0535F31D21C4389F00CD6C44 /* FVM.h */,
 				0535F31E21C4389F00CD6C44 /* Info.plist */,
 				BA9E20A521D58B830013E388 /* art.scnassets */,
@@ -107,6 +109,7 @@
 			children = (
 				BAAD17F422064B0600574F2C /* TapGestureHandler.swift */,
 				BAAD17F622064BD600574F2C /* PinchGestureHandler.swift */,
+				05CDF81F221034F400069640 /* PanGestureHandler.swift */,
 			);
 			path = GestureHandlers;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			files = (
 				BAAD17F522064B0600574F2C /* TapGestureHandler.swift in Sources */,
 				051E317521C43E5F0067C7F3 /* FVMCarModelViewController.swift in Sources */,
+				05CDF820221034F400069640 /* PanGestureHandler.swift in Sources */,
 				BA1FBE0C220780E400DBFB9E /* MaterialProcessor.swift in Sources */,
 				BAAD17F322063F2100574F2C /* HighlightHandler.swift in Sources */,
 				BAAD17F722064BD600574F2C /* PinchGestureHandler.swift in Sources */,
@@ -399,7 +403,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lapwingg.FVM;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fvm.FVM;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -427,7 +431,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lapwingg.FVM;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fvm.FVM;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
