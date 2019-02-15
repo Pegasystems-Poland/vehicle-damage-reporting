@@ -75,7 +75,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
     private void doneLoading() {
         Model car = assets.get(MODEL_FILE_NAME, Model.class);
-        ModelInstance shipInstance = new ModelInstance(car);
+        ModelInstance shipInstance = new ModelInstance(car, 0 , -5, 0);
         instances.add(shipInstance);
         loading = false;
     }
