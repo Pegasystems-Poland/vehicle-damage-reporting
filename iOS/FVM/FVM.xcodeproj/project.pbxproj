@@ -17,6 +17,7 @@
 		BAAD17F322063F2100574F2C /* HighlightHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD17F222063F2100574F2C /* HighlightHandler.swift */; };
 		BAAD17F522064B0600574F2C /* TapGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD17F422064B0600574F2C /* TapGestureHandler.swift */; };
 		BAAD17F722064BD600574F2C /* PinchGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD17F622064BD600574F2C /* PinchGestureHandler.swift */; };
+		BAF81BE22222D36A001768B0 /* ZoomConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		BAAD17F222063F2100574F2C /* HighlightHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightHandler.swift; sourceTree = "<group>"; };
 		BAAD17F422064B0600574F2C /* TapGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureHandler.swift; sourceTree = "<group>"; };
 		BAAD17F622064BD600574F2C /* PinchGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchGestureHandler.swift; sourceTree = "<group>"; };
+		BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomConstraint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		BA1FBE0A22077D2800DBFB9E /* GestureHandlers */ = {
 			isa = PBXGroup;
 			children = (
+				BAF81BE02222D34C001768B0 /* Constraints */,
 				BAAD17F422064B0600574F2C /* TapGestureHandler.swift */,
 				BAAD17F622064BD600574F2C /* PinchGestureHandler.swift */,
 				05CDF81F221034F400069640 /* PanGestureHandler.swift */,
@@ -121,6 +124,14 @@
 				BA1FBE0B220780E400DBFB9E /* MaterialProcessor.swift */,
 			);
 			path = Highlighting;
+			sourceTree = "<group>";
+		};
+		BAF81BE02222D34C001768B0 /* Constraints */ = {
+			isa = PBXGroup;
+			children = (
+				BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */,
+			);
+			path = Constraints;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +250,7 @@
 				05CDF820221034F400069640 /* PanGestureHandler.swift in Sources */,
 				BA1FBE0C220780E400DBFB9E /* MaterialProcessor.swift in Sources */,
 				BAAD17F322063F2100574F2C /* HighlightHandler.swift in Sources */,
+				BAF81BE22222D36A001768B0 /* ZoomConstraint.swift in Sources */,
 				BAAD17F722064BD600574F2C /* PinchGestureHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
