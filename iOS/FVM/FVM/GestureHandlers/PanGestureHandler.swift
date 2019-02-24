@@ -18,12 +18,12 @@ fileprivate struct NumberOfTouches {
 }
 
 fileprivate struct RotateConstraint {
-    static let maxHeightRatioXDown: Float = 0.0
+    static let maxHeightRatioXDown: Float = -0.15
     static let maxHeightRatioXUp: Float = 0.45
 }
 
 fileprivate struct LastRatio {
-    static var width: Float = 0.0
+    static var width: Float = 1.1
     static var height: Float = 0.0
 }
 
