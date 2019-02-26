@@ -32,12 +32,12 @@ public class LimitedCameraInputController extends CameraInputController {
     }
 
     private Vector3 createZoom(float amount) {
-        Vector3 zoom = new Vector3(camera.direction).scl(amount);
+        tmpV1.set(camera.direction).scl(amount);
 
         if (isZoomIn(amount)) {
-            return limitZoom (zoom, ZOOM_IN_LIMIT);
+            return limitZoom (tmpV1, ZOOM_IN_LIMIT);
         }
-        return limitZoom (zoom, ZOOM_OUT_LIMIT);
+        return limitZoom (tmpV1, ZOOM_OUT_LIMIT);
     }
 
     private boolean isZoomIn(float amount) {
@@ -45,12 +45,12 @@ public class LimitedCameraInputController extends CameraInputController {
     }
 
     private Vector3 limitZoom(Vector3 zoom, float zoomLimit) {
-        Vector3 limit = tmpV1.set(camera.direction)
+        tmpV2.set(camera.direction)
                 .scl(-zoomLimit / camera.direction.len())
                 .sub(camera.position);
 
-        if (zoom.len() >= limit.len()) {
-            return limit;
+        if (zoom.len() >= tmpV2.len()) {
+            return tmpV2;
         } else {
             return zoom;
         }
