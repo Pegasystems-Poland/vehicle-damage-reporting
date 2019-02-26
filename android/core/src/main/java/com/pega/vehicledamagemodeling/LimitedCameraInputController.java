@@ -7,9 +7,10 @@ import com.badlogic.gdx.math.Vector3;
 public class LimitedCameraInputController extends CameraInputController {
     private static final float ZOOM_IN_LIMIT = 18f;
     private static final float ZOOM_OUT_LIMIT = 40f;
+    private static final float ROTATE_DOWN_LIMIT = 3.0f;
+    private static final float ROTATE_UP_LIMIT = 0.5f;
     private Vector3 tmpV1 = new Vector3();
     private Vector3 tmpV2 = new Vector3();
-    private Vector3 tmpV3 = new Vector3();
 
     public LimitedCameraInputController(final Camera camera) {
         super(camera);
@@ -57,19 +58,14 @@ public class LimitedCameraInputController extends CameraInputController {
 
     @Override
     protected boolean process (float deltaX, float deltaY, int button) {
-        tmpV1.set(camera.direction).crs(camera.up).y = 0f;
-        tmpV1.nor();
-
         float deltaYRotate = deltaY * rotateAngle;
 
-        tmpV2.set(target);
-        tmpV2.sub(camera.position);
-        tmpV2.rotate(tmpV1, deltaYRotate);
+        tmpV1.set(camera.direction)
+                .crs(camera.up)
+                .y = 0f;
+        tmpV1.nor();
 
-        tmpV3.set(camera.up);
-        tmpV3.rotate(tmpV1, deltaYRotate);
-
-        if (tmpV2.y > 3 || tmpV3.y < 0.5f) {
+        if (isCrossingDownLimit(tmpV1, deltaYRotate) || isCrossingUpLimit(tmpV1, deltaYRotate)) {
             return false;
         }
 
@@ -79,6 +75,19 @@ public class LimitedCameraInputController extends CameraInputController {
         if (autoUpdate) camera.update();
 
         return true;
+    }
+
+    private boolean isCrossingDownLimit(Vector3 rotateVector, float deltaYRotate) {
+        tmpV2.set(target);
+        tmpV2.sub(camera.position);
+        tmpV2.rotate(rotateVector, deltaYRotate);
+        return tmpV2.y > ROTATE_DOWN_LIMIT;
+    }
+
+    private boolean isCrossingUpLimit(Vector3 rotateVector, float deltaYRotate) {
+        tmpV2.set(camera.up);
+        tmpV2.rotate(rotateVector, deltaYRotate);
+        return tmpV2.y < ROTATE_UP_LIMIT;
     }
 
 
