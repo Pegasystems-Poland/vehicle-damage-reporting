@@ -39,7 +39,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Array<ModelInstance> instances = new Array<>();
     private Environment environment;
     private boolean loading;
-    private static final String MODEL_FILE_NAME = "modelK.obj";
+    private static final String MODEL_FILE_NAME = "model.2.0.obj";
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
@@ -75,7 +75,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
     private void doneLoading() {
         Model car = assets.get(MODEL_FILE_NAME, Model.class);
-        ModelInstance shipInstance = new ModelInstance(car);
+        ModelInstance shipInstance = new ModelInstance(car, 0 , -5, 0);
         instances.add(shipInstance);
         loading = false;
     }
