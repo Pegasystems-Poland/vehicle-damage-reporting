@@ -39,7 +39,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Array<ModelInstance> instances = new Array<>();
     private Environment environment;
     private boolean loading;
-    private static final String MODEL_FILE_NAME = "modelK.obj";
+    private static final String MODEL_FILE_NAME = "model.2.0.obj";
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
