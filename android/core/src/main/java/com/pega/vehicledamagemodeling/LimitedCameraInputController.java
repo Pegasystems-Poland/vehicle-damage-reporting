@@ -32,12 +32,12 @@ public class LimitedCameraInputController extends CameraInputController {
     }
 
     private Vector3 createZoom(float amount) {
-        tmpV1.set(camera.direction).scl(amount);
+        Vector3 zoom = tmpV1.set(camera.direction).scl(amount);
 
         if (isZoomIn(amount)) {
-            return limitZoom (tmpV1, ZOOM_IN_LIMIT);
+            return limitZoom (zoom, ZOOM_IN_LIMIT);
         }
-        return limitZoom (tmpV1, ZOOM_OUT_LIMIT);
+        return limitZoom (zoom, ZOOM_OUT_LIMIT);
     }
 
     private boolean isZoomIn(float amount) {
