@@ -12,14 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import Foundation
+import UIKit
 
-import XCTest
-@testable import FVM
-
-class FVMTests: XCTestCase {
-
-    func testExample() {
-        XCTAssert(true)
-    }
-
+internal struct ZoomConstraint {
+    internal static let minFOV: CGFloat = 20
+    internal static let maxFOV: CGFloat = 70
 }
