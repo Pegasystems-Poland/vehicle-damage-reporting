@@ -7,6 +7,10 @@ import com.badlogic.gdx.math.Vector3;
 public class LimitedCameraInputController extends CameraInputController {
     private static final float ZOOM_IN_LIMIT = 18f;
     private static final float ZOOM_OUT_LIMIT = 40f;
+    private static final float ROTATE_DOWN_LIMIT = 3.0f;
+    private static final float ROTATE_UP_LIMIT = 0.5f;
+    private Vector3 tmpV1 = new Vector3();
+    private Vector3 tmpV2 = new Vector3();
 
     public LimitedCameraInputController(final Camera camera) {
         super(camera);
@@ -28,7 +32,7 @@ public class LimitedCameraInputController extends CameraInputController {
     }
 
     private Vector3 createZoom(float amount) {
-        Vector3 zoom = new Vector3(camera.direction).scl(amount);
+        Vector3 zoom = tmpV1.set(camera.direction).scl(amount);
 
         if (isZoomIn(amount)) {
             return limitZoom (zoom, ZOOM_IN_LIMIT);
@@ -41,14 +45,50 @@ public class LimitedCameraInputController extends CameraInputController {
     }
 
     private Vector3 limitZoom(Vector3 zoom, float zoomLimit) {
-        Vector3 limit = new Vector3(camera.direction)
+        Vector3 limitedZoom = tmpV2.set(camera.direction)
                 .scl(-zoomLimit / camera.direction.len())
                 .sub(camera.position);
 
-        if (zoom.len() >= limit.len()) {
-            return limit;
+        if (zoom.len() >= limitedZoom.len()) {
+            return limitedZoom;
         } else {
             return zoom;
         }
     }
+
+    @Override
+    protected boolean process (float deltaX, float deltaY, int button) {
+        float deltaYRotate = deltaY * rotateAngle;
+
+        tmpV1.set(camera.direction)
+                .crs(camera.up)
+                .y = 0f;
+        tmpV1.nor();
+
+        if (isCrossingDownLimit(tmpV1, deltaYRotate) || isCrossingUpLimit(tmpV1, deltaYRotate)) {
+            return false;
+        }
+
+        camera.rotateAround(target, tmpV1, deltaYRotate);
+        camera.rotateAround(target, Vector3.Y, deltaX * -rotateAngle);
+
+        if (autoUpdate) camera.update();
+
+        return true;
+    }
+
+    private boolean isCrossingDownLimit(Vector3 rotateVector, float deltaYRotate) {
+        tmpV2.set(target);
+        tmpV2.sub(camera.position);
+        tmpV2.rotate(rotateVector, deltaYRotate);
+        return tmpV2.y > ROTATE_DOWN_LIMIT;
+    }
+
+    private boolean isCrossingUpLimit(Vector3 rotateVector, float deltaYRotate) {
+        tmpV2.set(camera.up);
+        tmpV2.rotate(rotateVector, deltaYRotate);
+        return tmpV2.y < ROTATE_UP_LIMIT;
+    }
+
+
 }
