@@ -18,6 +18,26 @@
 		BAAD17F522064B0600574F2C /* TapGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD17F422064B0600574F2C /* TapGestureHandler.swift */; };
 		BAAD17F722064BD600574F2C /* PinchGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD17F622064BD600574F2C /* PinchGestureHandler.swift */; };
 		BAF81BE22222D36A001768B0 /* ZoomConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */; };
+		D7C88820222702F600EB3375 /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8880E222702F600EB3375 /* JsonParser.swift */; };
+		D7C88821222702F600EB3375 /* DamagedPartsNamesProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88810222702F600EB3375 /* DamagedPartsNamesProviderProtocol.swift */; };
+		D7C88822222702F600EB3375 /* DamagedPartsNamesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88811222702F600EB3375 /* DamagedPartsNamesProvider.swift */; };
+		D7C88823222702F600EB3375 /* DamagedPartsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88813222702F600EB3375 /* DamagedPartsRepositoryProtocol.swift */; };
+		D7C88824222702F600EB3375 /* DamagedPartsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88814222702F600EB3375 /* DamagedPartsRepository.swift */; };
+		D7C88825222702F600EB3375 /* SelectionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88816222702F600EB3375 /* SelectionRoot.swift */; };
+		D7C88826222702F600EB3375 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88817222702F600EB3375 /* Selection.swift */; };
+		D7C88827222702F600EB3375 /* DamagePartsServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88819222702F600EB3375 /* DamagePartsServiceFactory.swift */; };
+		D7C88828222702F600EB3375 /* Validable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881B222702F600EB3375 /* Validable.swift */; };
+		D7C88829222702F600EB3375 /* DamagedPartsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881C222702F600EB3375 /* DamagedPartsValidator.swift */; };
+		D7C8882A222702F600EB3375 /* DamagePartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881E222702F600EB3375 /* DamagePartService.swift */; };
+		D7C8882B222702F600EB3375 /* DamagedPartsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881F222702F600EB3375 /* DamagedPartsService.swift */; };
+		D7C888462227033200EB3375 /* DamagedParstsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8882F2227033200EB3375 /* DamagedParstsRepositoryTests.swift */; };
+		D7C888472227033200EB3375 /* DamagedPartsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C888312227033200EB3375 /* DamagedPartsServiceTests.swift */; };
+		D7C88863222706B700EB3375 /* JsonParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88858222706B700EB3375 /* JsonParserTests.swift */; };
+		D7C88864222706B700EB3375 /* DamagePartsNamesProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8885A222706B700EB3375 /* DamagePartsNamesProviderTests.swift */; };
+		D7C88865222706B700EB3375 /* ProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8885D222706B700EB3375 /* ProviderMock.swift */; };
+		D7C88866222706B700EB3375 /* DamagePartsValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8885E222706B700EB3375 /* DamagePartsValidatorTests.swift */; };
+		D7C88867222706B700EB3375 /* ParserResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88861222706B700EB3375 /* ParserResources.swift */; };
+		D7C88868222706B700EB3375 /* ParserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88862222706B700EB3375 /* ParserMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +65,26 @@
 		BAAD17F422064B0600574F2C /* TapGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureHandler.swift; sourceTree = "<group>"; };
 		BAAD17F622064BD600574F2C /* PinchGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchGestureHandler.swift; sourceTree = "<group>"; };
 		BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomConstraint.swift; sourceTree = "<group>"; };
+		D7C8880E222702F600EB3375 /* JsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
+		D7C88810222702F600EB3375 /* DamagedPartsNamesProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsNamesProviderProtocol.swift; sourceTree = "<group>"; };
+		D7C88811222702F600EB3375 /* DamagedPartsNamesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsNamesProvider.swift; sourceTree = "<group>"; };
+		D7C88813222702F600EB3375 /* DamagedPartsRepositoryProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsRepositoryProtocol.swift; sourceTree = "<group>"; };
+		D7C88814222702F600EB3375 /* DamagedPartsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsRepository.swift; sourceTree = "<group>"; };
+		D7C88816222702F600EB3375 /* SelectionRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionRoot.swift; sourceTree = "<group>"; };
+		D7C88817222702F600EB3375 /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
+		D7C88819222702F600EB3375 /* DamagePartsServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagePartsServiceFactory.swift; sourceTree = "<group>"; };
+		D7C8881B222702F600EB3375 /* Validable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validable.swift; sourceTree = "<group>"; };
+		D7C8881C222702F600EB3375 /* DamagedPartsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsValidator.swift; sourceTree = "<group>"; };
+		D7C8881E222702F600EB3375 /* DamagePartService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagePartService.swift; sourceTree = "<group>"; };
+		D7C8881F222702F600EB3375 /* DamagedPartsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsService.swift; sourceTree = "<group>"; };
+		D7C8882F2227033200EB3375 /* DamagedParstsRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedParstsRepositoryTests.swift; sourceTree = "<group>"; };
+		D7C888312227033200EB3375 /* DamagedPartsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsServiceTests.swift; sourceTree = "<group>"; };
+		D7C88858222706B700EB3375 /* JsonParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParserTests.swift; sourceTree = "<group>"; };
+		D7C8885A222706B700EB3375 /* DamagePartsNamesProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagePartsNamesProviderTests.swift; sourceTree = "<group>"; };
+		D7C8885D222706B700EB3375 /* ProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderMock.swift; sourceTree = "<group>"; };
+		D7C8885E222706B700EB3375 /* DamagePartsValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagePartsValidatorTests.swift; sourceTree = "<group>"; };
+		D7C88861222706B700EB3375 /* ParserResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserResources.swift; sourceTree = "<group>"; };
+		D7C88862222706B700EB3375 /* ParserMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +127,7 @@
 		0535F31C21C4389F00CD6C44 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				D7C8880C222702F600EB3375 /* DamagedParts */,
 				051E317421C43E5F0067C7F3 /* FVMCarModelViewController.swift */,
 				BA1FBE0D220780F000DBFB9E /* Highlighting */,
 				BA1FBE0A22077D2800DBFB9E /* GestureHandlers */,
@@ -100,6 +141,8 @@
 		0535F32721C4389F00CD6C44 /* FVMTests */ = {
 			isa = PBXGroup;
 			children = (
+				D7C88856222706B700EB3375 /* DamagedParts */,
+				D7C8882C2227033200EB3375 /* Integration */,
 				0535F32A21C4389F00CD6C44 /* Info.plist */,
 				BA1FBE112208CB0800DBFB9E /* MaterialProcessorTests.swift */,
 			);
@@ -132,6 +175,175 @@
 				BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */,
 			);
 			path = Constraints;
+			sourceTree = "<group>";
+		};
+		D7C8880C222702F600EB3375 /* DamagedParts */ = {
+			isa = PBXGroup;
+			children = (
+				D7C8880D222702F600EB3375 /* Parsers */,
+				D7C8880F222702F600EB3375 /* Providers */,
+				D7C88812222702F600EB3375 /* Repositories */,
+				D7C88815222702F600EB3375 /* Models */,
+				D7C88818222702F600EB3375 /* Factories */,
+				D7C8881A222702F600EB3375 /* Validators */,
+				D7C8881D222702F600EB3375 /* Services */,
+			);
+			path = DamagedParts;
+			sourceTree = "<group>";
+		};
+		D7C8880D222702F600EB3375 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				D7C8880E222702F600EB3375 /* JsonParser.swift */,
+			);
+			path = Parsers;
+			sourceTree = "<group>";
+		};
+		D7C8880F222702F600EB3375 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				D7C88810222702F600EB3375 /* DamagedPartsNamesProviderProtocol.swift */,
+				D7C88811222702F600EB3375 /* DamagedPartsNamesProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		D7C88812222702F600EB3375 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				D7C88813222702F600EB3375 /* DamagedPartsRepositoryProtocol.swift */,
+				D7C88814222702F600EB3375 /* DamagedPartsRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		D7C88815222702F600EB3375 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D7C88816222702F600EB3375 /* SelectionRoot.swift */,
+				D7C88817222702F600EB3375 /* Selection.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D7C88818222702F600EB3375 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				D7C88819222702F600EB3375 /* DamagePartsServiceFactory.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
+		D7C8881A222702F600EB3375 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				D7C8881B222702F600EB3375 /* Validable.swift */,
+				D7C8881C222702F600EB3375 /* DamagedPartsValidator.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
+		D7C8881D222702F600EB3375 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D7C8881E222702F600EB3375 /* DamagePartService.swift */,
+				D7C8881F222702F600EB3375 /* DamagedPartsService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D7C8882C2227033200EB3375 /* Integration */ = {
+			isa = PBXGroup;
+			children = (
+				D7C8882D2227033200EB3375 /* DemagedParts */,
+			);
+			path = Integration;
+			sourceTree = "<group>";
+		};
+		D7C8882D2227033200EB3375 /* DemagedParts */ = {
+			isa = PBXGroup;
+			children = (
+				D7C8882E2227033200EB3375 /* Repository */,
+				D7C888302227033200EB3375 /* Services */,
+			);
+			path = DemagedParts;
+			sourceTree = "<group>";
+		};
+		D7C8882E2227033200EB3375 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				D7C8882F2227033200EB3375 /* DamagedParstsRepositoryTests.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		D7C888302227033200EB3375 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D7C888312227033200EB3375 /* DamagedPartsServiceTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D7C88856222706B700EB3375 /* DamagedParts */ = {
+			isa = PBXGroup;
+			children = (
+				D7C88857222706B700EB3375 /* Parsers */,
+				D7C88859222706B700EB3375 /* Providers */,
+				D7C8885B222706B700EB3375 /* Validators */,
+				D7C8885F222706B700EB3375 /* Services */,
+			);
+			path = DamagedParts;
+			sourceTree = "<group>";
+		};
+		D7C88857222706B700EB3375 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				D7C88858222706B700EB3375 /* JsonParserTests.swift */,
+			);
+			path = Parsers;
+			sourceTree = "<group>";
+		};
+		D7C88859222706B700EB3375 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				D7C8885A222706B700EB3375 /* DamagePartsNamesProviderTests.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		D7C8885B222706B700EB3375 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				D7C8885C222706B700EB3375 /* Mocks */,
+				D7C8885E222706B700EB3375 /* DamagePartsValidatorTests.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
+		D7C8885C222706B700EB3375 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				D7C8885D222706B700EB3375 /* ProviderMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		D7C8885F222706B700EB3375 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D7C88860222706B700EB3375 /* Mocks */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D7C88860222706B700EB3375 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				D7C88861222706B700EB3375 /* ParserResources.swift */,
+				D7C88862222706B700EB3375 /* ParserMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,13 +457,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7C88826222702F600EB3375 /* Selection.swift in Sources */,
+				D7C88824222702F600EB3375 /* DamagedPartsRepository.swift in Sources */,
 				BAAD17F522064B0600574F2C /* TapGestureHandler.swift in Sources */,
+				D7C88829222702F600EB3375 /* DamagedPartsValidator.swift in Sources */,
 				051E317521C43E5F0067C7F3 /* FVMCarModelViewController.swift in Sources */,
+				D7C8882A222702F600EB3375 /* DamagePartService.swift in Sources */,
+				D7C8882B222702F600EB3375 /* DamagedPartsService.swift in Sources */,
+				D7C88822222702F600EB3375 /* DamagedPartsNamesProvider.swift in Sources */,
+				D7C88820222702F600EB3375 /* JsonParser.swift in Sources */,
+				D7C88827222702F600EB3375 /* DamagePartsServiceFactory.swift in Sources */,
 				05CDF820221034F400069640 /* PanGestureHandler.swift in Sources */,
 				BA1FBE0C220780E400DBFB9E /* MaterialProcessor.swift in Sources */,
 				BAAD17F322063F2100574F2C /* HighlightHandler.swift in Sources */,
+				D7C88823222702F600EB3375 /* DamagedPartsRepositoryProtocol.swift in Sources */,
+				D7C88821222702F600EB3375 /* DamagedPartsNamesProviderProtocol.swift in Sources */,
 				BAF81BE22222D36A001768B0 /* ZoomConstraint.swift in Sources */,
 				BAAD17F722064BD600574F2C /* PinchGestureHandler.swift in Sources */,
+				D7C88828222702F600EB3375 /* Validable.swift in Sources */,
+				D7C88825222702F600EB3375 /* SelectionRoot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +483,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7C88867222706B700EB3375 /* ParserResources.swift in Sources */,
+				D7C88868222706B700EB3375 /* ParserMock.swift in Sources */,
+				D7C88865222706B700EB3375 /* ProviderMock.swift in Sources */,
+				D7C888472227033200EB3375 /* DamagedPartsServiceTests.swift in Sources */,
+				D7C888462227033200EB3375 /* DamagedParstsRepositoryTests.swift in Sources */,
+				D7C88864222706B700EB3375 /* DamagePartsNamesProviderTests.swift in Sources */,
+				D7C88863222706B700EB3375 /* JsonParserTests.swift in Sources */,
 				BA1FBE122208CB0800DBFB9E /* MaterialProcessorTests.swift in Sources */,
+				D7C88866222706B700EB3375 /* DamagePartsValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
