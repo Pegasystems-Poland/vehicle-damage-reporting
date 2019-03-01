@@ -12,21 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.pega.vehicledamagemodeling.API;
+package com.pega.vehicledamagemodeling.api;
 
-import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+
 public class Parser {
 
+    public Parser(){}
     public SelectionRoot parse(JsonObject obj){
         JsonArray arr = obj.getAsJsonArray("parts");
 
-        Array<Selection> selections = new Array<>();
+        ArrayList<Selection> selections = new ArrayList<>();
 
         for(int i =0; i < arr.size(); i++){
-            Boolean selected = arr.get(i)
+            boolean selected = arr.get(i)
                     .getAsJsonObject()
                     .getAsJsonObject("damaged")
                     .getAsBoolean();
@@ -41,7 +43,6 @@ public class Parser {
                 selections.add(selection);
             }
         }
-        SelectionRoot root = new SelectionRoot(selections,"what?");
-        return root;
+        return new SelectionRoot(selections,"nothing");
     }
 }

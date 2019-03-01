@@ -12,12 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.pega.vehicledamagemodeling.API;
+package com.pega.vehicledamagemodeling.api;
 
-public class Selection {
-    public String id;
+import java.util.ArrayList;
 
-    Selection(String id){
-        this.id = id;
+public class SelectionRoot {
+    private ArrayList<Selection> selections;
+    private String mainScreenText;
+
+    public SelectionRoot(ArrayList<Selection> selection, String mainScreenText){
+        this.selections = selection;
+        this.mainScreenText = mainScreenText;
     }
+
+    public ArrayList<Selection> returnArray(){
+        return this.selections;
+    }
+
+    public String getMainScreenText() { return this.mainScreenText; }
 }

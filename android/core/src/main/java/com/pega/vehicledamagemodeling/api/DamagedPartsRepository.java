@@ -12,13 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.pega.vehicledamagemodeling.API;
+package com.pega.vehicledamagemodeling.api;
 
-import com.badlogic.gdx.utils.Array;
+import java.util.ArrayList;
 
 public class DamagedPartsRepository extends DamagedPartsRepositoryProtocol {
 
-    private Array<Selection> selections = new Array<>();
+    private ArrayList<Selection> selections;
+
+    public DamagedPartsRepository(ArrayList<Selection> selections){
+        this.selections = selections;
+    }
 
     @Override
     public void clear() {
@@ -27,25 +31,25 @@ public class DamagedPartsRepository extends DamagedPartsRepositoryProtocol {
 
     @Override
     public void add(Selection selection) {
-        if( !this.selections.contains(selection,true)){
+        if( !this.selections.contains(selection)){
             this.selections.add(selection);
         }
     }
 
     @Override
     public void remove(Selection selection) {
-        this.selections.removeValue(selection,true);
+        this.selections.remove(selection);
     }
 
     @Override
-    public void add(Array<Selection> selections) {
+    public void add(ArrayList<Selection> selections) {
         for(Selection selection : selections){
             add(selection);
         }
     }
 
     @Override
-    public Array<Selection> getAll() {
+    public ArrayList<Selection> getAll() {
         return this.selections;
     }
 }

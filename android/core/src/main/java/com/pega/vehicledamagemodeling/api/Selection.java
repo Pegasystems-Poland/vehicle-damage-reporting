@@ -12,16 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.pega.vehicledamagemodeling.API;
+package com.pega.vehicledamagemodeling.api;
 
-import com.badlogic.gdx.utils.Array;
+public class Selection {
+    private String id;
 
-public class SelectionRoot {
-    protected Array<Selection> selection;
-    protected String mainScreenText;
-
-    SelectionRoot(Array<Selection> selection, String mainScreenText){
-        this.selection = selection;
-        this.mainScreenText = mainScreenText;
+    public Selection(String id){
+        this.id = id;
     }
+
+    public String getId(){ return this.id; }
 }

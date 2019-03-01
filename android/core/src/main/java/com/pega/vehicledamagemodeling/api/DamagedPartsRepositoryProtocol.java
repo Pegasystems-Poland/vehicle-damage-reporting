@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.pega.vehicledamagemodeling.API;
+package com.pega.vehicledamagemodeling.api;
 
-import com.badlogic.gdx.utils.Array;
+import java.util.ArrayList;
 
 public abstract class DamagedPartsRepositoryProtocol {
     public abstract void clear();
     public abstract void add(Selection selection);
     public abstract void remove(Selection selection);
-    public abstract void add(Array<Selection> selections);
-    public abstract Array<Selection> getAll();
+    public abstract void add(ArrayList<Selection> selections);
+    public abstract ArrayList<Selection> getAll();
 
 }
