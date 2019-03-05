@@ -41,7 +41,6 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Environment environment;
     private boolean loading;
     private static final String MODEL_FILE_NAME = "model.2.0.obj";
-    private boolean carShouldBeRotated = false;
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
@@ -89,11 +88,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         }
         camController.update();
 
-        if (carShouldBeRotated) {
-            Gdx.gl.glViewport(0, 0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
-        } else {
-            Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        }
+        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         modelBatch.begin(cam);
@@ -102,14 +97,18 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     }
 
     @Override
+    public void dispose () {
+        modelBatch.dispose();
+        instances.clear();
+        assets.dispose();
+    }
+
+    @Override
     public void resize(int width, int height) {
         Vector3 temporaryCamPosition = cam.position;
 
-        if (carShouldBeRotated) {
-            cam = new PerspectiveCamera(60, height, width);
-        } else {
-            cam = new PerspectiveCamera(60, width, height);
-        }
+        cam.viewportWidth = width;
+        cam.viewportHeight = height;
 
         cam.position.set(temporaryCamPosition);
         cam.lookAt(0,0,0);
