@@ -25,6 +25,7 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonObject;
 
@@ -40,7 +41,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Environment environment;
     private boolean loading;
     private static final String MODEL_FILE_NAME = "model.2.0.obj";
-    private boolean a = true;
+    private boolean carShouldBeRotated = false;
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
@@ -88,10 +89,10 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         }
         camController.update();
 
-        if (a) {
-            Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        } else {
+        if (carShouldBeRotated) {
             Gdx.gl.glViewport(0, 0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
+        } else {
+            Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
@@ -101,38 +102,20 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     }
 
     @Override
-    public void dispose () {
-        modelBatch.dispose();
-        instances.clear();
-        assets.dispose();
-    }
-
-    @Override
     public void resize(int width, int height) {
-        if (a) {
-            cam = new PerspectiveCamera(60, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            cam.position.set(20f, 20f, 20f);
-            cam.lookAt(0,0,0);
-            cam.update();
+        Vector3 temporaryCamPosition = cam.position;
 
-            camController = new LimitedCameraInputController(cam);
-            Gdx.input.setInputProcessor(camController);
+        if (carShouldBeRotated) {
+            cam = new PerspectiveCamera(60, height, width);
         } else {
-            cam = new PerspectiveCamera(60, Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
-            cam.position.set(20f, 20f, 20f);
-            cam.lookAt(0,0,0);
-            cam.update();
-
-            camController = new LimitedCameraInputController(cam);
-            Gdx.input.setInputProcessor(camController);
+            cam = new PerspectiveCamera(60, width, height);
         }
-    }
 
-    @Override
-    public void pause() {
-    }
+        cam.position.set(temporaryCamPosition);
+        cam.lookAt(0,0,0);
+        cam.update();
 
-    @Override
-    public void resume() {
+        camController = new LimitedCameraInputController(cam);
+        Gdx.input.setInputProcessor(camController);
     }
 }
