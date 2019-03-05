@@ -40,6 +40,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Environment environment;
     private boolean loading;
     private static final String MODEL_FILE_NAME = "modelK.obj";
+    private boolean a = true;
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
@@ -87,7 +88,11 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         }
         camController.update();
 
-        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        if (a) {
+            Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        } else {
+            Gdx.gl.glViewport(0, 0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
+        }
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         modelBatch.begin(cam);
@@ -104,6 +109,23 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
+        if (a) {
+            cam = new PerspectiveCamera(60, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            cam.position.set(20f, 20f, 20f);
+            cam.lookAt(0,0,0);
+            cam.update();
+
+            camController = new LimitedCameraInputController(cam);
+            Gdx.input.setInputProcessor(camController);
+        } else {
+            cam = new PerspectiveCamera(60, Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
+            cam.position.set(20f, 20f, 20f);
+            cam.lookAt(0,0,0);
+            cam.update();
+
+            camController = new LimitedCameraInputController(cam);
+            Gdx.input.setInputProcessor(camController);
+        }
     }
 
     @Override
