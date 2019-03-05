@@ -21,3 +21,5 @@ public class SelectionTest {
         Assert.assertEquals(test,selection.getId());
     }
 }
+
+

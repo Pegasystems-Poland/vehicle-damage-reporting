@@ -33,6 +33,8 @@ public class DamagedPartsTest {
         //to do
     }
 
+
+
     @Test
     public void testGetAll(){
         Selection s1 = new Selection("s1");
