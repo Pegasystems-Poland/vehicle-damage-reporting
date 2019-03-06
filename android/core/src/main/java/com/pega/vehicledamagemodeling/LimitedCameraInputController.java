@@ -89,6 +89,4 @@ public class LimitedCameraInputController extends CameraInputController {
         tmpV2.rotate(rotateVector, deltaYRotate);
         return tmpV2.y < ROTATE_UP_LIMIT;
     }
-
-
 }
