@@ -18,22 +18,48 @@ public class DamagedPartsTest {
     }
 
     @Test
-    public void testAdd(Selection selection){
+    public void testAdd(){
         Selection s1 = new Selection("s1");
         DamagedPartsRepository damagedPartsRepository = new DamagedPartsRepository(new ArrayList<>());
         if(damagedPartsRepository.getAll().isEmpty()) {
             damagedPartsRepository.add(s1);
             Assert.assertTrue(!damagedPartsRepository.getAll().isEmpty());
         } else Assert.assertFalse(false);
-        //ok ?
     }
 
     @Test
-    public void testRemove(Selection selection){
-        //to do
+    public void testAddMultiple(){
+        Selection s1 = new Selection("s1");
+        Selection s2 = new Selection("s2");
+        ArrayList<Selection> list = new ArrayList<Selection>();
+        list.add(s1);
+        list.add(s2);
+        DamagedPartsRepository damagedPartsRepository = new DamagedPartsRepository(new ArrayList<>());
+        if(damagedPartsRepository.getAll().isEmpty()) {
+            damagedPartsRepository.add(list);
+            Assert.assertTrue(!damagedPartsRepository.getAll().isEmpty());
+        } else Assert.assertFalse(false);
     }
 
+    @Test
+    public void testRemove(){
+        Selection s1 = new Selection("s1");
+        ArrayList<Selection> list = new ArrayList<Selection>();
+        list.add(s1);
+        DamagedPartsRepository damagedPartsRepository = new DamagedPartsRepository(list);
+        damagedPartsRepository.remove(s1);
+        Assert.assertTrue(damagedPartsRepository.getAll().isEmpty());
+    }
 
+    @Test
+    public void testClear(){
+        Selection s1 = new Selection("s1");
+        ArrayList<Selection> list = new ArrayList<Selection>();
+        list.add(s1);
+        DamagedPartsRepository damagedPartsRepository = new DamagedPartsRepository(list);
+        damagedPartsRepository.clear();
+        Assert.assertTrue(damagedPartsRepository.getAll().isEmpty());
+    }
 
     @Test
     public void testGetAll(){
