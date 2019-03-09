@@ -12,29 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import Foundation
+import SceneKit
 
-import UIKit
-import FVM
-
-class ViewController: UIViewController {
-    @IBOutlet weak var damageSelector: FVMCarModelViewController!
-    
-    override func viewDidLoad(){
-        damageSelector.onStartup(jsonConfiguration: """
-        {
-            "mainScreenText": "text",
-            "selection":[
-
-            {
-                "id":"Roof"
-            },
-            {
-            "id":"Hood"
-            }
-
-            ]
-        }
-        """)
-        super.viewDidLoad()
-    }
+protocol DamagedPartsInitializerProtocol {
+    func Initialize(damagedPartsNamesToHightlight: [String])
 }
