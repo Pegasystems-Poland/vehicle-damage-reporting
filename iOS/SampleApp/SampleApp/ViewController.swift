@@ -35,7 +35,8 @@ class ViewController: UIViewController {
         }
         """)
         
-        print(damageSelector.onExit())
+        print(damageSelector.onCancel())
+        print(damageSelector.onAccept())
         super.viewDidLoad()
     }
 }

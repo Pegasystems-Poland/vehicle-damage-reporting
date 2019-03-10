@@ -17,6 +17,7 @@ import SceneKit
 
 public class FVMCarModelViewController : SCNView {
     internal var damagedPartsService: DamagedPartsServiceProtocol!
+    internal var damagedPartsInitializer: DamagedPartsInitializerProtocol!
     internal var nodeHelper: NodeHelperProtocol?
     internal var scnScene: SCNScene!
     internal var scnCamera: SCNNode!
@@ -35,16 +36,20 @@ public class FVMCarModelViewController : SCNView {
         setupInitialSelection(configuration: jsonConfiguration)
     }
     
-    public func onExit() -> String {
+    public func onAccept() -> String {
         return damagedPartsService.getPartsAsJson()
+    }
+    
+    public func onCancel() -> String {
+        return damagedPartsInitializer.getInitialConfiguration()
     }
     
     private func setupInitialSelection(configuration: String) {
         let carModelNode = scnScene.rootNode.childNode(withName: CAR_MODEL_NAME, recursively: false)
         let validNodesNames = nodeHelper?.createValidNamesArray(carModel: carModelNode!)
         damagedPartsService = DamagePartsServiceFactory.create(validPartsNames: validNodesNames!)
-        let demagePartsInitializer = DamagedPartsInitializer(nodeHelper: nodeHelper!, damagePartsService: damagedPartsService, carModel: carModelNode!, initialConfiguration: configuration)
-        demagePartsInitializer.initialize(damagedPartsNamesToHightlight: validNodesNames!)
+        damagedPartsInitializer = DamagedPartsInitializer(nodeHelper: nodeHelper!, damagePartsService: damagedPartsService, carModel: carModelNode!, initialConfiguration: configuration)
+        damagedPartsInitializer.initialize(damagedPartsNamesToHightlight: validNodesNames!)
     }
 
     private func setupGestures() {

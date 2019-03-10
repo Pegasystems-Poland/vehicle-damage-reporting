@@ -25,7 +25,7 @@ internal class DamagedPartsInitializer : DamagedPartsInitializerProtocol {
         self.nodeHelper = nodeHelper
         self.carModel = carModel
         self.damagePartsService = damagePartsService
-        self.initialConfiguration = initialConfiguration
+        self.initialConfiguration = initialConfiguration.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "")
     }
     
     public func initialize(damagedPartsNamesToHightlight: [String]) {
