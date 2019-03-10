@@ -21,7 +21,7 @@ extension FVMCarModelViewController {
         if hitResults.count > 0 {
             let result = hitResults.first!
             guard let nodeName = result.node.name else {
-                print("Can't highlight part without name")
+                Log.warning("Can't highlight part without name")
                 return
             }
             if (highlightHandler.isHighlighted(nodeName: nodeName)) {

@@ -16,7 +16,6 @@ import Foundation
 
 internal class Log {
     internal static var shouldLog = true
-    private static var dateFormat = "yyyy-MM-dd hh:mm:ss"
     fileprivate static var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = dateFormat
@@ -24,6 +23,7 @@ internal class Log {
         formatter.timeZone = TimeZone.current
         return formatter
     }
+    private static var dateFormat = "yyyy-MM-dd hh:mm:ss"
     
     public class func info(_ object: Any, fileName: String = #file, line: Int = #line, col: Int = #column, methodName: String = #function) {
         if shouldLog {
