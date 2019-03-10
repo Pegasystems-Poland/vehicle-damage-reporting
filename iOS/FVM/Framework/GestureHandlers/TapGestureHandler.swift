@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+import SceneKit
 
 extension FVMCarModelViewController {
     @objc
@@ -24,12 +25,20 @@ extension FVMCarModelViewController {
                 return
             }
             if (highlightHandler.isHighlighted(nodeName: nodeName)) {
-                highlightHandler.setHighlightOff(nodeName: nodeName)
+                setHighlightOff(nodeName: nodeName)
             } else {
-                highlightHandler.setHighlightOn(node: result.node)
+                setHighlightOn(node: result.node, nodeName: nodeName)
             }
-        } else {
-            highlightHandler.setAllHighlightsOff()
         }
+    }
+    
+    private func setHighlightOn(node: SCNNode, nodeName: String) {
+        damagedPartsService.addPart(part: Selection(newName: nodeName))
+        highlightHandler.setHighlightOn(node: node)
+    }
+    
+    private func setHighlightOff(nodeName: String) {
+        damagedPartsService.removePart(partId: nodeName)
+        highlightHandler.setHighlightOff(nodeName: nodeName)
     }
 }

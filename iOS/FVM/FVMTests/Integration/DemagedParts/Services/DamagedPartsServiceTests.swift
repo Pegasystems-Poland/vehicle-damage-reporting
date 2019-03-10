@@ -25,7 +25,6 @@ class DamagedPartsServiceTests: XCTestCase {
     let validPartsNames = ["MirrorRight", "MirrorLeft", "Roof"]
 
     override func setUp() {
-        
         partsNamesProvider = DamagedPartsNamesProvider(validPartsNames: validPartsNames)
         validator = DamagedPartsValidator(provider: partsNamesProvider!)
         repository = DamagedPartsRepository()
@@ -34,7 +33,7 @@ class DamagedPartsServiceTests: XCTestCase {
         sut = DamagedPartsService(parser: parser!, validator: validator!, repository: repository!)
     }
     
-    func testIfCreatesSelectionArrayProperly(){
+    func testIfCreatesSelectionArrayProperly() {
         // Arrange
         let jsonWithOnePart = """
         {
@@ -56,7 +55,7 @@ class DamagedPartsServiceTests: XCTestCase {
         assert(actual?[0].id == "MirrorRight")
     }
     
-    func testIfRemovesInvalidParts(){
+    func testIfRemovesInvalidParts() {
         // Arrange
         let jsonWithInvalidParts = """
         {
@@ -85,7 +84,7 @@ class DamagedPartsServiceTests: XCTestCase {
         XCTAssert(actual?[0].id == "MirrorRight" )
     }
     
-    func testIfReturnsEmptyArrayWhenJsonIsInvalid()  {
+    func testIfReturnsEmptyArrayWhenJsonIsInvalid() {
         // Arrange
         let invalidJson = "{}}{}invalidJson{{]}}{"
         
@@ -97,7 +96,7 @@ class DamagedPartsServiceTests: XCTestCase {
         XCTAssert(actual?.count == 0)
     }
     
-    func testIfAddsOnePartProperly(){
+    func testIfAddsOnePartProperly() {
         // Arrange
         let part = Selection(newName: "MirrorRight")
         
@@ -110,7 +109,7 @@ class DamagedPartsServiceTests: XCTestCase {
         XCTAssert(actual![0] == part)
     }
     
-    func testIfRemovesPartProperly(){
+    func testIfRemovesPartProperly() {
         // Arrange
         let partToRemove = "MirrorRight"
         let jsonWithInvalidParts = """
@@ -141,7 +140,7 @@ class DamagedPartsServiceTests: XCTestCase {
         XCTAssert(actual![0].id == "MirrorLeft")
     }
     
-    func testIfItdoesntAddInvalidPart(){
+    func testIfItdoesntAddInvalidPart() {
         // Arrange
         let invalidPart = Selection(newName: "invalidPart")
         
@@ -154,7 +153,7 @@ class DamagedPartsServiceTests: XCTestCase {
         
     }
     
-    func testIfOveritesCollection(){
+    func testIfOveritesCollection() {
         // Arrange
         let jsonWithOnePart = """
         {

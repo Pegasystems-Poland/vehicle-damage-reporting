@@ -16,36 +16,35 @@ import UIKit
 import SceneKit
 
 public class FVMCarModelViewController : SCNView {
-    internal var damagedPartsService: DamagedPartsServiceProtocol?
+    internal var damagedPartsService: DamagedPartsServiceProtocol!
     internal var nodeHelper: NodeHelperProtocol?
     internal var scnScene: SCNScene!
     internal var scnCamera: SCNNode!
     internal var scnCameraOrbit: SCNNode!
     internal let highlightHandler = HighlightHandler()
-    
     private let CAR_MODEL_NAME = "carModel"
     
     public func onStartup(jsonConfiguration: String) {
-        self.allowsCameraControl = false
         self.autoenablesDefaultLighting = true
-    
         nodeHelper = NodeHelper(highlightHandler: highlightHandler)
         
         setupGestures()
         setupScene()
         setupCamera()
         setupLights()
-        
         setupInitialSelection(configuration: jsonConfiguration)
     }
     
-    private func setupInitialSelection(configuration: String){
+    public func onExit() -> String {
+        return damagedPartsService.getPartsAsJson()
+    }
+    
+    private func setupInitialSelection(configuration: String) {
         let carModelNode = scnScene.rootNode.childNode(withName: CAR_MODEL_NAME, recursively: false)
         let validNodesNames = nodeHelper?.createValidNamesArray(carModel: carModelNode!)
         damagedPartsService = DamagePartsServiceFactory.create(validPartsNames: validNodesNames!)
-        let demagePartsInitializer = DamagedPartsInitializer(nodeHelper: nodeHelper!, damagePartsService: damagedPartsService!,
-                                                             carModel: carModelNode!, initialConfiguration: configuration)
-        demagePartsInitializer.Initialize(damagedPartsNamesToHightlight: validNodesNames!)
+        let demagePartsInitializer = DamagedPartsInitializer(nodeHelper: nodeHelper!, damagePartsService: damagedPartsService, carModel: carModelNode!, initialConfiguration: configuration)
+        demagePartsInitializer.initialize(damagedPartsNamesToHightlight: validNodesNames!)
     }
 
     private func setupGestures() {

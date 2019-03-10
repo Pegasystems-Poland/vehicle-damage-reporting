@@ -17,31 +17,31 @@ import Foundation
 internal class DamagedPartsRepository : DamagedPartsRepositoryProtocol {
     private var selections = [Selection]()
     
-    public func clear(){
+    public func clear() {
         selections.removeAll()
     }
     
-    public func add(selection: Selection){
-        if !selections.contains(selection){
+    public func add(selection: Selection) {
+        if !selections.contains(selection) {
             selections.append(selection)
         }
     }
     
-    public func remove(selection: Selection){
+    public func remove(selection: Selection) {
         remove(partId: selection.id)
     }
     
-    public func add(selections: [Selection]){
-        for selection in selections{
+    public func add(selections: [Selection]) {
+        for selection in selections {
             add(selection: selection)
         }
     }
     
-    public func remove(partId: String){
+    public func remove(partId: String) {
         selections.removeAll{$0.id == partId}
     }
     
-    public func getAll() -> [Selection]{
+    public func getAll() -> [Selection] {
         return selections
     }
 }

@@ -14,10 +14,11 @@
 
 import Foundation
 
-internal class DamagedPartsService: DamagedPartsServiceProtocol{
+internal class DamagedPartsService: DamagedPartsServiceProtocol {
     private var parser: JsonParser<SelectionRoot>
     private var validator: DamagedPartsValidator
     private var repository: DamagedPartsRepository
+    private var initialRoot: SelectionRoot?
     
     init(parser: JsonParser<SelectionRoot>, validator: DamagedPartsValidator, repository: DamagedPartsRepository) {
         self.parser = parser
@@ -36,18 +37,26 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol{
     
     public func createCollectionOfDamagedParts(json: String) {
         let root = parser.parse(jsonData: json)
+        if (initialRoot == nil) {
+            initialRoot = root
+        }
+        
         let validated = validator.validate(partsNames: root?.selection ?? [Selection]())
         repository.clear()
         repository.add(selections: validated)
     }
     
     public func addPart(part: Selection) {
-        if validator.validate(part: part) != nil{
+        if validator.validate(part: part) != nil {
             repository.add(selection: part)
         }
     }
     
     public func removePart(partId: String) {
         repository.remove(partId: partId)
+    }
+    
+    public func getPartsAsJson() -> String {
+        return parser.parse(element: SelectionRoot(selectionArray: repository.getAll(), text: initialRoot?.mainScreenText ?? ""))
     }
 }

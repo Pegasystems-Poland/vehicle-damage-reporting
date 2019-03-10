@@ -14,15 +14,21 @@
 
 import Foundation
 
-public class JsonParser <Element: Decodable>{
+internal class JsonParser<Element: Codable> {
     public func parse(data: Data?) -> Element? {
         let selectionRoot = try? JSONDecoder().decode(Element.self, from: data!)
         return selectionRoot
     }
     
-    public func parse(jsonData: String) -> Element?{
+    public func parse(jsonData: String) -> Element? {
         let data = jsonData.data(using: .utf8)
         let selectionRoot = parse(data: data)
         return selectionRoot
+    }
+    
+    public func parse(element: Element?) -> String {
+        let data = try? JSONEncoder().encode(element)
+        let json = String(bytes: data!, encoding: String.Encoding.utf8)
+        return json ?? ""
     }
 }

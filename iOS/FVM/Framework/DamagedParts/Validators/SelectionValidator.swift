@@ -14,7 +14,7 @@
 
 import Foundation
 
-internal protocol Validable {
+internal protocol SelectionValidator {
     func validate(partsNames: [Selection]) -> [Selection]
     func validate(part: Selection) -> Selection?
 }

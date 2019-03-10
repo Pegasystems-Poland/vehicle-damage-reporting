@@ -23,18 +23,19 @@ class ViewController: UIViewController {
         damageSelector.onStartup(jsonConfiguration: """
         {
             "mainScreenText": "text",
-            "selection":[
-
-            {
-                "id":"Roof"
-            },
-            {
-            "id":"Hood"
-            }
-
+            "selection":
+            [
+                {
+                    "id":"Roof"
+                },
+                {
+                    "id":"Hood"
+                }
             ]
         }
         """)
+        
+        print(damageSelector.onExit())
         super.viewDidLoad()
     }
 }

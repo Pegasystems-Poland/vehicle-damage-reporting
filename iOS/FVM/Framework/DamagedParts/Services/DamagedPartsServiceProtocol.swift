@@ -18,6 +18,7 @@ public protocol DamagedPartsServiceProtocol {
     func createAndGetCollectionOfDamagedParts(json: String) -> [Selection]
     func getCollectionOfDamagedParts() -> [Selection]
     func createCollectionOfDamagedParts(json: String) -> Void
+    func getPartsAsJson() -> String
     func addPart(part: Selection)
     func removePart(partId: String)
 }

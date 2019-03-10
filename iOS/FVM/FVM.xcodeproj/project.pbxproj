@@ -32,7 +32,7 @@
 		D7C88824222702F600EB3375 /* DamagedPartsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88814222702F600EB3375 /* DamagedPartsRepository.swift */; };
 		D7C88825222702F600EB3375 /* SelectionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88816222702F600EB3375 /* SelectionRoot.swift */; };
 		D7C88827222702F600EB3375 /* DamagePartsServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88819222702F600EB3375 /* DamagePartsServiceFactory.swift */; };
-		D7C88828222702F600EB3375 /* Validable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881B222702F600EB3375 /* Validable.swift */; };
+		D7C88828222702F600EB3375 /* SelectionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881B222702F600EB3375 /* SelectionValidator.swift */; };
 		D7C88829222702F600EB3375 /* DamagedPartsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881C222702F600EB3375 /* DamagedPartsValidator.swift */; };
 		D7C8882B222702F600EB3375 /* DamagedPartsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881F222702F600EB3375 /* DamagedPartsService.swift */; };
 		D7C888462227033200EB3375 /* DamagedParstsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8882F2227033200EB3375 /* DamagedParstsRepositoryTests.swift */; };
@@ -86,7 +86,7 @@
 		D7C88814222702F600EB3375 /* DamagedPartsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsRepository.swift; sourceTree = "<group>"; };
 		D7C88816222702F600EB3375 /* SelectionRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionRoot.swift; sourceTree = "<group>"; };
 		D7C88819222702F600EB3375 /* DamagePartsServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagePartsServiceFactory.swift; sourceTree = "<group>"; };
-		D7C8881B222702F600EB3375 /* Validable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validable.swift; sourceTree = "<group>"; };
+		D7C8881B222702F600EB3375 /* SelectionValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionValidator.swift; sourceTree = "<group>"; };
 		D7C8881C222702F600EB3375 /* DamagedPartsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsValidator.swift; sourceTree = "<group>"; };
 		D7C8881F222702F600EB3375 /* DamagedPartsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsService.swift; sourceTree = "<group>"; };
 		D7C8882F2227033200EB3375 /* DamagedParstsRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedParstsRepositoryTests.swift; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 		D7C8881A222702F600EB3375 /* Validators */ = {
 			isa = PBXGroup;
 			children = (
-				D7C8881B222702F600EB3375 /* Validable.swift */,
+				D7C8881B222702F600EB3375 /* SelectionValidator.swift */,
 				D7C8881C222702F600EB3375 /* DamagedPartsValidator.swift */,
 			);
 			path = Validators;
@@ -514,7 +514,7 @@
 				D7C88821222702F600EB3375 /* DamagedPartsNamesProviderProtocol.swift in Sources */,
 				BAF81BE22222D36A001768B0 /* ZoomConstraint.swift in Sources */,
 				BAAD17F722064BD600574F2C /* PinchGestureHandler.swift in Sources */,
-				D7C88828222702F600EB3375 /* Validable.swift in Sources */,
+				D7C88828222702F600EB3375 /* SelectionValidator.swift in Sources */,
 				D7BD08522233ACF300D36DD4 /* Selection.swift in Sources */,
 				D7C88825222702F600EB3375 /* SelectionRoot.swift in Sources */,
 			);
