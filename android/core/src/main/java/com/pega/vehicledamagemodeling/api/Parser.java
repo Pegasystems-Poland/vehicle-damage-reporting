@@ -27,16 +27,17 @@ public class Parser {
 
         ArrayList<Selection> selections = new ArrayList<>();
 
+
         for(int i =0; i < arr.size(); i++){
             boolean selected = arr.get(i)
                     .getAsJsonObject()
-                    .getAsJsonObject("damaged")
+                    .get("damaged")
                     .getAsBoolean();
 
             if(selected){
                 String part = arr.get(i)
                         .getAsJsonObject()
-                        .getAsJsonObject("name")
+                        .get("name")
                         .getAsString();
 
                 Selection selection = new Selection(part);

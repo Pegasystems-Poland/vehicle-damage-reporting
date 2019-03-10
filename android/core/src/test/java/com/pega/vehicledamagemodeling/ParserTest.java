@@ -22,7 +22,7 @@ public class ParserTest {
 
     @Test
     public void testParse(){
-        /*JsonObject jsonObject = new JsonObject();
+        JsonObject jsonObject = new JsonObject();
         JsonArray array = new JsonArray();
         JsonObject item = new JsonObject();
         JsonObject item2 = new JsonObject();
@@ -40,7 +40,10 @@ public class ParserTest {
         list.add(s1);
         SelectionRoot selectionRoot = new SelectionRoot(list,"nothing");
         Parser parser = new Parser();
-        Assert.assertEquals(selectionRoot,parser.parse(jsonObject));*/
+        SelectionRoot parsed = parser.parse(jsonObject);
+        for(int i = 0; i < parsed.returnArray().size(); i++)
+            System.out.println(parsed.returnArray().get(i).getId());
+        Assert.assertTrue(parsed.equals(selectionRoot));
     }
 }
 

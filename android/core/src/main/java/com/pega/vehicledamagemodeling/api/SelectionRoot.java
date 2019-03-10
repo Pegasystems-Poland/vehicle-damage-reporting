@@ -29,5 +29,20 @@ public class SelectionRoot {
         return this.selections;
     }
 
-    public String getMainScreenText() { return this.mainScreenText; }
+    public String getMainScreenText() {
+        return this.mainScreenText;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof SelectionRoot) {
+            SelectionRoot other = (SelectionRoot) obj;
+            return selections.equals(other.selections) &&
+                    mainScreenText.equals(other.mainScreenText);
+        }
+        return false;
+    }
 }

@@ -14,26 +14,17 @@
 
 package com.pega.vehicledamagemodeling.api;
 
-public class Selection {
-    private String id;
+import com.google.gson.JsonObject;
 
-    public Selection(String id) {
-        this.id = id;
+
+public class Receiver {
+    private JsonObject jsonObject;
+
+    public Receiver(JsonObject object){
+        this.jsonObject = object;
     }
 
-    public String getId() {
-        return this.id;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (obj instanceof Selection) {
-            Selection other = (Selection) obj;
-            return id.equals(other.id);
-        }
-        return false;
+    public JsonObject returnJson() {
+        return this.jsonObject;
     }
 }
