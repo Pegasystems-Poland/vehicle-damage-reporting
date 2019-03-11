@@ -180,12 +180,37 @@ class DamagedPartsServiceTests: XCTestCase {
         """
         
         // Act
-        
         let actual = sut?.createAndGetCollectionOfDamagedParts(json: newJson)
         
         // Assert
         XCTAssert(actual?.count == 1)
         XCTAssert(actual![0].id == "Roof")
+    }
+    
+    func testIfReturnsSelectionProperly() {
+        //Arrange
+        let expected = "{\"mainScreenText\":\"\",\"selection\":[{\"id\":\"Roof\"},{\"id\":\"MirrorLeft\"},{\"id\":\"MirrorRight\"}]}"
+        sut?.createCollectionOfDamagedParts(json: expected)
+        
+        //Act
+        let actual = sut!.getPartsAsJson()
+        
+        //Assert
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testIfReturnsSelectionProperlyAfterAddingNewElement() {
+        //Arrange
+        let json = "{\"mainScreenText\":\"\",\"selection\":[{\"id\":\"Roof\"},{\"id\":\"MirrorLeft\"}]}"
+        let expected = "{\"mainScreenText\":\"\",\"selection\":[{\"id\":\"Roof\"},{\"id\":\"MirrorLeft\"},{\"id\":\"MirrorRight\"}]}"
+        sut?.createCollectionOfDamagedParts(json: json)
+        sut?.addPart(part: Selection(newName: "MirrorRight"))
+        
+        //Act
+        let actual = sut!.getPartsAsJson()
+        
+        //Assert
+        XCTAssertEqual(expected, actual)
     }
 }
 
