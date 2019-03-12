@@ -27,13 +27,13 @@ extension FVMCarModelViewController {
             if (highlightHandler.isHighlighted(nodeName: nodeName)) {
                 setHighlightOff(nodeName: nodeName)
             } else {
-                setHighlightOn(node: result.node, nodeName: nodeName)
+                setHighlightOn(node: result.node)
             }
         }
     }
     
-    private func setHighlightOn(node: SCNNode, nodeName: String) {
-        damagedPartsService.addPart(part: Selection(newName: nodeName))
+    private func setHighlightOn(node: SCNNode) {
+        damagedPartsService.addPart(part: Selection(newName: node.name!))
         highlightHandler.setHighlightOn(node: node)
     }
     

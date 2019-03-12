@@ -37,11 +37,11 @@ public class FVMCarModelViewController : SCNView {
     }
     
     public func onAccept() -> String {
-        return damagedPartsService.getPartsAsJson()
+        return damagedPartsService.getSerializedParts()
     }
     
     public func onCancel() -> String {
-        return damagedPartsInitializer.getInitialConfiguration()
+        return damagedPartsInitializer.originalConfiguration
     }
     
     private func setupInitialSelection(configuration: String) {

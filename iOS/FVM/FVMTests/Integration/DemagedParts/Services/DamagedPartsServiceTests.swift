@@ -193,7 +193,7 @@ class DamagedPartsServiceTests: XCTestCase {
         sut?.createCollectionOfDamagedParts(json: expected)
         
         //Act
-        let actual = sut!.getPartsAsJson()
+        let actual = sut!.getSerializedParts()
         
         //Assert
         XCTAssertEqual(expected, actual)
@@ -207,7 +207,7 @@ class DamagedPartsServiceTests: XCTestCase {
         sut?.addPart(part: Selection(newName: "MirrorRight"))
         
         //Act
-        let actual = sut!.getPartsAsJson()
+        let actual = sut!.getSerializedParts()
         
         //Assert
         XCTAssertEqual(expected, actual)

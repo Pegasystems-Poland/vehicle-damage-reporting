@@ -16,6 +16,9 @@ import Foundation
 import SceneKit
 
 internal class DamagedPartsInitializer : DamagedPartsInitializerProtocol {
+    public var originalConfiguration: String {
+        return initialConfiguration
+    }
     private var nodeHelper: NodeHelperProtocol
     private var carModel: SCNNode
     private var damagePartsService: DamagedPartsServiceProtocol
@@ -32,9 +35,5 @@ internal class DamagedPartsInitializer : DamagedPartsInitializerProtocol {
         let initialDamagedParts = damagePartsService.createAndGetCollectionOfDamagedParts(json: initialConfiguration)
         let nodesToHighlight = nodeHelper.getIdsOfSelection(selections: initialDamagedParts)
         nodeHelper.updateDamagedPartsOnUI(damagedPartsNames: nodesToHighlight, carModel: carModel)
-    }
-    
-    public func getInitialConfiguration() -> String {
-        return initialConfiguration
     }
 }

@@ -18,7 +18,7 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol {
     private var parser: JsonParser<SelectionRoot>
     private var validator: DamagedPartsValidator
     private var repository: DamagedPartsRepository
-    private var initialRoot: SelectionRoot?
+    private var initialSelectionRoot: SelectionRoot?
     
     init(parser: JsonParser<SelectionRoot>, validator: DamagedPartsValidator, repository: DamagedPartsRepository) {
         self.parser = parser
@@ -37,8 +37,8 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol {
     
     public func createCollectionOfDamagedParts(json: String) {
         let root = parser.parse(jsonData: json)
-        if (initialRoot == nil) {
-            initialRoot = root
+        if (initialSelectionRoot == nil) {
+            initialSelectionRoot = root
         }
         
         let validated = validator.validate(partsNames: root?.selection ?? [Selection]())
@@ -56,7 +56,7 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol {
         repository.remove(partId: partId)
     }
     
-    public func getPartsAsJson() -> String {
-        return parser.parse(element: SelectionRoot(selectionArray: repository.getAll(), text: initialRoot?.mainScreenText ?? ""))
+    public func getSerializedParts() -> String {
+        return parser.parse(element: SelectionRoot(selectionArray: repository.getAll(), text: initialSelectionRoot?.mainScreenText ?? ""))
     }
 }
