@@ -15,6 +15,7 @@
 import Foundation
 
 public protocol DamagedPartsServiceProtocol {
+    var originalConfiguration: String { get }
     func createAndGetCollectionOfDamagedParts(json: String) -> [Selection]
     func getCollectionOfDamagedParts() -> [Selection]
     func createCollectionOfDamagedParts(json: String) -> Void

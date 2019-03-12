@@ -17,7 +17,6 @@ import SceneKit
 
 public class FVMCarModelViewController : SCNView {
     internal var damagedPartsService: DamagedPartsServiceProtocol!
-    internal var damagedPartsInitializer: DamagedPartsInitializerProtocol!
     internal var nodeHelper: NodeHelperProtocol?
     internal var scnScene: SCNScene!
     internal var scnCamera: SCNNode!
@@ -41,14 +40,14 @@ public class FVMCarModelViewController : SCNView {
     }
     
     public func onCancel() -> String {
-        return damagedPartsInitializer.originalConfiguration
+        return damagedPartsService.originalConfiguration
     }
     
     private func setupInitialSelection(configuration: String) {
         let carModelNode = scnScene.rootNode.childNode(withName: CAR_MODEL_NAME, recursively: false)
         let validNodesNames = nodeHelper?.createValidNamesArray(carModel: carModelNode!)
         damagedPartsService = DamagePartsServiceFactory.create(validPartsNames: validNodesNames!)
-        damagedPartsInitializer = DamagedPartsInitializer(nodeHelper: nodeHelper!, damagePartsService: damagedPartsService, carModel: carModelNode!, initialConfiguration: configuration)
+        let damagedPartsInitializer = DamagedPartsInitializer(nodeHelper: nodeHelper!, damagePartsService: damagedPartsService, carModel: carModelNode!, initialConfiguration: configuration)
         damagedPartsInitializer.initialize(damagedPartsNamesToHightlight: validNodesNames!)
     }
 

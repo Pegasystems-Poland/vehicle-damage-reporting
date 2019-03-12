@@ -16,9 +16,6 @@ import Foundation
 import SceneKit
 
 internal class DamagedPartsInitializer : DamagedPartsInitializerProtocol {
-    public var originalConfiguration: String {
-        return initialConfiguration
-    }
     private var nodeHelper: NodeHelperProtocol
     private var carModel: SCNNode
     private var damagePartsService: DamagedPartsServiceProtocol
@@ -28,7 +25,7 @@ internal class DamagedPartsInitializer : DamagedPartsInitializerProtocol {
         self.nodeHelper = nodeHelper
         self.carModel = carModel
         self.damagePartsService = damagePartsService
-        self.initialConfiguration = initialConfiguration.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "")
+        self.initialConfiguration = initialConfiguration
     }
     
     public func initialize(damagedPartsNamesToHightlight: [String]) {

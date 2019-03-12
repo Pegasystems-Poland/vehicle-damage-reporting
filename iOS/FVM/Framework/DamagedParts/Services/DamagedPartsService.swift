@@ -15,10 +15,14 @@
 import Foundation
 
 internal class DamagedPartsService: DamagedPartsServiceProtocol {
+    public var originalConfiguration: String {
+        return initialConfiguration ?? ""
+    }
     private var parser: JsonParser<SelectionRoot>
     private var validator: DamagedPartsValidator
     private var repository: DamagedPartsRepository
     private var initialSelectionRoot: SelectionRoot?
+    private var initialConfiguration: String?
     
     init(parser: JsonParser<SelectionRoot>, validator: DamagedPartsValidator, repository: DamagedPartsRepository) {
         self.parser = parser
@@ -27,6 +31,9 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol {
     }
     
     public func createAndGetCollectionOfDamagedParts(json: String) -> [Selection] {
+        if (initialConfiguration == nil) {
+            initialConfiguration = json.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "")
+        }
         createCollectionOfDamagedParts(json: json)
         return getCollectionOfDamagedParts()
     }

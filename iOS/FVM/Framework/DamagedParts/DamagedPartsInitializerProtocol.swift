@@ -16,6 +16,5 @@ import Foundation
 import SceneKit
 
 protocol DamagedPartsInitializerProtocol {
-    var originalConfiguration: String { get }
     func initialize(damagedPartsNamesToHightlight: [String])
 }
