@@ -13,8 +13,10 @@
 // limitations under the License.
 
 import Foundation
-import SceneKit
 
-protocol DamagedPartsInitializerProtocol {
-    func initialize(damagedPartsNamesToHightlight: [String])
+internal enum LogEvent: String {
+    case info = "INFO"
+    case debug = "DEBUG"
+    case warning = "WARNING"
+    case error = "ERROR"
 }

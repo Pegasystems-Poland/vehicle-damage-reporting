@@ -18,6 +18,8 @@
 		BAAD17F522064B0600574F2C /* TapGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD17F422064B0600574F2C /* TapGestureHandler.swift */; };
 		BAAD17F722064BD600574F2C /* PinchGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD17F622064BD600574F2C /* PinchGestureHandler.swift */; };
 		BAF81BE22222D36A001768B0 /* ZoomConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */; };
+		BAF81BEF2235CE95001768B0 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BEE2235CE95001768B0 /* Log.swift */; };
+		BAF81BF32235D211001768B0 /* LogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BF22235D211001768B0 /* LogEvent.swift */; };
 		D7B875FB2233E74900E6B09B /* HightlightHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B875FA2233E74900E6B09B /* HightlightHandlerMock.swift */; };
 		D7B875FC2233E74900E6B09B /* HightlightHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B875FA2233E74900E6B09B /* HightlightHandlerMock.swift */; };
 		D7BD083C2232808200D36DD4 /* DamagedPartsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BD083B2232808200D36DD4 /* DamagedPartsInitializer.swift */; };
@@ -32,7 +34,7 @@
 		D7C88824222702F600EB3375 /* DamagedPartsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88814222702F600EB3375 /* DamagedPartsRepository.swift */; };
 		D7C88825222702F600EB3375 /* SelectionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88816222702F600EB3375 /* SelectionRoot.swift */; };
 		D7C88827222702F600EB3375 /* DamagePartsServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88819222702F600EB3375 /* DamagePartsServiceFactory.swift */; };
-		D7C88828222702F600EB3375 /* Validable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881B222702F600EB3375 /* Validable.swift */; };
+		D7C88828222702F600EB3375 /* SelectionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881B222702F600EB3375 /* SelectionValidator.swift */; };
 		D7C88829222702F600EB3375 /* DamagedPartsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881C222702F600EB3375 /* DamagedPartsValidator.swift */; };
 		D7C8882B222702F600EB3375 /* DamagedPartsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881F222702F600EB3375 /* DamagedPartsService.swift */; };
 		D7C888462227033200EB3375 /* DamagedParstsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8882F2227033200EB3375 /* DamagedParstsRepositoryTests.swift */; };
@@ -73,6 +75,8 @@
 		BAAD17F422064B0600574F2C /* TapGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureHandler.swift; sourceTree = "<group>"; };
 		BAAD17F622064BD600574F2C /* PinchGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchGestureHandler.swift; sourceTree = "<group>"; };
 		BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomConstraint.swift; sourceTree = "<group>"; };
+		BAF81BEE2235CE95001768B0 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		BAF81BF22235D211001768B0 /* LogEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEvent.swift; sourceTree = "<group>"; };
 		D7B875FA2233E74900E6B09B /* HightlightHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HightlightHandlerMock.swift; sourceTree = "<group>"; };
 		D7BD083B2232808200D36DD4 /* DamagedPartsInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamagedPartsInitializer.swift; sourceTree = "<group>"; };
 		D7BD08452232F91B00D36DD4 /* NodeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeHelper.swift; sourceTree = "<group>"; };
@@ -86,7 +90,7 @@
 		D7C88814222702F600EB3375 /* DamagedPartsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsRepository.swift; sourceTree = "<group>"; };
 		D7C88816222702F600EB3375 /* SelectionRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionRoot.swift; sourceTree = "<group>"; };
 		D7C88819222702F600EB3375 /* DamagePartsServiceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagePartsServiceFactory.swift; sourceTree = "<group>"; };
-		D7C8881B222702F600EB3375 /* Validable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validable.swift; sourceTree = "<group>"; };
+		D7C8881B222702F600EB3375 /* SelectionValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionValidator.swift; sourceTree = "<group>"; };
 		D7C8881C222702F600EB3375 /* DamagedPartsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsValidator.swift; sourceTree = "<group>"; };
 		D7C8881F222702F600EB3375 /* DamagedPartsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsService.swift; sourceTree = "<group>"; };
 		D7C8882F2227033200EB3375 /* DamagedParstsRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedParstsRepositoryTests.swift; sourceTree = "<group>"; };
@@ -141,6 +145,7 @@
 		0535F31C21C4389F00CD6C44 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				BAF81BED2235CE58001768B0 /* Logging */,
 				D7C8880C222702F600EB3375 /* DamagedParts */,
 				051E317421C43E5F0067C7F3 /* FVMCarModelViewController.swift */,
 				BA1FBE0D220780F000DBFB9E /* Highlighting */,
@@ -198,6 +203,15 @@
 				BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */,
 			);
 			path = Constraints;
+			sourceTree = "<group>";
+		};
+		BAF81BED2235CE58001768B0 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				BAF81BEE2235CE95001768B0 /* Log.swift */,
+				BAF81BF22235D211001768B0 /* LogEvent.swift */,
+			);
+			path = Logging;
 			sourceTree = "<group>";
 		};
 		D7B875F92233E49500E6B09B /* Helpers */ = {
@@ -272,7 +286,7 @@
 		D7C8881A222702F600EB3375 /* Validators */ = {
 			isa = PBXGroup;
 			children = (
-				D7C8881B222702F600EB3375 /* Validable.swift */,
+				D7C8881B222702F600EB3375 /* SelectionValidator.swift */,
 				D7C8881C222702F600EB3375 /* DamagedPartsValidator.swift */,
 			);
 			path = Validators;
@@ -496,10 +510,12 @@
 				D7C88824222702F600EB3375 /* DamagedPartsRepository.swift in Sources */,
 				BAAD17F522064B0600574F2C /* TapGestureHandler.swift in Sources */,
 				D7B875FB2233E74900E6B09B /* HightlightHandlerMock.swift in Sources */,
+				BAF81BF32235D211001768B0 /* LogEvent.swift in Sources */,
 				D7C88829222702F600EB3375 /* DamagedPartsValidator.swift in Sources */,
 				D7BD08562233B44A00D36DD4 /* NodeHelperProtocol.swift in Sources */,
 				D7BD084C2233A97400D36DD4 /* DamagedPartsServiceProtocol.swift in Sources */,
 				051E317521C43E5F0067C7F3 /* FVMCarModelViewController.swift in Sources */,
+				BAF81BEF2235CE95001768B0 /* Log.swift in Sources */,
 				D7BD083C2232808200D36DD4 /* DamagedPartsInitializer.swift in Sources */,
 				D7C8882B222702F600EB3375 /* DamagedPartsService.swift in Sources */,
 				D7F0300A222EADCD00D87F6A /* DamagedPartsInitializerProtocol.swift in Sources */,
@@ -514,7 +530,7 @@
 				D7C88821222702F600EB3375 /* DamagedPartsNamesProviderProtocol.swift in Sources */,
 				BAF81BE22222D36A001768B0 /* ZoomConstraint.swift in Sources */,
 				BAAD17F722064BD600574F2C /* PinchGestureHandler.swift in Sources */,
-				D7C88828222702F600EB3375 /* Validable.swift in Sources */,
+				D7C88828222702F600EB3375 /* SelectionValidator.swift in Sources */,
 				D7BD08522233ACF300D36DD4 /* Selection.swift in Sources */,
 				D7C88825222702F600EB3375 /* SelectionRoot.swift in Sources */,
 			);

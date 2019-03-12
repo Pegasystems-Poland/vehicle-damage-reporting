@@ -15,7 +15,7 @@
 import Foundation
 import SceneKit
 
-public class NodeHelper : NodeHelperProtocol{
+public class NodeHelper : NodeHelperProtocol {
     private var highlightHandler: HighlightHandler
     
     init(highlightHandler: HighlightHandler) {
@@ -40,6 +40,6 @@ public class NodeHelper : NodeHelperProtocol{
     }
 
     public func getIdsOfSelection(selections: [Selection]?) -> [String] {
-            return (selections?.map{ $0.id})!
+        return (selections?.map{ $0.id })!
     }
 }
