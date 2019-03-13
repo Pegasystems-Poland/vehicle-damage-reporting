@@ -15,14 +15,14 @@
 package com.pega.vehicledamagemodeling.api;
 
 public class Selection {
-    private String id;
+    private String name;
 
-    public Selection(String id) {
-        this.id = id;
+    public Selection(String name) {
+        this.name = name;
     }
 
-    public String getId() {
-        return this.id;
+    public String getName() {
+        return this.name;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Selection {
         }
         if (obj instanceof Selection) {
             Selection other = (Selection) obj;
-            return id.equals(other.id);
+            return name.equals(other.name);
         }
         return false;
     }

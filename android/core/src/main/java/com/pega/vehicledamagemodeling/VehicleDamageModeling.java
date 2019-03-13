@@ -54,8 +54,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
     public VehicleDamageModeling(JsonObject report, VehicleDamageReportCallback callback) {
         this(callback);
-        Parser parser = new Parser();
-        selections = new DamagedPartsRepository(parser.parse(report).returnArray());
+        selections = new DamagedPartsRepository(report, new Parser());
         // display given report
     }
 

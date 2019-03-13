@@ -41,8 +41,6 @@ public class ParserTest {
         SelectionRoot selectionRoot = new SelectionRoot(list,"nothing");
         Parser parser = new Parser();
         SelectionRoot parsed = parser.parse(jsonObject);
-        for(int i = 0; i < parsed.returnArray().size(); i++)
-            System.out.println(parsed.returnArray().get(i).getId());
         Assert.assertTrue(parsed.equals(selectionRoot));
     }
 }

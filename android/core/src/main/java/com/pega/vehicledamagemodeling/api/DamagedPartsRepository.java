@@ -14,14 +14,20 @@
 
 package com.pega.vehicledamagemodeling.api;
 
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 
-public class DamagedPartsRepository extends DamagedPartsRepositoryProtocol {
+public class DamagedPartsRepository implements DamagedPartsRepositoryProtocol {
 
     private ArrayList<Selection> selections;
+    private JsonObject jsonObject;
+    private Parser parser;
 
-    public DamagedPartsRepository(ArrayList<Selection> selections){
-        this.selections = selections;
+    public DamagedPartsRepository(JsonObject jsonObject, Parser parser){
+        this.parser = parser;
+        this.jsonObject = jsonObject;
+        this.selections = this.parser.parse(this.jsonObject).returnArray();
     }
 
     @Override
@@ -51,5 +57,10 @@ public class DamagedPartsRepository extends DamagedPartsRepositoryProtocol {
     @Override
     public ArrayList<Selection> getAll() {
         return this.selections;
+    }
+
+    @Override
+    public JsonObject getJsonObject(){
+        return this.jsonObject;
     }
 }

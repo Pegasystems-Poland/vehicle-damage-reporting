@@ -15,27 +15,20 @@
 package com.pega.vehicledamagemodeling.api;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
 public class Parser {
 
-    public Parser(){}
     public SelectionRoot parse(JsonObject obj){
-        JsonArray arr = obj.getAsJsonArray("parts");
-
+        JsonArray partsArray = obj.getAsJsonArray("parts");
         ArrayList<Selection> selections = new ArrayList<>();
 
-
-        for(int i =0; i < arr.size(); i++){
-            boolean selected = arr.get(i)
-                    .getAsJsonObject()
-                    .get("damaged")
-                    .getAsBoolean();
-
-            if(selected){
-                String part = arr.get(i)
+        for(int i =0; i < partsArray.size(); i++){
+            if(isDamaged(partsArray.get(i))){
+                String part = partsArray.get(i)
                         .getAsJsonObject()
                         .get("name")
                         .getAsString();
@@ -45,5 +38,11 @@ public class Parser {
             }
         }
         return new SelectionRoot(selections,"nothing");
+    }
+
+    private boolean isDamaged(JsonElement jsonElement) {
+        return jsonElement.getAsJsonObject()
+                .get("damaged")
+                .getAsBoolean();
     }
 }
