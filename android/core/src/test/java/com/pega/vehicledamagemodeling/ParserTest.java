@@ -2,15 +2,15 @@ package com.pega.vehicledamagemodeling;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.pega.vehicledamagemodeling.api.DamagedPartsRepository;
 import com.pega.vehicledamagemodeling.api.Parser;
-import com.pega.vehicledamagemodeling.api.Selection;
-import com.pega.vehicledamagemodeling.api.SelectionRoot;
+import com.pega.vehicledamagemodeling.api.PartRoot;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
 
 
 public class ParserTest {
@@ -21,27 +21,56 @@ public class ParserTest {
     }
 
     @Test
-    public void testParse(){
-        JsonObject jsonObject = new JsonObject();
-        JsonArray array = new JsonArray();
-        JsonObject item = new JsonObject();
-        JsonObject item2 = new JsonObject();
-        item.addProperty("name","roof");
-        item.addProperty("damaged",true);
-        array.add(item);
-        item2.addProperty("name","front bumper");
-        item2.addProperty("damaged",false);
-        array.add(item2);
+    public void whenJsonIsNotNullThenReturnPartRoot(){
+        //given
+        JsonObject initJson = new JsonObject();
+        JsonArray partsArray = new JsonArray();
+        JsonObject jsonProperty = new JsonObject();
+        jsonProperty.addProperty("id","roof");
+        partsArray.add(jsonProperty);
+        JsonObject jsonProperty2 = new JsonObject();
+        jsonProperty2.addProperty("id","front bumper");
+        partsArray.add(jsonProperty2);
+        initJson.add("selection",partsArray);
 
-        jsonObject.add("parts",array);
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("roof");
+        list.add("front bumper");
 
-        Selection s1 = new Selection("roof");
-        ArrayList<Selection> list = new ArrayList<Selection>();
-        list.add(s1);
-        SelectionRoot selectionRoot = new SelectionRoot(list,"nothing");
         Parser parser = new Parser();
-        SelectionRoot parsed = parser.parse(jsonObject);
-        Assert.assertTrue(parsed.equals(selectionRoot));
+
+        //when
+        PartRoot result = parser.parseToPartRoot(initJson);
+
+        //then
+        assertEquals(list,result.getParts());
+    }
+
+    @Test
+    public void whenPartRootIsNotNullThenReturnJson(){
+        //given
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("roof");
+        list.add("front bumper");
+        PartRoot parts = new PartRoot(list,"nothing");
+
+        JsonObject expectedJson = new JsonObject();
+        JsonArray partsArray = new JsonArray();
+        JsonObject jsonProperty = new JsonObject();
+        jsonProperty.addProperty("id","roof");
+        partsArray.add(jsonProperty);
+        JsonObject jsonProperty2 = new JsonObject();
+        jsonProperty2.addProperty("id","front bumper");
+        partsArray.add(jsonProperty2);
+        expectedJson.add("selection",partsArray);
+
+        Parser parser = new Parser();
+
+        //when
+        JsonObject result = parser.parseToJson(parts);
+
+        //then
+        assertEquals(expectedJson,result);
     }
 }
 

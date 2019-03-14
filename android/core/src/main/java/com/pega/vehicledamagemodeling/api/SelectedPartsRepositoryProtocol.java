@@ -18,12 +18,11 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
-public interface DamagedPartsRepositoryProtocol {
-    void clear();
-    void add(Selection selection);
-    void remove(Selection selection);
-    void add(ArrayList<Selection> selections);
-    ArrayList<Selection> getAll();
-    JsonObject getJsonObject();
+public interface SelectedPartsRepositoryProtocol {
+    void add(String part);
+    void remove(String part);
+    void add(ArrayList<String> parts);
+    ArrayList<String> getAll();
+    JsonObject getInitJson();
 
 }

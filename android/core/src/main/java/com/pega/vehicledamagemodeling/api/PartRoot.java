@@ -14,26 +14,22 @@
 
 package com.pega.vehicledamagemodeling.api;
 
-public class Selection {
-    private String name;
+import java.util.ArrayList;
 
-    public Selection(String name) {
-        this.name = name;
+public class PartRoot {
+    private ArrayList<String> parts;
+    private String mainScreenText;
+
+    public PartRoot(ArrayList<String> part, String mainScreenText){
+        parts = part;
+        this.mainScreenText = mainScreenText;
     }
 
-    public String getName() {
-        return this.name;
+    public ArrayList<String> getParts() {
+        return parts;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (obj instanceof Selection) {
-            Selection other = (Selection) obj;
-            return name.equals(other.name);
-        }
-        return false;
+    public String getMainScreenText() {
+        return mainScreenText;
     }
 }

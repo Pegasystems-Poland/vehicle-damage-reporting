@@ -22,22 +22,33 @@ import java.util.ArrayList;
 
 public class Parser {
 
-    public SelectionRoot parse(JsonObject obj){
-        JsonArray partsArray = obj.getAsJsonArray("parts");
-        ArrayList<Selection> selections = new ArrayList<>();
+    public PartRoot parseToPartRoot(JsonObject obj){
+        JsonArray partsArray = obj.getAsJsonArray("selection");
+        ArrayList<String> parts = new ArrayList<>();
 
-        for(int i =0; i < partsArray.size(); i++){
-            if(isDamaged(partsArray.get(i))){
-                String part = partsArray.get(i)
-                        .getAsJsonObject()
-                        .get("name")
-                        .getAsString();
-
-                Selection selection = new Selection(part);
-                selections.add(selection);
-            }
+        for(int i = 0; i < partsArray.size(); i++){
+            String part = partsArray.get(i)
+                    .getAsJsonObject()
+                    .get("id")
+                    .getAsString();
+            String selection = part;
+            parts.add(selection);
         }
-        return new SelectionRoot(selections,"nothing");
+        return new PartRoot(parts,"nothing");
+    }
+
+    public JsonObject parseToJson(PartRoot parts) {
+        JsonObject parsed = new JsonObject();
+        JsonArray parsedArray = new JsonArray();
+
+        for(int i = 0; i < parts.getParts().size(); i++)
+        {
+            JsonObject jsonProperty = new JsonObject();
+            jsonProperty.addProperty("id",parts.getParts().get(i));
+            parsedArray.add(jsonProperty);
+        }
+        parsed.add("selection",parsedArray);
+        return parsed;
     }
 
     private boolean isDamaged(JsonElement jsonElement) {
