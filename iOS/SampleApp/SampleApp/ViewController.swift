@@ -42,6 +42,11 @@ public class ViewController: UIViewController {
             updateCurrentValuesBeforeSending()
             nextController!.jsonConfigurationData = CurrentValue.JSON
             nextController!.descriptionFromSampleApp = CurrentValue.Description
+            
+            nextController!.completionHandler = { json in
+                CurrentValue.JSON = json
+                self.manageJSONTextView.text = json
+            }
         }
     }
     

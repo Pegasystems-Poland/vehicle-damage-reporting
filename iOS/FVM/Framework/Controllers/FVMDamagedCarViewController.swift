@@ -25,28 +25,21 @@ public class FVMDamagedCarViewController: UIViewController {
     """
     public var descriptionFromSampleApp: String = """
     """
+    public var completionHandler:((String) -> Void)?
     
     override public func viewDidLoad() {
         damageSelector.onStartup(jsonConfiguration: jsonConfigurationData)
         informationForUserTextView.text = descriptionFromSampleApp
-        
-        print(damageSelector.onCancel())
-        print(damageSelector.onAccept())
         super.viewDidLoad()
     }
     
-//    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.destination is ViewController {
-//            let nextController = segue.destination as? ViewController
-//            nextController!.updateJSONCurrentValue(damageSelector.onCancel())
-//        }
-//    }
-
     @IBAction func closeButtonTapped(_ sender: UIButton) {
-        self.dismiss(animated: false, completion: nil)
+        _ = completionHandler?(damageSelector.onCancel())
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func finishButtonTapped(_ sender: UIButton) {
-        self.dismiss(animated: false, completion: nil)
+        _ = completionHandler?(damageSelector.onAccept())
+        self.dismiss(animated: true, completion: nil)
     }
 }
