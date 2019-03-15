@@ -18,28 +18,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-G7-Qhx" customClass="FVMCarModelViewController" customModule="FVM">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                            </sceneKitView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bd1-RJ-rnz">
+                                <rect key="frame" x="141" y="318" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Goes To FVM"/>
+                                <connections>
+                                    <segue destination="54P-Qk-o0X" kind="show" id="Skh-Zm-B1k"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="9rb-G7-Qhx" firstAttribute="leading" secondItem="Nhr-ZC-ubh" secondAttribute="leading" id="3Pn-D6-HaO"/>
-                            <constraint firstItem="Nhr-ZC-ubh" firstAttribute="trailing" secondItem="9rb-G7-Qhx" secondAttribute="trailing" id="7Wa-lD-Gsk"/>
-                            <constraint firstItem="Nhr-ZC-ubh" firstAttribute="bottom" secondItem="9rb-G7-Qhx" secondAttribute="bottom" id="T1y-50-zgo"/>
-                            <constraint firstItem="9rb-G7-Qhx" firstAttribute="top" secondItem="Nhr-ZC-ubh" secondAttribute="top" id="lgB-q6-eoD" userLabel="Damage Selector.top = Safe Area.top">
-                                <variation key="heightClass=compact" constant="0.0"/>
-                            </constraint>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Nhr-ZC-ubh"/>
                     </view>
                     <connections>
-                        <outlet property="damageSelector" destination="9rb-G7-Qhx" id="1M2-7u-mOO"/>
+                        <outlet property="goesToFVMButton" destination="Bd1-RJ-rnz" id="Jko-KU-DoD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRo-9X-vxN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="129.98500749625188" y="122.40000000000001"/>
+        </scene>
+        <!--DamagedCar-->
+        <scene sceneID="qo0-br-vpq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DamagedCar" referencedIdentifier="DamagedCar" id="54P-Qk-o0X" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bwc-9j-lvF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="729" y="121"/>
         </scene>
     </scenes>
 </document>

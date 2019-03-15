@@ -17,26 +17,9 @@ import UIKit
 import FVM
 
 class ViewController: UIViewController {
-    @IBOutlet weak var damageSelector: FVMCarModelViewController!
+    @IBOutlet weak var goesToFVMButton: UIButton!
     
     override func viewDidLoad(){
-        damageSelector.onStartup(jsonConfiguration: """
-        {
-            "mainScreenText": "text",
-            "selection":
-            [
-                {
-                    "id":"Roof"
-                },
-                {
-                    "id":"Hood"
-                }
-            ]
-        }
-        """)
-        
-        print(damageSelector.onCancel())
-        print(damageSelector.onAccept())
         super.viewDidLoad()
     }
 }
