@@ -18,9 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bd1-RJ-rnz">
-                                <rect key="frame" x="141" y="318" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Damaged Car JSON: " textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="rtF-nV-ODq">
+                                <rect key="frame" x="0.0" y="20" width="375" height="589"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bd1-RJ-rnz">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <state key="normal" title="Goes To FVM"/>
                                 <connections>
                                     <segue destination="54P-Qk-o0X" kind="show" id="Skh-Zm-B1k"/>
@@ -28,15 +33,26 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Bd1-RJ-rnz" firstAttribute="trailing" secondItem="Nhr-ZC-ubh" secondAttribute="trailing" id="0tl-q6-NDF"/>
+                            <constraint firstItem="Bd1-RJ-rnz" firstAttribute="bottom" secondItem="Nhr-ZC-ubh" secondAttribute="bottom" id="4iU-nj-yaR"/>
+                            <constraint firstItem="Bd1-RJ-rnz" firstAttribute="top" secondItem="Nhr-ZC-ubh" secondAttribute="bottom" constant="-50" id="GgX-hX-YEh"/>
+                            <constraint firstItem="Nhr-ZC-ubh" firstAttribute="trailing" secondItem="rtF-nV-ODq" secondAttribute="trailing" id="HO6-so-Bx8"/>
+                            <constraint firstItem="rtF-nV-ODq" firstAttribute="top" secondItem="Nhr-ZC-ubh" secondAttribute="top" id="Lxf-z1-NJx"/>
+                            <constraint firstItem="rtF-nV-ODq" firstAttribute="leading" secondItem="Nhr-ZC-ubh" secondAttribute="leading" id="YSh-13-hTb"/>
+                            <constraint firstItem="Bd1-RJ-rnz" firstAttribute="leading" secondItem="Nhr-ZC-ubh" secondAttribute="leading" id="ZPt-Cm-oRl"/>
+                            <constraint firstItem="Nhr-ZC-ubh" firstAttribute="bottom" secondItem="rtF-nV-ODq" secondAttribute="bottom" constant="58" id="p6U-T2-0Sj"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Nhr-ZC-ubh"/>
                     </view>
                     <connections>
+                        <outlet property="displayJSONTextView" destination="rtF-nV-ODq" id="Sat-mQ-D05"/>
                         <outlet property="goesToFVMButton" destination="Bd1-RJ-rnz" id="Jko-KU-DoD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRo-9X-vxN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129.98500749625188" y="122.40000000000001"/>
+            <point key="canvasLocation" x="128.80000000000001" y="121.88905547226388"/>
         </scene>
         <!--DamagedCar-->
         <scene sceneID="qo0-br-vpq">

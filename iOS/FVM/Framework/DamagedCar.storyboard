@@ -18,21 +18,64 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kyd-mX-0E4" customClass="FVMCarModelViewController" customModule="FVM">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyd-mX-0E4" customClass="FVMCarModelViewController" customModule="FVM">
+                                <rect key="frame" x="0.0" y="20" width="375" height="573"/>
                             </sceneKitView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZk-nF-mGK">
+                                <rect key="frame" x="0.0" y="637" width="90" height="30"/>
+                                <state key="normal" title="Close Button"/>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="ios-2y-x77" eventType="touchUpInside" id="aGK-39-jma"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Hello Text Field" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWF-SY-VfI">
+                                <rect key="frame" x="0.0" y="601" width="375" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kK-jZ-ioB">
+                                <rect key="frame" x="285" y="637" width="90" height="30"/>
+                                <state key="normal" title="Finish Button"/>
+                                <connections>
+                                    <action selector="finishButtonTapped:" destination="ios-2y-x77" eventType="touchUpInside" id="pgx-39-1jg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nWF-SY-VfI" firstAttribute="bottom" secondItem="Dq4-ft-aoT" secondAttribute="bottom" constant="-36" id="2z6-Ze-7Ye"/>
+                            <constraint firstItem="Kyd-mX-0E4" firstAttribute="leading" secondItem="Dq4-ft-aoT" secondAttribute="leading" id="5mH-U6-vut"/>
+                            <constraint firstItem="3kK-jZ-ioB" firstAttribute="trailing" secondItem="Kyd-mX-0E4" secondAttribute="trailing" id="BPL-OX-NoK"/>
+                            <constraint firstItem="3kK-jZ-ioB" firstAttribute="bottom" secondItem="nWF-SY-VfI" secondAttribute="bottom" constant="36" id="Fa2-1B-rn8"/>
+                            <constraint firstItem="mZk-nF-mGK" firstAttribute="bottom" secondItem="nWF-SY-VfI" secondAttribute="bottom" constant="36" id="HOq-Uq-chg"/>
+                            <constraint firstItem="Kyd-mX-0E4" firstAttribute="top" secondItem="Dq4-ft-aoT" secondAttribute="top" id="Jtd-1O-770"/>
+                            <constraint firstItem="Dq4-ft-aoT" firstAttribute="bottom" secondItem="Kyd-mX-0E4" secondAttribute="bottom" constant="74" id="Kks-yS-3ac"/>
+                            <constraint firstItem="nWF-SY-VfI" firstAttribute="leading" secondItem="mZk-nF-mGK" secondAttribute="trailing" constant="-90" id="Nol-dE-53L"/>
+                            <constraint firstItem="Kyd-mX-0E4" firstAttribute="trailing" secondItem="Dq4-ft-aoT" secondAttribute="trailing" id="Rln-jd-jI0"/>
+                            <constraint firstItem="mZk-nF-mGK" firstAttribute="top" secondItem="3kK-jZ-ioB" secondAttribute="top" id="TUx-Ni-cvG"/>
+                            <constraint firstItem="mZk-nF-mGK" firstAttribute="top" secondItem="nWF-SY-VfI" secondAttribute="top" constant="36" id="Vaw-W0-eD6"/>
+                            <constraint firstItem="Kyd-mX-0E4" firstAttribute="leading" secondItem="Dq4-ft-aoT" secondAttribute="leading" id="f0u-dL-mGV"/>
+                            <constraint firstItem="3kK-jZ-ioB" firstAttribute="leading" secondItem="nWF-SY-VfI" secondAttribute="trailing" constant="-90" id="fF0-ko-CQA"/>
+                            <constraint firstItem="mZk-nF-mGK" firstAttribute="leading" secondItem="Kyd-mX-0E4" secondAttribute="leading" id="hiE-yq-w8Q"/>
+                            <constraint firstItem="3kK-jZ-ioB" firstAttribute="centerY" secondItem="nWF-SY-VfI" secondAttribute="centerY" constant="36" id="l0N-Si-gKJ"/>
+                            <constraint firstItem="mZk-nF-mGK" firstAttribute="centerY" secondItem="nWF-SY-VfI" secondAttribute="centerY" constant="36" id="l5L-9A-mwA"/>
+                            <constraint firstItem="Kyd-mX-0E4" firstAttribute="centerX" secondItem="nWF-SY-VfI" secondAttribute="centerX" id="n9S-ym-rnk"/>
+                            <constraint firstItem="3kK-jZ-ioB" firstAttribute="centerY" secondItem="mZk-nF-mGK" secondAttribute="centerY" id="uzr-sk-655"/>
+                            <constraint firstItem="3kK-jZ-ioB" firstAttribute="top" secondItem="nWF-SY-VfI" secondAttribute="top" constant="36" id="xs2-do-IQL"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Dq4-ft-aoT"/>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="mZk-nF-mGK" id="OW2-AB-d5m"/>
                         <outlet property="damageSelector" destination="Kyd-mX-0E4" id="37d-47-ahP"/>
+                        <outlet property="finishButton" destination="3kK-jZ-ioB" id="iR5-8u-PJM"/>
+                        <outlet property="informationForUserTextView" destination="nWF-SY-VfI" id="4WX-JB-ADK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LA0-O5-eEl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="-90.404797601199405"/>
+            <point key="canvasLocation" x="-308" y="-258.62068965517244"/>
         </scene>
     </scenes>
 </document>

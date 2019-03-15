@@ -12,14 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import UIKit
 import FVM
 
 class ViewController: UIViewController {
+    @IBOutlet weak var displayJSONTextView: UITextView!
     @IBOutlet weak var goesToFVMButton: UIButton!
+    private let json: String = """
+        Damaged Car JSON:
+        {
+            "mainScreenText": "text",
+            "selection":
+            [
+                {
+                    "id":"Roof"
+                },
+                {
+                    "id":"Hood"
+                }
+            ]
+        }
+    """
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        displayJSONTextView.text = json
     }
+    
+    // TODO: Change displayJSONTextView when calls back from FVM 
 }
