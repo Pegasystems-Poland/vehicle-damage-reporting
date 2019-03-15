@@ -15,29 +15,42 @@
 import UIKit
 import FVM
 
-class ViewController: UIViewController {
-    @IBOutlet weak var displayJSONTextView: UITextView!
+public class ViewController: UIViewController {
+    @IBOutlet weak var manageJSONTextView: UITextView!
+    @IBOutlet weak var manageDescriptionTextView: UITextView!
     @IBOutlet weak var goesToFVMButton: UIButton!
-    private let json: String = """
-        Damaged Car JSON:
-        {
-            "mainScreenText": "text",
-            "selection":
-            [
-                {
-                    "id":"Roof"
-                },
-                {
-                    "id":"Hood"
-                }
-            ]
-        }
-    """
     
-    override func viewDidLoad(){
+    override public func viewDidLoad() {
+        initializeManageJSONTextView()
+        initializeManageDescriptionTextView()
         super.viewDidLoad()
-        displayJSONTextView.text = json
     }
     
-    // TODO: Change displayJSONTextView when calls back from FVM 
+    override public func viewDidAppear(_ animated: Bool) {
+        if CurrentValue.FirstTimeInformation == true {
+            showFirstTimeOpenAppInformationAlert()
+        }
+        else {
+            showInformationAlertWhenReturingFVM()
+        }
+        super.viewDidAppear(true)
+    }
+    
+    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is FVMDamagedCarViewController {
+            let nextController = segue.destination as? FVMDamagedCarViewController
+            updateCurrentValuesBeforeSending()
+            nextController!.jsonConfigurationData = CurrentValue.JSON
+            nextController!.descriptionFromSampleApp = CurrentValue.Description
+        }
+    }
+    
+    public func updateJSONCurrentValue(jsonFromFVM: String) {
+        CurrentValue.JSON = jsonFromFVM
+    }
+    
+    fileprivate func updateCurrentValuesBeforeSending() {
+        CurrentValue.JSON = manageJSONTextView.text
+        CurrentValue.Description = manageDescriptionTextView.text
+    }
 }

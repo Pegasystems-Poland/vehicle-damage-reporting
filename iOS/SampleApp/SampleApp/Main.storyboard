@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8bG-13-ouU">
-    <device id="retina4_7" orientation="portrait">
+    <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,39 +15,52 @@
             <objects>
                 <viewController id="8bG-13-ouU" customClass="ViewController" customModule="SampleApp" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Dg-Wq-DBv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Damaged Car JSON: " textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="rtF-nV-ODq">
-                                <rect key="frame" x="0.0" y="20" width="375" height="589"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bd1-RJ-rnz">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="718" width="1024" height="50"/>
                                 <state key="normal" title="Goes To FVM"/>
                                 <connections>
                                     <segue destination="54P-Qk-o0X" kind="show" id="Skh-Zm-B1k"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="Main" text="Your description for FVM" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="egy-tL-5h5">
+                                <rect key="frame" x="0.0" y="20" width="1024" height="84"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="84" id="MaC-yQ-njb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Damaged Car JSON: " textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="rtF-nV-ODq">
+                                <rect key="frame" x="0.0" y="112" width="1024" height="598"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Bd1-RJ-rnz" firstAttribute="trailing" secondItem="Nhr-ZC-ubh" secondAttribute="trailing" id="0tl-q6-NDF"/>
                             <constraint firstItem="Bd1-RJ-rnz" firstAttribute="bottom" secondItem="Nhr-ZC-ubh" secondAttribute="bottom" id="4iU-nj-yaR"/>
+                            <constraint firstItem="rtF-nV-ODq" firstAttribute="trailing" secondItem="Nhr-ZC-ubh" secondAttribute="trailing" id="Cq6-sY-Pgc"/>
                             <constraint firstItem="Bd1-RJ-rnz" firstAttribute="top" secondItem="Nhr-ZC-ubh" secondAttribute="bottom" constant="-50" id="GgX-hX-YEh"/>
-                            <constraint firstItem="Nhr-ZC-ubh" firstAttribute="trailing" secondItem="rtF-nV-ODq" secondAttribute="trailing" id="HO6-so-Bx8"/>
-                            <constraint firstItem="rtF-nV-ODq" firstAttribute="top" secondItem="Nhr-ZC-ubh" secondAttribute="top" id="Lxf-z1-NJx"/>
-                            <constraint firstItem="rtF-nV-ODq" firstAttribute="leading" secondItem="Nhr-ZC-ubh" secondAttribute="leading" id="YSh-13-hTb"/>
+                            <constraint firstItem="rtF-nV-ODq" firstAttribute="leading" secondItem="Nhr-ZC-ubh" secondAttribute="leading" id="Gqs-9R-UPY"/>
+                            <constraint firstItem="egy-tL-5h5" firstAttribute="top" secondItem="Nhr-ZC-ubh" secondAttribute="top" id="Llr-ck-5qM"/>
+                            <constraint firstItem="egy-tL-5h5" firstAttribute="leading" secondItem="rtF-nV-ODq" secondAttribute="leading" id="QJE-Wk-9aG"/>
                             <constraint firstItem="Bd1-RJ-rnz" firstAttribute="leading" secondItem="Nhr-ZC-ubh" secondAttribute="leading" id="ZPt-Cm-oRl"/>
-                            <constraint firstItem="Nhr-ZC-ubh" firstAttribute="bottom" secondItem="rtF-nV-ODq" secondAttribute="bottom" constant="58" id="p6U-T2-0Sj"/>
+                            <constraint firstItem="egy-tL-5h5" firstAttribute="trailing" secondItem="rtF-nV-ODq" secondAttribute="trailing" id="g3l-D3-vAX"/>
+                            <constraint firstItem="Bd1-RJ-rnz" firstAttribute="top" secondItem="rtF-nV-ODq" secondAttribute="bottom" constant="8" symbolic="YES" id="uaS-mT-laX"/>
+                            <constraint firstItem="rtF-nV-ODq" firstAttribute="top" secondItem="egy-tL-5h5" secondAttribute="bottom" constant="8" symbolic="YES" id="xWr-Mr-qrE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Nhr-ZC-ubh"/>
                     </view>
                     <connections>
-                        <outlet property="displayJSONTextView" destination="rtF-nV-ODq" id="Sat-mQ-D05"/>
                         <outlet property="goesToFVMButton" destination="Bd1-RJ-rnz" id="Jko-KU-DoD"/>
+                        <outlet property="manageDescriptionTextView" destination="egy-tL-5h5" id="9mO-0o-yyU"/>
+                        <outlet property="manageJSONTextView" destination="rtF-nV-ODq" id="xPa-i9-w8M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRo-9X-vxN" userLabel="First Responder" sceneMemberID="firstResponder"/>

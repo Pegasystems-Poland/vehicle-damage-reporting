@@ -42,7 +42,7 @@ public class FVMCarModelViewController : SCNView {
     public func onCancel() -> String {
         return damagedPartsService.originalConfiguration
     }
-    
+        
     private func setupInitialSelection(configuration: String) {
         let carModelNode = scnScene.rootNode.childNode(withName: CAR_MODEL_NAME, recursively: false)
         let validNodesNames = nodeHelper?.createValidNamesArray(carModel: carModelNode!)

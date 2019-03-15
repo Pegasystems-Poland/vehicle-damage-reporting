@@ -14,52 +14,39 @@
 
 import UIKit
 
-class FVMDamagedCarViewController: UIViewController {
+public class FVMDamagedCarViewController: UIViewController {
     @IBOutlet weak var damageSelector: FVMCarModelViewController!
     @IBOutlet weak var informationForUserTextView: UITextView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var finishButton: UIButton!
-    
-    override func viewDidLoad() {
-        damageSelector.onStartup(jsonConfiguration: """
+    public var jsonConfigurationData: String = """
         {
-            "mainScreenText": "text",
-                "selection":
-                [
-                    {
-                        "id":"Roof"
-                    },
-                    {
-                        "id":"Hood"
-                    }
-                ]
-            }
-        """)
-        
-        // TODO : Should be configuralbe
-        informationForUserTextView.text = "Hello FVM!"
+        }
+    """
+    public var descriptionFromSampleApp: String = """
+    """
+    
+    override public func viewDidLoad() {
+        damageSelector.onStartup(jsonConfiguration: jsonConfigurationData)
+        informationForUserTextView.text = descriptionFromSampleApp
         
         print(damageSelector.onCancel())
         print(damageSelector.onAccept())
         super.viewDidLoad()
     }
     
-    // TODO: Sending JSON when tapped
+//    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.destination is ViewController {
+//            let nextController = segue.destination as? ViewController
+//            nextController!.updateJSONCurrentValue(damageSelector.onCancel())
+//        }
+//    }
+
     @IBAction func closeButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: false, completion: nil)
     }
     
-    @IBAction func finishButtonTapped(_ sender: Any) {
+    @IBAction func finishButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: false, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
