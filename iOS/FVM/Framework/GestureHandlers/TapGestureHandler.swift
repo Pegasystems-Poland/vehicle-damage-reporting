@@ -29,6 +29,7 @@ extension FVMCarModelViewController {
             } else {
                 setHighlightOn(node: result.node)
             }
+            notifyFinishButton()
         }
     }
     
@@ -40,5 +41,14 @@ extension FVMCarModelViewController {
     private func setHighlightOff(nodeName: String) {
         damagedPartsService.removePart(partId: nodeName)
         highlightHandler.setHighlightOff(nodeName: nodeName)
+    }
+    
+    fileprivate func notifyFinishButton() {
+        if damagedPartsService.getCollectionOfDamagedParts().isEmpty {
+            NotificationCenter.default.post(name: .disableFinishButton, object: FVMDamagedCarViewController.self)
+        }
+        else {
+            NotificationCenter.default.post(name: .enableFinishButton, object: FVMDamagedCarViewController.self)
+        }
     }
 }

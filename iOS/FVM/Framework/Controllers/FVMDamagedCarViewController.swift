@@ -26,6 +26,7 @@ public class FVMDamagedCarViewController: UIViewController {
     override public func viewDidLoad() {
         setUpDamagedCarScene()
         showRotationPrompt()
+        addFinishButtonObservers()
         super.viewDidLoad()
     }
     
@@ -39,20 +40,51 @@ public class FVMDamagedCarViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    fileprivate func setUpDamagedCarScene() {
+    private func setUpDamagedCarScene() {
         damageSelector.onStartup(jsonConfiguration: jsonConfigurationData!)
-        informationForUserTextView.text = parseDescriptionFromSampleApp()
+        parseJSONFromSampleApp()
     }
     
-    fileprivate func showRotationPrompt() {
+    private func showRotationPrompt() {
         self.view.addSubview(rotationPromptUIImageView)
         NotificationCenter.default.addObserver(self, selector: #selector(hideRotationPrompt), name: .hideRotationPrompt, object: nil)
     }
     
-    fileprivate func parseDescriptionFromSampleApp() -> String {
+    private func addFinishButtonObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(disableFinishButton), name: .disableFinishButton, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(enableFinishButton), name: .enableFinishButton, object: nil)
+    }
+    
+    private func parseJSONFromSampleApp() {
         let parser = JsonParser<SelectionRoot>()
         let selectionRoot = parser.parse(jsonData: jsonConfigurationData!)
-        return selectionRoot?.mainScreenText ?? ""
+        setInformationForUserTextView(selectionRoot)
+        setFinishButtonEnabled(selectionRoot)
+    }
+    
+    fileprivate func setInformationForUserTextView(_ selectionRoot: SelectionRoot?) {
+        informationForUserTextView.text = selectionRoot?.mainScreenText ?? ""
+    }
+    
+    fileprivate func setFinishButtonEnabled(_ selectionRoot: SelectionRoot?) {
+        if selectionRoot?.selection.isEmpty ?? false as Bool {
+            finishButton.isEnabled = false
+        }
+        else {
+            finishButton.isEnabled = true
+        }
+    }
+    
+    @objc
+    fileprivate func disableFinishButton() {
+        finishButton.setTitleColor(UIColor.lightGray, for: .disabled)
+        finishButton.isEnabled = false
+    }
+    
+    @objc
+    fileprivate func enableFinishButton() {
+        finishButton.setTitleColor(UIColor.blue, for: .normal)
+        finishButton.isEnabled = true
     }
     
     @objc

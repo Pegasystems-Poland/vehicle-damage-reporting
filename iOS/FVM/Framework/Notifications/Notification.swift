@@ -12,9 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import Foundation
 
 import Foundation
 
 extension Notification.Name {
     static let hideRotationPrompt = Notification.Name(rawValue: "hideRotationPrompt")
+    static let disableFinishButton = Notification.Name(rawValue: "disableFinishButton")
+    static let enableFinishButton = Notification.Name(rawValue: "enableFinishButton")
 }
