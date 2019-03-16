@@ -25,17 +25,50 @@
                                     <segue destination="54P-Qk-o0X" kind="show" id="Skh-Zm-B1k"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="Main" text="Your description for FVM" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="egy-tL-5h5">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="Description" text="Your description for FVM" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="egy-tL-5h5">
                                 <rect key="frame" x="0.0" y="20" width="375" height="84"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="84" id="MaC-yQ-njb"/>
+                                    <constraint firstAttribute="height" constant="84" id="WJ0-cy-sNA"/>
+                                    <constraint firstAttribute="height" constant="55" id="zZ4-K1-KMA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="zZ4-K1-KMA"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="WJ0-cy-sNA"/>
+                                        <include reference="zZ4-K1-KMA"/>
+                                    </mask>
+                                </variation>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Damaged Car JSON: " textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="rtF-nV-ODq">
-                                <rect key="frame" x="0.0" y="112" width="375" height="497"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="DamagedCarParts" text="Damaged Car JSON: " textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="rtF-nV-ODq" userLabel="Manage Damaged Car Parts Text View">
+                                <rect key="frame" x="0.0" y="112" width="375" height="223"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="122" id="IXL-Ml-iaq"/>
+                                    <constraint firstAttribute="height" constant="223" id="Puv-nu-6CJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="IXL-Ml-iaq"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="IXL-Ml-iaq"/>
+                                        <exclude reference="Puv-nu-6CJ"/>
+                                    </mask>
+                                </variation>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="DisplayReturningJSON" editable="NO" text="JSON Result" translatesAutoresizingMaskIntoConstraints="NO" id="qdS-vO-PwH">
+                                <rect key="frame" x="0.0" y="343" width="375" height="266"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -50,23 +83,29 @@
                             <constraint firstItem="rtF-nV-ODq" firstAttribute="leading" secondItem="Nhr-ZC-ubh" secondAttribute="leading" id="Gqs-9R-UPY"/>
                             <constraint firstItem="egy-tL-5h5" firstAttribute="top" secondItem="Nhr-ZC-ubh" secondAttribute="top" id="Llr-ck-5qM"/>
                             <constraint firstItem="egy-tL-5h5" firstAttribute="leading" secondItem="rtF-nV-ODq" secondAttribute="leading" id="QJE-Wk-9aG"/>
+                            <constraint firstItem="rtF-nV-ODq" firstAttribute="centerX" secondItem="qdS-vO-PwH" secondAttribute="centerX" id="WKp-xA-wsq"/>
+                            <constraint firstItem="rtF-nV-ODq" firstAttribute="centerX" secondItem="egy-tL-5h5" secondAttribute="centerX" id="Yve-V4-85K"/>
                             <constraint firstItem="Bd1-RJ-rnz" firstAttribute="leading" secondItem="Nhr-ZC-ubh" secondAttribute="leading" id="ZPt-Cm-oRl"/>
+                            <constraint firstItem="Bd1-RJ-rnz" firstAttribute="top" secondItem="qdS-vO-PwH" secondAttribute="bottom" constant="8" symbolic="YES" id="eWI-Gz-kTl"/>
                             <constraint firstItem="egy-tL-5h5" firstAttribute="trailing" secondItem="rtF-nV-ODq" secondAttribute="trailing" id="g3l-D3-vAX"/>
-                            <constraint firstItem="Bd1-RJ-rnz" firstAttribute="top" secondItem="rtF-nV-ODq" secondAttribute="bottom" constant="8" symbolic="YES" id="uaS-mT-laX"/>
+                            <constraint firstItem="qdS-vO-PwH" firstAttribute="top" secondItem="rtF-nV-ODq" secondAttribute="bottom" constant="8" symbolic="YES" id="npL-wZ-zLK"/>
+                            <constraint firstItem="rtF-nV-ODq" firstAttribute="leading" secondItem="qdS-vO-PwH" secondAttribute="leading" id="tMp-li-nOk"/>
+                            <constraint firstItem="rtF-nV-ODq" firstAttribute="trailing" secondItem="qdS-vO-PwH" secondAttribute="trailing" id="vYT-N4-DTH"/>
                             <constraint firstItem="rtF-nV-ODq" firstAttribute="top" secondItem="egy-tL-5h5" secondAttribute="bottom" constant="8" symbolic="YES" id="xWr-Mr-qrE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Nhr-ZC-ubh"/>
                     </view>
                     <navigationItem key="navigationItem" id="lmZ-FS-kuC"/>
                     <connections>
+                        <outlet property="displayReturningJSON" destination="qdS-vO-PwH" id="zzf-Dx-zXi"/>
                         <outlet property="goesToFVMButton" destination="Bd1-RJ-rnz" id="Jko-KU-DoD"/>
-                        <outlet property="manageDescriptionTextView" destination="egy-tL-5h5" id="9mO-0o-yyU"/>
-                        <outlet property="manageJSONTextView" destination="rtF-nV-ODq" id="xPa-i9-w8M"/>
+                        <outlet property="manageDamagedCarPartsTextView" destination="rtF-nV-ODq" id="lSO-Lx-zAF"/>
+                        <outlet property="manageDescriptionTextView" destination="egy-tL-5h5" id="EL9-cE-hbE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRo-9X-vxN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1068" y="121.88905547226388"/>
+            <point key="canvasLocation" x="1004" y="121"/>
         </scene>
         <!--DamagedCar-->
         <scene sceneID="qo0-br-vpq">

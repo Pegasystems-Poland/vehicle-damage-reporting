@@ -33,19 +33,37 @@ extension ViewController : UITextViewDelegate {
     
     public func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "Your description for FVM:"
+            textView.text = getDefaultText(textView)
             textView.textColor = UIColor.lightGray
         }
     }
     
-    internal func initializeManageJSONTextView() {
-        manageJSONTextView.text = CurrentValue.JSON
-        manageJSONTextView.delegate = self
+    internal func initializeManageDamagedCarPartsTextView() {
+        manageDamagedCarPartsTextView.text = CurrentValue.DamagedCarParts
+        manageDamagedCarPartsTextView.delegate = self
     }
     
     internal func initializeManageDescriptionTextView() {
         manageDescriptionTextView.text = CurrentValue.Description
         manageDescriptionTextView.textColor = UIColor.lightGray
         manageDescriptionTextView.delegate = self
+    }
+    
+    internal func initializeDisplayReturningJSONTextView() {
+        displayReturningJSON.text = """
+            {
+            }
+        """
+    }
+    
+    fileprivate func getDefaultText(_ textViewId: UITextView) -> String {
+        switch textViewId.restorationIdentifier {
+            case "Description":
+                return "Your description for FVM:"
+            case "DamagedCarParts":
+                return "Your damaged car parts for FVM:"
+            default:
+                return ""
+        }
     }
 }

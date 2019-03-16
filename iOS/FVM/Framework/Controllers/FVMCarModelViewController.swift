@@ -15,7 +15,7 @@
 import UIKit
 import SceneKit
 
-public class FVMCarModelViewController : SCNView {
+internal class FVMCarModelViewController : SCNView {
     internal var damagedPartsService: DamagedPartsServiceProtocol!
     internal var nodeHelper: NodeHelperProtocol?
     internal var scnScene: SCNScene!

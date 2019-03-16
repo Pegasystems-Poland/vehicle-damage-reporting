@@ -19,27 +19,28 @@ public class FVMDamagedCarViewController: UIViewController {
     @IBOutlet weak var informationForUserTextView: UITextView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var finishButton: UIButton!
-    public var jsonConfigurationData: String = """
-        {
-        }
-    """
-    public var descriptionFromSampleApp: String = """
-    """
-    public var completionHandler:((String) -> Void)?
+    public var jsonConfigurationData: String?
+    public var getReturningJSONData: ((String) -> Void)?
     
     override public func viewDidLoad() {
-        damageSelector.onStartup(jsonConfiguration: jsonConfigurationData)
-        informationForUserTextView.text = descriptionFromSampleApp
+        damageSelector.onStartup(jsonConfiguration: jsonConfigurationData!)
+        informationForUserTextView.text = parseDescriptionFromSampleApp()
         super.viewDidLoad()
     }
     
+    internal func parseDescriptionFromSampleApp() -> String {
+        let parser = JsonParser<SelectionRoot>()
+        let selectionRoot = parser.parse(jsonData: jsonConfigurationData!)
+        return selectionRoot?.mainScreenText ?? ""
+    }
+    
     @IBAction func closeButtonTapped(_ sender: UIButton) {
-        _ = completionHandler?(damageSelector.onCancel())
+        _ = getReturningJSONData?(damageSelector.onCancel())
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func finishButtonTapped(_ sender: UIButton) {
-        _ = completionHandler?(damageSelector.onAccept())
+        _ = getReturningJSONData?(damageSelector.onAccept())
         self.dismiss(animated: true, completion: nil)
     }
 }

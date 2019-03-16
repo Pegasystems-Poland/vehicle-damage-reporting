@@ -15,18 +15,20 @@
 import UIKit
 import FVM
 
-public class ViewController: UIViewController {
-    @IBOutlet weak var manageJSONTextView: UITextView!
+class ViewController: UIViewController {
     @IBOutlet weak var manageDescriptionTextView: UITextView!
+    @IBOutlet weak var manageDamagedCarPartsTextView: UITextView!
+    @IBOutlet weak var displayReturningJSON: UITextView!
     @IBOutlet weak var goesToFVMButton: UIButton!
     
-    override public func viewDidLoad() {
-        initializeManageJSONTextView()
+    override func viewDidLoad() {
+        initializeManageDamagedCarPartsTextView()
         initializeManageDescriptionTextView()
+        initializeDisplayReturningJSONTextView()
         super.viewDidLoad()
     }
     
-    override public func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if CurrentValue.FirstTimeInformation == true {
             showFirstTimeOpenAppInformationAlert()
         }
@@ -36,26 +38,31 @@ public class ViewController: UIViewController {
         super.viewDidAppear(true)
     }
     
-    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is FVMDamagedCarViewController {
-            let nextController = segue.destination as? FVMDamagedCarViewController
-            updateCurrentValuesBeforeSending()
-            nextController!.jsonConfigurationData = CurrentValue.JSON
-            nextController!.descriptionFromSampleApp = CurrentValue.Description
+            let fvmController = segue.destination as? FVMDamagedCarViewController
+            fvmController!.jsonConfigurationData = prepareJSONToSend()
             
-            nextController!.completionHandler = { json in
-                CurrentValue.JSON = json
-                self.manageJSONTextView.text = json
+            fvmController!.getReturningJSONData = { returningJSON in
+                CurrentValue.DamagedCarParts = returningJSON
+                self.displayReturningJSON.text = returningJSON
             }
         }
     }
     
-    public func updateJSONCurrentValue(jsonFromFVM: String) {
-        CurrentValue.JSON = jsonFromFVM
+    // TODO: Allow to sending JSON's
+    fileprivate func prepareJSONToSend() -> String {
+        updateCurrentValuesBeforeSending()
+        return """
+            {
+                "mainScreenText": "\(CurrentValue.Description)",
+                "selection": []
+            }
+        """
     }
     
     fileprivate func updateCurrentValuesBeforeSending() {
-        CurrentValue.JSON = manageJSONTextView.text
+        CurrentValue.DamagedCarParts = manageDamagedCarPartsTextView.text
         CurrentValue.Description = manageDescriptionTextView.text
     }
 }

@@ -12,7 +12,7 @@
 		056E8BAF21C43ED5003EBE53 /* FVM.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 056E8BA721C43E8F003EBE53 /* FVM.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0570687A223BCE2400D2A78A /* DamagedCar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05706879223BCE2400D2A78A /* DamagedCar.storyboard */; };
 		05706881223BF25100D2A78A /* CurrentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05706880223BF25100D2A78A /* CurrentValue.swift */; };
-		05706887223C2DDD00D2A78A /* ManagingDescriptionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05706886223C2DDD00D2A78A /* ManagingDescriptionTextView.swift */; };
+		05706887223C2DDD00D2A78A /* ManagingTextViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05706886223C2DDD00D2A78A /* ManagingTextViews.swift */; };
 		05706889223C2F7300D2A78A /* ManagingInformationAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05706888223C2F7300D2A78A /* ManagingInformationAlerts.swift */; };
 		B52DB81621BA8EEF00C6CC36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DB81521BA8EEF00C6CC36 /* AppDelegate.swift */; };
 		B52DB81821BA8EEF00C6CC36 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DB81721BA8EEF00C6CC36 /* ViewController.swift */; };
@@ -63,7 +63,7 @@
 		056E8BA121C43E8F003EBE53 /* FVM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FVM.xcodeproj; path = ../FVM/FVM.xcodeproj; sourceTree = "<group>"; };
 		05706879223BCE2400D2A78A /* DamagedCar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = DamagedCar.storyboard; path = ../FVM/Framework/DamagedCar.storyboard; sourceTree = "<group>"; };
 		05706880223BF25100D2A78A /* CurrentValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentValue.swift; sourceTree = "<group>"; };
-		05706886223C2DDD00D2A78A /* ManagingDescriptionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagingDescriptionTextView.swift; sourceTree = "<group>"; };
+		05706886223C2DDD00D2A78A /* ManagingTextViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagingTextViews.swift; sourceTree = "<group>"; };
 		05706888223C2F7300D2A78A /* ManagingInformationAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagingInformationAlerts.swift; sourceTree = "<group>"; };
 		B52DB81221BA8EEF00C6CC36 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52DB81521BA8EEF00C6CC36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				05706880223BF25100D2A78A /* CurrentValue.swift */,
-				05706886223C2DDD00D2A78A /* ManagingDescriptionTextView.swift */,
+				05706886223C2DDD00D2A78A /* ManagingTextViews.swift */,
 				05706888223C2F7300D2A78A /* ManagingInformationAlerts.swift */,
 			);
 			path = Services;
@@ -244,7 +244,7 @@
 				B52DB81821BA8EEF00C6CC36 /* ViewController.swift in Sources */,
 				05706889223C2F7300D2A78A /* ManagingInformationAlerts.swift in Sources */,
 				B52DB81621BA8EEF00C6CC36 /* AppDelegate.swift in Sources */,
-				05706887223C2DDD00D2A78A /* ManagingDescriptionTextView.swift in Sources */,
+				05706887223C2DDD00D2A78A /* ManagingTextViews.swift in Sources */,
 				05706881223BF25100D2A78A /* CurrentValue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

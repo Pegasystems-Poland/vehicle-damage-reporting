@@ -15,19 +15,8 @@
 import Foundation
 
 internal struct CurrentValue {
-    internal static var JSON: String = """
-        {
-            "mainScreenText": "text",
-            "selection":
-            [
-                {
-                    "id":"Roof"
-                },
-                {
-                    "id":"Hood"
-                }
-            ]
-        }
+    internal static var DamagedCarParts: String = """
+        Your damaged car parts for FVM:
     """
     internal static var Description: String = """
         Your description for FVM:
