@@ -63,7 +63,6 @@ internal class FVMCarModelViewController : SCNView {
         
     private func setupScene() {
         scnScene = SCNScene(named: "art.scnassets/model.scn")
-        scnScene.background.contents = "art.scnassets/background.png"
         self.scene = scnScene
     }
     

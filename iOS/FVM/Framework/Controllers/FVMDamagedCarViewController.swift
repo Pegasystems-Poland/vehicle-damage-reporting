@@ -16,6 +16,7 @@ import UIKit
 
 public class FVMDamagedCarViewController: UIViewController {
     @IBOutlet weak var damageSelector: FVMCarModelViewController!
+    @IBOutlet weak var rotationPromptUIImageView: UIImageView!
     @IBOutlet weak var informationForUserTextView: UITextView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var finishButton: UIButton!
@@ -23,24 +24,43 @@ public class FVMDamagedCarViewController: UIViewController {
     public var getReturningJSONData: ((String) -> Void)?
     
     override public func viewDidLoad() {
-        damageSelector.onStartup(jsonConfiguration: jsonConfigurationData!)
-        informationForUserTextView.text = parseDescriptionFromSampleApp()
+        setUpDamagedCarScene()
+        showRotationPrompt()
         super.viewDidLoad()
     }
     
-    internal func parseDescriptionFromSampleApp() -> String {
+    @IBAction internal func closeButtonTapped(_ sender: UIButton) {
+        _ = getReturningJSONData?(damageSelector.onCancel())
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction internal func finishButtonTapped(_ sender: UIButton) {
+        _ = getReturningJSONData?(damageSelector.onAccept())
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    fileprivate func setUpDamagedCarScene() {
+        damageSelector.onStartup(jsonConfiguration: jsonConfigurationData!)
+        informationForUserTextView.text = parseDescriptionFromSampleApp()
+    }
+    
+    fileprivate func showRotationPrompt() {
+        self.view.addSubview(rotationPromptUIImageView)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideRotationPrompt), name: .hideRotationPrompt, object: nil)
+    }
+    
+    fileprivate func parseDescriptionFromSampleApp() -> String {
         let parser = JsonParser<SelectionRoot>()
         let selectionRoot = parser.parse(jsonData: jsonConfigurationData!)
         return selectionRoot?.mainScreenText ?? ""
     }
     
-    @IBAction func closeButtonTapped(_ sender: UIButton) {
-        _ = getReturningJSONData?(damageSelector.onCancel())
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func finishButtonTapped(_ sender: UIButton) {
-        _ = getReturningJSONData?(damageSelector.onAccept())
-        self.dismiss(animated: true, completion: nil)
+    @objc
+    fileprivate func hideRotationPrompt() {
+        for view in self.view.subviews {
+            if view.restorationIdentifier?.isEqual("RotationPrompt") ?? false as Bool {
+                view.removeFromSuperview()
+            }
+        }
     }
 }
