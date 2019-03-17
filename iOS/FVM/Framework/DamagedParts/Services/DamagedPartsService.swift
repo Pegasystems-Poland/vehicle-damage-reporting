@@ -30,7 +30,7 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol {
         self.repository = repository
     }
     
-    public func createAndGetCollectionOfDamagedParts(json: String) -> [Selection] {
+    internal func createAndGetCollectionOfDamagedParts(json: String) -> [Selection] {
         if (initialConfiguration == nil) {
             initialConfiguration = json.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "")
         }
@@ -38,11 +38,11 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol {
         return getCollectionOfDamagedParts()
     }
     
-    public func getCollectionOfDamagedParts() -> [Selection] {
+    internal func getCollectionOfDamagedParts() -> [Selection] {
         return repository.getAll()
     }
     
-    public func createCollectionOfDamagedParts(json: String) {
+    internal func createCollectionOfDamagedParts(json: String) {
         let root = parser.parse(jsonData: json)
         if (initialSelectionRoot == nil) {
             initialSelectionRoot = root
@@ -53,17 +53,17 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol {
         repository.add(selections: validated)
     }
     
-    public func addPart(part: Selection) {
+    internal func addPart(part: Selection) {
         if validator.validate(part: part) != nil {
             repository.add(selection: part)
         }
     }
     
-    public func removePart(partId: String) {
+    internal func removePart(partId: String) {
         repository.remove(partId: partId)
     }
     
-    public func getSerializedParts() -> String {
+    internal func getSerializedParts() -> String {
         return parser.parse(element: SelectionRoot(selectionArray: repository.getAll(), text: initialSelectionRoot?.mainScreenText ?? ""))
     }
 }

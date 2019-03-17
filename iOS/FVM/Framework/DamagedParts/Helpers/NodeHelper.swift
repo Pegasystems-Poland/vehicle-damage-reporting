@@ -15,31 +15,31 @@
 import Foundation
 import SceneKit
 
-public class NodeHelper : NodeHelperProtocol {
+internal class NodeHelper : NodeHelperProtocol {
     private var highlightHandler: HighlightHandler
     
     init(highlightHandler: HighlightHandler) {
         self.highlightHandler = highlightHandler
     }
     
-    public func updateDamagedPartsOnUI(damagedPartsNames: [String], carModel: SCNNode){
+    internal func updateDamagedPartsOnUI(damagedPartsNames: [String], carModel: SCNNode){
         for partName in damagedPartsNames{
             let nodeToHighlight = carModel.childNode(withName: partName, recursively: true)
             highlightHandler.setHighlightOn(node: nodeToHighlight!)
         }
     }
     
-    public func createValidNamesArray(carModel: SCNNode) -> [String]? {
+    internal func createValidNamesArray(carModel: SCNNode) -> [String]? {
         let childNodes = carModel.childNodes
         let validNodesNames = getNodesNames(nodes: childNodes)
         return validNodesNames
     }
     
-    public func getNodesNames(nodes: [SCNNode]) -> [String]{
+    internal func getNodesNames(nodes: [SCNNode]) -> [String]{
         return nodes.map{$0.name ?? ""};
     }
 
-    public func getIdsOfSelection(selections: [Selection]?) -> [String] {
+    internal func getIdsOfSelection(selections: [Selection]?) -> [String] {
         return (selections?.map{ $0.id })!
     }
 }

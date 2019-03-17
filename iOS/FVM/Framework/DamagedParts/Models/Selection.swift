@@ -14,8 +14,8 @@
 
 import Foundation
 
-public struct Selection : Codable, Equatable {
-    public var id: String
+internal struct Selection : Codable, Equatable {
+    internal var id: String
     
     init(newName: String) {
         id = newName

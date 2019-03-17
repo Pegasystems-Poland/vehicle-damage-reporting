@@ -14,7 +14,7 @@
 
 import Foundation
 
-public struct SelectionRoot: Codable {
+internal struct SelectionRoot: Codable {
     let mainScreenText: String
     let selection: [Selection]
     
