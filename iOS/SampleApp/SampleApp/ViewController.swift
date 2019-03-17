@@ -50,7 +50,6 @@ class ViewController: UIViewController {
         }
     }
     
-    // TODO: Allow to sending JSON's
     fileprivate func prepareJSONToSend() -> String {
         updateCurrentValuesBeforeSending()
         return """
