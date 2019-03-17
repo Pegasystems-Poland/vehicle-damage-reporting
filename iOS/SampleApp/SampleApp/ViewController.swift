@@ -44,24 +44,9 @@ class ViewController: UIViewController {
             fvmController!.jsonConfigurationData = prepareJSONToSend()
             
             fvmController!.getReturningJSONData = { returningJSON in
-                CurrentValue.DamagedCarParts = returningJSON
+                self.fillDamagedCarPartsTextView(returningJSON)
                 self.displayReturningJSON.text = returningJSON
             }
         }
-    }
-    
-    fileprivate func prepareJSONToSend() -> String {
-        updateCurrentValuesBeforeSending()
-        return """
-            {
-                "mainScreenText": "\(CurrentValue.Description)",
-                "selection": []
-            }
-        """
-    }
-    
-    fileprivate func updateCurrentValuesBeforeSending() {
-        CurrentValue.DamagedCarParts = manageDamagedCarPartsTextView.text
-        CurrentValue.Description = manageDescriptionTextView.text
     }
 }

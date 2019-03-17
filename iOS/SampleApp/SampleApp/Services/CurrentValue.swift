@@ -14,7 +14,7 @@
 
 internal struct CurrentValue {
     internal static var DamagedCarParts: String = """
-        Your damaged car parts for FVM:
+        Hood, Roof
     """
     internal static var Description: String = """
         Your description for FVM:

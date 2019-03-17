@@ -21,7 +21,7 @@ extension ViewController : UITextViewDelegate {
     fileprivate static let DESCRIPTION_ID = "Description"
     fileprivate static let DESCRIPTION_VALUE = "Your description for FVM:"
     fileprivate static let DAMAGED_CAR_PARTS_ID = "DamagedCarParts"
-    fileprivate static let DAMAGED_CAR_PARTS_VALUE = "Your damaged car parts for FVM:"
+    fileprivate static let DAMAGED_CAR_PARTS_VALUE = "Your damaged car parts for FVM"
     fileprivate static let DEFAULT_VALUE = ""
     fileprivate static let DEFAULT_TEXT = """
             {

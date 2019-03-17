@@ -17,8 +17,8 @@ import UIKit
 extension ViewController {
     fileprivate static let ALERT_TITLE = "Information"
     fileprivate static let ALERT_ACTION_TITLE = "OK"
-    fileprivate static let FIRST_TIME_ALERT_MESSAGE = "You can set description sending to FVM"
-    fileprivate static let INFORMATION_ALERT_MESSAGE = "You can set description sending to FVM and here is displayed JSON returning from FVM"
+    fileprivate static let FIRST_TIME_ALERT_MESSAGE = "You can set description and damaged car parts (please separate through ;) sending to FVM"
+    fileprivate static let INFORMATION_ALERT_MESSAGE = "You can change description and damaged car parts (please separate through ;) sending to FVM and here is displayed JSON returning from FVM"
     
     internal func showFirstTimeOpenAppInformationAlert() {
         let alert = UIAlertController(title: ViewController.ALERT_TITLE, message: ViewController.FIRST_TIME_ALERT_MESSAGE, preferredStyle: .alert)
