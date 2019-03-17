@@ -15,26 +15,38 @@
 import UIKit
 
 extension ViewController : UITextViewDelegate {
+    fileprivate static let END_WRITING_CHARACTER = "\n"
+    fileprivate static let LIGHT_GRAY_COLOR = UIColor.lightGray
+    fileprivate static let BLACK_COLOR = UIColor.black
+    fileprivate static let DESCRIPTION_ID = "Description"
+    fileprivate static let DESCRIPTION_VALUE = "Your description for FVM:"
+    fileprivate static let DAMAGED_CAR_PARTS_ID = "DamagedCarParts"
+    fileprivate static let DAMAGED_CAR_PARTS_VALUE = "Your damaged car parts for FVM:"
+    fileprivate static let DEFAULT_VALUE = ""
+    fileprivate static let DEFAULT_TEXT = """
+            {
+            }
+        """
+    
     public func textView(_ textView: UITextView, shouldChangeTextIn: NSRange, replacementText: String) -> Bool {
-        if replacementText == "\n" {
+        if replacementText == ViewController.END_WRITING_CHARACTER {
             textView.resignFirstResponder()
             return false
         }
-        
         return true
     }
     
     public func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
+        if textView.textColor == ViewController.LIGHT_GRAY_COLOR {
             textView.text = nil
-            textView.textColor = UIColor.black
+            textView.textColor = ViewController.BLACK_COLOR
         }
     }
     
     public func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = getDefaultText(textView)
-            textView.textColor = UIColor.lightGray
+            textView.textColor = ViewController.LIGHT_GRAY_COLOR
         }
     }
     
@@ -45,25 +57,22 @@ extension ViewController : UITextViewDelegate {
     
     internal func initializeManageDescriptionTextView() {
         manageDescriptionTextView.text = CurrentValue.Description
-        manageDescriptionTextView.textColor = UIColor.lightGray
+        manageDescriptionTextView.textColor = ViewController.LIGHT_GRAY_COLOR
         manageDescriptionTextView.delegate = self
     }
     
     internal func initializeDisplayReturningJSONTextView() {
-        displayReturningJSON.text = """
-            {
-            }
-        """
+        displayReturningJSON.text = ViewController.DEFAULT_TEXT
     }
     
     fileprivate func getDefaultText(_ textViewId: UITextView) -> String {
         switch textViewId.restorationIdentifier {
-            case "Description":
-                return "Your description for FVM:"
-            case "DamagedCarParts":
-                return "Your damaged car parts for FVM:"
+        case ViewController.DESCRIPTION_ID:
+            return ViewController.DESCRIPTION_VALUE
+        case ViewController.DAMAGED_CAR_PARTS_ID:
+            return ViewController.DAMAGED_CAR_PARTS_VALUE
             default:
-                return ""
+                return ViewController.DEFAULT_VALUE
         }
     }
 }

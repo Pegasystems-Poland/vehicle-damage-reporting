@@ -15,17 +15,22 @@
 import UIKit
 
 extension ViewController {
+    fileprivate static let ALERT_TITLE = "Information"
+    fileprivate static let ALERT_ACTION_TITLE = "OK"
+    fileprivate static let FIRST_TIME_ALERT_MESSAGE = "You can set description sending to FVM"
+    fileprivate static let INFORMATION_ALERT_MESSAGE = "You can set description sending to FVM and here is displayed JSON returning from FVM"
+    
     internal func showFirstTimeOpenAppInformationAlert() {
-        let alert = UIAlertController(title: "Information", message: "You can set description sending to FVM", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        let alert = UIAlertController(title: ViewController.ALERT_TITLE, message: ViewController.FIRST_TIME_ALERT_MESSAGE, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: ViewController.ALERT_ACTION_TITLE, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
         disableShowingFirstTimeOpenAppInformationAlert()
     }
     
     internal func showInformationAlertWhenReturingFVM() {
-        let alert = UIAlertController(title: "Information", message: "You can set description sending to FVM and here is displayed JSON returning from FVM", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        let alert = UIAlertController(title: ViewController.ALERT_TITLE, message: ViewController.INFORMATION_ALERT_MESSAGE, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: ViewController.ALERT_ACTION_TITLE, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     

@@ -19,14 +19,16 @@ public class FVMDamagedCarViewController: UIViewController {
     @IBOutlet weak var rotationPromptUIImageView: UIImageView!
     @IBOutlet weak var informationForUserTextView: UITextView!
     @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var finishButton: UIButton!
+    @IBOutlet weak var acceptButton: UIButton!
     public var jsonConfigurationData: String?
     public var getReturningJSONData: ((String) -> Void)?
+    private let parser = JsonParser<SelectionRoot>()
+    private let ROTATION_PROMPT = "RotationPrompt"
     
     override public func viewDidLoad() {
-        setUpDamagedCarScene()
+        setupDamagedCarScene()
         showRotationPrompt()
-        addFinishButtonObservers()
+        addAcceptButtonObservers()
         super.viewDidLoad()
     }
     
@@ -35,12 +37,12 @@ public class FVMDamagedCarViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction internal func finishButtonTapped(_ sender: UIButton) {
+    @IBAction internal func acceptButtonTapped(_ sender: UIButton) {
         _ = getReturningJSONData?(damageSelector.onAccept())
         self.dismiss(animated: true, completion: nil)
     }
     
-    private func setUpDamagedCarScene() {
+    private func setupDamagedCarScene() {
         damageSelector.onStartup(jsonConfiguration: jsonConfigurationData!)
         parseJSONFromSampleApp()
     }
@@ -50,47 +52,46 @@ public class FVMDamagedCarViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(hideRotationPrompt), name: .hideRotationPrompt, object: nil)
     }
     
-    private func addFinishButtonObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(disableFinishButton), name: .disableFinishButton, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(enableFinishButton), name: .enableFinishButton, object: nil)
+    private func addAcceptButtonObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(disableAcceptButton), name: .disableAcceptButton, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(enableAcceptButton), name: .enableAcceptButton, object: nil)
     }
     
     private func parseJSONFromSampleApp() {
-        let parser = JsonParser<SelectionRoot>()
         let selectionRoot = parser.parse(jsonData: jsonConfigurationData!)
-        setInformationForUserTextView(selectionRoot)
-        setFinishButtonEnabled(selectionRoot)
+        fillUserPromptText(selectionRoot)
+        setAcceptButtonEnabled(selectionRoot)
     }
     
-    fileprivate func setInformationForUserTextView(_ selectionRoot: SelectionRoot?) {
+    fileprivate func fillUserPromptText(_ selectionRoot: SelectionRoot?) {
         informationForUserTextView.text = selectionRoot?.mainScreenText ?? ""
     }
     
-    fileprivate func setFinishButtonEnabled(_ selectionRoot: SelectionRoot?) {
+    fileprivate func setAcceptButtonEnabled(_ selectionRoot: SelectionRoot?) {
         if selectionRoot?.selection.isEmpty ?? false as Bool {
-            finishButton.isEnabled = false
+            disableAcceptButton()
         }
         else {
-            finishButton.isEnabled = true
+            enableAcceptButton()
         }
     }
     
     @objc
-    fileprivate func disableFinishButton() {
-        finishButton.setTitleColor(UIColor.lightGray, for: .disabled)
-        finishButton.isEnabled = false
+    fileprivate func disableAcceptButton() {
+        acceptButton.setTitleColor(UIColor.lightGray, for: .disabled)
+        acceptButton.isEnabled = false
     }
     
     @objc
-    fileprivate func enableFinishButton() {
-        finishButton.setTitleColor(UIColor.blue, for: .normal)
-        finishButton.isEnabled = true
+    fileprivate func enableAcceptButton() {
+        acceptButton.setTitleColor(UIColor.blue, for: .normal)
+        acceptButton.isEnabled = true
     }
     
     @objc
     fileprivate func hideRotationPrompt() {
         for view in self.view.subviews {
-            if view.restorationIdentifier?.isEqual("RotationPrompt") ?? false as Bool {
+            if view.restorationIdentifier?.isEqual(ROTATION_PROMPT) ?? false as Bool {
                 view.removeFromSuperview()
             }
         }

@@ -45,10 +45,10 @@ extension FVMCarModelViewController {
     
     fileprivate func notifyFinishButton() {
         if damagedPartsService.getCollectionOfDamagedParts().isEmpty {
-            NotificationCenter.default.post(name: .disableFinishButton, object: FVMDamagedCarViewController.self)
+            NotificationCenter.default.post(name: .disableAcceptButton, object: FVMDamagedCarViewController.self)
         }
         else {
-            NotificationCenter.default.post(name: .enableFinishButton, object: FVMDamagedCarViewController.self)
+            NotificationCenter.default.post(name: .enableAcceptButton, object: FVMDamagedCarViewController.self)
         }
     }
 }

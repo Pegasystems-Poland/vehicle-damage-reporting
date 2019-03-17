@@ -14,10 +14,8 @@
 
 import Foundation
 
-import Foundation
-
 extension Notification.Name {
     static let hideRotationPrompt = Notification.Name(rawValue: "hideRotationPrompt")
-    static let disableFinishButton = Notification.Name(rawValue: "disableFinishButton")
-    static let enableFinishButton = Notification.Name(rawValue: "enableFinishButton")
+    static let disableAcceptButton = Notification.Name(rawValue: "disableAcceptButton")
+    static let enableAcceptButton = Notification.Name(rawValue: "enableAcceptButton")
 }
