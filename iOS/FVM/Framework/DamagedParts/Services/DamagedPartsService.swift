@@ -66,4 +66,8 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol {
     internal func getSerializedParts() -> String {
         return parser.parse(element: SelectionRoot(selectionArray: repository.getAll(), text: initialSelectionRoot?.mainScreenText ?? ""))
     }
+    
+    internal func getInitialSelectionRoot() -> SelectionRoot? {
+        return initialSelectionRoot
+    }
 }

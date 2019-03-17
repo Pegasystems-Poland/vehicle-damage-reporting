@@ -22,7 +22,6 @@ public class FVMDamagedCarViewController: UIViewController {
     @IBOutlet weak var acceptButton: UIButton!
     public var jsonConfigurationData: String?
     public var getReturningJSONData: ((String) -> Void)?
-    private let parser = JsonParser<SelectionRoot>()
     private let ROTATION_PROMPT = "RotationPrompt"
     
     override public func viewDidLoad() {
@@ -44,7 +43,7 @@ public class FVMDamagedCarViewController: UIViewController {
     
     private func setupDamagedCarScene() {
         damageSelector.onStartup(jsonConfiguration: jsonConfigurationData!)
-        parseJSONFromSampleApp()
+        fillFVMDamagedCarScene()
     }
     
     private func showRotationPrompt() {
@@ -57,18 +56,18 @@ public class FVMDamagedCarViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(enableAcceptButton), name: .enableAcceptButton, object: nil)
     }
     
-    private func parseJSONFromSampleApp() {
-        let selectionRoot = parser.parse(jsonData: jsonConfigurationData!)
-        fillUserPromptText(selectionRoot)
-        setAcceptButtonEnabled(selectionRoot)
+    private func fillFVMDamagedCarScene() {
+        let parsedData = damageSelector.onSetup()
+        fillUserPromptText(parsedData)
+        setAcceptButtonState(parsedData)
     }
     
-    fileprivate func fillUserPromptText(_ selectionRoot: SelectionRoot?) {
-        informationForUserTextView.text = selectionRoot?.mainScreenText ?? ""
+    fileprivate func fillUserPromptText(_ parsedData: SelectionRoot?) {
+        informationForUserTextView.text = parsedData?.mainScreenText ?? ""
     }
     
-    fileprivate func setAcceptButtonEnabled(_ selectionRoot: SelectionRoot?) {
-        if selectionRoot?.selection.isEmpty ?? false as Bool {
+    fileprivate func setAcceptButtonState(_ parsedData: SelectionRoot?) {
+        if parsedData?.selection.isEmpty ?? false as Bool {
             disableAcceptButton()
         }
         else {

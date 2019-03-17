@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         else {
             showInformationAlertWhenReturingFVM()
         }
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

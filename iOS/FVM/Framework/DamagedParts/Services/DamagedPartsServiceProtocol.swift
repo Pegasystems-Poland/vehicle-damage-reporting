@@ -22,4 +22,5 @@ internal protocol DamagedPartsServiceProtocol {
     func getSerializedParts() -> String
     func addPart(part: Selection)
     func removePart(partId: String)
+    func getInitialSelectionRoot() -> SelectionRoot?
 }
