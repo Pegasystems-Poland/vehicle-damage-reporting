@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.pega.vehicledamagemodeling.VehicleDamageModeling;
@@ -52,7 +53,7 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
                 finish();
             }
         };
-
+        /*
         String report = getIntent().getStringExtra(REPORT_EXTRA);
         VehicleDamageModeling vehicleDamageModeling;
         if (report == null || report.isEmpty()) {
@@ -61,6 +62,22 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
             vehicleDamageModeling = new VehicleDamageModeling(
                     new JsonParser().parse(report).getAsJsonObject(), callback);
         }
+        */
+
+        //initJson
+        JsonObject initJson = new JsonObject();
+        JsonArray partsArray = new JsonArray();
+        JsonObject jsonProperty = new JsonObject();
+        jsonProperty.addProperty("id","roof");
+        partsArray.add(jsonProperty);
+        JsonObject jsonProperty2 = new JsonObject();
+        jsonProperty2.addProperty("id","front bumper");
+        partsArray.add(jsonProperty2);
+        initJson.add("selection",partsArray);
+
+        VehicleDamageModeling vehicleDamageModeling = new VehicleDamageModeling(initJson,callback);
+        //end initJson
+
         viewGroup.addView(initializeForView(vehicleDamageModeling, config));
     }
 }
