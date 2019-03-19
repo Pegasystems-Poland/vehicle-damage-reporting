@@ -18,7 +18,7 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
-public class SelectedPartsRepository implements SelectedPartsRepositoryProtocol {
+public class SelectedPartsRepository{
 
     private ArrayList<String> parts;
     private JsonObject initJson;
@@ -30,32 +30,18 @@ public class SelectedPartsRepository implements SelectedPartsRepositoryProtocol 
         this.parts = parser.parseToPartRoot(initJson).getParts();
     }
 
-    @Override
     public void add(String part) {
         if( !parts.contains(part)){
             parts.add(part);
         }
     }
 
-    @Override
-    public void remove(String part) {
-        parts.remove(part);
-    }
+    public boolean remove(String part) { return parts.remove(part); }
 
-
-    @Override
-    public void add(ArrayList<String> parts) {
-        for(String part : parts){
-            add(part);
-        }
-    }
-
-    @Override
     public ArrayList<String> getAll() {
         return parts;
     }
 
-    @Override
     public JsonObject getInitJson() {
         return initJson;
     }

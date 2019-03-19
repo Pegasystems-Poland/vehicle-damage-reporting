@@ -50,10 +50,4 @@ public class Parser {
         parsed.add("selection",parsedArray);
         return parsed;
     }
-
-    private boolean isDamaged(JsonElement jsonElement) {
-        return jsonElement.getAsJsonObject()
-                .get("damaged")
-                .getAsBoolean();
-    }
 }

@@ -14,11 +14,6 @@ import static org.junit.Assert.assertEquals;
 
 
 public class ParserTest {
-    @Test
-    public void testCreate(){
-        Parser parser = new Parser();
-        Assert.assertNotNull(parser);
-    }
 
     @Test
     public void whenJsonIsNotNullThenReturnPartRoot(){

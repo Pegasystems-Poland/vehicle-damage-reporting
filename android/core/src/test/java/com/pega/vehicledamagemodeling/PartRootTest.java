@@ -11,14 +11,6 @@ import static junit.framework.TestCase.assertEquals;
 public class PartRootTest {
 
     @Test
-    public void testCreate() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        String test = "test";
-        PartRoot partRoot = new PartRoot(arrayList, test);
-        Assert.assertNotNull(partRoot);
-    }
-
-    @Test
     public void whenArrayNullThenGetEmptyList(){
         //given
         ArrayList<String> arrayList = new ArrayList<>();
