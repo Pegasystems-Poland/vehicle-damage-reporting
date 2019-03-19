@@ -22,19 +22,16 @@ import java.util.ArrayList;
 public class Parser {
 
     public PartRoot parseToPartRoot(JsonObject obj){
-        JsonArray partsArray = new JsonArray();
-        if(obj.isJsonNull())
-            partsArray= obj.getAsJsonArray("selection");
+        JsonArray partsArray = obj.getAsJsonArray("selection");
         ArrayList<String> parts = new ArrayList<>();
-
-        for(int i = 0; i < partsArray.size(); i++){
-            String part = partsArray.get(i)
-                    .getAsJsonObject()
-                    .get("id")
-                    .getAsString();
-            String selection = part;
-            parts.add(selection);
-        }
+        if(partsArray != null)
+            for(int i = 0; i < partsArray.size(); i++){
+                String selection = partsArray.get(i)
+                        .getAsJsonObject()
+                        .get("id")
+                        .getAsString();
+                parts.add(selection);
+            }
         return new PartRoot(parts,"nothing");
     }
 

@@ -15,7 +15,6 @@
 package com.pega.vehicledamagemodeling.api;
 
 import com.google.gson.JsonObject;
-
 import java.util.ArrayList;
 
 public class SelectedPartsRepository{
