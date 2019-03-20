@@ -15,5 +15,70 @@
 import Foundation
 
 extension ViewController {
+    internal func prepareDamagedCarPartsToSend() -> String {
+        func removeRedundantCharacters() -> String {
+            return ResultContainer.DamagedCarParts.replacingOccurrences(of: " ", with: ";").replacingOccurrences(of: ",", with: ";")
+        }
+        
+        func parseDamagedCarParts(toParse tmp: String) -> String {
+            let elems = tmp.split(separator: ";")
+            var result = ""
+            var first = true
+            for e in elems {
+                if first {
+                    first = false
+                }
+                else {
+                    result.append(",")
+                }
+                
+                result.append("{ \"id\" : \"")
+                result.append(String(e))
+                result.append("\" }")
+            }
+            return result
+        }
+        
+        return parseDamagedCarParts(toParse: removeRedundantCharacters())
+    }
     
+    internal func fillDamagedCarPartsTextView (_ returningJSON: String) {
+        func removeRedundantCharacters(_ tmp: String) -> String {
+            return tmp.replacingOccurrences(of: "\"", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "id", with: "")
+        }
+        
+        let tmp = returningJSON.split(separator: ":")
+        var i = 0
+        var result = ""
+        for t in tmp {
+            if i < 3 {
+                i = i + 1
+            }
+            else {
+                let elem = removeRedundantCharacters(String(t))
+                result.append(elem)
+                result.append("; ")
+            }
+            
+        }
+        
+        ResultContainer.DamagedCarParts = result
+        partsTextView.text = result
+    }
+    
+    internal func prepareJSONToSend() -> String {
+        updateCurrentValuesBeforeSending()
+        
+        return """
+        {
+        "mainScreenText": "\(ResultContainer.Description)",
+        "selection": [\(prepareDamagedCarPartsToSend())]
+        }
+        """
+    }
+    
+    internal func updateCurrentValuesBeforeSending() {
+        ResultContainer.DamagedCarParts = partsTextView.text
+        ResultContainer.Description = descriptionTextView.text
+    }
 }
