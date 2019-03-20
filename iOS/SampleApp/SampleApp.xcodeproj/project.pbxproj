@@ -18,6 +18,7 @@
 		B52DB81621BA8EEF00C6CC36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DB81521BA8EEF00C6CC36 /* AppDelegate.swift */; };
 		B52DB81821BA8EEF00C6CC36 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DB81721BA8EEF00C6CC36 /* ViewController.swift */; };
 		B52DB81D21BA8EF100C6CC36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B52DB81C21BA8EF100C6CC36 /* Assets.xcassets */; };
+		BA60E91B2242AFBA00B5C566 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA60E9192242AFBA00B5C566 /* Images.xcassets */; };
 		BA9E20A921D591450013E388 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = BA9E20A721D591450013E388 /* art.scnassets */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		B52DB81721BA8EEF00C6CC36 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B52DB81C21BA8EF100C6CC36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B52DB82121BA8EF100C6CC36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA60E9192242AFBA00B5C566 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BA9E20A721D591450013E388 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = art.scnassets; path = ../FVM/Framework/art.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 		B52DB80921BA8EEF00C6CC36 = {
 			isa = PBXGroup;
 			children = (
+				BA60E9192242AFBA00B5C566 /* Images.xcassets */,
 				05706879223BCE2400D2A78A /* DamagedCar.storyboard */,
 				BA9E20A721D591450013E388 /* art.scnassets */,
 				056E8BA121C43E8F003EBE53 /* FVM.xcodeproj */,
@@ -230,6 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA60E91B2242AFBA00B5C566 /* Images.xcassets in Resources */,
 				0570687A223BCE2400D2A78A /* DamagedCar.storyboard in Resources */,
 				BA9E20A921D591450013E388 /* art.scnassets in Resources */,
 				052BF5C121C446E8009AFC40 /* Main.storyboard in Resources */,
