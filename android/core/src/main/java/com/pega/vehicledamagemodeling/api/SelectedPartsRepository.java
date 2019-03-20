@@ -22,11 +22,13 @@ public class SelectedPartsRepository{
     private ArrayList<String> parts;
     private JsonObject initJson;
     private Parser parser;
+    private PartRoot partRoot;
 
     public SelectedPartsRepository(JsonObject initJson, Parser parser){
         this.parser = parser;
         this.initJson = initJson;
-        this.parts = parser.parseToPartRoot(initJson).getParts();
+        this.partRoot = this.parser.parseToPartRoot(initJson);
+        this.parts = partRoot.getParts();
     }
 
     public void add(String part) {
@@ -39,6 +41,14 @@ public class SelectedPartsRepository{
 
     public ArrayList<String> getAll() {
         return parts;
+    }
+
+    public JsonObject getJson(){
+        return parser.parseToJson(new PartRoot(parts,partRoot.getMainScreenText()));
+    }
+
+    public String getMainScreenText(){
+        return partRoot.getMainScreenText();
     }
 
     public JsonObject getInitJson() {

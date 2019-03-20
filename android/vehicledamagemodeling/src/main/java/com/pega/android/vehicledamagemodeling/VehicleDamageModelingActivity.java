@@ -66,6 +66,7 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
 
         //initJson
         JsonObject initJson = new JsonObject();
+        initJson.addProperty("mainScreenText","Można obracać autko");
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
         jsonProperty.addProperty("id","roof");

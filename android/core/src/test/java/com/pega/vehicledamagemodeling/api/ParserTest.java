@@ -26,6 +26,7 @@ public class ParserTest {
     public void whenJsonIsNotNullThenReturnPartRoot(){
         //given
         JsonObject initJson = new JsonObject();
+        initJson.addProperty("mainScreenText", "test");
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
         jsonProperty.addProperty("id","roof");
@@ -64,6 +65,7 @@ public class ParserTest {
         JsonObject jsonProperty2 = new JsonObject();
         jsonProperty2.addProperty("id","front bumper");
         partsArray.add(jsonProperty2);
+        expectedJson.addProperty("mainScreenText", "nothing");
         expectedJson.add("selection",partsArray);
 
         Parser parser = new Parser();

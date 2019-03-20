@@ -15,6 +15,7 @@
 package com.pega.vehicledamagemodeling.api;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -22,6 +23,11 @@ import java.util.ArrayList;
 public class Parser {
 
     public PartRoot parseToPartRoot(JsonObject obj){
+        JsonElement jsonText = obj.get("mainScreenText");
+        String text = "";
+        if(jsonText != null){
+            text = jsonText.getAsString();
+        }
         JsonArray partsArray = obj.getAsJsonArray("selection");
         ArrayList<String> parts = new ArrayList<>();
         if(partsArray != null)
@@ -32,7 +38,7 @@ public class Parser {
                         .getAsString();
                 parts.add(selection);
             }
-        return new PartRoot(parts,"nothing");
+        return new PartRoot(parts,text);
     }
 
     public JsonObject parseToJson(PartRoot parts) {
@@ -45,6 +51,7 @@ public class Parser {
             jsonProperty.addProperty("id",parts.getParts().get(i));
             parsedArray.add(jsonProperty);
         }
+        parsed.addProperty("mainScreenText", parts.getMainScreenText());
         parsed.add("selection",parsedArray);
         return parsed;
     }

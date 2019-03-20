@@ -14,6 +14,7 @@
 
 package com.pega.vehicledamagemodeling.api;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.junit.Test;
 import java.util.ArrayList;
@@ -56,6 +57,62 @@ public class SelectedPartsTest {
 
         //when
         JsonObject result = selectedPartsRepository.getInitJson();
+
+        //then
+        assertEquals(expected,result);
+    }
+
+    @Test
+    public void testGetMainScreenText(){
+        //given
+        JsonObject jsonText = new JsonObject();
+        jsonText.addProperty("mainScreenText", "The text");
+        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository(jsonText,new Parser());
+        String expected = "The text";
+
+        //when
+        String result = selectedPartsRepository.getMainScreenText();
+
+        //then
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testGetJson(){
+        //given
+        //init
+        JsonObject initJson = new JsonObject();
+        initJson.addProperty("mainScreenText","Można obracać autko");
+        JsonArray partsArray = new JsonArray();
+        JsonObject jsonProperty = new JsonObject();
+        jsonProperty.addProperty("id","roof");
+        partsArray.add(jsonProperty);
+        JsonObject jsonProperty2 = new JsonObject();
+        jsonProperty2.addProperty("id","front bumper");
+        partsArray.add(jsonProperty2);
+        initJson.add("selection",partsArray);
+        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository(initJson,new Parser());
+
+        //add
+        selectedPartsRepository.add("trunk");
+
+        //expected
+        JsonObject expected = new JsonObject();
+        expected.addProperty("mainScreenText","Można obracać autko");
+        partsArray = new JsonArray();
+        jsonProperty = new JsonObject();
+        jsonProperty.addProperty("id","roof");
+        partsArray.add(jsonProperty);
+        jsonProperty2 = new JsonObject();
+        jsonProperty2.addProperty("id","front bumper");
+        partsArray.add(jsonProperty2);
+        JsonObject jsonProperty3 = new JsonObject();
+        jsonProperty3.addProperty("id","trunk");
+        partsArray.add(jsonProperty3);
+        expected.add("selection",partsArray);
+
+        //when
+        JsonObject result = selectedPartsRepository.getJson();
 
         //then
         assertEquals(expected,result);
