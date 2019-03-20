@@ -43,8 +43,8 @@ internal class FVMCarModelViewController : SCNView {
         return damagedPartsService.originalConfiguration
     }
     
-    public func onSetup() -> SelectionRoot? {
-        return damagedPartsService.getInitialSelectionRoot()
+    public func getInitialSelectionRoot() -> SelectionRoot? {
+        return damagedPartsService.originalSelectionRoot
     }
     
     private func setupInitialSelection(configuration: String) {

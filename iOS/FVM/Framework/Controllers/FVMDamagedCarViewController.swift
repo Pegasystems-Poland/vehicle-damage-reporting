@@ -57,33 +57,26 @@ public class FVMDamagedCarViewController: UIViewController {
     }
     
     private func fillFVMDamagedCarScene() {
-        let parsedData = damageSelector.onSetup()
-        fillUserPromptText(parsedData)
-        setAcceptButtonState(parsedData)
+        let initialSelectionRoot = damageSelector.getInitialSelectionRoot()
+        fillUserPromptText(initialSelectionRoot?.mainScreenText)
+        disableAcceptButton()
     }
     
-    fileprivate func fillUserPromptText(_ parsedData: SelectionRoot?) {
-        informationForUserTextView.text = parsedData?.mainScreenText ?? ""
-    }
-    
-    fileprivate func setAcceptButtonState(_ parsedData: SelectionRoot?) {
-        if parsedData?.selection.isEmpty ?? false as Bool {
-            disableAcceptButton()
-        }
-        else {
-            enableAcceptButton()
-        }
+    fileprivate func fillUserPromptText(_ userInfoText: String?) {
+        informationForUserTextView.text = userInfoText
     }
     
     @objc
     fileprivate func disableAcceptButton() {
         acceptButton.setTitleColor(UIColor.lightGray, for: .disabled)
+        acceptButton.alpha = 0.5
         acceptButton.isEnabled = false
     }
     
     @objc
     fileprivate func enableAcceptButton() {
         acceptButton.setTitleColor(UIColor.blue, for: .normal)
+        acceptButton.alpha = 1.0
         acceptButton.isEnabled = true
     }
     

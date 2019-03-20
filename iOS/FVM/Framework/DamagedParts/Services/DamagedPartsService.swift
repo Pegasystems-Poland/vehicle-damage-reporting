@@ -15,8 +15,11 @@
 import Foundation
 
 internal class DamagedPartsService: DamagedPartsServiceProtocol {
-    public var originalConfiguration: String {
+    internal var originalConfiguration: String {
         return initialConfiguration ?? ""
+    }
+    internal var originalSelectionRoot: SelectionRoot? {
+        return initialSelectionRoot
     }
     private var parser: JsonParser<SelectionRoot>
     private var validator: DamagedPartsValidator
@@ -65,9 +68,5 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol {
     
     internal func getSerializedParts() -> String {
         return parser.parse(element: SelectionRoot(selectionArray: repository.getAll(), text: initialSelectionRoot?.mainScreenText ?? ""))
-    }
-    
-    internal func getInitialSelectionRoot() -> SelectionRoot? {
-        return initialSelectionRoot
     }
 }

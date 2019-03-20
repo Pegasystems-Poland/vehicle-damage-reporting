@@ -16,11 +16,11 @@ import Foundation
 
 internal protocol DamagedPartsServiceProtocol {
     var originalConfiguration: String { get }
+    var originalSelectionRoot: SelectionRoot? { get }
     func createAndGetCollectionOfDamagedParts(json: String) -> [Selection]
     func getCollectionOfDamagedParts() -> [Selection]
     func createCollectionOfDamagedParts(json: String) -> Void
     func getSerializedParts() -> String
     func addPart(part: Selection)
     func removePart(partId: String)
-    func getInitialSelectionRoot() -> SelectionRoot?
 }

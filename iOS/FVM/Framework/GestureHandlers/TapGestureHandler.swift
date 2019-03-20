@@ -33,21 +33,22 @@ extension FVMCarModelViewController {
         }
     }
     
-    private func setHighlightOn(node: SCNNode) {
+    fileprivate func setHighlightOn(node: SCNNode) {
         damagedPartsService.addPart(part: Selection(newName: node.name!))
         highlightHandler.setHighlightOn(node: node)
     }
     
-    private func setHighlightOff(nodeName: String) {
+    fileprivate func setHighlightOff(nodeName: String) {
         damagedPartsService.removePart(partId: nodeName)
         highlightHandler.setHighlightOff(nodeName: nodeName)
     }
     
     fileprivate func notifyFinishButton() {
-        if damagedPartsService.getCollectionOfDamagedParts().isEmpty {
+        let currentSelection = damagedPartsService.getCollectionOfDamagedParts().sorted(by: { $0.id < $1.id })
+        let originalSelection = damagedPartsService.originalSelectionRoot!.selection.sorted(by: {$0.id < $1.id })
+        if currentSelection == originalSelection {
             NotificationCenter.default.post(name: .disableAcceptButton, object: FVMDamagedCarViewController.self)
-        }
-        else {
+        } else {
             NotificationCenter.default.post(name: .enableAcceptButton, object: FVMDamagedCarViewController.self)
         }
     }
