@@ -41,9 +41,9 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is FVMDamagedCarViewController {
             let fvmController = segue.destination as? FVMDamagedCarViewController
-            fvmController!.configurationData = prepareJSONToSend()
+            fvmController!.configuration = prepareJSONToSend()
             
-            fvmController!.getReturningData = { returningData in
+            fvmController!.completionAction = { returningData in
                 self.fillDamagedCarPartsTextView(returningData)
                 self.displayReturningDataTextView.text = returningData
             }

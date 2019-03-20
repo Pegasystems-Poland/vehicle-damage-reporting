@@ -16,6 +16,9 @@ import UIKit
 import SceneKit
 
 internal class FVMCarModelViewController : SCNView {
+    internal var userPromptText: String? {
+        return damagedPartsService.originalSelectionRoot?.mainScreenText
+    }
     internal var damagedPartsService: DamagedPartsServiceProtocol!
     internal var nodeHelper: NodeHelperProtocol?
     internal var scnScene: SCNScene!
@@ -25,7 +28,6 @@ internal class FVMCarModelViewController : SCNView {
     private let CAR_MODEL_NAME = "carModel"
     
     public func onStartup(configuration: String) {
-        self.autoenablesDefaultLighting = true
         nodeHelper = NodeHelper(highlightHandler: highlightHandler)
         
         setupGestures()
@@ -43,10 +45,6 @@ internal class FVMCarModelViewController : SCNView {
         return damagedPartsService.originalConfiguration
     }
     
-    public func getInitialSelectionRoot() -> SelectionRoot? {
-        return damagedPartsService.originalSelectionRoot
-    }
-    
     private func setupInitialSelection(configuration: String) {
         let carModelNode = scnScene.rootNode.childNode(withName: CAR_MODEL_NAME, recursively: false)
         let validNodesNames = nodeHelper?.createValidNamesArray(carModel: carModelNode!)
@@ -60,6 +58,7 @@ internal class FVMCarModelViewController : SCNView {
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(_:)))
         var panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         configurePanGestureRecognizer(&panGesture)
+        
         self.addGestureRecognizer(tapGesture)
         self.addGestureRecognizer(pinchGesture)
         self.addGestureRecognizer(panGesture)
