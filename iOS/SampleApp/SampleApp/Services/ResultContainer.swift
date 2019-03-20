@@ -12,12 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-internal struct CurrentValue {
-    internal static var DamagedCarParts: String = """
-        Hood; Roof
+internal struct ResultContainer {
+    internal static var DamagedCarParts: String = ""
+    internal static var Description: String =
     """
-    internal static var Description: String = """
-        Your description for FVM:
+    Rotate model and select damaged parts by tapping on the model.
+    Press button when you're done.
     """
-    internal static var FirstTimeInformation: Bool = true
 }

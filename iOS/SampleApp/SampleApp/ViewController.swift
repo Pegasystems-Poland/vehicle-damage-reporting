@@ -16,36 +16,26 @@ import UIKit
 import FVM
 
 class ViewController: UIViewController {
-    @IBOutlet weak var manageDescriptionTextView: UITextView!
-    @IBOutlet weak var manageDamagedCarPartsTextView: UITextView!
-    @IBOutlet weak var goesToFVMButton: UIButton!
-    @IBOutlet weak var displayReturningDataTextView: UITextView!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var partsTextView: UITextView!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var resultTextView: UITextView!
     
     override func viewDidLoad() {
-        initializeManageDamagedCarPartsTextView()
-        initializeManageDescriptionTextView()
-        initializeDisplayReturningJSONTextView()
+        initializePartsTextView()
+        initializeDescriptionTextView()
+        initializeResultTextView()
         super.viewDidLoad()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        if CurrentValue.FirstTimeInformation == true {
-            showFirstTimeOpenAppInformationAlert()
-        }
-        else {
-            showInformationAlertWhenReturingFVM()
-        }
-        super.viewDidAppear(animated)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is FVMDamagedCarViewController {
-            let fvmController = segue.destination as? FVMDamagedCarViewController
-            fvmController!.configuration = prepareJSONToSend()
+            let fvmController = segue.destination as! FVMDamagedCarViewController
+            fvmController.configuration = prepareJSONToSend()
             
-            fvmController!.completionAction = { returningData in
-                self.fillDamagedCarPartsTextView(returningData)
-                self.displayReturningDataTextView.text = returningData
+            fvmController.completionAction = { result in
+                self.fillDamagedCarPartsTextView(result)
+                self.resultTextView.text = result
             }
         }
     }

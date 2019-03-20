@@ -15,21 +15,20 @@
 import UIKit
 
 extension ViewController : UITextViewDelegate {
-    fileprivate static let END_WRITING_CHARACTER = "\n"
-    fileprivate static let LIGHT_GRAY_COLOR = UIColor.lightGray
-    fileprivate static let BLACK_COLOR = UIColor.black
+    fileprivate static let TERMINATING_CHAR = "\n"
     fileprivate static let DESCRIPTION_ID = "Description"
-    fileprivate static let DESCRIPTION_VALUE = "Your description for FVM:"
-    fileprivate static let DAMAGED_CAR_PARTS_ID = "DamagedCarParts"
-    fileprivate static let DAMAGED_CAR_PARTS_VALUE = "Your damaged car parts for FVM"
-    fileprivate static let DEFAULT_VALUE = ""
-    fileprivate static let DEFAULT_TEXT = """
-            {
-            }
-        """
+    fileprivate static let DESCRIPTION_VALUE = "Enter FVM description here"
+    fileprivate static let DAMAGED_PARTS_ID = "DamagedCarParts"
+    fileprivate static let DAMAGED_PARTS_VALUE = "Enter initial damaged car parts here, seperate each part with semicolon (;)"
+    fileprivate static let DEFAULT_RESULT =
+    """
+    FVM Result:
+    {
+    }
+    """
     
     public func textView(_ textView: UITextView, shouldChangeTextIn: NSRange, replacementText: String) -> Bool {
-        if replacementText == ViewController.END_WRITING_CHARACTER {
+        if replacementText == ViewController.TERMINATING_CHAR {
             textView.resignFirstResponder()
             return false
         }
@@ -37,42 +36,42 @@ extension ViewController : UITextViewDelegate {
     }
     
     public func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == ViewController.LIGHT_GRAY_COLOR {
+        if textView.textColor == UIColor.lightGray {
             textView.text = nil
-            textView.textColor = ViewController.BLACK_COLOR
+            textView.textColor = UIColor.black
         }
     }
     
     public func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = getDefaultText(textView)
-            textView.textColor = ViewController.LIGHT_GRAY_COLOR
+            textView.textColor = UIColor.lightGray
         }
     }
     
-    internal func initializeManageDamagedCarPartsTextView() {
-        manageDamagedCarPartsTextView.text = CurrentValue.DamagedCarParts
-        manageDamagedCarPartsTextView.delegate = self
+    internal func initializePartsTextView() {
+        partsTextView.text = ViewController.DAMAGED_PARTS_VALUE
+        partsTextView.delegate = self
     }
     
-    internal func initializeManageDescriptionTextView() {
-        manageDescriptionTextView.text = CurrentValue.Description
-        manageDescriptionTextView.textColor = ViewController.LIGHT_GRAY_COLOR
-        manageDescriptionTextView.delegate = self
+    internal func initializeDescriptionTextView() {
+        descriptionTextView.text = ViewController.DESCRIPTION_VALUE
+        descriptionTextView.textColor = UIColor.lightGray
+        descriptionTextView.delegate = self
     }
     
-    internal func initializeDisplayReturningJSONTextView() {
-        displayReturningDataTextView.text = ViewController.DEFAULT_TEXT
+    internal func initializeResultTextView() {
+        resultTextView.text = ViewController.DEFAULT_RESULT
     }
     
     fileprivate func getDefaultText(_ textViewId: UITextView) -> String {
         switch textViewId.restorationIdentifier {
         case ViewController.DESCRIPTION_ID:
             return ViewController.DESCRIPTION_VALUE
-        case ViewController.DAMAGED_CAR_PARTS_ID:
-            return ViewController.DAMAGED_CAR_PARTS_VALUE
-            default:
-                return ViewController.DEFAULT_VALUE
+        case ViewController.DAMAGED_PARTS_ID:
+            return ViewController.DAMAGED_PARTS_VALUE
+        default:
+            fatalError("Unexpected identifier: \(String(describing: textViewId.restorationIdentifier))")
         }
     }
 }

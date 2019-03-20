@@ -20,12 +20,12 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bd1-RJ-rnz">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
-                                <state key="normal" title="Goes To FVM"/>
+                                <state key="normal" title="Run FVM"/>
                                 <connections>
                                     <segue destination="54P-Qk-o0X" kind="show" id="Skh-Zm-B1k"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="Description" text="Your description for FVM" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="egy-tL-5h5">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="Description" text="Your description for FVM" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="egy-tL-5h5" userLabel="Description">
                                 <rect key="frame" x="0.0" y="20" width="375" height="84"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -46,7 +46,7 @@
                                     </mask>
                                 </variation>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="DamagedCarParts" text="Damaged Car Parts:" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="rtF-nV-ODq" userLabel="Manage Damaged Car Parts Text View">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="DamagedCarParts" text="Damaged Car Parts:" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="rtF-nV-ODq" userLabel="DamagedParts">
                                 <rect key="frame" x="0.0" y="112" width="375" height="223"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -67,7 +67,7 @@
                                     </mask>
                                 </variation>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="DisplayReturningJSON" editable="NO" text="Result" translatesAutoresizingMaskIntoConstraints="NO" id="qdS-vO-PwH">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="DisplayReturningJSON" editable="NO" text="Result" translatesAutoresizingMaskIntoConstraints="NO" id="qdS-vO-PwH" userLabel="Result">
                                 <rect key="frame" x="0.0" y="343" width="375" height="266"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -97,10 +97,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="lmZ-FS-kuC"/>
                     <connections>
-                        <outlet property="displayReturningDataTextView" destination="qdS-vO-PwH" id="AGk-P9-SSG"/>
-                        <outlet property="goesToFVMButton" destination="Bd1-RJ-rnz" id="Jko-KU-DoD"/>
-                        <outlet property="manageDamagedCarPartsTextView" destination="rtF-nV-ODq" id="lSO-Lx-zAF"/>
-                        <outlet property="manageDescriptionTextView" destination="egy-tL-5h5" id="EL9-cE-hbE"/>
+                        <outlet property="descriptionTextView" destination="egy-tL-5h5" id="EL9-cE-hbE"/>
+                        <outlet property="partsTextView" destination="rtF-nV-ODq" id="lSO-Lx-zAF"/>
+                        <outlet property="resultTextView" destination="qdS-vO-PwH" id="AGk-P9-SSG"/>
+                        <outlet property="startButton" destination="Bd1-RJ-rnz" id="Jko-KU-DoD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRo-9X-vxN" userLabel="First Responder" sceneMemberID="firstResponder"/>
