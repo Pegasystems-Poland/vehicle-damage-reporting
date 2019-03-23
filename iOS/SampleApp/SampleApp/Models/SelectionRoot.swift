@@ -12,7 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-internal struct ResultContainer {
-    internal static var damagedCarParts: String = ""
-    internal static var description: String = ""
+import Foundation
+
+internal struct SelectionRoot: Codable {
+    let mainScreenText: String
+    let selection: [Selection]
+    
+    init(selectionArray: [Selection], text: String) {
+        selection = selectionArray
+        mainScreenText = text
+    }
 }

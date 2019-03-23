@@ -12,7 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-internal struct ResultContainer {
-    internal static var damagedCarParts: String = ""
-    internal static var description: String = ""
+import Foundation
+
+internal struct Selection : Codable, Equatable {
+    internal var id: String
+    
+    init(newName: String) {
+        id = newName
+    }
 }

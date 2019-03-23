@@ -17,9 +17,9 @@ import UIKit
 extension ViewController : UITextViewDelegate {
     fileprivate static let TERMINATING_CHAR = "\n"
     fileprivate static let DESCRIPTION_ID = "Description"
-    fileprivate static let DESCRIPTION_VALUE = "Enter FVM description here"
+    fileprivate static let DESCRIPTION_VALUE = "FVM description"
     fileprivate static let DAMAGED_PARTS_ID = "DamagedCarParts"
-    fileprivate static let DAMAGED_PARTS_VALUE = "Enter initial damaged car parts here, seperate each part with semicolon (;)"
+    fileprivate static let DAMAGED_PARTS_VALUE = "Hood; Roof;"
     fileprivate static let DEFAULT_RESULT =
     """
     FVM Result:
@@ -51,6 +51,7 @@ extension ViewController : UITextViewDelegate {
     
     internal func initializePartsTextView() {
         partsTextView.text = ViewController.DAMAGED_PARTS_VALUE
+        partsTextView.textColor = UIColor.lightGray
         partsTextView.delegate = self
     }
     

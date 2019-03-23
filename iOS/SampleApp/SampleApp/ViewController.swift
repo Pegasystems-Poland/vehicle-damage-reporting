@@ -31,10 +31,12 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is FVMDamagedCarViewController {
             let fvmController = segue.destination as! FVMDamagedCarViewController
-            fvmController.configuration = prepareJSONToSend()
+            fvmController.configuration = getConfigurationData()
             
             fvmController.completionAction = { result in
-                self.fillDamagedCarPartsTextView(result)
+                let formattedParts = self.getReadableDamagedParts(result)
+                ResultContainer.damagedCarParts = formattedParts ?? ""
+                self.partsTextView.text = formattedParts
                 self.resultTextView.text = result
             }
         }

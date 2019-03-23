@@ -15,70 +15,36 @@
 import Foundation
 
 extension ViewController {
-    internal func prepareDamagedCarPartsToSend() -> String {
-        func removeRedundantCharacters() -> String {
-            return ResultContainer.DamagedCarParts.replacingOccurrences(of: " ", with: ";").replacingOccurrences(of: ",", with: ";")
-        }
-        
-        func parseDamagedCarParts(toParse tmp: String) -> String {
-            let elems = tmp.split(separator: ";")
-            var result = ""
-            var first = true
-            for e in elems {
-                if first {
-                    first = false
-                }
-                else {
-                    result.append(",")
-                }
-                
-                result.append("{ \"id\" : \"")
-                result.append(String(e))
-                result.append("\" }")
-            }
-            return result
-        }
-        
-        return parseDamagedCarParts(toParse: removeRedundantCharacters())
-    }
-    
-    internal func fillDamagedCarPartsTextView (_ returningJSON: String) {
-        func removeRedundantCharacters(_ tmp: String) -> String {
-            return tmp.replacingOccurrences(of: "\"", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "id", with: "")
-        }
-        
-        let tmp = returningJSON.split(separator: ":")
-        var i = 0
+    internal func formatDamagedParts() -> String {
+        let cleanString = ResultContainer.damagedCarParts.replacingOccurrences(of: " ", with: ";").replacingOccurrences(of: ",", with: ";")
+        let partsIdentifiers = cleanString.split(separator: ";")
         var result = ""
-        for t in tmp {
-            if i < 3 {
-                i = i + 1
-            }
-            else {
-                let elem = removeRedundantCharacters(String(t))
-                result.append(elem)
-                result.append("; ")
-            }
-            
+        for identifier in partsIdentifiers {
+            result.append("{\"id\":\"\(identifier)\"},")
         }
-        
-        ResultContainer.DamagedCarParts = result
-        partsTextView.text = result
+        return String(result.dropLast())
     }
     
-    internal func prepareJSONToSend() -> String {
-        updateCurrentValuesBeforeSending()
+    internal func getReadableDamagedParts(_ data: String) -> String? {
+        let binaryData = data.data(using: .utf8)
+        let selectionRoot = try? JSONDecoder().decode(SelectionRoot.self, from: binaryData!)
         
+        var result = ""
+        for part in selectionRoot!.selection {
+            result.append("\(part.id); ")
+        }
+        return result
+    }
+    
+    internal func getConfigurationData() -> String {
+        ResultContainer.damagedCarParts = partsTextView.text
+        ResultContainer.description = descriptionTextView.text
+        let damagedParts = formatDamagedParts()
         return """
         {
-        "mainScreenText": "\(ResultContainer.Description)",
-        "selection": [\(prepareDamagedCarPartsToSend())]
+        "mainScreenText": "\(ResultContainer.description)",
+        "selection": [\(damagedParts)]
         }
         """
-    }
-    
-    internal func updateCurrentValuesBeforeSending() {
-        ResultContainer.DamagedCarParts = partsTextView.text
-        ResultContainer.Description = descriptionTextView.text
     }
 }
