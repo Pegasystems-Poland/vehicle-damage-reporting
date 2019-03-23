@@ -30,6 +30,11 @@ public class FVMDamagedCarViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    override public func viewDidLayoutSubviews() {
+        setupButtonShape(closeButton)
+        setupButtonShape(acceptButton)
+    }
+    
     @IBAction internal func closeButtonTapped(_ sender: UIButton) {
         _ = completionAction?(damageSelector.onCancel())
         self.dismiss(animated: true, completion: nil)
@@ -60,6 +65,14 @@ public class FVMDamagedCarViewController: UIViewController {
     
     private func fillUserPromptTextView() {
         userPromptText.text = damageSelector.userPromptText
+    }
+    
+    private func setupButtonShape(_ button: UIButton) {
+        button.layer.cornerRadius = button.frame.width / 2.0
+        button.layer.masksToBounds = true
+        button.layer.shadowOffset = CGSize(width: 1, height: 1)
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 5
     }
     
     @objc

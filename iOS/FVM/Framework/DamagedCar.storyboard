@@ -52,12 +52,6 @@
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <state key="normal" image="cross"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="HZI-Bw-rIu"/>
@@ -136,12 +130,6 @@
                                 <state key="normal" image="check">
                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="N1x-I5-xOy"/>
@@ -304,6 +292,7 @@
                         <viewLayoutGuide key="safeArea" id="Dq4-ft-aoT"/>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="mZb-vt-NMr"/>
                                 <exclude reference="4x4-s2-7j1"/>
                                 <exclude reference="5XF-xW-h8W"/>
                                 <exclude reference="6Vc-K7-JOr"/>
@@ -315,7 +304,6 @@
                                 <exclude reference="mOL-gp-XyD"/>
                                 <exclude reference="njd-bI-69f"/>
                                 <exclude reference="rEO-hi-Md3"/>
-                                <exclude reference="mZb-vt-NMr"/>
                                 <exclude reference="2wE-Ic-iOZ"/>
                                 <exclude reference="3MY-4c-boF"/>
                                 <exclude reference="3ZG-ZT-6du"/>
@@ -363,13 +351,13 @@
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
+                                <exclude reference="IXG-7k-lea"/>
                                 <include reference="5XF-xW-h8W"/>
                                 <include reference="6Vc-K7-JOr"/>
                                 <include reference="HBv-hB-xXF"/>
                                 <exclude reference="VnV-fF-ZRg"/>
                                 <exclude reference="Vng-T0-u1h"/>
                                 <exclude reference="hWB-7H-Hpw"/>
-                                <exclude reference="IXG-7k-lea"/>
                                 <include reference="3ZG-ZT-6du"/>
                                 <include reference="Jvz-WZ-zLb"/>
                                 <exclude reference="PxE-ms-Wfz"/>
@@ -395,6 +383,9 @@
                         </variation>
                         <variation key="widthClass=regular">
                             <mask key="constraints">
+                                <exclude reference="6RN-Qi-tVe"/>
+                                <exclude reference="IXG-7k-lea"/>
+                                <include reference="mZb-vt-NMr"/>
                                 <exclude reference="4x4-s2-7j1"/>
                                 <exclude reference="7so-hW-t7B"/>
                                 <exclude reference="VnV-fF-ZRg"/>
@@ -404,9 +395,6 @@
                                 <exclude reference="lLZ-7a-ffC"/>
                                 <exclude reference="mOL-gp-XyD"/>
                                 <exclude reference="rEO-hi-Md3"/>
-                                <exclude reference="6RN-Qi-tVe"/>
-                                <exclude reference="IXG-7k-lea"/>
-                                <include reference="mZb-vt-NMr"/>
                                 <exclude reference="2wE-Ic-iOZ"/>
                                 <include reference="3MY-4c-boF"/>
                                 <exclude reference="PxE-ms-Wfz"/>
