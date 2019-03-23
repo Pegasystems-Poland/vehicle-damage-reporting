@@ -14,12 +14,14 @@
 
 package com.pega.vehicledamagemodeling.api;
 
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.google.gson.JsonObject;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class SelectedPartsRepository{
 
-    private ArrayList<String> parts;
+    private HashMap<String, Material> partsWithMaterial;
     private JsonObject initJson;
     private Parser parser;
     private PartRoot partRoot;
@@ -28,23 +30,30 @@ public class SelectedPartsRepository{
         this.parser = parser;
         this.initJson = initJson;
         this.partRoot = this.parser.parseToPartRoot(initJson);
-        this.parts = partRoot.getParts();
-    }
-
-    public void add(String part) {
-        if( !parts.contains(part)){
-            parts.add(part);
+        this.partsWithMaterial = new HashMap<>();
+        for( String s : partRoot.getParts()){
+            partsWithMaterial.put(s,null);
         }
     }
 
-    public boolean remove(String part) { return parts.remove(part); }
+    public void add(String part, Material material) {
+        if( !partsWithMaterial.containsKey(part)){
+            partsWithMaterial.put(part,material);
+        }
+    }
 
-    public ArrayList<String> getAll() {
-        return parts;
+    public Material remove(String part) {
+        return partsWithMaterial.remove(part);
+    }
+
+    public HashSet<String> getAll() {
+        HashSet<String> allInHashSet = new HashSet<>();
+        allInHashSet.addAll(partsWithMaterial.keySet());
+        return allInHashSet;
     }
 
     public JsonObject getJson(){
-        return parser.parseToJson(new PartRoot(parts,partRoot.getMainScreenText()));
+        return parser.parseToJson(new PartRoot(this.getAll(),partRoot.getMainScreenText()));
     }
 
     public String getMainScreenText(){

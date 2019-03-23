@@ -55,6 +55,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         this(callback);
 
         selections = new SelectedPartsRepository(report, new Parser());
+
         System.out.println("Init Json: " + selections.getInitJson());
         // display given report
     }

@@ -16,20 +16,20 @@ package com.pega.vehicledamagemodeling.api;
 
 import junit.framework.TestCase;
 import org.junit.Test;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class PartRootTest {
 
     @Test
     public void whenArrayNullThenGetEmptyList(){
         //given
-        ArrayList<String> arrayList = new ArrayList<>();
+        HashSet<String> hashSet = new HashSet<>();
         String testString = "test";
-        PartRoot partRoot = new PartRoot(arrayList, testString);
-        ArrayList<String> expected = new ArrayList<>();
+        PartRoot partRoot = new PartRoot(hashSet, testString);
+        HashSet<String> expected = new HashSet<>();
 
         //when
-        ArrayList<String> result = partRoot.getParts();
+        HashSet<String> result = partRoot.getParts();
 
         //then
         TestCase.assertEquals(expected,result);
@@ -38,9 +38,9 @@ public class PartRootTest {
     @Test
     public void whenTestNotNullThenReturnCorrectText() {
         //given
-        ArrayList<String> arrayList = new ArrayList<>();
+        HashSet<String> hashSet = new HashSet<>();
         String testString = "test";
-        PartRoot partRoot = new PartRoot(arrayList, testString);
+        PartRoot partRoot = new PartRoot(hashSet, testString);
 
         //when
         String result = partRoot.getMainScreenText();

@@ -14,18 +14,18 @@
 
 package com.pega.vehicledamagemodeling.api;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class PartRoot {
-    private ArrayList<String> parts;
+    private HashSet<String> parts;
     private String mainScreenText;
 
-    public PartRoot(ArrayList<String> part, String mainScreenText){
+    public PartRoot(HashSet<String> part, String mainScreenText){
         parts = part;
         this.mainScreenText = mainScreenText;
     }
 
-    public ArrayList<String> getParts() {
+    public HashSet<String> getParts() {
         return parts;
     }
 

@@ -18,6 +18,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.junit.Test;
 import java.util.ArrayList;
+import java.util.HashSet;
+
 import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
@@ -36,7 +38,7 @@ public class ParserTest {
         partsArray.add(jsonProperty2);
         initJson.add("selection",partsArray);
 
-        ArrayList<String> list = new ArrayList<>();
+        HashSet<String> list = new HashSet<>();
         list.add("roof");
         list.add("front bumper");
 
@@ -52,10 +54,10 @@ public class ParserTest {
     @Test
     public void whenPartRootIsNotNullThenReturnJson(){
         //given
-        ArrayList<String> list = new ArrayList<>();
-        list.add("roof");
-        list.add("front bumper");
-        PartRoot parts = new PartRoot(list,"nothing");
+        HashSet<String> hashSet = new HashSet<>();
+        hashSet.add("roof");
+        hashSet.add("front bumper");
+        PartRoot parts = new PartRoot(hashSet,"nothing");
 
         JsonObject expectedJson = new JsonObject();
         JsonArray partsArray = new JsonArray();

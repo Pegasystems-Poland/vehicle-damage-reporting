@@ -18,7 +18,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Parser {
 
@@ -29,7 +29,7 @@ public class Parser {
             text = jsonText.getAsString();
         }
         JsonArray partsArray = obj.getAsJsonArray("selection");
-        ArrayList<String> parts = new ArrayList<>();
+        HashSet<String> parts = new HashSet<>();
         if(partsArray != null)
             for(int i = 0; i < partsArray.size(); i++){
                 String selection = partsArray.get(i)
@@ -45,12 +45,12 @@ public class Parser {
         JsonObject parsed = new JsonObject();
         JsonArray parsedArray = new JsonArray();
 
-        for(int i = 0; i < parts.getParts().size(); i++)
-        {
+        for(String s : parts.getParts()){
             JsonObject jsonProperty = new JsonObject();
-            jsonProperty.addProperty("id",parts.getParts().get(i));
+            jsonProperty.addProperty("id", s);
             parsedArray.add(jsonProperty);
         }
+
         parsed.addProperty("mainScreenText", parts.getMainScreenText());
         parsed.add("selection",parsedArray);
         return parsed;

@@ -14,10 +14,13 @@
 
 package com.pega.vehicledamagemodeling.api;
 
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.junit.Test;
 import java.util.ArrayList;
+import java.util.HashSet;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class SelectedPartsTest {
@@ -26,10 +29,10 @@ public class SelectedPartsTest {
     public void testRemove(){  //removeNonexistentPart
         //given
         SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository(new JsonObject(), new Parser());
-        boolean expected = false;
+        Material expected = null;
 
         //when
-        boolean result = selectedPartsRepository.remove("test");
+        Material result = selectedPartsRepository.remove("test");
 
         //then
         assertEquals(expected,result);
@@ -39,10 +42,10 @@ public class SelectedPartsTest {
     public void testGetAll(){
         //given
         SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository(new JsonObject(), new Parser());
-        ArrayList<String> expected = new ArrayList<>();
+        HashSet<String> expected = new HashSet<>();
 
         //when
-        ArrayList<String> result = selectedPartsRepository.getAll();
+        HashSet<String> result = selectedPartsRepository.getAll();
 
         //then
         assertEquals(expected,result);
@@ -94,7 +97,7 @@ public class SelectedPartsTest {
         SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository(initJson,new Parser());
 
         //add
-        selectedPartsRepository.add("trunk");
+        selectedPartsRepository.add("trunk", null);
 
         //expected
         JsonObject expected = new JsonObject();
