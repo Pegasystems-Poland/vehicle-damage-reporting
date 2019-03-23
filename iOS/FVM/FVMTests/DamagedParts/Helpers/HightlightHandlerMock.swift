@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import SceneKit
+@testable import FVM
 
 class HightlightHandlerMock: HighlightHandler {
     
