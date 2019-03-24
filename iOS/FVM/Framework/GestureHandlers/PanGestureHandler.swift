@@ -18,8 +18,8 @@ fileprivate struct NumberOfTouches {
 }
 
 fileprivate struct RotateConstraint {
-    static let maxHeightRatioXDown: Float = -0.15
-    static let maxHeightRatioXUp: Float = 0.35
+    static let minAngle: Float = -0.15
+    static let maxAngle: Float = 0.35
 }
 
 fileprivate struct LastRatio {
@@ -52,8 +52,8 @@ extension FVMCarModelViewController {
     }
     
     private func truncateRatioConstraintsOverflow(_ heightRatio: inout Float) {
-        heightRatio = heightRatio >= RotateConstraint.maxHeightRatioXUp ? RotateConstraint.maxHeightRatioXUp : heightRatio
-        heightRatio = heightRatio <= RotateConstraint.maxHeightRatioXDown ? RotateConstraint.maxHeightRatioXDown : heightRatio
+        heightRatio = min(heightRatio, RotateConstraint.maxAngle)
+        heightRatio = max(heightRatio, RotateConstraint.minAngle)
     }
     
     fileprivate func hideRotationPrompt() {
