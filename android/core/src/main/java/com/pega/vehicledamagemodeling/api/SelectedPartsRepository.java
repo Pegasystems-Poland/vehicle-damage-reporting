@@ -23,15 +23,13 @@ public class SelectedPartsRepository{
 
     private HashMap<String, Material> partsWithMaterial;
     private JsonObject initJson;
-    private Parser parser;
-    private PartRoot partRoot;
+    private String mainScreenText;
 
-    public SelectedPartsRepository(JsonObject initJson, Parser parser){
-        this.parser = parser;
+    public SelectedPartsRepository(JsonObject initJson){
         this.initJson = initJson;
-        this.partRoot = this.parser.parseToPartRoot(initJson);
+        mainScreenText = Parser.parseToMainScreenText(this.initJson);
         this.partsWithMaterial = new HashMap<>();
-        for( String s : partRoot.getParts()){
+        for( String s : Parser.parseToSelectedParts(this.initJson)){
             partsWithMaterial.put(s,null);
         }
     }
@@ -53,11 +51,11 @@ public class SelectedPartsRepository{
     }
 
     public JsonObject getJson(){
-        return parser.parseToJson(new PartRoot(this.getAll(),partRoot.getMainScreenText()));
+        return Parser.parseToJson(this.mainScreenText, this.getAll());
     }
 
     public String getMainScreenText(){
-        return partRoot.getMainScreenText();
+        return mainScreenText;
     }
 
     public JsonObject getInitJson() {

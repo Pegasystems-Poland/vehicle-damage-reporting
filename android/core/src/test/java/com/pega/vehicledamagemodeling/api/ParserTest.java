@@ -24,6 +24,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
 
+    /*
     @Test
     public void whenJsonIsNotNullThenReturnPartRoot(){
         //given
@@ -78,6 +79,7 @@ public class ParserTest {
         //then
         assertEquals(expectedJson,result);
     }
+    */
 }
 
 

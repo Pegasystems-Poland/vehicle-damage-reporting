@@ -27,8 +27,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonObject;
-import com.pega.vehicledamagemodeling.api.SelectedPartsRepository;
-import com.pega.vehicledamagemodeling.api.Parser;
+import com.pega.vehicledamagemodeling.api.SelectionService;
 
 
 public class VehicleDamageModeling extends ApplicationAdapter {
@@ -43,7 +42,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private boolean loading;
     private static final String MODEL_FILE_NAME = "model.2.0.obj";
 
-    private SelectedPartsRepository selections;
+    private SelectionService selections;
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
@@ -54,9 +53,8 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     public VehicleDamageModeling(JsonObject report, VehicleDamageReportCallback callback) {
         this(callback);
 
-        selections = new SelectedPartsRepository(report, new Parser());
-
-        System.out.println("Init Json: " + selections.getInitJson());
+        selections = new SelectionService();
+        selections.attachedJson(report);
         // display given report
     }
 

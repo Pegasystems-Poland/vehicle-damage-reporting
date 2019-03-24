@@ -18,13 +18,13 @@ import com.badlogic.gdx.graphics.g3d.Material;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.junit.Test;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import static junit.framework.TestCase.assertEquals;
 
 public class SelectedPartsTest {
 
+    /*
     @Test
     public void testRemove(){  //removeNonexistentPart
         //given
@@ -120,4 +120,5 @@ public class SelectedPartsTest {
         //then
         assertEquals(expected,result);
     }
+    */
 }

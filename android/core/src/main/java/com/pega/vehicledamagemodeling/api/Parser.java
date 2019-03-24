@@ -22,36 +22,40 @@ import java.util.HashSet;
 
 public class Parser {
 
-    public PartRoot parseToPartRoot(JsonObject obj){
-        JsonElement jsonText = obj.get("mainScreenText");
+    public static String parseToMainScreenText(JsonObject jsonObject){
+        JsonElement jsonText = jsonObject.get("mainScreenText");
         String text = "";
         if(jsonText != null){
             text = jsonText.getAsString();
         }
-        JsonArray partsArray = obj.getAsJsonArray("selection");
-        HashSet<String> parts = new HashSet<>();
+        return text;
+    }
+
+    public static HashSet<String> parseToSelectedParts(JsonObject jsonObject){
+        JsonArray partsArray = jsonObject.getAsJsonArray("selection");
+        HashSet<String> selectedParts = new HashSet<>();
         if(partsArray != null)
             for(int i = 0; i < partsArray.size(); i++){
                 String selection = partsArray.get(i)
                         .getAsJsonObject()
                         .get("id")
                         .getAsString();
-                parts.add(selection);
+                selectedParts.add(selection);
             }
-        return new PartRoot(parts,text);
+            return selectedParts;
     }
 
-    public JsonObject parseToJson(PartRoot parts) {
+    public static JsonObject parseToJson(String text, HashSet<String> parts){
         JsonObject parsed = new JsonObject();
         JsonArray parsedArray = new JsonArray();
 
-        for(String s : parts.getParts()){
+        for(String s : parts){
             JsonObject jsonProperty = new JsonObject();
             jsonProperty.addProperty("id", s);
             parsedArray.add(jsonProperty);
         }
 
-        parsed.addProperty("mainScreenText", parts.getMainScreenText());
+        parsed.addProperty("mainScreenText", text);
         parsed.add("selection",parsedArray);
         return parsed;
     }
