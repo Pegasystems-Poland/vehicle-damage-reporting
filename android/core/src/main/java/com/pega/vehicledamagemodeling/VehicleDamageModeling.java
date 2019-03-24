@@ -54,7 +54,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         this(callback);
 
         selections = new SelectionService();
-        selections.attachedJson(report);
+        selections.attachJson(report);
         // display given report
     }
 

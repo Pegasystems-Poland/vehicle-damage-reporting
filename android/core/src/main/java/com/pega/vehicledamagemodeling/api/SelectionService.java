@@ -19,8 +19,21 @@ import com.google.gson.JsonObject;
 public class SelectionService {
     private SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
 
+    public void attachJson(JsonObject json){
+        selectedPartsRepository.setInitJson(json);
+        selectedPartsRepository.setMainScreenText(Parser.parseToMainScreenText(json));
+        for( String s : Parser.parseToSelectedParts(json)){
+            setSelectedPart(s);
+        }
+    }
+
+    public void setSelectedPart(String name){
+        //coloring and add to repo
+        //todo
+    }
+
     public JsonObject getModifiedJson(){
-        return selectedPartsRepository.getModifiedJson();
+        return Parser.parseToJson(selectedPartsRepository.getMainScreenText(), selectedPartsRepository.getSelectedParts());
     }
 
     public JsonObject getInitJson(){
@@ -31,20 +44,4 @@ public class SelectionService {
         return selectedPartsRepository.getMainScreenText();
     }
 
-    public void setSelectedPart(String name){
-        //coloring and add to repo
-        //to do
-    }
-
-    public void attachedJson(JsonObject json){
-        //save json in repo
-        selectedPartsRepository.setInitJson(json);
-        //parse json to (TextAndParts) object
-        //save text in repo
-        selectedPartsRepository.setMainScreenText(Parser.parseToMainScreenText(json));
-        //set parts
-        for( String s : Parser.parseToSelectedParts(json)){
-            setSelectedPart(s);
-        }
-    }
 }

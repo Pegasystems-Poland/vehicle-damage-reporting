@@ -31,10 +31,6 @@ public class SelectedPartsRepository{
         return allInHashSet;
     }
 
-    public JsonObject getModifiedJson(){
-        return Parser.parseToJson(this.mainScreenText, this.getSelectedParts());
-    }
-
     public String getMainScreenText(){
         return mainScreenText;
     }
