@@ -15,22 +15,18 @@
 import Foundation
 
 extension ViewController {
-    internal func formatDamagedParts() -> String {
-        let cleanString = ResultContainer.damagedCarParts.replacingOccurrences(of: " ", with: ";").replacingOccurrences(of: ",", with: ";")
-        let partsIdentifiers = cleanString.split(separator: ";")
-        var result = ""
-        for identifier in partsIdentifiers {
-            result.append("{\"id\":\"\(identifier)\"},")
-        }
-        return String(result.dropLast())
-    }
-    
     internal func getReadableDamagedParts(_ data: String) -> String? {
         let binaryData = data.data(using: .utf8)
-        let selectionRoot = try? JSONDecoder().decode(SelectionRoot.self, from: binaryData!)
+        var selectionRoot: SelectionRoot
+        do {
+            selectionRoot = try JSONDecoder().decode(SelectionRoot.self, from: binaryData!)
+        } catch {
+            print("Invalid data, can't read damaged parts: -> \(data)")
+            return nil
+        }
         
         var result = ""
-        for part in selectionRoot!.selection {
+        for part in selectionRoot.selection {
             result.append("\(part.id); ")
         }
         return result
@@ -39,7 +35,7 @@ extension ViewController {
     internal func getConfigurationData() -> String {
         ResultContainer.damagedCarParts = partsTextView.text
         ResultContainer.description = descriptionTextView.text
-        let damagedParts = formatDamagedParts()
+        let damagedParts = selectionFormatter.format(ResultContainer.damagedCarParts)
         return """
         {
         "mainScreenText": "\(ResultContainer.description)",

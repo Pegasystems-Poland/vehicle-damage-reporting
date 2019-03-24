@@ -20,8 +20,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var partsTextView: UITextView!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var resultTextView: UITextView!
+    internal var selectionFormatter: SelectionFormatterProtocol!
     
     override func viewDidLoad() {
+        selectionFormatter = SelectionFormatter()
         initializePartsTextView()
         initializeDescriptionTextView()
         initializeResultTextView()
