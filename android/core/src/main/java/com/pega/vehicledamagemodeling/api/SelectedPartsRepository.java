@@ -21,9 +21,27 @@ import java.util.HashSet;
 
 public class SelectedPartsRepository{
 
-    private HashMap<String, Material> partsWithMaterial = new HashMap<>();
     private JsonObject initJson;
     private String mainScreenText;
+    private HashMap<String, Material> selectedPartsWithMaterial = new HashMap<>();
+
+    public HashSet<String> getSelectedParts() {
+        HashSet<String> allInHashSet = new HashSet<>();
+        allInHashSet.addAll(selectedPartsWithMaterial.keySet());
+        return allInHashSet;
+    }
+
+    public JsonObject getModifiedJson(){
+        return Parser.parseToJson(this.mainScreenText, this.getSelectedParts());
+    }
+
+    public String getMainScreenText(){
+        return mainScreenText;
+    }
+
+    public JsonObject getInitJson() {
+        return initJson;
+    }
 
     public void setInitJson(JsonObject initJson) {
         this.initJson = initJson;
@@ -33,35 +51,13 @@ public class SelectedPartsRepository{
         this.mainScreenText = mainScreenText;
     }
 
-    public void setPartsWithMaterial(HashMap<String, Material> partsWithMaterial) {
-        this.partsWithMaterial = partsWithMaterial;
-    }
-
     public void add(String part, Material material) {
-        if( !partsWithMaterial.containsKey(part)){
-            partsWithMaterial.put(part,material);
+        if( !selectedPartsWithMaterial.containsKey(part)){
+            selectedPartsWithMaterial.put(part,material);
         }
     }
 
     public Material remove(String part) {
-        return partsWithMaterial.remove(part);
-    }
-
-    public HashSet<String> getAll() {
-        HashSet<String> allInHashSet = new HashSet<>();
-        allInHashSet.addAll(partsWithMaterial.keySet());
-        return allInHashSet;
-    }
-
-    public JsonObject getJson(){
-        return Parser.parseToJson(this.mainScreenText, this.getAll());
-    }
-
-    public String getMainScreenText(){
-        return mainScreenText;
-    }
-
-    public JsonObject getInitJson() {
-        return initJson;
+        return selectedPartsWithMaterial.remove(part);
     }
 }
