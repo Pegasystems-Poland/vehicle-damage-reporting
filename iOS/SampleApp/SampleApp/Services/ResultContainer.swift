@@ -12,15 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
-
-internal protocol DamagedPartsServiceProtocol {
-    var originalConfiguration: String { get }
-    var originalSelectionRoot: SelectionRoot? { get }
-    func createAndGetCollectionOfDamagedParts(json: String) -> [Selection]
-    func getCollectionOfDamagedParts() -> [Selection]
-    func createCollectionOfDamagedParts(json: String) -> Void
-    func getSerializedParts() -> String
-    func addPart(part: Selection)
-    func removePart(partId: String)
+internal struct ResultContainer {
+    internal static var damagedCarParts: String = ""
+    internal static var description: String = ""
 }

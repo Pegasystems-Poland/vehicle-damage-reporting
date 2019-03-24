@@ -15,7 +15,10 @@
 import UIKit
 import SceneKit
 
-public class FVMCarModelViewController : SCNView {
+internal class FVMCarModelViewController : SCNView {
+    internal var userPromptText: String? {
+        return damagedPartsService.originalSelectionRoot?.mainScreenText
+    }
     internal var damagedPartsService: DamagedPartsServiceProtocol!
     internal var nodeHelper: NodeHelperProtocol?
     internal var scnScene: SCNScene!
@@ -24,15 +27,14 @@ public class FVMCarModelViewController : SCNView {
     internal let highlightHandler = HighlightHandler()
     private let CAR_MODEL_NAME = "carModel"
     
-    public func onStartup(jsonConfiguration: String) {
-        self.autoenablesDefaultLighting = true
+    public func onStartup(configuration: String) {
         nodeHelper = NodeHelper(highlightHandler: highlightHandler)
         
         setupGestures()
         setupScene()
         setupCamera()
         setupLights()
-        setupInitialSelection(configuration: jsonConfiguration)
+        setupInitialSelection(configuration: configuration)
     }
     
     public func onAccept() -> String {
@@ -56,6 +58,7 @@ public class FVMCarModelViewController : SCNView {
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(_:)))
         var panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         configurePanGestureRecognizer(&panGesture)
+        
         self.addGestureRecognizer(tapGesture)
         self.addGestureRecognizer(pinchGesture)
         self.addGestureRecognizer(panGesture)
@@ -63,7 +66,6 @@ public class FVMCarModelViewController : SCNView {
         
     private func setupScene() {
         scnScene = SCNScene(named: "art.scnassets/model.scn")
-        scnScene.background.contents = "art.scnassets/background.png"
         self.scene = scnScene
     }
     

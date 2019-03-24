@@ -25,6 +25,8 @@ internal class Log {
     }
     private static var dateFormat = "yyyy-MM-dd hh:mm:ss"
     
+    private init() {}
+    
     public class func info(_ object: Any, fileName: String = #file, line: Int = #line, col: Int = #column, methodName: String = #function) {
         if shouldLog {
             log("[\(Date().toString())] [\(LogEvent.info.rawValue)] [\(sourceFileName(fileName))]:(\(line), \(col)) at: \(methodName) -> \(object)")

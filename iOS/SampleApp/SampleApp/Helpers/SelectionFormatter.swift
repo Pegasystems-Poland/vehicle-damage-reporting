@@ -14,13 +14,14 @@
 
 import Foundation
 
-internal protocol DamagedPartsServiceProtocol {
-    var originalConfiguration: String { get }
-    var originalSelectionRoot: SelectionRoot? { get }
-    func createAndGetCollectionOfDamagedParts(json: String) -> [Selection]
-    func getCollectionOfDamagedParts() -> [Selection]
-    func createCollectionOfDamagedParts(json: String) -> Void
-    func getSerializedParts() -> String
-    func addPart(part: Selection)
-    func removePart(partId: String)
+internal class SelectionFormatter: SelectionFormatterProtocol {
+    internal func format(_ data: String) -> String {
+        let cleanString = data.replacingOccurrences(of: " ", with: ";").replacingOccurrences(of: ",", with: ";")
+        let partsIdentifiers = cleanString.split(separator: ";")
+        var result = ""
+        for identifier in partsIdentifiers {
+            result.append("{\"id\":\"\(identifier)\"},")
+        }
+        return String(result.dropLast())
+    }
 }

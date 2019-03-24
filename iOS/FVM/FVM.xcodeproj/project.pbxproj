@@ -10,7 +10,11 @@
 		051E317521C43E5F0067C7F3 /* FVMCarModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E317421C43E5F0067C7F3 /* FVMCarModelViewController.swift */; };
 		0535F32421C4389F00CD6C44 /* FVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0535F31A21C4389F00CD6C44 /* FVM.framework */; };
 		0535F32B21C4389F00CD6C44 /* FVM.h in Headers */ = {isa = PBXBuildFile; fileRef = 0535F31D21C4389F00CD6C44 /* FVM.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05706873223BCC7E00D2A78A /* FVMDamagedCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05706872223BCC7E00D2A78A /* FVMDamagedCarViewController.swift */; };
+		05706878223BCD5800D2A78A /* DamagedCar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05706877223BCD5800D2A78A /* DamagedCar.storyboard */; };
 		05CDF820221034F400069640 /* PanGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CDF81F221034F400069640 /* PanGestureHandler.swift */; };
+		05FECD5F223D419200F8C371 /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FECD5E223D419200F8C371 /* NotificationExtensions.swift */; };
+		05FECD61223D423400F8C371 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05FECD60223D423400F8C371 /* Images.xcassets */; };
 		BA1FBE0C220780E400DBFB9E /* MaterialProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1FBE0B220780E400DBFB9E /* MaterialProcessor.swift */; };
 		BA1FBE122208CB0800DBFB9E /* MaterialProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1FBE112208CB0800DBFB9E /* MaterialProcessorTests.swift */; };
 		BA9E20A621D58B830013E388 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = BA9E20A521D58B830013E388 /* art.scnassets */; };
@@ -67,7 +71,11 @@
 		0535F31E21C4389F00CD6C44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0535F32321C4389F00CD6C44 /* FVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FVMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0535F32A21C4389F00CD6C44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05706872223BCC7E00D2A78A /* FVMDamagedCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FVMDamagedCarViewController.swift; sourceTree = "<group>"; };
+		05706877223BCD5800D2A78A /* DamagedCar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DamagedCar.storyboard; sourceTree = "<group>"; };
 		05CDF81F221034F400069640 /* PanGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanGestureHandler.swift; sourceTree = "<group>"; };
+		05FECD5E223D419200F8C371 /* NotificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
+		05FECD60223D423400F8C371 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BA1FBE0B220780E400DBFB9E /* MaterialProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialProcessor.swift; sourceTree = "<group>"; };
 		BA1FBE112208CB0800DBFB9E /* MaterialProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialProcessorTests.swift; sourceTree = "<group>"; };
 		BA9E20A521D58B830013E388 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -145,14 +153,17 @@
 		0535F31C21C4389F00CD6C44 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				05FECD5D223D417700F8C371 /* Notifications */,
+				05706871223BCC6800D2A78A /* Controllers */,
 				BAF81BED2235CE58001768B0 /* Logging */,
 				D7C8880C222702F600EB3375 /* DamagedParts */,
-				051E317421C43E5F0067C7F3 /* FVMCarModelViewController.swift */,
 				BA1FBE0D220780F000DBFB9E /* Highlighting */,
 				BA1FBE0A22077D2800DBFB9E /* GestureHandlers */,
 				0535F31D21C4389F00CD6C44 /* FVM.h */,
 				0535F31E21C4389F00CD6C44 /* Info.plist */,
+				05FECD60223D423400F8C371 /* Images.xcassets */,
 				BA9E20A521D58B830013E388 /* art.scnassets */,
+				05706877223BCD5800D2A78A /* DamagedCar.storyboard */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -166,6 +177,23 @@
 				BA1FBE112208CB0800DBFB9E /* MaterialProcessorTests.swift */,
 			);
 			path = FVMTests;
+			sourceTree = "<group>";
+		};
+		05706871223BCC6800D2A78A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				051E317421C43E5F0067C7F3 /* FVMCarModelViewController.swift */,
+				05706872223BCC7E00D2A78A /* FVMDamagedCarViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		05FECD5D223D417700F8C371 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				05FECD5E223D419200F8C371 /* NotificationExtensions.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		687EF96A467D92EF564D78D2 /* Helpers */ = {
@@ -489,7 +517,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05FECD61223D423400F8C371 /* Images.xcassets in Resources */,
 				BA9E20A621D58B830013E388 /* art.scnassets in Resources */,
+				05706878223BCD5800D2A78A /* DamagedCar.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,6 +551,7 @@
 				D7F0300A222EADCD00D87F6A /* DamagedPartsInitializerProtocol.swift in Sources */,
 				D7BD08472232F91B00D36DD4 /* NodeHelper.swift in Sources */,
 				D7C88822222702F600EB3375 /* DamagedPartsNamesProvider.swift in Sources */,
+				05706873223BCC7E00D2A78A /* FVMDamagedCarViewController.swift in Sources */,
 				D7C88820222702F600EB3375 /* JsonParser.swift in Sources */,
 				D7C88827222702F600EB3375 /* DamagePartsServiceFactory.swift in Sources */,
 				05CDF820221034F400069640 /* PanGestureHandler.swift in Sources */,
@@ -530,6 +561,7 @@
 				D7C88821222702F600EB3375 /* DamagedPartsNamesProviderProtocol.swift in Sources */,
 				BAF81BE22222D36A001768B0 /* ZoomConstraint.swift in Sources */,
 				BAAD17F722064BD600574F2C /* PinchGestureHandler.swift in Sources */,
+				05FECD5F223D419200F8C371 /* NotificationExtensions.swift in Sources */,
 				D7C88828222702F600EB3375 /* SelectionValidator.swift in Sources */,
 				D7BD08522233ACF300D36DD4 /* Selection.swift in Sources */,
 				D7C88825222702F600EB3375 /* SelectionRoot.swift in Sources */,

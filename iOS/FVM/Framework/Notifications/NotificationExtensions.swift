@@ -14,13 +14,8 @@
 
 import Foundation
 
-internal protocol DamagedPartsServiceProtocol {
-    var originalConfiguration: String { get }
-    var originalSelectionRoot: SelectionRoot? { get }
-    func createAndGetCollectionOfDamagedParts(json: String) -> [Selection]
-    func getCollectionOfDamagedParts() -> [Selection]
-    func createCollectionOfDamagedParts(json: String) -> Void
-    func getSerializedParts() -> String
-    func addPart(part: Selection)
-    func removePart(partId: String)
+extension Notification.Name {
+    static let hideRotationPrompt = Notification.Name(rawValue: "hideRotationPrompt")
+    static let disableAcceptButton = Notification.Name(rawValue: "disableAcceptButton")
+    static let enableAcceptButton = Notification.Name(rawValue: "enableAcceptButton")
 }
