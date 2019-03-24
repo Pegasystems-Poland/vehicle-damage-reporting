@@ -21,17 +21,20 @@ import java.util.HashSet;
 
 public class SelectedPartsRepository{
 
-    private HashMap<String, Material> partsWithMaterial;
+    private HashMap<String, Material> partsWithMaterial = new HashMap<>();
     private JsonObject initJson;
     private String mainScreenText;
 
-    public SelectedPartsRepository(JsonObject initJson){
+    public void setInitJson(JsonObject initJson) {
         this.initJson = initJson;
-        mainScreenText = Parser.parseToMainScreenText(this.initJson);
-        this.partsWithMaterial = new HashMap<>();
-        for( String s : Parser.parseToSelectedParts(this.initJson)){
-            partsWithMaterial.put(s,null);
-        }
+    }
+
+    public void setMainScreenText(String mainScreenText) {
+        this.mainScreenText = mainScreenText;
+    }
+
+    public void setPartsWithMaterial(HashMap<String, Material> partsWithMaterial) {
+        this.partsWithMaterial = partsWithMaterial;
     }
 
     public void add(String part, Material material) {
