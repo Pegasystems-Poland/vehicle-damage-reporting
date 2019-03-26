@@ -12,15 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import UIKit
 import FVM
 
 class ViewController: UIViewController {
-    @IBOutlet weak var damageSelector: FVMCarModelViewController!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var partsTextView: UITextView!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var resultTextView: UITextView!
+    internal var selectionFormatter: SelectionFormatterProtocol!
     
-    override func viewDidLoad(){
-        damageSelector.onStartup()
+    override func viewDidLoad() {
+        selectionFormatter = SelectionFormatter()
+        initializePartsTextView()
+        initializeDescriptionTextView()
+        initializeResultTextView()
         super.viewDidLoad()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is FVMDamagedCarViewController {
+            let fvmController = segue.destination as! FVMDamagedCarViewController
+            fvmController.configuration = getConfigurationData()
+            
+            fvmController.completionAction = { result in
+                let formattedParts = self.getReadableDamagedParts(result)
+                ResultContainer.damagedCarParts = formattedParts ?? ""
+                self.partsTextView.text = formattedParts
+                self.resultTextView.text = result
+            }
+        }
     }
 }

@@ -19,11 +19,11 @@ internal class MaterialProcessor {
     
     internal func highlightNewMaterial(forNode node: SCNNode) {
         guard let nodeName = node.name else {
-            print("Can't highlight part without name")
+            Log.warning("Can't highlight part without name")
             return
         }
         guard let material = node.geometry?.firstMaterial else {
-            print("Can't highlight part without material")
+            Log.warning("Can't highlight part without material")
             return
         }
         materialStore[nodeName] = (node, material.diffuse.contents)
@@ -32,7 +32,7 @@ internal class MaterialProcessor {
     
     internal func restoreMaterial(for nodeName: String) {
         guard let tuple = materialStore[nodeName] else {
-            print("Node \(nodeName) not found")
+            Log.warning("Node \(nodeName) not found")
             return
         }
         tuple.node.geometry?.firstMaterial?.diffuse.contents = tuple.material
@@ -51,7 +51,7 @@ internal class MaterialProcessor {
     
     private func setHighlightedMaterial(for nodeName: String) {
         guard let node = materialStore[nodeName]?.node else {
-            print("Node \(nodeName) not found")
+            Log.warning("Node \(nodeName) not found")
             return
         }
         node.geometry?.firstMaterial?.diffuse.contents = UIColor.red

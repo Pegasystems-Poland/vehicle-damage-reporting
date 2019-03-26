@@ -14,8 +14,8 @@
 
 import Foundation
 
-internal class DamagePartsServiceFactory{
-    public static func create(validPartsNames: [String]) -> DamagedPartsService{
+internal class DamagePartsServiceFactory {
+    public static func create(validPartsNames: [String]) -> DamagedPartsService {
         let parser = JsonParser<SelectionRoot>()
         let partsNamesProvider = DamagedPartsNamesProvider(validPartsNames: validPartsNames)
         let validator = DamagedPartsValidator(provider: partsNamesProvider)
