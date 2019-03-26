@@ -157,6 +157,7 @@
 		0535F31C21C4389F00CD6C44 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				39E1264C224AB5E400EC6C33 /* Lighting */,
 				05FECD5D223D417700F8C371 /* Notifications */,
 				05706871223BCC6800D2A78A /* Controllers */,
 				BAF81BED2235CE58001768B0 /* Logging */,
@@ -188,8 +189,6 @@
 			children = (
 				051E317421C43E5F0067C7F3 /* FVMCarModelViewController.swift */,
 				05706872223BCC7E00D2A78A /* FVMDamagedCarViewController.swift */,
-				39A4585F224A55A7000721D5 /* LightManager.swift */,
-				39A45861224A55BC000721D5 /* LightManagerProtocol.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -200,6 +199,15 @@
 				05FECD5E223D419200F8C371 /* NotificationExtensions.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		39E1264C224AB5E400EC6C33 /* Lighting */ = {
+			isa = PBXGroup;
+			children = (
+				39A4585F224A55A7000721D5 /* LightManager.swift */,
+				39A45861224A55BC000721D5 /* LightManagerProtocol.swift */,
+			);
+			path = Lighting;
 			sourceTree = "<group>";
 		};
 		687EF96A467D92EF564D78D2 /* Helpers */ = {

@@ -22,7 +22,7 @@ internal class LightManager {
         scnScene = scene
     }
     
-    internal func setupLights(){
+    internal func setup(){
         let topLight = SCNNode()
         let bottomLight = SCNNode()
         let centralLight = SCNNode()
@@ -33,17 +33,17 @@ internal class LightManager {
         let bottomLightVector = SCNVector3(x: 0, y: -50, z: 0)
         let centralLightVector = SCNVector3(x: 0, y: 0, z: 0)
         
-        set(setType: SCNLight.LightType.directional, setIntensity: topLightIntensity, setPosition: topLightVector, setNode: topLight)
-        set(setType: SCNLight.LightType.directional, setIntensity: bottomLightIntensity, setPosition: bottomLightVector, setNode: bottomLight)
-        set(setType: SCNLight.LightType.ambient, setIntensity: centralLightIntensity, setPosition: centralLightVector, setNode: centralLight)
+        set(type: SCNLight.LightType.directional, intensity: topLightIntensity, position: topLightVector, target: topLight)
+        set(type: SCNLight.LightType.directional, intensity: bottomLightIntensity, position: bottomLightVector, target: bottomLight)
+        set(type: SCNLight.LightType.ambient, intensity: centralLightIntensity, position: centralLightVector, target: centralLight)
     }
     
-    private func set(setType: SCNLight.LightType, setIntensity: CGFloat, setPosition: SCNVector3, setNode: SCNNode){
-        setNode.light?.intensity = setIntensity
-        setNode.light = SCNLight()
-        setNode.light?.type = setType
-        setNode.position = setPosition
-        setNode.eulerAngles = SCNVector3Make(Float(-Double.pi / 2), 0, 0)
-        scnScene.rootNode.addChildNode(setNode)
+    private func set(type: SCNLight.LightType, intensity: CGFloat, position: SCNVector3, target: SCNNode){
+        target.light?.intensity = intensity
+        target.light = SCNLight()
+        target.light?.type = type
+        target.position = position
+        target.eulerAngles = SCNVector3Make(Float(-Double.pi / 2), 0, 0)
+        scnScene.rootNode.addChildNode(target)
     }
 }

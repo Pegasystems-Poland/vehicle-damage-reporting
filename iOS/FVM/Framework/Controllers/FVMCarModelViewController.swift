@@ -87,7 +87,7 @@ internal class FVMCarModelViewController : SCNView {
     }
     
     private func setupLights(){
-        let light = LightManager(scene: scnScene)
-        light.setupLights()
+        let lightManager = LightManager(scene: scnScene)
+        lightManager.setup()
     }
 }

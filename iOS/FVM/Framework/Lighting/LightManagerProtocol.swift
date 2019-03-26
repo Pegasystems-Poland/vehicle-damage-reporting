@@ -15,5 +15,5 @@
 import Foundation
 
 internal protocol LightManagerProtocol {
-    func setupLights()
+    func setup()
 }
