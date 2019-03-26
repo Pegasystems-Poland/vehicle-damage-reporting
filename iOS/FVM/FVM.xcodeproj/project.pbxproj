@@ -15,6 +15,8 @@
 		05CDF820221034F400069640 /* PanGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CDF81F221034F400069640 /* PanGestureHandler.swift */; };
 		05FECD5F223D419200F8C371 /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FECD5E223D419200F8C371 /* NotificationExtensions.swift */; };
 		05FECD61223D423400F8C371 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05FECD60223D423400F8C371 /* Images.xcassets */; };
+		39A45860224A55A7000721D5 /* LightManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A4585F224A55A7000721D5 /* LightManager.swift */; };
+		39A45862224A55BC000721D5 /* LightManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A45861224A55BC000721D5 /* LightManagerProtocol.swift */; };
 		BA1FBE0C220780E400DBFB9E /* MaterialProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1FBE0B220780E400DBFB9E /* MaterialProcessor.swift */; };
 		BA1FBE122208CB0800DBFB9E /* MaterialProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1FBE112208CB0800DBFB9E /* MaterialProcessorTests.swift */; };
 		BA9E20A621D58B830013E388 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = BA9E20A521D58B830013E388 /* art.scnassets */; };
@@ -76,6 +78,8 @@
 		05CDF81F221034F400069640 /* PanGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanGestureHandler.swift; sourceTree = "<group>"; };
 		05FECD5E223D419200F8C371 /* NotificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
 		05FECD60223D423400F8C371 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		39A4585F224A55A7000721D5 /* LightManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightManager.swift; sourceTree = "<group>"; };
+		39A45861224A55BC000721D5 /* LightManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightManagerProtocol.swift; sourceTree = "<group>"; };
 		BA1FBE0B220780E400DBFB9E /* MaterialProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialProcessor.swift; sourceTree = "<group>"; };
 		BA1FBE112208CB0800DBFB9E /* MaterialProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialProcessorTests.swift; sourceTree = "<group>"; };
 		BA9E20A521D58B830013E388 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 			children = (
 				051E317421C43E5F0067C7F3 /* FVMCarModelViewController.swift */,
 				05706872223BCC7E00D2A78A /* FVMDamagedCarViewController.swift */,
+				39A4585F224A55A7000721D5 /* LightManager.swift */,
+				39A45861224A55BC000721D5 /* LightManagerProtocol.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -542,6 +548,7 @@
 				D7B875FB2233E74900E6B09B /* HightlightHandlerMock.swift in Sources */,
 				BAF81BF32235D211001768B0 /* LogEvent.swift in Sources */,
 				D7C88829222702F600EB3375 /* DamagedPartsValidator.swift in Sources */,
+				39A45860224A55A7000721D5 /* LightManager.swift in Sources */,
 				D7BD08562233B44A00D36DD4 /* NodeHelperProtocol.swift in Sources */,
 				D7BD084C2233A97400D36DD4 /* DamagedPartsServiceProtocol.swift in Sources */,
 				051E317521C43E5F0067C7F3 /* FVMCarModelViewController.swift in Sources */,
@@ -552,6 +559,7 @@
 				D7BD08472232F91B00D36DD4 /* NodeHelper.swift in Sources */,
 				D7C88822222702F600EB3375 /* DamagedPartsNamesProvider.swift in Sources */,
 				05706873223BCC7E00D2A78A /* FVMDamagedCarViewController.swift in Sources */,
+				39A45862224A55BC000721D5 /* LightManagerProtocol.swift in Sources */,
 				D7C88820222702F600EB3375 /* JsonParser.swift in Sources */,
 				D7C88827222702F600EB3375 /* DamagePartsServiceFactory.swift in Sources */,
 				05CDF820221034F400069640 /* PanGestureHandler.swift in Sources */,
