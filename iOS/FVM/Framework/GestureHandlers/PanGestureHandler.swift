@@ -18,8 +18,8 @@ fileprivate struct NumberOfTouches {
 }
 
 fileprivate struct RotateConstraint {
-    static let maxHeightRatioXDown: Float = -0.15
-    static let maxHeightRatioXUp: Float = 0.45
+    static let minAngle: Float = -0.15
+    static let maxAngle: Float = 0.35
 }
 
 fileprivate struct LastRatio {
@@ -30,6 +30,8 @@ fileprivate struct LastRatio {
 extension FVMCarModelViewController {
     @objc
     internal func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
+        hideRotationPrompt()
+        
         let translation = gestureRecognizer.translation(in: self)
         let widthRatio = Float(translation.x) / Float(self.frame.size.width) + LastRatio.width
         var heightRatio = Float(translation.y) / Float(self.frame.size.height) + LastRatio.height
@@ -50,7 +52,11 @@ extension FVMCarModelViewController {
     }
     
     private func truncateRatioConstraintsOverflow(_ heightRatio: inout Float) {
-        heightRatio = heightRatio >= RotateConstraint.maxHeightRatioXUp ? RotateConstraint.maxHeightRatioXUp : heightRatio
-        heightRatio = heightRatio <= RotateConstraint.maxHeightRatioXDown ? RotateConstraint.maxHeightRatioXDown : heightRatio
+        heightRatio = min(heightRatio, RotateConstraint.maxAngle)
+        heightRatio = max(heightRatio, RotateConstraint.minAngle)
+    }
+    
+    fileprivate func hideRotationPrompt() {
+        NotificationCenter.default.post(name: .hideRotationPrompt, object: FVMDamagedCarViewController.self)
     }
 }

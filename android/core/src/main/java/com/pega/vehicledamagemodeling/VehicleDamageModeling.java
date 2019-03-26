@@ -1,16 +1,18 @@
-// Copyright 2018 Flying Vehicle Monster team
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*
+ * Copyright (c) 2019 Flying Vehicle Monster team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.pega.vehicledamagemodeling;
 
@@ -32,15 +34,14 @@ import com.pega.vehicledamagemodeling.api.SelectionService;
 
 public class VehicleDamageModeling extends ApplicationAdapter {
     private final VehicleDamageReportCallback callback;
-
-    private PerspectiveCamera cam;
-    private LimitedCameraInputController camController;
+    private PerspectiveCamera perspectiveCamera;
+    private LimitedCameraInputController cameraController;
     private ModelBatch modelBatch;
     private AssetManager assets;
     private Array<ModelInstance> instances = new Array<>();
     private Environment environment;
     private boolean loading;
-    private static final String MODEL_FILE_NAME = "model.2.0.obj";
+    private static final String MODEL_FILE_NAME = "model.2.1.obj";
 
     private SelectionService selections;
 
@@ -65,13 +66,13 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.6f, 0.6f, 0.6f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.8f, -0.8f, -0.8f));
 
-        cam = new PerspectiveCamera(60, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        cam.position.set(20f, 20f, 20f);
-        cam.lookAt(0,0,0);
-        cam.update();
+        perspectiveCamera = new PerspectiveCamera(60, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        perspectiveCamera.position.set(20f, 20f, 20f);
+        perspectiveCamera.lookAt(0,0,0);
+        perspectiveCamera.update();
 
-        camController = new LimitedCameraInputController(cam);
-        Gdx.input.setInputProcessor(camController);
+        cameraController = new LimitedCameraInputController(perspectiveCamera);
+        Gdx.input.setInputProcessor(cameraController);
 
         assets = new AssetManager();
         assets.load(MODEL_FILE_NAME, Model.class);
@@ -80,8 +81,8 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
     private void doneLoading() {
         Model car = assets.get(MODEL_FILE_NAME, Model.class);
-        ModelInstance shipInstance = new ModelInstance(car, 0 , -5, 0);
-        instances.add(shipInstance);
+        ModelInstance carInstance = new ModelInstance(car, 0 , 0, 0);
+        instances.add(carInstance);
         loading = false;
     }
 
@@ -90,12 +91,12 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         if (loading && assets.update()) {
             doneLoading();
         }
-        camController.update();
+        cameraController.update();
 
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        modelBatch.begin(cam);
+        modelBatch.begin(perspectiveCamera);
         modelBatch.render(instances, environment);
         modelBatch.end();
     }
@@ -109,13 +110,8 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
+        perspectiveCamera.viewportHeight = height;
+        perspectiveCamera.viewportWidth = width;
+        perspectiveCamera.update();
     }
 }
