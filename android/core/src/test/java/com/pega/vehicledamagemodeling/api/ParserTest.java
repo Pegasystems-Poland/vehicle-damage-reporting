@@ -16,20 +16,20 @@ package com.pega.vehicledamagemodeling.api;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
 import org.junit.Test;
-import java.util.ArrayList;
+
 import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
 
-    /*
+
     @Test
-    public void whenJsonIsNotNullThenReturnPartRoot(){
+    public void whenJsonIsNotNullThenReturnSelectedParts(){
         //given
         JsonObject initJson = new JsonObject();
-        initJson.addProperty("mainScreenText", "test");
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
         jsonProperty.addProperty("id","roof");
@@ -43,13 +43,11 @@ public class ParserTest {
         list.add("roof");
         list.add("front bumper");
 
-        Parser parser = new Parser();
-
         //when
-        PartRoot result = parser.parseToPartRoot(initJson);
+        HashSet<String> result = Parser.parseToSelectedParts(initJson);
 
         //then
-        assertEquals(list,result.getParts());
+        assertEquals(list,result);
     }
 
     @Test
@@ -58,7 +56,6 @@ public class ParserTest {
         HashSet<String> hashSet = new HashSet<>();
         hashSet.add("roof");
         hashSet.add("front bumper");
-        PartRoot parts = new PartRoot(hashSet,"nothing");
 
         JsonObject expectedJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
@@ -71,15 +68,36 @@ public class ParserTest {
         expectedJson.addProperty("mainScreenText", "nothing");
         expectedJson.add("selection",partsArray);
 
-        Parser parser = new Parser();
-
         //when
-        JsonObject result = parser.parseToJson(parts);
+        JsonObject result = Parser.parseToJson("nothing",hashSet);
 
         //then
         assertEquals(expectedJson,result);
     }
-    */
+
+    @Test
+    public void whenMainScreenTextIsNotNullThenReturnCorrectText() {
+        //initJson
+        JsonObject initJson = new JsonObject();
+        initJson.addProperty("mainScreenText","Można obracać autko");
+        JsonArray partsArray = new JsonArray();
+        JsonObject jsonProperty = new JsonObject();
+        jsonProperty.addProperty("id","roof");
+        partsArray.add(jsonProperty);
+        JsonObject jsonProperty2 = new JsonObject();
+        jsonProperty2.addProperty("id","front bumper");
+        partsArray.add(jsonProperty2);
+        initJson.add("selection",partsArray);
+
+        //given
+        String expectedText = "Można obracać autko";
+
+        //when
+        String result = Parser.parseToMainScreenText(initJson);
+
+        //then
+        assertEquals(expectedText,result);
+    }
 }
 
 
