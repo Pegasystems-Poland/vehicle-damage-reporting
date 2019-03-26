@@ -32,7 +32,7 @@ public class SelectedPartsTest {
     public void whenPartDoesntExistThenReturnNull(){  //removeNonexistentPart
         //initJson
         JsonObject initJson = new JsonObject();
-        initJson.addProperty("mainScreenText","Można obracać autko");
+        initJson.addProperty("mainScreenText","nothing");
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
         jsonProperty.addProperty("id","roof");
