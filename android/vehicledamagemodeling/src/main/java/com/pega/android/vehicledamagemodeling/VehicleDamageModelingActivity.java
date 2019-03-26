@@ -26,9 +26,9 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.pega.vehicledamagemodeling.VehicleDamageModeling;
 import com.pega.vehicledamagemodeling.VehicleDamageReportCallback;
+import com.pega.vehicledamagemodeling.api.SelectionService;
 
 public class VehicleDamageModelingActivity extends AndroidApplication {
 
@@ -68,7 +68,7 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
 
         //initJson
         JsonObject initJson = new JsonObject();
-        initJson.addProperty("mainScreenText","Można obracać autko");
+        initJson.addProperty("mainScreenText","nothing");
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
         jsonProperty.addProperty("id","roof");
@@ -80,6 +80,10 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
 
         VehicleDamageModeling vehicleDamageModeling = new VehicleDamageModeling(initJson,callback);
         //end initJson
+
+        SelectionService selectionService = new SelectionService();
+        selectionService.attachJson(initJson);
+        JsonObject result = selectionService.getInitJson();
 
         viewGroup.addView(initializeForView(vehicleDamageModeling, config));
     }
