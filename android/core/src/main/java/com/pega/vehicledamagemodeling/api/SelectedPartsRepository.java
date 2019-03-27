@@ -48,7 +48,7 @@ public class SelectedPartsRepository{
     }
 
     public void add(String part, Material material) {
-        if( !selectedPartsWithMaterial.containsKey(part)){
+        if(!selectedPartsWithMaterial.containsKey(part)){
             selectedPartsWithMaterial.put(part,material);
         }
     }
