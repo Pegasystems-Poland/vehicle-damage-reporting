@@ -26,9 +26,7 @@ public class SelectedPartsRepository{
     private HashMap<String, Material> selectedPartsWithMaterial = new HashMap<>();
 
     public HashSet<String> getSelectedParts() {
-        HashSet<String> allInHashSet = new HashSet<>();
-        allInHashSet.addAll(selectedPartsWithMaterial.keySet());
-        return allInHashSet;
+        return new HashSet<>(selectedPartsWithMaterial.keySet());
     }
 
     public String getMainScreenText(){
