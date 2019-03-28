@@ -27,7 +27,7 @@ public class ParserTest {
 
 
     @Test
-    public void whenJsonIsNotNullThenReturnSelectedParts(){
+    public void whenJsonContainsTwoPartsThenReturnSelectedParts(){
         //given
         JsonObject initJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
@@ -51,7 +51,20 @@ public class ParserTest {
     }
 
     @Test
-    public void whenPartRootIsNotNullThenReturnJson(){
+    public void whenJsonIsNullThenReturnEmptyHashSet() {
+        //given
+        JsonObject initJson = new JsonObject();
+        HashSet<String> expected = new HashSet<>();
+
+        //when
+        HashSet<String> result = Parser.parseToSelectedParts(initJson);
+
+        //then
+        assertEquals(expected,result);
+    }
+
+    @Test
+    public void whenHashSetContainsTwoPartsThenReturnJson(){
         //given
         HashSet<String> hashSet = new HashSet<>();
         hashSet.add("roof");
@@ -76,21 +89,41 @@ public class ParserTest {
     }
 
     @Test
-    public void whenMainScreenTextIsNotNullThenReturnCorrectText() {
-        //initJson
-        JsonObject initJson = new JsonObject();
-        initJson.addProperty("mainScreenText","nothing");
-        JsonArray partsArray = new JsonArray();
-        JsonObject jsonProperty = new JsonObject();
-        jsonProperty.addProperty("id","roof");
-        partsArray.add(jsonProperty);
-        JsonObject jsonProperty2 = new JsonObject();
-        jsonProperty2.addProperty("id","front bumper");
-        partsArray.add(jsonProperty2);
-        initJson.add("selection",partsArray);
+    public void whenHashSetIsNullThenReturnJsonWithoutParts(){
+        //given
+        HashSet<String> parts = new HashSet<>();
 
+        JsonObject expectedJson = new JsonObject();
+        expectedJson.addProperty("mainScreenText", "nothing");
+        JsonArray partsArray = new JsonArray();
+        expectedJson.add("selection",partsArray);
+
+        //when
+        JsonObject result = Parser.parseToJson("nothing",parts);
+
+        //then
+        assertEquals(expectedJson,result);
+    }
+
+    @Test
+    public void whenMainScreenTextInJsonIsNotNullThenReturnCorrectText() {
         //given
         String expectedText = "nothing";
+        JsonObject initJson = new JsonObject();
+        initJson.addProperty("mainScreenText","nothing");
+
+        //when
+        String result = Parser.parseToMainScreenText(initJson);
+
+        //then
+        assertEquals(expectedText,result);
+    }
+
+    @Test
+    public void whenJsonDoesNotContainMainScreenTextThenReturnEmptyText(){
+        //given
+        JsonObject initJson = new JsonObject();
+        String expectedText = "";
 
         //when
         String result = Parser.parseToMainScreenText(initJson);

@@ -29,6 +29,7 @@ public class SelectionService {
 
     public void setSelectedPart(String name){
         //coloring and add to repo
+        selectedPartsRepository.add(name,null);
         //todo
     }
 

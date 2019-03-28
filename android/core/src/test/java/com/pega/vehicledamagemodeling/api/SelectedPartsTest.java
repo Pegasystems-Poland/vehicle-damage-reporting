@@ -29,10 +29,9 @@ public class SelectedPartsTest {
 
 
     @Test
-    public void whenPartDoesntExistThenReturnNull(){  //removeNonexistentPart
+    public void whenPartDoesNotExistThenReturnNull(){
         //initJson
         JsonObject initJson = new JsonObject();
-        initJson.addProperty("mainScreenText","nothing");
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
         jsonProperty.addProperty("id","roof");

@@ -26,9 +26,7 @@ public class SelectedPartsRepository{
     private HashMap<String, Material> selectedPartsWithMaterial = new HashMap<>();
 
     public HashSet<String> getSelectedParts() {
-        HashSet<String> allInHashSet = new HashSet<>();
-        allInHashSet.addAll(selectedPartsWithMaterial.keySet());
-        return allInHashSet;
+        return new HashSet<>(selectedPartsWithMaterial.keySet());
     }
 
     public String getMainScreenText(){
@@ -48,7 +46,7 @@ public class SelectedPartsRepository{
     }
 
     public void add(String part, Material material) {
-        if( !selectedPartsWithMaterial.containsKey(part)){
+        if(!selectedPartsWithMaterial.containsKey(part)){
             selectedPartsWithMaterial.put(part,material);
         }
     }

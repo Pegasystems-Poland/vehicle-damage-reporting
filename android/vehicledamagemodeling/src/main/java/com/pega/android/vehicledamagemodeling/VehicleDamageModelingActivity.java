@@ -83,7 +83,8 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
 
         SelectionService selectionService = new SelectionService();
         selectionService.attachJson(initJson);
-        JsonObject result = selectionService.getInitJson();
+        selectionService.setSelectedPart("rim");
+        JsonObject result = selectionService.getModifiedJson();
 
         viewGroup.addView(initializeForView(vehicleDamageModeling, config));
     }
