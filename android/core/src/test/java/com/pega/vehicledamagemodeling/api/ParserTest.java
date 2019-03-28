@@ -25,6 +25,9 @@ import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
 
+    private static String Selection = "selection";
+    private static String Id = "id";
+    private static String MainScreenText = "mainScreenText";
 
     @Test
     public void whenJsonContainsTwoPartsThenReturnSelectedParts(){
@@ -32,12 +35,12 @@ public class ParserTest {
         JsonObject initJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
-        jsonProperty.addProperty("id","roof");
+        jsonProperty.addProperty(Id,"roof");
         partsArray.add(jsonProperty);
         JsonObject jsonProperty2 = new JsonObject();
-        jsonProperty2.addProperty("id","front bumper");
+        jsonProperty2.addProperty(Id,"front bumper");
         partsArray.add(jsonProperty2);
-        initJson.add("selection",partsArray);
+        initJson.add(Selection,partsArray);
 
         HashSet<String> list = new HashSet<>();
         list.add("roof");
@@ -73,13 +76,13 @@ public class ParserTest {
         JsonObject expectedJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
-        jsonProperty.addProperty("id","roof");
+        jsonProperty.addProperty(Id,"roof");
         partsArray.add(jsonProperty);
         JsonObject jsonProperty2 = new JsonObject();
-        jsonProperty2.addProperty("id","front bumper");
+        jsonProperty2.addProperty(Id,"front bumper");
         partsArray.add(jsonProperty2);
-        expectedJson.addProperty("mainScreenText", "nothing");
-        expectedJson.add("selection",partsArray);
+        expectedJson.addProperty(MainScreenText, "nothing");
+        expectedJson.add(Selection,partsArray);
 
         //when
         JsonObject result = Parser.parseToJson("nothing",hashSet);
@@ -94,9 +97,9 @@ public class ParserTest {
         HashSet<String> parts = new HashSet<>();
 
         JsonObject expectedJson = new JsonObject();
-        expectedJson.addProperty("mainScreenText", "nothing");
+        expectedJson.addProperty(MainScreenText, "nothing");
         JsonArray partsArray = new JsonArray();
-        expectedJson.add("selection",partsArray);
+        expectedJson.add(Selection,partsArray);
 
         //when
         JsonObject result = Parser.parseToJson("nothing",parts);
@@ -110,7 +113,7 @@ public class ParserTest {
         //given
         String expectedText = "nothing";
         JsonObject initJson = new JsonObject();
-        initJson.addProperty("mainScreenText","nothing");
+        initJson.addProperty(MainScreenText,"nothing");
 
         //when
         String result = Parser.parseToMainScreenText(initJson);
