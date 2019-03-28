@@ -43,20 +43,19 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private boolean loading;
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
 
-    private SelectionService selections;
+    private SelectionService selections = new SelectionService();
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
         // To report selected damage call e.g.:
-        // callback.onFinished(new JsonParser().parse("{result:\"car mask\"}").getAsJsonObject());
+        //callback.onFinished(new JsonParser().parse("{result:\"car mask\"}").getAsJsonObject());
     }
 
     public VehicleDamageModeling(JsonObject report, VehicleDamageReportCallback callback) {
         this(callback);
-
-        selections = new SelectionService();
         selections.attachJson(report);
-        // display given report
+        //close app and display report: (to demo)
+        //callback.onFinished(selections.getModifiedJson());
     }
 
     @Override

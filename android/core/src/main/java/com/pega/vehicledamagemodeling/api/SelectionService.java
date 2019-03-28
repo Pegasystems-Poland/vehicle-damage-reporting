@@ -25,6 +25,7 @@ public class SelectionService {
         for( String s : Parser.parseToSelectedParts(json)){
             setSelectedPart(s);
         }
+        selectedPartsRepository.add("mask", null);
     }
 
     public void setSelectedPart(String name){
