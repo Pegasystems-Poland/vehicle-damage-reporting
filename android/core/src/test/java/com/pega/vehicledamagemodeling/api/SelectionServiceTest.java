@@ -9,19 +9,22 @@ import static org.junit.Assert.assertEquals;
 
 public class SelectionServiceTest {
 
+    private static String Selection = "selection";
+    private static String Id = "id";
+    private static String MainScreenText = "mainScreenText";
+
     @Test
-    public void TestGetInitJson() {
+    public void whenJsonContainsTwoPartsThenReturnCorrectInitJson() {
         //given
         JsonObject expectedJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
-        jsonProperty.addProperty("id","roof");
+        jsonProperty.addProperty(Id,"roof");
         partsArray.add(jsonProperty);
         JsonObject jsonProperty2 = new JsonObject();
-        jsonProperty2.addProperty("id","front bumper");
+        jsonProperty2.addProperty(Id,"front bumper");
         partsArray.add(jsonProperty2);
-        expectedJson.addProperty("mainScreenText", "nothing");
-        expectedJson.add("selection",partsArray);
+        expectedJson.add(Selection,partsArray);
 
         SelectionService selectionService = new SelectionService();
         selectionService.attachJson(expectedJson);
@@ -34,19 +37,24 @@ public class SelectionServiceTest {
     }
 
     @Test
-    public void TestMainScreenText() {
+    public void whenJsonIsEmptyThenReturnEmptyInitJson(){
         //given
         JsonObject initJson = new JsonObject();
-        JsonArray partsArray = new JsonArray();
-        JsonObject jsonProperty = new JsonObject();
-        jsonProperty.addProperty("id","roof");
-        partsArray.add(jsonProperty);
-        JsonObject jsonProperty2 = new JsonObject();
-        jsonProperty2.addProperty("id","front bumper");
-        partsArray.add(jsonProperty2);
-        initJson.addProperty("mainScreenText", "nothing");
-        initJson.add("selection",partsArray);
+        SelectionService selectionService = new SelectionService();
+        selectionService.attachJson(initJson);
 
+        //when
+        JsonObject result = selectionService.getInitJson();
+
+        //then
+        assertEquals(initJson,result);
+    }
+
+    @Test
+    public void whenInitJsonContainTextThenReturnCorrectText() {
+        //given
+        JsonObject initJson = new JsonObject();
+        initJson.addProperty(MainScreenText, "nothing");
         SelectionService selectionService = new SelectionService();
         selectionService.attachJson(initJson);
 
@@ -55,5 +63,28 @@ public class SelectionServiceTest {
 
         //then
         assertEquals("nothing",result);
+    }
+
+    @Test
+    public void whenJsonIsEmptyAndNewPartIsAddedThenReturnModifiedJson(){
+        //given
+        JsonObject initJson = new JsonObject();
+        JsonObject expectedJson = new JsonObject();
+        JsonArray partsArray = new JsonArray();
+        JsonObject jsonProperty = new JsonObject();
+        jsonProperty.addProperty(Id,"roof");
+        partsArray.add(jsonProperty);
+        expectedJson.addProperty(MainScreenText,"");
+        expectedJson.add(Selection,partsArray);
+
+        SelectionService selectionService = new SelectionService();
+        selectionService.attachJson(initJson);
+        selectionService.setSelectedPart("roof");
+
+        //when
+        JsonObject result = selectionService.getModifiedJson();
+
+        //then
+        assertEquals(expectedJson,result);
     }
 }
