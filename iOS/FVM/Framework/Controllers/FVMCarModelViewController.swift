@@ -52,7 +52,7 @@ internal class FVMCarModelViewController : SCNView {
         let damagedPartsInitializer = DamagedPartsInitializer(nodeHelper: nodeHelper!, damagePartsService: damagedPartsService, carModel: carModelNode!, initialConfiguration: configuration)
         damagedPartsInitializer.initialize(damagedPartsNamesToHightlight: validNodesNames!)
     }
-
+    
     private func setupGestures() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(_:)))
@@ -63,7 +63,7 @@ internal class FVMCarModelViewController : SCNView {
         self.addGestureRecognizer(pinchGesture)
         self.addGestureRecognizer(panGesture)
     }
-        
+    
     private func setupScene() {
         scnScene = SCNScene(named: "art.scnassets/model.scn")
         self.scene = scnScene
@@ -86,20 +86,8 @@ internal class FVMCarModelViewController : SCNView {
         scnScene.rootNode.addChildNode(scnCameraOrbit)
     }
     
-    private func setupLights() {
-        let topLight = SCNNode()
-        topLight.light = SCNLight()
-        topLight.light?.type = .directional
-        topLight.position = SCNVector3(x: 0, y: 50, z: 0)
-        topLight.eulerAngles = SCNVector3Make(Float(-Double.pi / 2), 0, 0)
-        scnScene.rootNode.addChildNode(topLight)
-        
-        let bottomLight = SCNNode()
-        bottomLight.light = SCNLight()
-        bottomLight.light?.type = .directional
-        bottomLight.light?.intensity = 750
-        bottomLight.position = SCNVector3(x: 0, y: -50, z: 0)
-        bottomLight.eulerAngles = SCNVector3Make(Float(-Double.pi / 2), 0, 0)
-        scnScene.rootNode.addChildNode(bottomLight)
+    private func setupLights(){
+        let lightManager = LightManager(scene: scnScene)
+        lightManager.setup()
     }
 }
