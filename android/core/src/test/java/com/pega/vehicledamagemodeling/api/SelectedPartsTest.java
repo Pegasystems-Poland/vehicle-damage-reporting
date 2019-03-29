@@ -61,8 +61,8 @@ public class SelectedPartsTest {
     public void whenSelectionContainsTwoPartsThenReturnCorrectParts() {
         //given
         SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
-        selectedPartsRepository.add("roof",null);
-        selectedPartsRepository.add("front bumper",null);
+        selectedPartsRepository.add("roof",new Material());
+        selectedPartsRepository.add("front bumper",new Material());
 
         HashSet<String> expected = new HashSet<>();
         expected.add("roof");

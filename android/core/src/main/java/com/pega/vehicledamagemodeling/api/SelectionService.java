@@ -14,6 +14,7 @@
 
 package com.pega.vehicledamagemodeling.api;
 
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.google.gson.JsonObject;
 
 public class SelectionService {
@@ -25,12 +26,11 @@ public class SelectionService {
         for( String s : Parser.parseToSelectedParts(json)){
             setSelectedPart(s);
         }
-        selectedPartsRepository.add("mask", null);
     }
 
     public void setSelectedPart(String name){
         //coloring and add to repo
-        selectedPartsRepository.add(name,null);
+        selectedPartsRepository.add(name,new Material());
         //todo
     }
 

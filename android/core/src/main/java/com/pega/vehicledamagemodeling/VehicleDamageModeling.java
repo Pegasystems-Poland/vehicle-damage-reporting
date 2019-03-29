@@ -55,6 +55,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         this(callback);
         selections.attachJson(report);
         //close app and display report: (to demo)
+        //selections.setSelectedPart("mask");
         //callback.onFinished(selections.getModifiedJson());
     }
 
