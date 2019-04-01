@@ -55,12 +55,9 @@ public class MainActivity extends AppCompatActivity {
     public void showVehicleModel(View view) {
         Intent intent = new Intent(this, VehicleDamageModelingActivity.class);
         String report = textView.getText().toString();
-        //to demo:
-        report = "{\"mainScreenText\":\"text\", \"selection\":[{\"id\":\"trunk\"}]}";
         if (!report.isEmpty()) {
             intent.putExtra(VehicleDamageModelingActivity.REPORT_EXTRA, report);
         }
         startActivityForResult(intent, VehicleDamageModelingActivity.REQUEST_CODE);
     }
-
 }

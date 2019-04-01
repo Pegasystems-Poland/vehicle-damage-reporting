@@ -2,9 +2,7 @@ package com.pega.vehicledamagemodeling.api;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 
 public class SelectionServiceTest {
@@ -25,7 +23,6 @@ public class SelectionServiceTest {
         jsonProperty2.addProperty(Id,"front bumper");
         partsArray.add(jsonProperty2);
         expectedJson.add(Selection,partsArray);
-
         SelectionService selectionService = new SelectionService();
         selectionService.attachJson(expectedJson);
 
@@ -76,7 +73,6 @@ public class SelectionServiceTest {
         partsArray.add(jsonProperty);
         expectedJson.addProperty(MainScreenText,"");
         expectedJson.add(Selection,partsArray);
-
         SelectionService selectionService = new SelectionService();
         selectionService.attachJson(initJson);
         selectionService.setSelectedPart("roof");

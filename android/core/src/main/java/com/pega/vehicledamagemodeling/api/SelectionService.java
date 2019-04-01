@@ -29,9 +29,8 @@ public class SelectionService {
     }
 
     public void setSelectedPart(String name){
-        //coloring and add to repo
         selectedPartsRepository.add(name,new Material());
-        //todo
+        //TODO implement method which get name of part and add it to hashmap in SelectedPartsRepository
     }
 
     public JsonObject getModifiedJson(){
@@ -45,5 +44,4 @@ public class SelectionService {
     public String getMainScreenText(){
         return selectedPartsRepository.getMainScreenText();
     }
-
 }

@@ -17,16 +17,12 @@ package com.pega.vehicledamagemodeling.api;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import org.junit.Test;
-
 import java.util.HashSet;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 public class SelectedPartsTest {
-
 
     private static String Selection = "selection";
     private static String Id = "id";
@@ -121,7 +117,6 @@ public class SelectedPartsTest {
 
         //then
         assertEquals(initJson,result);
-
     }
 
     @Test
@@ -157,9 +152,9 @@ public class SelectedPartsTest {
         SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.add("roof",new Material());
         selectedPartsRepository.add("roof",new Material());
-
         HashSet<String> expected = new HashSet<>();
         expected.add("roof");
+
         //when
         HashSet<String> result = selectedPartsRepository.getSelectedParts();
 
@@ -172,7 +167,6 @@ public class SelectedPartsTest {
         //given
         SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.add("roof", new Material());
-
         HashSet<String> expected = new HashSet<>();
         expected.add("roof");
 
@@ -181,6 +175,5 @@ public class SelectedPartsTest {
 
         //then
         assertEquals(expected,result);
-
     }
 }

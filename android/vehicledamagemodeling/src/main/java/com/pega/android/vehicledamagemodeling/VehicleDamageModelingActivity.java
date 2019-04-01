@@ -63,7 +63,6 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
             vehicleDamageModeling = new VehicleDamageModeling(
                     new JsonParser().parse(report).getAsJsonObject(), callback);
         }
-
         viewGroup.addView(initializeForView(vehicleDamageModeling, config));
     }
 }

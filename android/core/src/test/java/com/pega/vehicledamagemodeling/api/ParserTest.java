@@ -16,11 +16,8 @@ package com.pega.vehicledamagemodeling.api;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import org.junit.Test;
-
 import java.util.HashSet;
-
 import static org.junit.Assert.assertEquals;
 
 public class ParserTest {

@@ -33,7 +33,6 @@ import com.pega.vehicledamagemodeling.api.SelectionService;
 
 
 public class VehicleDamageModeling extends ApplicationAdapter {
-    private final VehicleDamageReportCallback callback;
     private PerspectiveCamera perspectiveCamera;
     private LimitedCameraInputController cameraController;
     private ModelBatch modelBatch;
@@ -41,22 +40,18 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Array<ModelInstance> instances = new Array<>();
     private Environment environment;
     private boolean loading;
+    private SelectionService selections = new SelectionService();
+    private final VehicleDamageReportCallback callback;
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
 
-    private SelectionService selections = new SelectionService();
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
-        // To report selected damage call e.g.:
-        //callback.onFinished(new JsonParser().parse("{result:\"car mask\"}").getAsJsonObject());
     }
 
     public VehicleDamageModeling(JsonObject report, VehicleDamageReportCallback callback) {
         this(callback);
         selections.attachJson(report);
-        //close app and display report: (to demo)
-        //selections.setSelectedPart("mask");
-        //callback.onFinished(selections.getModifiedJson());
     }
 
     @Override
