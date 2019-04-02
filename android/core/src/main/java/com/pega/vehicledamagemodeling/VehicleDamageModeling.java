@@ -29,6 +29,8 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonObject;
+import com.pega.vehicledamagemodeling.api.Parser;
+import com.pega.vehicledamagemodeling.api.SelectedPartsRepository;
 import com.pega.vehicledamagemodeling.api.SelectionService;
 
 
@@ -40,7 +42,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Array<ModelInstance> instances = new Array<>();
     private Environment environment;
     private boolean loading;
-    private SelectionService selections = new SelectionService();
+    private SelectionService selections = new SelectionService(new SelectedPartsRepository(), new Parser());
     private final VehicleDamageReportCallback callback;
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
 

@@ -38,13 +38,13 @@ public class ParserTest {
         jsonProperty2.addProperty(Id,"front bumper");
         partsArray.add(jsonProperty2);
         initJson.add(Selection,partsArray);
-
+        Parser parser = new Parser();
         HashSet<String> list = new HashSet<>();
         list.add("roof");
         list.add("front bumper");
 
         //when
-        HashSet<String> result = Parser.parseToSelectedParts(initJson);
+        HashSet<String> result = parser.parseToSelectedParts(initJson);
 
         //then
         assertEquals(list,result);
@@ -55,9 +55,10 @@ public class ParserTest {
         //given
         JsonObject initJson = new JsonObject();
         HashSet<String> expected = new HashSet<>();
+        Parser parser = new Parser();
 
         //when
-        HashSet<String> result = Parser.parseToSelectedParts(initJson);
+        HashSet<String> result = parser.parseToSelectedParts(initJson);
 
         //then
         assertEquals(expected,result);
@@ -69,7 +70,7 @@ public class ParserTest {
         HashSet<String> hashSet = new HashSet<>();
         hashSet.add("roof");
         hashSet.add("front bumper");
-
+        Parser parser = new Parser();
         JsonObject expectedJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
@@ -82,7 +83,7 @@ public class ParserTest {
         expectedJson.add(Selection,partsArray);
 
         //when
-        JsonObject result = Parser.parseToJson("nothing",hashSet);
+        JsonObject result = parser.parseToJson("nothing",hashSet);
 
         //then
         assertEquals(expectedJson,result);
@@ -92,14 +93,14 @@ public class ParserTest {
     public void whenHashSetIsNullThenReturnJsonWithoutParts(){
         //given
         HashSet<String> parts = new HashSet<>();
-
+        Parser parser = new Parser();
         JsonObject expectedJson = new JsonObject();
         expectedJson.addProperty(MainScreenText, "nothing");
         JsonArray partsArray = new JsonArray();
         expectedJson.add(Selection,partsArray);
 
         //when
-        JsonObject result = Parser.parseToJson("nothing",parts);
+        JsonObject result = parser.parseToJson("nothing",parts);
 
         //then
         assertEquals(expectedJson,result);
@@ -111,9 +112,10 @@ public class ParserTest {
         String expectedText = "nothing";
         JsonObject initJson = new JsonObject();
         initJson.addProperty(MainScreenText,"nothing");
+        Parser parser = new Parser();
 
         //when
-        String result = Parser.parseToMainScreenText(initJson);
+        String result = parser.parseToMainScreenText(initJson);
 
         //then
         assertEquals(expectedText,result);
@@ -124,9 +126,10 @@ public class ParserTest {
         //given
         JsonObject initJson = new JsonObject();
         String expectedText = "";
+        Parser parser = new Parser();
 
         //when
-        String result = Parser.parseToMainScreenText(initJson);
+        String result = parser.parseToMainScreenText(initJson);
 
         //then
         assertEquals(expectedText,result);

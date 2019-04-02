@@ -18,12 +18,19 @@ import com.badlogic.gdx.graphics.g3d.Material;
 import com.google.gson.JsonObject;
 
 public class SelectionService {
-    private SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
+
+    public SelectionService(SelectedPartsRepository selectedPartsRepository, Parser parser){
+        this.selectedPartsRepository = selectedPartsRepository;
+        this.parser = parser;
+    }
+
+    private SelectedPartsRepository selectedPartsRepository;
+    private Parser parser;
 
     public void attachJson(JsonObject json){
         selectedPartsRepository.setInitJson(json);
-        selectedPartsRepository.setMainScreenText(Parser.parseToMainScreenText(json));
-        for( String s : Parser.parseToSelectedParts(json)){
+        selectedPartsRepository.setMainScreenText(parser.parseToMainScreenText(json));
+        for( String s : parser.parseToSelectedParts(json)){
             setSelectedPart(s);
         }
     }
@@ -34,7 +41,7 @@ public class SelectionService {
     }
 
     public JsonObject getModifiedJson(){
-        return Parser.parseToJson(selectedPartsRepository.getMainScreenText(), selectedPartsRepository.getSelectedParts());
+        return parser.parseToJson(selectedPartsRepository.getMainScreenText(), selectedPartsRepository.getSelectedParts());
     }
 
     public JsonObject getInitJson(){

@@ -17,10 +17,12 @@ package com.pega.vehicledamagemodeling.api;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
 import org.junit.Test;
+
 import java.util.HashSet;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 public class SelectedPartsTest {
 
@@ -42,8 +44,7 @@ public class SelectedPartsTest {
 
         //given
         SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
-        SelectionService selectionService = new SelectionService();
-        selectionService.attachJson(initJson);
+        selectedPartsRepository.setInitJson(initJson);
         Material expected = null;
 
         //when
@@ -85,18 +86,17 @@ public class SelectedPartsTest {
     }
 
     @Test
-    public void whenJsonIsEmptyThenReturnNull(){
+    public void whenJsonIsEmptyThenReturnEmptyJson(){
         //given
         JsonObject initJson = new JsonObject();
         SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
-        SelectionService selectionService = new SelectionService();
-        selectionService.attachJson(initJson);
+        selectedPartsRepository.setInitJson(initJson);
 
         //when
         JsonObject result = selectedPartsRepository.getInitJson();
 
         //then
-        assertNull(result);
+        assertEquals(initJson,result);
     }
 
     @Test

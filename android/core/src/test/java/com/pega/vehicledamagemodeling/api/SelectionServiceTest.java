@@ -4,6 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 
 public class SelectionServiceTest {
 
@@ -14,6 +17,7 @@ public class SelectionServiceTest {
     @Test
     public void whenJsonContainsTwoPartsThenReturnCorrectInitJson() {
         //given
+        SelectedPartsRepository selectedPartsRepository = mock(SelectedPartsRepository.class);
         JsonObject expectedJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
@@ -23,8 +27,8 @@ public class SelectionServiceTest {
         jsonProperty2.addProperty(Id,"front bumper");
         partsArray.add(jsonProperty2);
         expectedJson.add(Selection,partsArray);
-        SelectionService selectionService = new SelectionService();
-        selectionService.attachJson(expectedJson);
+        when(selectedPartsRepository.getInitJson()).thenReturn(expectedJson);
+        SelectionService selectionService = new SelectionService(selectedPartsRepository, new Parser());
 
         //when
         JsonObject result = selectionService.getInitJson();
@@ -37,8 +41,9 @@ public class SelectionServiceTest {
     public void whenJsonIsEmptyThenReturnEmptyInitJson(){
         //given
         JsonObject initJson = new JsonObject();
-        SelectionService selectionService = new SelectionService();
-        selectionService.attachJson(initJson);
+        SelectedPartsRepository selectedPartsRepository = mock(SelectedPartsRepository.class);
+        when(selectedPartsRepository.getInitJson()).thenReturn(initJson);
+        SelectionService selectionService = new SelectionService(selectedPartsRepository, new Parser());
 
         //when
         JsonObject result = selectionService.getInitJson();
@@ -52,8 +57,9 @@ public class SelectionServiceTest {
         //given
         JsonObject initJson = new JsonObject();
         initJson.addProperty(MainScreenText, "nothing");
-        SelectionService selectionService = new SelectionService();
-        selectionService.attachJson(initJson);
+        SelectedPartsRepository selectedPartsRepository = mock(SelectedPartsRepository.class);
+        when(selectedPartsRepository.getMainScreenText()).thenReturn("nothing");
+        SelectionService selectionService = new SelectionService(selectedPartsRepository, new Parser());
 
         //when
         String result = selectionService.getMainScreenText();
@@ -73,7 +79,7 @@ public class SelectionServiceTest {
         partsArray.add(jsonProperty);
         expectedJson.addProperty(MainScreenText,"");
         expectedJson.add(Selection,partsArray);
-        SelectionService selectionService = new SelectionService();
+        SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), new Parser());
         selectionService.attachJson(initJson);
         selectionService.setSelectedPart("roof");
 
