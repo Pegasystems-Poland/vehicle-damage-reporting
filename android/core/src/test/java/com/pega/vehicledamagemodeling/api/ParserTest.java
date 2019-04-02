@@ -26,6 +26,15 @@ public class ParserTest {
     private static String Id = "id";
     private static String MainScreenText = "mainScreenText";
 
+
+    @Test
+    public void whenJsonIsNullThenHashSetIsEmpty(){
+        JsonObject initJson = null;
+        Parser parser = new Parser();
+        HashSet<String> hashSet = parser.parseToSelectedParts(initJson);
+        assertEquals( hashSet, new HashSet<>());
+    }
+
     @Test
     public void whenJsonContainsTwoPartsThenReturnSelectedParts(){
         //given
@@ -51,7 +60,7 @@ public class ParserTest {
     }
 
     @Test
-    public void whenJsonIsNullThenReturnEmptyHashSet() {
+    public void whenJsonIsEmptyThenReturnEmptyHashSet() {
         //given
         JsonObject initJson = new JsonObject();
         HashSet<String> expected = new HashSet<>();
@@ -90,7 +99,7 @@ public class ParserTest {
     }
 
     @Test
-    public void whenHashSetIsNullThenReturnJsonWithoutParts(){
+    public void whenHashSetIsEmptyThenReturnJsonWithoutParts(){
         //given
         HashSet<String> parts = new HashSet<>();
         Parser parser = new Parser();

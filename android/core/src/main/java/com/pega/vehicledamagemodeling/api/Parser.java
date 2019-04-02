@@ -26,7 +26,7 @@ public class Parser {
     private static final String Selection = "selection";
     private static final String Id = "id";
 
-    public final String parseToMainScreenText(JsonObject jsonObject){
+    public String parseToMainScreenText(JsonObject jsonObject){
         JsonElement jsonText = jsonObject.get(Main_Screen_Text);
         String text = "";
         if(jsonText != null){
@@ -35,22 +35,24 @@ public class Parser {
         return text;
     }
 
-    public final HashSet<String> parseToSelectedParts(JsonObject jsonObject){
-        JsonArray partsArray = jsonObject.getAsJsonArray(Selection);
+    public HashSet<String> parseToSelectedParts(JsonObject jsonObject){
         HashSet<String> selectedParts = new HashSet<>();
-        if(partsArray != null) {
-            for (int i = 0; i < partsArray.size(); i++) {
-                String selection = partsArray.get(i)
-                        .getAsJsonObject()
-                        .get(Id)
-                        .getAsString();
-                selectedParts.add(selection);
+        if(jsonObject != null) {
+            JsonArray partsArray = jsonObject.getAsJsonArray(Selection);
+            if (partsArray != null) {
+                for (int i = 0; i < partsArray.size(); i++) {
+                    String selection = partsArray.get(i)
+                            .getAsJsonObject()
+                            .get(Id)
+                            .getAsString();
+                    selectedParts.add(selection);
+                }
             }
         }
         return selectedParts;
     }
 
-    public final JsonObject parseToJson(String text, HashSet<String> parts){
+    public JsonObject parseToJson(String text, HashSet<String> parts){
         JsonObject parsed = new JsonObject();
         JsonArray parsedArray = new JsonArray();
 

@@ -19,13 +19,13 @@ import com.google.gson.JsonObject;
 
 public class SelectionService {
 
+    private SelectedPartsRepository selectedPartsRepository;
+    private Parser parser;
+
     public SelectionService(SelectedPartsRepository selectedPartsRepository, Parser parser){
         this.selectedPartsRepository = selectedPartsRepository;
         this.parser = parser;
     }
-
-    private SelectedPartsRepository selectedPartsRepository;
-    private Parser parser;
 
     public void attachJson(JsonObject json){
         selectedPartsRepository.setInitJson(json);
