@@ -35,6 +35,26 @@ public class FVMDamagedCarViewController: UIViewController {
         setupButtonShape(acceptButton)
     }
     
+    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if UIDevice.current.orientation.isLandscape {
+            let width = UIScreen.main.nativeBounds.height
+            let height = UIScreen.main.nativeBounds.width
+            
+            if #available(iOS 11.0, *) {
+                damageSelector.scnCamera.camera!.fieldOfView = ZoomConstraint.maxFOV / CGFloat(width / height)
+            } else {
+                damageSelector.scnCamera.camera!.yFov = Double(ZoomConstraint.maxFOV / CGFloat(width / height))
+            }
+        } else {
+            if #available(iOS 11.0, *) {
+                damageSelector.scnCamera.camera!.fieldOfView = ZoomConstraint.maxFOV
+            } else {
+                damageSelector.scnCamera.camera!.yFov = Double(ZoomConstraint.maxFOV)
+            }
+        }
+    }
+    
     @IBAction internal func closeButtonTapped(_ sender: UIButton) {
         _ = completionAction?(damageSelector.onCancel())
         self.dismiss(animated: true, completion: nil)
