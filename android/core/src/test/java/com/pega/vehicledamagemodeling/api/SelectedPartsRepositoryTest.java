@@ -17,14 +17,11 @@ package com.pega.vehicledamagemodeling.api;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import org.junit.Test;
-
 import java.util.HashSet;
-
 import static org.junit.Assert.assertEquals;
 
-public class SelectedPartsTest {
+public class SelectedPartsRepositoryTest {
 
     private static String Selection = "selection";
     private static String Id = "id";
@@ -58,8 +55,8 @@ public class SelectedPartsTest {
     public void whenSelectionContainsTwoPartsThenReturnCorrectParts() {
         //given
         SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
-        selectedPartsRepository.add("roof",new Material());
-        selectedPartsRepository.add("front bumper",new Material());
+        selectedPartsRepository.add("roof", new Material());
+        selectedPartsRepository.add("front bumper", new Material());
 
         HashSet<String> expected = new HashSet<>();
         expected.add("roof");
@@ -150,8 +147,8 @@ public class SelectedPartsTest {
     public void whenPartExistThenDoNotAdd(){
         //given
         SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
-        selectedPartsRepository.add("roof",new Material());
-        selectedPartsRepository.add("roof",new Material());
+        selectedPartsRepository.add("roof", new Material());
+        selectedPartsRepository.add("roof", new Material());
         HashSet<String> expected = new HashSet<>();
         expected.add("roof");
 
