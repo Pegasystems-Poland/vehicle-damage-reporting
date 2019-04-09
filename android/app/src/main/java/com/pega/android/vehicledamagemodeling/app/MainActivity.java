@@ -60,6 +60,4 @@ public class MainActivity extends AppCompatActivity {
         }
         startActivityForResult(intent, VehicleDamageModelingActivity.REQUEST_CODE);
     }
-
-
 }

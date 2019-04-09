@@ -29,10 +29,12 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonObject;
+import com.pega.vehicledamagemodeling.api.Parser;
+import com.pega.vehicledamagemodeling.api.SelectedPartsRepository;
+import com.pega.vehicledamagemodeling.api.SelectionService;
 
 
 public class VehicleDamageModeling extends ApplicationAdapter {
-    private final VehicleDamageReportCallback callback;
     private PerspectiveCamera perspectiveCamera;
     private LimitedCameraInputController cameraController;
     private ModelBatch modelBatch;
@@ -40,18 +42,18 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Array<ModelInstance> instances = new Array<>();
     private Environment environment;
     private boolean loading;
+    private SelectionService selections = new SelectionService(new SelectedPartsRepository(), new Parser());
+    private final VehicleDamageReportCallback callback;
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
+
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
-
-        // To report selected damage call e.g.:
-        // callback.onFinished(new JsonParser().parse("{result:\"car mask\"}").getAsJsonObject());
     }
 
     public VehicleDamageModeling(JsonObject report, VehicleDamageReportCallback callback) {
         this(callback);
-        // display given report
+        selections.attachJson(report);
     }
 
     @Override
