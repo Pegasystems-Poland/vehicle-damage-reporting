@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
-
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.gson.GsonBuilder;
@@ -30,7 +29,6 @@ import com.pega.vehicledamagemodeling.VehicleDamageModeling;
 import com.pega.vehicledamagemodeling.VehicleDamageReportCallback;
 
 public class VehicleDamageModelingActivity extends AndroidApplication {
-
     public static final int REQUEST_CODE = 123;
     public static final String REPORT_EXTRA = "vehicle_damage_report_extra";
 

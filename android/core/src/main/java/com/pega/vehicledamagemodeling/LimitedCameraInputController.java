@@ -21,12 +21,12 @@ import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
 
 public class LimitedCameraInputController extends CameraInputController {
+    private Vector3 tmpV1 = new Vector3();
+    private Vector3 tmpV2 = new Vector3();
     private static final float ZOOM_IN_LIMIT = 18f;
     private static final float ZOOM_OUT_LIMIT = 40f;
     private static final float ROTATE_DOWN_LIMIT = 3.0f;
     private static final float ROTATE_UP_LIMIT = 0.5f;
-    private Vector3 tmpV1 = new Vector3();
-    private Vector3 tmpV2 = new Vector3();
 
     public LimitedCameraInputController(final Camera camera) {
         super(camera);
@@ -34,16 +34,19 @@ public class LimitedCameraInputController extends CameraInputController {
     }
 
     @Override
-    protected boolean pinchZoom (float amount) {
+    protected boolean pinchZoom(float amount) {
         return zoom(pinchZoomFactor * amount);
     }
 
     @Override
     public boolean zoom(float amount) {
-        if (amount == 0f) return false;
+        if (amount == 0f) {
+            return false;
+        }
 
         camera.translate(createZoom(amount));
         camera.update();
+
         return true;
     }
 
@@ -51,9 +54,10 @@ public class LimitedCameraInputController extends CameraInputController {
         Vector3 zoom = tmpV1.set(camera.direction).scl(amount);
 
         if (isZoomIn(amount)) {
-            return limitZoom (zoom, ZOOM_IN_LIMIT);
+            return limitZoom(zoom, ZOOM_IN_LIMIT);
         }
-        return limitZoom (zoom, ZOOM_OUT_LIMIT);
+
+        return limitZoom(zoom, ZOOM_OUT_LIMIT);
     }
 
     private boolean isZoomIn(float amount) {
@@ -67,13 +71,13 @@ public class LimitedCameraInputController extends CameraInputController {
 
         if (zoom.len() >= limitedZoom.len()) {
             return limitedZoom;
-        } else {
-            return zoom;
         }
+
+        return zoom;
     }
 
     @Override
-    protected boolean process (float deltaX, float deltaY, int button) {
+    protected boolean process(float deltaX, float deltaY, int button) {
         float deltaYRotate = deltaY * rotateAngle;
 
         tmpV1.set(camera.direction)
@@ -86,9 +90,11 @@ public class LimitedCameraInputController extends CameraInputController {
         }
 
         camera.rotateAround(target, tmpV1, deltaYRotate);
-        camera.rotateAround(target, Vector3.Y, deltaX * -rotateAngle);
+        camera.rotateAround(target, Vector3.Y, deltaX * (-rotateAngle));
 
-        if (autoUpdate) camera.update();
+        if (autoUpdate) {
+            camera.update();
+        }
 
         return true;
     }
@@ -97,14 +103,14 @@ public class LimitedCameraInputController extends CameraInputController {
         tmpV2.set(target);
         tmpV2.sub(camera.position);
         tmpV2.rotate(rotateVector, deltaYRotate);
+
         return tmpV2.y > ROTATE_DOWN_LIMIT;
     }
 
     private boolean isCrossingUpLimit(Vector3 rotateVector, float deltaYRotate) {
         tmpV2.set(camera.up);
         tmpV2.rotate(rotateVector, deltaYRotate);
+
         return tmpV2.y < ROTATE_UP_LIMIT;
     }
-
-
 }

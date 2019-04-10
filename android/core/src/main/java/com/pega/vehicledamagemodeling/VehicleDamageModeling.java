@@ -33,7 +33,6 @@ import com.pega.vehicledamagemodeling.api.Parser;
 import com.pega.vehicledamagemodeling.api.SelectedPartsRepository;
 import com.pega.vehicledamagemodeling.api.SelectionService;
 
-
 public class VehicleDamageModeling extends ApplicationAdapter {
     private PerspectiveCamera perspectiveCamera;
     private LimitedCameraInputController cameraController;
@@ -45,7 +44,6 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private SelectionService selections = new SelectionService(new SelectedPartsRepository(), new Parser());
     private final VehicleDamageReportCallback callback;
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
-
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
