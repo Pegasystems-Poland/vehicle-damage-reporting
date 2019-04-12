@@ -19,6 +19,7 @@
 		39A45862224A55BC000721D5 /* LightManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A45861224A55BC000721D5 /* LightManagerProtocol.swift */; };
 		BA1FBE0C220780E400DBFB9E /* MaterialProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1FBE0B220780E400DBFB9E /* MaterialProcessor.swift */; };
 		BA1FBE122208CB0800DBFB9E /* MaterialProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1FBE112208CB0800DBFB9E /* MaterialProcessorTests.swift */; };
+		BA5B809F2261166B002C2D08 /* SCNCamera+FOVSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B809E2261166B002C2D08 /* SCNCamera+FOVSetter.swift */; };
 		BA9E20A621D58B830013E388 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = BA9E20A521D58B830013E388 /* art.scnassets */; };
 		BAAD17F322063F2100574F2C /* HighlightHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD17F222063F2100574F2C /* HighlightHandler.swift */; };
 		BAAD17F522064B0600574F2C /* TapGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD17F422064B0600574F2C /* TapGestureHandler.swift */; };
@@ -82,6 +83,7 @@
 		39A45861224A55BC000721D5 /* LightManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightManagerProtocol.swift; sourceTree = "<group>"; };
 		BA1FBE0B220780E400DBFB9E /* MaterialProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialProcessor.swift; sourceTree = "<group>"; };
 		BA1FBE112208CB0800DBFB9E /* MaterialProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialProcessorTests.swift; sourceTree = "<group>"; };
+		BA5B809E2261166B002C2D08 /* SCNCamera+FOVSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNCamera+FOVSetter.swift"; sourceTree = "<group>"; };
 		BA9E20A521D58B830013E388 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		BAAD17F222063F2100574F2C /* HighlightHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightHandler.swift; sourceTree = "<group>"; };
 		BAAD17F422064B0600574F2C /* TapGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureHandler.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 		0535F31C21C4389F00CD6C44 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				BA5B809D226115A1002C2D08 /* Extensions */,
 				39E1264C224AB5E400EC6C33 /* Lighting */,
 				05FECD5D223D417700F8C371 /* Notifications */,
 				05706871223BCC6800D2A78A /* Controllers */,
@@ -237,6 +240,14 @@
 				BA1FBE0B220780E400DBFB9E /* MaterialProcessor.swift */,
 			);
 			path = Highlighting;
+			sourceTree = "<group>";
+		};
+		BA5B809D226115A1002C2D08 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BA5B809E2261166B002C2D08 /* SCNCamera+FOVSetter.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		BAF81BE02222D34C001768B0 /* Constraints */ = {
@@ -566,6 +577,7 @@
 				D7F0300A222EADCD00D87F6A /* DamagedPartsInitializerProtocol.swift in Sources */,
 				D7BD08472232F91B00D36DD4 /* NodeHelper.swift in Sources */,
 				D7C88822222702F600EB3375 /* DamagedPartsNamesProvider.swift in Sources */,
+				BA5B809F2261166B002C2D08 /* SCNCamera+FOVSetter.swift in Sources */,
 				05706873223BCC7E00D2A78A /* FVMDamagedCarViewController.swift in Sources */,
 				39A45862224A55BC000721D5 /* LightManagerProtocol.swift in Sources */,
 				D7C88820222702F600EB3375 /* JsonParser.swift in Sources */,

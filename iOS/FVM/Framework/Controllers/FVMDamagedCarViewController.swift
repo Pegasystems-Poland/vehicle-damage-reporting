@@ -24,9 +24,12 @@ public class FVMDamagedCarViewController: UIViewController {
     public var completionAction: ((String) -> Void)?
     private let ROTATION_PROMPT = "RotationPrompt"
     
+    private var lastOrientation: UIDeviceOrientation!
+    
     override public func viewDidLoad() {
         setupDamagedCarScene()
         showRotationPrompt()
+        lastOrientation = UIDevice.current.orientation
         super.viewDidLoad()
     }
     
@@ -37,22 +40,18 @@ public class FVMDamagedCarViewController: UIViewController {
     
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        if UIDevice.current.orientation.isLandscape {
-            let width = UIScreen.main.nativeBounds.height
-            let height = UIScreen.main.nativeBounds.width
+        if UIDevice.current.orientation.isLandscape && !lastOrientation.isLandscape {
+            damageSelector.scnCamera.camera!.divideFOV(by: ZoomConstraint.scale)
+            damageSelector.scnCamera.camera!.truncateFOVOverflow()
             
-            if #available(iOS 11.0, *) {
-                damageSelector.scnCamera.camera!.fieldOfView = ZoomConstraint.maxFOV / CGFloat(width / height)
-            } else {
-                damageSelector.scnCamera.camera!.yFov = Double(ZoomConstraint.maxFOV / CGFloat(width / height))
-            }
-        } else {
-            if #available(iOS 11.0, *) {
-                damageSelector.scnCamera.camera!.fieldOfView = ZoomConstraint.maxFOV
-            } else {
-                damageSelector.scnCamera.camera!.yFov = Double(ZoomConstraint.maxFOV)
-            }
+            lastOrientation = UIDevice.current.orientation
+        } else if UIDevice.current.orientation.isPortrait && !lastOrientation.isPortrait {
+            damageSelector.scnCamera.camera!.multiplyFOV(by: ZoomConstraint.scale)
+            damageSelector.scnCamera.camera!.truncateFOVOverflow()
+
+            lastOrientation = UIDevice.current.orientation
         }
+        damageSelector.scnCamera.camera!.printFOV()
     }
     
     @IBAction internal func closeButtonTapped(_ sender: UIButton) {
