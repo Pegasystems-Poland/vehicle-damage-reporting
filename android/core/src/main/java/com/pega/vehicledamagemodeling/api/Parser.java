@@ -28,7 +28,7 @@ public class Parser {
         JsonElement jsonText = jsonObject.get(MAIN_SCREEN_TEXT);
         String text = "";
 
-        if (jsonText != null){
+        if (jsonText != null) {
             text = jsonText.getAsString();
         }
 

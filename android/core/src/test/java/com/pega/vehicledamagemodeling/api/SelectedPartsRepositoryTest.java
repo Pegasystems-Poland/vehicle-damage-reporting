@@ -17,18 +17,25 @@ package com.pega.vehicledamagemodeling.api;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.junit.Before;
 import org.junit.Test;
 import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 
 public class SelectedPartsRepositoryTest {
+    private SelectedPartsRepository selectedPartsRepository;
     private static final String SELECTION = "selection";
     private static final String ID = "id";
     private static final String ROOF = "roof";
     private static final String FRONT_BUMPER = "front bumper";
     private static final String TEST = "test";
     private static final String SAMPLE_TEXT = "the text";
+
+    @Before
+    public void setUp() {
+        selectedPartsRepository = new SelectedPartsRepository();
+    }
 
     @Test
     public void whenPartDoesNotExistThenReturnNull(){
@@ -42,7 +49,6 @@ public class SelectedPartsRepositoryTest {
         jsonProperty2.addProperty(ID,FRONT_BUMPER);
         partsArray.add(jsonProperty2);
         initJson.add(SELECTION, partsArray);
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.setInitJson(initJson);
         Material expected = null;
 
@@ -56,7 +62,6 @@ public class SelectedPartsRepositoryTest {
     @Test
     public void whenSelectionContainsTwoPartsThenReturnCorrectParts() {
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.add(ROOF, new Material());
         selectedPartsRepository.add(FRONT_BUMPER, new Material());
 
@@ -74,7 +79,6 @@ public class SelectedPartsRepositoryTest {
     @Test
     public void whenSelectionIsEmptyThenReturnEmptyHashSet(){
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         HashSet<String> expected = new HashSet<>();
 
         //when
@@ -88,7 +92,6 @@ public class SelectedPartsRepositoryTest {
     public void whenJsonIsEmptyThenReturnEmptyJson(){
         //given
         JsonObject initJson = new JsonObject();
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.setInitJson(initJson);
 
         //when
@@ -107,8 +110,6 @@ public class SelectedPartsRepositoryTest {
         jsonProperty.addProperty(ID, ROOF);
         partsArray.add(jsonProperty);
         initJson.add(SELECTION, partsArray);
-
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.setInitJson(initJson);
 
         //when
@@ -121,7 +122,6 @@ public class SelectedPartsRepositoryTest {
     @Test
     public void whenTextIsNotEmptyThenReturnCorrectText(){
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.setMainScreenText(SAMPLE_TEXT);
         String expected = SAMPLE_TEXT;
 
@@ -135,7 +135,6 @@ public class SelectedPartsRepositoryTest {
     @Test
     public void whenTextIsEmptyThenReturnEmptyText(){
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.setMainScreenText("");
 
         //when
@@ -148,7 +147,6 @@ public class SelectedPartsRepositoryTest {
     @Test
     public void whenPartExistThenDoNotAdd(){
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.add(ROOF, new Material());
         selectedPartsRepository.add(ROOF, new Material());
         HashSet<String> expected = new HashSet<>();
@@ -164,7 +162,6 @@ public class SelectedPartsRepositoryTest {
     @Test
     public void whenPartDoesNotExistThenAdd(){
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.add(ROOF, new Material());
         HashSet<String> expected = new HashSet<>();
         expected.add(ROOF);

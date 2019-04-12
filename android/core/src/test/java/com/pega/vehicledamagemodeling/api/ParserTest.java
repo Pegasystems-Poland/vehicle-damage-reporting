@@ -16,11 +16,15 @@ package com.pega.vehicledamagemodeling.api;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.junit.Before;
 import org.junit.Test;
 import java.util.HashSet;
+
 import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
+    private Parser parser;
+    private JsonObject initJson;
     private static final String SELECTION = "selection";
     private static final String ID = "id";
     private static final String MAIN_SCREEN_TEXT = "mainScreenText";
@@ -28,11 +32,16 @@ public class ParserTest {
     private static final String ROOF = "roof";
     private static final String FRONT_BUMPER = "front bumper";
 
+    @Before
+    public void setUp() {
+        parser = new Parser();
+        initJson = new JsonObject();
+    }
+
     @Test
     public void whenJsonIsNullThenHashSetIsEmpty() {
         //given
-        JsonObject initJson = null;
-        Parser parser = new Parser();
+        initJson = null;
 
         //when
         HashSet<String> hashSet = parser.parseToSelectedParts(initJson);
@@ -44,7 +53,6 @@ public class ParserTest {
     @Test
     public void whenJsonContainsTwoPartsThenReturnSelectedParts() {
         //given
-        JsonObject initJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
         jsonProperty.addProperty(ID, ROOF);
@@ -53,7 +61,6 @@ public class ParserTest {
         jsonProperty2.addProperty(ID, FRONT_BUMPER);
         partsArray.add(jsonProperty2);
         initJson.add(SELECTION, partsArray);
-        Parser parser = new Parser();
         HashSet<String> list = new HashSet<>();
         list.add(ROOF);
         list.add(FRONT_BUMPER);
@@ -68,9 +75,7 @@ public class ParserTest {
     @Test
     public void whenJsonIsEmptyThenReturnEmptyHashSet() {
         //given
-        JsonObject initJson = new JsonObject();
         HashSet<String> expected = new HashSet<>();
-        Parser parser = new Parser();
 
         //when
         HashSet<String> result = parser.parseToSelectedParts(initJson);
@@ -85,7 +90,6 @@ public class ParserTest {
         HashSet<String> hashSet = new HashSet<>();
         hashSet.add(ROOF);
         hashSet.add(FRONT_BUMPER);
-        Parser parser = new Parser();
         JsonObject expectedJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
@@ -108,7 +112,6 @@ public class ParserTest {
     public void whenHashSetIsEmptyThenReturnJsonWithoutParts() {
         //given
         HashSet<String> parts = new HashSet<>();
-        Parser parser = new Parser();
         JsonObject expectedJson = new JsonObject();
         expectedJson.addProperty(MAIN_SCREEN_TEXT, NOTHING);
         JsonArray partsArray = new JsonArray();
@@ -125,9 +128,7 @@ public class ParserTest {
     public void whenMainScreenTextInJsonIsNotNullThenReturnCorrectText() {
         //given
         String expectedText = NOTHING;
-        JsonObject initJson = new JsonObject();
         initJson.addProperty(MAIN_SCREEN_TEXT, NOTHING);
-        Parser parser = new Parser();
 
         //when
         String result = parser.parseToMainScreenText(initJson);
@@ -139,9 +140,7 @@ public class ParserTest {
     @Test
     public void whenJsonDoesNotContainMainScreenTextThenReturnEmptyText() {
         //given
-        JsonObject initJson = new JsonObject();
         String expectedText = "";
-        Parser parser = new Parser();
 
         //when
         String result = parser.parseToMainScreenText(initJson);

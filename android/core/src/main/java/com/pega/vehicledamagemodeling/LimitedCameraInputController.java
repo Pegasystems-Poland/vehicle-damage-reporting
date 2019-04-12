@@ -66,7 +66,7 @@ public class LimitedCameraInputController extends CameraInputController {
 
     private Vector3 limitZoom(Vector3 zoom, float zoomLimit) {
         Vector3 limitedZoom = tmpV2.set(camera.direction)
-                .scl(-zoomLimit / camera.direction.len())
+                .scl((-zoomLimit) / camera.direction.len())
                 .sub(camera.position);
 
         if (zoom.len() >= limitedZoom.len()) {
