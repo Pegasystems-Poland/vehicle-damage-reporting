@@ -26,6 +26,7 @@
 		BAF81BE22222D36A001768B0 /* ZoomConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */; };
 		BAF81BEF2235CE95001768B0 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BEE2235CE95001768B0 /* Log.swift */; };
 		BAF81BF32235D211001768B0 /* LogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BF22235D211001768B0 /* LogEvent.swift */; };
+		D76124DF225CCD7400F99418 /* FVMDamagedCarViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76124DE225CCD7400F99418 /* FVMDamagedCarViewControllerTests.swift */; };
 		D7B875FB2233E74900E6B09B /* HightlightHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B875FA2233E74900E6B09B /* HightlightHandlerMock.swift */; };
 		D7B875FC2233E74900E6B09B /* HightlightHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B875FA2233E74900E6B09B /* HightlightHandlerMock.swift */; };
 		D7BD083C2232808200D36DD4 /* DamagedPartsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BD083B2232808200D36DD4 /* DamagedPartsInitializer.swift */; };
@@ -89,6 +90,7 @@
 		BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomConstraint.swift; sourceTree = "<group>"; };
 		BAF81BEE2235CE95001768B0 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		BAF81BF22235D211001768B0 /* LogEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEvent.swift; sourceTree = "<group>"; };
+		D76124DE225CCD7400F99418 /* FVMDamagedCarViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FVMDamagedCarViewControllerTests.swift; sourceTree = "<group>"; };
 		D7B875FA2233E74900E6B09B /* HightlightHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HightlightHandlerMock.swift; sourceTree = "<group>"; };
 		D7BD083B2232808200D36DD4 /* DamagedPartsInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamagedPartsInitializer.swift; sourceTree = "<group>"; };
 		D7BD08452232F91B00D36DD4 /* NodeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeHelper.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		0535F32721C4389F00CD6C44 /* FVMTests */ = {
 			isa = PBXGroup;
 			children = (
+				D76124DD225CCD5E00F99418 /* Controllers */,
 				D7C88856222706B700EB3375 /* DamagedParts */,
 				D7C8882C2227033200EB3375 /* Integration */,
 				0535F32A21C4389F00CD6C44 /* Info.plist */,
@@ -254,6 +257,14 @@
 				BAF81BF22235D211001768B0 /* LogEvent.swift */,
 			);
 			path = Logging;
+			sourceTree = "<group>";
+		};
+		D76124DD225CCD5E00F99418 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D76124DE225CCD7400F99418 /* FVMDamagedCarViewControllerTests.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		D7B875F92233E49500E6B09B /* Helpers */ = {
@@ -595,6 +606,7 @@
 				D7F0300B222EADCD00D87F6A /* DamagedPartsInitializerProtocol.swift in Sources */,
 				D7C88865222706B700EB3375 /* ProviderMock.swift in Sources */,
 				D7C888472227033200EB3375 /* DamagedPartsServiceTests.swift in Sources */,
+				D76124DF225CCD7400F99418 /* FVMDamagedCarViewControllerTests.swift in Sources */,
 				D7C888462227033200EB3375 /* DamagedParstsRepositoryTests.swift in Sources */,
 				D7C88864222706B700EB3375 /* DamagePartsNamesProviderTests.swift in Sources */,
 				D7C88863222706B700EB3375 /* JsonParserTests.swift in Sources */,
