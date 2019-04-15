@@ -31,42 +31,4 @@ extension SCNCamera {
             yFov *= Double(multiplier)
         }
     }
-    
-    public func divideFOV(by divider: CGFloat) {
-        if #available(iOS 11.0, *) {
-            fieldOfView /= divider
-        } else {
-            yFov /= Double(divider)
-        }
-    }
-    
-    public func truncateFOVOverflow() {
-        if #available(iOS 11.0, *) {
-            fieldOfView = min(fieldOfView, ZoomConstraint.maxFOV)
-            fieldOfView = max(fieldOfView, ZoomConstraint.minFOV)
-        } else {
-            yFov = min(yFov, Double(ZoomConstraint.maxFOV))
-            yFov = max(yFov, Double(ZoomConstraint.minFOV))
-        }
-    }
-    
-    public func printFOV() {
-        if #available(iOS 11.0, *) {
-            if (UIDevice.current.orientation.isLandscape) {
-                Log.info("\(fieldOfView) in landscape, after calc: \(fieldOfView * ZoomConstraint.scale)")
-            }
-            else
-            {
-                Log.info("\(fieldOfView) in portrait")
-            }
-        } else {
-            if (UIDevice.current.orientation.isLandscape) {
-                Log.info("\(yFov) in landscape, after calc: \(yFov * Double(ZoomConstraint.scale))")
-            }
-            else
-            {
-                Log.info("\(yFov) in portrait")
-            }
-        }
-    }
 }

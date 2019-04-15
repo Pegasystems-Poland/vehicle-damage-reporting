@@ -39,19 +39,7 @@ public class FVMDamagedCarViewController: UIViewController {
     }
     
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        if UIDevice.current.orientation.isLandscape && !lastOrientation.isLandscape {
-            damageSelector.scnCamera.camera!.divideFOV(by: ZoomConstraint.scale)
-            damageSelector.scnCamera.camera!.truncateFOVOverflow()
-            
-            lastOrientation = UIDevice.current.orientation
-        } else if UIDevice.current.orientation.isPortrait && !lastOrientation.isPortrait {
-            damageSelector.scnCamera.camera!.multiplyFOV(by: ZoomConstraint.scale)
-            damageSelector.scnCamera.camera!.truncateFOVOverflow()
-
-            lastOrientation = UIDevice.current.orientation
-        }
-        damageSelector.scnCamera.camera!.printFOV()
+        damageSelector.scnCamera.camera!.multiplyFOV(by: size.height / self.view.bounds.height)
     }
     
     @IBAction internal func closeButtonTapped(_ sender: UIButton) {
