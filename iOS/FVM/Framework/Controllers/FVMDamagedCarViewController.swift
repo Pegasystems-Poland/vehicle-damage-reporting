@@ -24,12 +24,9 @@ public class FVMDamagedCarViewController: UIViewController {
     public var completionAction: ((String) -> Void)?
     private let ROTATION_PROMPT = "RotationPrompt"
     
-    private var lastOrientation: UIDeviceOrientation!
-    
     override public func viewDidLoad() {
         setupDamagedCarScene()
         showRotationPrompt()
-        lastOrientation = UIDevice.current.orientation
         super.viewDidLoad()
     }
     
