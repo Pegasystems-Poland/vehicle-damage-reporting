@@ -27,7 +27,6 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonObject;
 import com.pega.vehicledamagemodeling.api.Parser;
@@ -43,9 +42,6 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Array<ModelInstance> instances = new Array<>();
     private Environment environment;
     private boolean loading;
-    private ShapeRenderer horizontalLine;
-    private ShapeRenderer whiteBox;
-    private ShapeRenderer cancelButton;
     private SelectionService selections = new SelectionService(new SelectedPartsRepository(), new Parser());
     private final VehicleDamageReportCallback callback;
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
@@ -77,18 +73,6 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         assets = new AssetManager();
         assets.load(MODEL_FILE_NAME, Model.class);
         loading = true;
-
-        horizontalLine = new ShapeRenderer();
-        horizontalLine.setColor(0,191/255,1,0.5f);
-        horizontalLine.setProjectionMatrix(perspectiveCamera.projection);
-
-        whiteBox = new ShapeRenderer();
-        whiteBox.setColor(1,1,1,1);
-        whiteBox.setProjectionMatrix(perspectiveCamera.projection);
-
-        cancelButton = new ShapeRenderer();
-        cancelButton.setColor(220/255f,220/255f,220/255f,0.5f);
-        cancelButton.setProjectionMatrix(perspectiveCamera.projection);
     }
 
     private void doneLoading() {
@@ -112,19 +96,6 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         modelBatch.begin(perspectiveCamera);
         modelBatch.render(instances, environment);
         modelBatch.end();
-
-        horizontalLine.begin(ShapeRenderer.ShapeType.Filled);
-        horizontalLine.rectLine(0,Gdx.graphics.getHeight()*0.2f,
-                Gdx.graphics.getWidth(), Gdx.graphics.getHeight()*0.2f, 1f);
-        horizontalLine.end();
-
-        whiteBox.begin(ShapeRenderer.ShapeType.Filled);
-        whiteBox.rect(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight()*0.2f);
-        whiteBox.end();
-
-        cancelButton.begin(ShapeRenderer.ShapeType.Filled);
-        cancelButton.circle(75,75,50);
-        cancelButton.end();
     }
 
     @Override
@@ -132,9 +103,6 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         modelBatch.dispose();
         instances.clear();
         assets.dispose();
-        horizontalLine.dispose();
-        whiteBox.dispose();
-        cancelButton.dispose();
     }
 
     @Override
