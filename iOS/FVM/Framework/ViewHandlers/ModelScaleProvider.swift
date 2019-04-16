@@ -13,21 +13,20 @@
 // limitations under the License.
 
 import Foundation
-import UIKit
+import SceneKit
 
-internal struct ZoomConstraint {
-    private static let scale: CGFloat = UIScreen.main.nativeBounds.height / UIScreen.main.nativeBounds.width
-    private static var minFovBase: CGFloat = 20
-    private static var maxFovBase: CGFloat = 70
+internal class ModelScaleProvider : ModelScaleProviderProtocol {
+    private let referenceModelScale: Float = 32.05522
+    private let model: SCNNode
     
-    internal static var minFOV: CGFloat {
-        return UIDevice.current.orientation.isLandscape
-            ? minFovBase / scale
-            : minFovBase
+    init(_ model: SCNNode) {
+        self.model = model
     }
-    internal static var maxFOV: CGFloat {
-        return UIDevice.current.orientation.isLandscape
-            ? maxFovBase / scale
-            : maxFovBase
+    
+    internal func getModelScale() -> Float {
+        let worldSpaceMin = model.convertPosition(model.boundingBox.min, to: nil)
+        let worldSpaceMax = model.convertPosition(model.boundingBox.max, to: nil)
+        let actualModelScale = SCNVector3.distance(worldSpaceMin, worldSpaceMax)
+        return actualModelScale / referenceModelScale
     }
 }
