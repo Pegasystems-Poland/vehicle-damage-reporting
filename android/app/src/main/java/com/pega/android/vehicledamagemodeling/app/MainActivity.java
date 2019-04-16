@@ -16,26 +16,23 @@
 
 package com.pega.android.vehicledamagemodeling.app;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import com.pega.android.vehicledamagemodeling.VehicleDamageModelingActivity;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.pega.android.vehicledamagemodeling.app.R.layout.main_activity;
 
 public class MainActivity extends AppCompatActivity {
-
     private TextView textView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(main_activity);
         textView = findViewById(R.id.result_text_view);
     }
 
@@ -44,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case (VehicleDamageModelingActivity.REQUEST_CODE): {
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == RESULT_OK) {
                     String returnValue = data.getStringExtra(VehicleDamageModelingActivity.REPORT_EXTRA);
                     textView.setText(returnValue);
                 }

@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class SelectedPartsRepository{
-
     private JsonObject initJson;
     private String mainScreenText;
     private HashMap<String, Material> selectedPartsWithMaterial = new HashMap<>();
@@ -29,7 +28,7 @@ public class SelectedPartsRepository{
         return new HashSet<>(selectedPartsWithMaterial.keySet());
     }
 
-    public String getMainScreenText(){
+    public String getMainScreenText() {
         return mainScreenText;
     }
 
@@ -46,8 +45,8 @@ public class SelectedPartsRepository{
     }
 
     public void add(String part, Material material) {
-        if(!selectedPartsWithMaterial.containsKey(part)){
-            selectedPartsWithMaterial.put(part,material);
+        if (!selectedPartsWithMaterial.containsKey(part)) {
+            selectedPartsWithMaterial.put(part, material);
         }
     }
 
