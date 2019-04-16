@@ -35,6 +35,10 @@ public class FVMDamagedCarViewController: UIViewController {
         setupButtonShape(acceptButton)
     }
     
+    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        damageSelector.scnCamera.camera!.multiplyFOV(by: size.height / self.view.bounds.height)
+    }
+    
     @IBAction internal func closeButtonTapped(_ sender: UIButton) {
         _ = completionAction?(damageSelector.onCancel())
         self.dismiss(animated: true, completion: nil)

@@ -76,11 +76,7 @@ internal class FVMCarModelViewController : SCNView {
         scnCameraOrbit.eulerAngles.x = 0.0
         scnCameraOrbit.eulerAngles.y = -1.1
         
-        if #available(iOS 11.0, *) {
-            scnCamera.camera!.fieldOfView = ZoomConstraint.maxFOV
-        } else {
-            scnCamera.camera!.yFov = Double(ZoomConstraint.maxFOV)
-        }
+        scnCamera.camera!.setFOV(ZoomConstraint.maxFOV)
         
         scnCameraOrbit.addChildNode(scnCamera)
         scnScene.rootNode.addChildNode(scnCameraOrbit)
