@@ -16,6 +16,20 @@ import Foundation
 import UIKit
 
 internal struct ZoomConstraint {
-    internal static let minFOV: CGFloat = 20
-    internal static let maxFOV: CGFloat = 70
+    private static let minFovBase: CGFloat = 20
+    private static let maxFovBase: CGFloat = 70
+    
+    internal static var minFOV: CGFloat {
+        return UIDevice.current.orientation.isLandscape
+            ? minFovBase / scale
+            : minFovBase
+    }
+    internal static var maxFOV: CGFloat {
+        return UIDevice.current.orientation.isLandscape
+            ? maxFovBase / scale
+            : maxFovBase
+    }
+    internal static var scale: CGFloat {
+        return UIScreen.main.nativeBounds.height / UIScreen.main.nativeBounds.width
+    }
 }
