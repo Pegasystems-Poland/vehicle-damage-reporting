@@ -15,7 +15,7 @@ iOS project uses SceneKit - a 3D graphics application programming interface (API
 ### Structure
 There are two projects:
 
- - _FVM_ - framework containing UI component that allows user to choose damaged parts of vehicle
+ - _FVM_ - framework containing UI component that allows user to choose damaged parts of vehicle   
  - _SampleApp_ - sample application which demonstrates how to import and use _FVM_ framework
 
 ### Run sample project
