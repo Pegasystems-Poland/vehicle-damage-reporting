@@ -19,7 +19,6 @@ package com.pega.vehicledamagemodeling;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Model;
@@ -33,6 +32,11 @@ import com.pega.vehicledamagemodeling.api.Parser;
 import com.pega.vehicledamagemodeling.api.SelectedPartsRepository;
 import com.pega.vehicledamagemodeling.api.SelectionService;
 
+import static com.badlogic.gdx.Gdx.gl;
+import static com.badlogic.gdx.Gdx.graphics;
+import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
+import static com.badlogic.gdx.graphics.GL20.GL_DEPTH_BUFFER_BIT;
+import static com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute.AmbientLight;
 
 public class VehicleDamageModeling extends ApplicationAdapter {
     private PerspectiveCamera perspectiveCamera;
@@ -45,7 +49,6 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private SelectionService selections = new SelectionService(new SelectedPartsRepository(), new Parser());
     private final VehicleDamageReportCallback callback;
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
-
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
@@ -60,10 +63,10 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     public void create () {
         modelBatch = new ModelBatch();
         environment = new Environment();
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.6f, 0.6f, 0.6f, 1f));
+        environment.set(new ColorAttribute(AmbientLight, 0.6f, 0.6f, 0.6f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.8f, -0.8f, -0.8f));
 
-        perspectiveCamera = new PerspectiveCamera(60, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        perspectiveCamera = new PerspectiveCamera(60, graphics.getWidth(), graphics.getHeight());
         perspectiveCamera.position.set(20f, 20f, 20f);
         perspectiveCamera.lookAt(0,0,0);
         perspectiveCamera.update();
@@ -90,8 +93,8 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         }
         cameraController.update();
 
-        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        gl.glViewport(0, 0, graphics.getWidth(), graphics.getHeight());
+        gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         modelBatch.begin(perspectiveCamera);
         modelBatch.render(instances, environment);
