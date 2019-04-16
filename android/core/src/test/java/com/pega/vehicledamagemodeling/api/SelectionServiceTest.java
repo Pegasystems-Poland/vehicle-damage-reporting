@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 
 public class SelectionServiceTest {
     private Parser parser;
+    private JsonObject initJson;
     private SelectedPartsRepository selectedPartsRepository;
     private static final String SELECTION = "selection";
     private static final String ID = "id";
@@ -39,6 +40,7 @@ public class SelectionServiceTest {
     public void setUp() {
         parser = new Parser();
         selectedPartsRepository = mock(SelectedPartsRepository.class);
+        initJson = new JsonObject();
     }
 
     @Test
@@ -66,7 +68,6 @@ public class SelectionServiceTest {
     @Test
     public void whenJsonIsEmptyThenReturnEmptyInitJson(){
         //given
-        JsonObject initJson = new JsonObject();
         when(selectedPartsRepository.getInitJson()).thenReturn(initJson);
         SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
 
@@ -80,7 +81,6 @@ public class SelectionServiceTest {
     @Test
     public void whenInitJsonContainTextThenReturnCorrectText() {
         //given
-        JsonObject initJson = new JsonObject();
         initJson.addProperty(MAIN_SCREEN_TEXT, NOTHING);
         when(selectedPartsRepository.getMainScreenText()).thenReturn(NOTHING);
         SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
@@ -95,7 +95,6 @@ public class SelectionServiceTest {
     @Test
     public void whenJsonIsEmptyAndNewPartIsAddedThenReturnModifiedJson(){
         //given
-        JsonObject initJson = new JsonObject();
         JsonObject expectedJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();

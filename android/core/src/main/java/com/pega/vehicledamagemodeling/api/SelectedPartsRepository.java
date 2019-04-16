@@ -24,33 +24,33 @@ public class SelectedPartsRepository{
     private String mainScreenText;
     private HashMap<String, Material> selectedPartsWithMaterial = new HashMap<>();
 
-    public HashSet<String> getSelectedParts() {
+    HashSet<String> getSelectedParts() {
         return new HashSet<>(selectedPartsWithMaterial.keySet());
     }
 
-    public String getMainScreenText() {
+    String getMainScreenText() {
         return mainScreenText;
     }
 
-    public JsonObject getInitJson() {
+    JsonObject getInitJson() {
         return initJson;
     }
 
-    public void setInitJson(JsonObject initJson) {
+    void setInitJson(JsonObject initJson) {
         this.initJson = initJson;
     }
 
-    public void setMainScreenText(String mainScreenText) {
+    void setMainScreenText(String mainScreenText) {
         this.mainScreenText = mainScreenText;
     }
 
-    public void add(String part, Material material) {
+    void add(String part, Material material) {
         if (!selectedPartsWithMaterial.containsKey(part)) {
             selectedPartsWithMaterial.put(part, material);
         }
     }
 
-    public Material remove(String part) {
+    Material remove(String part) {
         return selectedPartsWithMaterial.remove(part);
     }
 }

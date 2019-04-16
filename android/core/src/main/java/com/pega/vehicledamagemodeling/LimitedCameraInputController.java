@@ -20,6 +20,8 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
 
+import static com.badlogic.gdx.math.Vector3.*;
+
 public class LimitedCameraInputController extends CameraInputController {
     private Vector3 tmpV1 = new Vector3();
     private Vector3 tmpV2 = new Vector3();
@@ -28,7 +30,7 @@ public class LimitedCameraInputController extends CameraInputController {
     private static final float ROTATE_DOWN_LIMIT = 3.0f;
     private static final float ROTATE_UP_LIMIT = 0.5f;
 
-    public LimitedCameraInputController(final Camera camera) {
+    LimitedCameraInputController(final Camera camera) {
         super(camera);
         super.pinchZoomFactor = 15f;
     }
@@ -90,7 +92,7 @@ public class LimitedCameraInputController extends CameraInputController {
         }
 
         camera.rotateAround(target, tmpV1, deltaYRotate);
-        camera.rotateAround(target, Vector3.Y, deltaX * (-rotateAngle));
+        camera.rotateAround(target, Y, deltaX * (-rotateAngle));
 
         if (autoUpdate) {
             camera.update();

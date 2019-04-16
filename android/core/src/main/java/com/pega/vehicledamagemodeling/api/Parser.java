@@ -24,7 +24,7 @@ public class Parser {
     private static final String SELECTION = "selection";
     private static final String ID = "id";
 
-    public String parseToMainScreenText(JsonObject jsonObject) {
+    String parseToMainScreenText(JsonObject jsonObject) {
         JsonElement jsonText = jsonObject.get(MAIN_SCREEN_TEXT);
         String text = "";
 
@@ -35,7 +35,7 @@ public class Parser {
         return text;
     }
 
-    public HashSet<String> parseToSelectedParts(JsonObject jsonObject) {
+    HashSet<String> parseToSelectedParts(JsonObject jsonObject) {
         HashSet<String> selectedParts = new HashSet<>();
 
         if (jsonObject != null) {
@@ -55,7 +55,7 @@ public class Parser {
         return selectedParts;
     }
 
-    public JsonObject parseToJson(String text, HashSet<String> parts) {
+    JsonObject parseToJson(String text, HashSet<String> parts) {
         JsonObject parsed = new JsonObject();
         JsonArray parsedArray = new JsonArray();
 
