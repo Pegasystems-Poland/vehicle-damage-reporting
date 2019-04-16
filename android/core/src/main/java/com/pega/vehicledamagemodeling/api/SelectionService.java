@@ -35,20 +35,20 @@ public class SelectionService {
         }
     }
 
-    void setSelectedPart(String name) {
+    public void setSelectedPart(String name) {
         selectedPartsRepository.add(name, new Material());
         //TODO implement method which get name of part and add it to hashmap in SelectedPartsRepository
     }
 
-    JsonObject getModifiedJson() {
+    public JsonObject getModifiedJson() {
         return parser.parseToJson(selectedPartsRepository.getMainScreenText(), selectedPartsRepository.getSelectedParts());
     }
 
-    JsonObject getInitJson() {
+    public JsonObject getInitJson() {
         return selectedPartsRepository.getInitJson();
     }
 
-    String getMainScreenText() {
+    public String getMainScreenText() {
         return selectedPartsRepository.getMainScreenText();
     }
 }

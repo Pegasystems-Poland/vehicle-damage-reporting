@@ -30,7 +30,7 @@ public class LimitedCameraInputController extends CameraInputController {
     private static final float ROTATE_DOWN_LIMIT = 3.0f;
     private static final float ROTATE_UP_LIMIT = 0.5f;
 
-    LimitedCameraInputController(final Camera camera) {
+    public LimitedCameraInputController(final Camera camera) {
         super(camera);
         super.pinchZoomFactor = 15f;
     }
