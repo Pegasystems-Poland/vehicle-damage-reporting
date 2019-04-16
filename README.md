@@ -4,7 +4,7 @@ This repository contains Vehicle Damage Modeling project.
 
 ## iOS
 
-iOS project uses SceneKit - a 3D graphics application programming interface (API) developed by Apple Inc.
+iOS project uses SceneKit - a 3D graphics application programming interface (API) developed by Apple Inc. 
 
 ### Requirements
 
