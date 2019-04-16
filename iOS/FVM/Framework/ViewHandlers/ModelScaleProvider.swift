@@ -26,7 +26,7 @@ internal class ModelScaleProvider : ModelScaleProviderProtocol {
     internal func getModelScale() -> Float {
         let worldSpaceMin = model.convertPosition(model.boundingBox.min, to: nil)
         let worldSpaceMax = model.convertPosition(model.boundingBox.max, to: nil)
-        let actualModelScale = SCNVector3.distance(worldSpaceMin, worldSpaceMax)
+        let actualModelScale = SCNVector3.distance(from: worldSpaceMin, to: worldSpaceMax)
         return actualModelScale / referenceModelScale
     }
 }

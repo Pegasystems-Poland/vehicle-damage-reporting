@@ -16,7 +16,7 @@ import Foundation
 import SceneKit
 
 extension SCNVector3 {
-    internal static func distance(_ a: SCNVector3, _ b: SCNVector3) -> Float {
+    internal static func distance(from a: SCNVector3, to b: SCNVector3) -> Float {
         return sqrtf(powf(b.x - a.x, 2) + powf(b.y - a.y, 2) + powf(b.z - a.z, 2))
     }
     
