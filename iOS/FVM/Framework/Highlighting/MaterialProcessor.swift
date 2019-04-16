@@ -16,6 +16,7 @@ import SceneKit
 
 internal class MaterialProcessor {
     private var materialStore = Dictionary<String, (node: SCNNode, material: Any?)>()
+    private let SELECTION_COLOR = UIColor(red: 219/255, green: 114/255, blue: 114/255, alpha: 1.0)
     
     internal func highlightNewMaterial(forNode node: SCNNode) {
         guard let nodeName = node.name else {
@@ -54,6 +55,6 @@ internal class MaterialProcessor {
             Log.warning("Node \(nodeName) not found")
             return
         }
-        node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+        node.geometry?.firstMaterial?.diffuse.contents = SELECTION_COLOR
     }
 }
