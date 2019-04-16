@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import UIKit
+import SceneKit
 
 public class FVMDamagedCarViewController: UIViewController {
     @IBOutlet weak var damageSelector: FVMCarModelViewController!
