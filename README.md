@@ -1,8 +1,10 @@
 # Vehicle Damage Modeling
 
-This repository contains template projects for Vehicle Damage Modeling project.
+This repository contains Vehicle Damage Modeling project.
 
 ## iOS
+
+iOS project uses SceneKit - a 3D graphics application programming interface (API) for Apple Inc.
 
 ### Requirements
 
@@ -13,11 +15,8 @@ This repository contains template projects for Vehicle Damage Modeling project.
 ### Structure
 There are two projects:
 
- - _VehicleDamageModeling_ - template for developing framework with UI component for choosing damaged parts of vehicle
- - _SampleApp_ - sample application which demonstrates how to import and use _VehicleDamageModeling_ framework
-
-### Notice
-iOS project uses [Metal Framework](https://developer.apple.com/metal/) for rendering. As some of required classes (like `CAMetalLayer`) is not available on iOS Simulator - please use iOS Device as compilation target.
+ - _FVM_ - developing framework with UI component for choosing damaged parts of vehicle
+ - _SampleApp_ - sample application which demonstrates how to import and use _FVM_ framework
 
 ### Run sample project
 1. Open project from ```iOS/SampleApp/SampleApp.xcodeproj```
