@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">vdm</string>
+    <string name="mainScreenText">Rotate model</string>
 </resources>
