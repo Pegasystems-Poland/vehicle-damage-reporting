@@ -24,8 +24,6 @@ import com.pega.android.vehicledamagemodeling.VehicleDamageModelingActivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import static com.pega.android.vehicledamagemodeling.VehicleDamageModelingActivity.REPORT_EXTRA;
-import static com.pega.android.vehicledamagemodeling.VehicleDamageModelingActivity.REQUEST_CODE;
 import static com.pega.android.vehicledamagemodeling.app.R.layout.main_activity;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case (REQUEST_CODE): {
+            case (VehicleDamageModelingActivity.REQUEST_CODE): {
                 if (resultCode == RESULT_OK) {
-                    String returnValue = data.getStringExtra(REPORT_EXTRA);
+                    String returnValue = data.getStringExtra(VehicleDamageModelingActivity.REPORT_EXTRA);
                     textView.setText(returnValue);
                 }
             }
@@ -55,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, VehicleDamageModelingActivity.class);
         String report = textView.getText().toString();
         if (!report.isEmpty()) {
-            intent.putExtra(REPORT_EXTRA, report);
+            intent.putExtra(VehicleDamageModelingActivity.REPORT_EXTRA, report);
         }
-        startActivityForResult(intent, REQUEST_CODE);
+        startActivityForResult(intent, VehicleDamageModelingActivity.REQUEST_CODE);
     }
 }
