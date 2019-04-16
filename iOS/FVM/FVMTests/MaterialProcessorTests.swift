@@ -18,6 +18,7 @@ import SceneKit
 @testable import FVM
 
 public class MaterialProcessorTests: XCTestCase {
+    let SELECTION_COLOR = UIColor(red: 219/255, green: 114/255, blue: 114/255, alpha: 1.0)
     
     func test_highlightNamelessNode_nothingHighlighted() {
         let invalidNode = setupNode(name: nil, color: UIColor.white)
@@ -44,7 +45,7 @@ public class MaterialProcessorTests: XCTestCase {
         
         processor.highlightNewMaterial(forNode: validNode)
         
-        XCTAssertEqual(UIColor.red, validNode.geometry?.firstMaterial?.diffuse.contents as! UIColor)
+        XCTAssertEqual(SELECTION_COLOR, validNode.geometry?.firstMaterial?.diffuse.contents as! UIColor)
         XCTAssertTrue(processor.hasKeyFor("Valid"))
     }
     
@@ -66,7 +67,7 @@ public class MaterialProcessorTests: XCTestCase {
         
         processor.restoreMaterial(for: "Invalid")
         
-        XCTAssertEqual(UIColor.red, validNode.geometry?.firstMaterial?.diffuse.contents as! UIColor)
+        XCTAssertEqual(SELECTION_COLOR, validNode.geometry?.firstMaterial?.diffuse.contents as! UIColor)
         XCTAssertTrue(processor.hasKeyFor("Valid"))
     }
     
