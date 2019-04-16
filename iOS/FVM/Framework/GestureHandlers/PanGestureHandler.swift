@@ -25,6 +25,11 @@ fileprivate struct RotateConstraint {
 fileprivate struct LastRatio {
     static var width: Float = 1.1
     static var height: Float = 0.0
+    
+    static func reset() {
+        width = 1.1
+        height = 0.0
+    }
 }
 
 extension FVMCarModelViewController {
@@ -47,6 +52,7 @@ extension FVMCarModelViewController {
     }
     
     internal func configurePanGestureRecognizer(_ panGestureRecognizer: inout UIPanGestureRecognizer) {
+        LastRatio.reset()
         panGestureRecognizer.minimumNumberOfTouches = NumberOfTouches.min
         panGestureRecognizer.maximumNumberOfTouches = NumberOfTouches.max
     }

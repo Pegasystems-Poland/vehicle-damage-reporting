@@ -82,7 +82,7 @@ internal class FVMCarModelViewController : SCNView {
         scnScene.rootNode.addChildNode(scnCameraOrbit)
     }
     
-    private func setupLights(){
+    private func setupLights() {
         let lightManager = LightManager(scene: scnScene)
         lightManager.setup()
     }
