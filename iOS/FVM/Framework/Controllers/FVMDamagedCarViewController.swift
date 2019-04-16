@@ -97,7 +97,7 @@ public class FVMDamagedCarViewController: UIViewController {
     fileprivate func hideRotationPrompt() {
         for view in self.view.subviews {
             if view.restorationIdentifier?.isEqual(ROTATION_PROMPT) ?? false as Bool {
-                view.removeFromSuperview()
+                view.alpha = 0
             }
         }
     }
