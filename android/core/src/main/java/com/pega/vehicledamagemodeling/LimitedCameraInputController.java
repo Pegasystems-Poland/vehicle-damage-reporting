@@ -45,7 +45,6 @@ public class LimitedCameraInputController extends CameraInputController {
         if (amount == 0f) {
             return false;
         }
-
         camera.translate(createZoom(amount));
         camera.update();
 
