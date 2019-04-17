@@ -4,19 +4,19 @@ This repository contains Vehicle Damage Modeling project.
 
 ## iOS
 
-iOS project uses SceneKit - a 3D graphics application programming interface (API) developed by Apple Inc. 
+iOS project uses [SceneKit](https://developer.apple.com/documentation/scenekit) - a 3D graphics application programming interface (API) developed by Apple Inc. 
 
 ### Requirements
 
  - XCode 10.1
  - Developer Profile
- - Physical device with iOS 10.0 or newer
+ - Physical device with iOS 9 or newer
 
 ### Structure
 There are two projects:
 
  - _FVM_ - framework containing UI component that allows user to choose damaged parts of vehicle   
- - _SampleApp_ - sample application which demonstrates how to import and use _FVM_ framework
+ - _SampleApp_ - sample application which demonstrates usage of FVM framework
 
 ### Run sample project
 1. Open project from ```iOS/SampleApp/SampleApp.xcodeproj```
