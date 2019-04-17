@@ -14,7 +14,7 @@
 
 import Foundation
 
-internal class DamagedPartsValidator : Validable {
+internal class DamagedPartsValidator : SelectionValidator {
     private var provider: DamagedPartsNamesProviderProtocol
     
     init(provider: DamagedPartsNamesProviderProtocol) {

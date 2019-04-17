@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+import SceneKit
 
 extension FVMCarModelViewController {
     @objc
@@ -20,16 +21,35 @@ extension FVMCarModelViewController {
         if hitResults.count > 0 {
             let result = hitResults.first!
             guard let nodeName = result.node.name else {
-                print("Can't highlight part without name")
+                Log.warning("Can't highlight part without name")
                 return
             }
             if (highlightHandler.isHighlighted(nodeName: nodeName)) {
-                highlightHandler.setHighlightOff(nodeName: nodeName)
+                setHighlightOff(nodeName: nodeName)
             } else {
-                highlightHandler.setHighlightOn(node: result.node)
+                setHighlightOn(node: result.node)
             }
+            notifyFinishButton()
+        }
+    }
+    
+    fileprivate func setHighlightOn(node: SCNNode) {
+        damagedPartsService.addPart(part: Selection(newName: node.name!))
+        highlightHandler.setHighlightOn(node: node)
+    }
+    
+    fileprivate func setHighlightOff(nodeName: String) {
+        damagedPartsService.removePart(partId: nodeName)
+        highlightHandler.setHighlightOff(nodeName: nodeName)
+    }
+    
+    fileprivate func notifyFinishButton() {
+        let currentSelection = damagedPartsService.getCollectionOfDamagedParts().sorted(by: { $0.id < $1.id })
+        let originalSelection = damagedPartsService.originalSelectionRoot!.selection.sorted(by: {$0.id < $1.id })
+        if currentSelection == originalSelection {
+            NotificationCenter.default.post(name: .disableAcceptButton, object: FVMDamagedCarViewController.self)
         } else {
-            highlightHandler.setAllHighlightsOff()
+            NotificationCenter.default.post(name: .enableAcceptButton, object: FVMDamagedCarViewController.self)
         }
     }
 }

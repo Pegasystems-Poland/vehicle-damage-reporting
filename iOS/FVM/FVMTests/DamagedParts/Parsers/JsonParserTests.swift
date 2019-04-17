@@ -55,4 +55,40 @@ class JsonParserTests: XCTestCase {
         //Assert
         XCTAssertEqual(actual?.selection[0].id, expected)
     }
+    
+    func testIfJsonIsCorrectlyBuiltWhenSelectionRootIsEmpty() {
+        //Arrange
+        let selectionRoot = SelectionRoot(selectionArray: [Selection](), text: "")
+        let expected = "{\"mainScreenText\":\"\",\"selection\":[]}"
+        
+        //Act
+        let actual = sut!.parse(element: selectionRoot)
+        
+        //Assert
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testIfJsonIsCorrectlyBuildWhenSelectionRootHasText() {
+        //Arrange
+        let selectionRoot = SelectionRoot(selectionArray: [Selection](), text: "sampleText with spaces!")
+        let expected = "{\"mainScreenText\":\"sampleText with spaces!\",\"selection\":[]}"
+        
+        //Act
+        let actual = sut!.parse(element: selectionRoot)
+        
+        //Assert
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testIfJsonIsCorrectlyBuildWhenSelectionRootHasSelections() {
+        //Arrange
+        let selectionRoot = SelectionRoot(selectionArray: [Selection(newName: "Roof"), Selection(newName: "Hood")], text: "")
+        let expected = "{\"mainScreenText\":\"\",\"selection\":[{\"id\":\"Roof\"},{\"id\":\"Hood\"}]}"
+        
+        //Act
+        let actual = sut!.parse(element: selectionRoot);
+        
+        //Assert
+        XCTAssertEqual(expected, actual)
+    }
 }
