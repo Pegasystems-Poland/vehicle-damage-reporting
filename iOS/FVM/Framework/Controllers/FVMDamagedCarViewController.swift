@@ -59,7 +59,7 @@ public class FVMDamagedCarViewController: UIViewController {
     }
     
     private func showRotationPrompt() {
-        self.view.addSubview(rotationPrompt)
+     //   self.view.addSubview(rotationPrompt)
         NotificationCenter.default.addObserver(self, selector: #selector(hideRotationPrompt), name: .hideRotationPrompt, object: nil)
     }
     
@@ -96,10 +96,11 @@ public class FVMDamagedCarViewController: UIViewController {
     
     @objc
     fileprivate func hideRotationPrompt() {
-        for view in self.view.subviews {
-            if view.restorationIdentifier?.isEqual(ROTATION_PROMPT) ?? false as Bool {
-                view.alpha = 0
-            }
-        }
+        rotationPrompt.alpha = 0
+//        for view in self.view.subviews {
+//            if view.restorationIdentifier?.isEqual(ROTATION_PROMPT) ?? false as Bool {
+//                view.alpha = 0
+//            }
+//        }
     }
 }
