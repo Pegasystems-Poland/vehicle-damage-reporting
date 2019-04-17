@@ -52,7 +52,7 @@ public class SelectedPartsRepository{
         return selectedPartsWithMaterial.remove(part);
     }
 
-    public Material getReverseColor(String partName, Material currentMaterial) {
+    public Material getReverseMaterial(String partName, Material currentMaterial) {
         Material reverseMaterial;
         if (selectedPartsWithMaterial.containsKey(partName)) {
             reverseMaterial = selectedPartsWithMaterial.get(partName);

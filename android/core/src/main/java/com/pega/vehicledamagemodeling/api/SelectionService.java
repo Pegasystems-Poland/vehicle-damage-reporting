@@ -52,7 +52,7 @@ public class SelectionService {
     public void setSelectedPart(ModelInstance part) {
         String partName = getPartName(part);
         Material currentMaterial = getPartMaterial(part);
-        Material reverseMaterial = selectedPartsRepository.getReverseColor(partName, currentMaterial);
+        Material reverseMaterial = selectedPartsRepository.getReverseMaterial(partName, currentMaterial);
         getPartMaterial(part).set(reverseMaterial);
     }
 
