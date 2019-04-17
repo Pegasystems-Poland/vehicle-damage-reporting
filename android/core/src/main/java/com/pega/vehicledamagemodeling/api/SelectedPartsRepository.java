@@ -53,4 +53,12 @@ public class SelectedPartsRepository{
     public Material remove(String part) {
         return selectedPartsWithMaterial.remove(part);
     }
+
+    public boolean contains(String partName) {
+        return selectedPartsWithMaterial.containsKey(partName);
+    }
+
+    public Material getMaterial(String partName) {
+        return selectedPartsWithMaterial.get(partName);
+    }
 }

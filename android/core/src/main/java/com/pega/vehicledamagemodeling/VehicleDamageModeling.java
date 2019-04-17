@@ -40,30 +40,33 @@ import static com.badlogic.gdx.graphics.GL20.GL_DEPTH_BUFFER_BIT;
 import static com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute.AmbientLight;
 
 public class VehicleDamageModeling extends ApplicationAdapter {
-    private PerspectiveCamera camera;
-    private SelectingInputAdapter selectingInputAdapter;
-    private LimitedCameraInputController cameraController;
     private ModelBatch modelBatch;
+    private Environment environment;
+    private PerspectiveCamera camera;
+    private LimitedCameraInputController cameraController;
+    private SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), new Parser());
     private AssetManager assets;
     private Array<ModelInstance> instances = new Array<>();
-    private Environment environment;
-    private boolean loading;
-    private SelectionService selections = new SelectionService(new SelectedPartsRepository(), new Parser());
     private final VehicleDamageReportCallback callback;
+    private JsonObject jsonWithSelectedParts;
+
+    private boolean loading;
+
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback) {
         this.callback = callback;
     }
 
-    public VehicleDamageModeling(JsonObject report, VehicleDamageReportCallback callback) {
+    public VehicleDamageModeling(JsonObject jsonWithSelectedParts, VehicleDamageReportCallback callback) {
         this(callback);
-        selections.attachJson(report);
+        this.jsonWithSelectedParts = jsonWithSelectedParts;
     }
 
     @Override
     public void create () {
         modelBatch = new ModelBatch();
+
         environment = new Environment();
         environment.set(new ColorAttribute(AmbientLight, 0.6f, 0.6f, 0.6f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.8f, -0.8f, -0.8f));
@@ -73,10 +76,9 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         camera.lookAt(0,0,0);
         camera.update();
 
-        selectingInputAdapter = new SelectingInputAdapter(camera, instances);
+        PartSelectedDetector partSelectedDetector = new PartSelectedDetector(camera, instances, selectionService);
         cameraController = new LimitedCameraInputController(camera);
-
-        Gdx.input.setInputProcessor(new InputMultiplexer(selectingInputAdapter, cameraController));
+        Gdx.input.setInputProcessor(new InputMultiplexer(partSelectedDetector, cameraController));
 
         assets = new AssetManager();
         assets.load(MODEL_FILE_NAME, Model.class);
@@ -85,11 +87,16 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
     private void doneLoading() {
         Model model = assets.get(MODEL_FILE_NAME, Model.class);
+
         for (int i = 0; i < model.nodes.size; i++) {
             String id = model.nodes.get(i).id;
             ModelInstance instance = new ModelInstance(model, id, true);
 
             instances.add(instance);
+        }
+
+        if (jsonWithSelectedParts != null) {
+            selectionService.attachJson(jsonWithSelectedParts, instances);
         }
 
         loading = false;
