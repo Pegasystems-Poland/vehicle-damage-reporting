@@ -14,7 +14,9 @@
 
 package com.pega.vehicledamagemodeling.api;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.google.gson.JsonObject;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,6 +25,8 @@ public class SelectedPartsRepository{
     private JsonObject initJson;
     private String mainScreenText;
     private HashMap<String, Material> selectedPartsWithMaterial = new HashMap<>();
+
+    private static final Material selectionMaterial = new Material(ColorAttribute.createDiffuse(Color.RED));
 
     public HashSet<String> getSelectedParts() {
         return new HashSet<>(selectedPartsWithMaterial.keySet());
@@ -44,21 +48,19 @@ public class SelectedPartsRepository{
         this.mainScreenText = mainScreenText;
     }
 
-    public void add(String part, Material material) {
-        if (!selectedPartsWithMaterial.containsKey(part)) {
-            selectedPartsWithMaterial.put(part, material);
-        }
-    }
-
     public Material remove(String part) {
         return selectedPartsWithMaterial.remove(part);
     }
 
-    public boolean contains(String partName) {
-        return selectedPartsWithMaterial.containsKey(partName);
-    }
-
-    public Material getMaterial(String partName) {
-        return selectedPartsWithMaterial.get(partName);
+    public Material getReverseColor(String partName, Material currentMaterial) {
+        Material reverseMaterial;
+        if (selectedPartsWithMaterial.containsKey(partName)) {
+            reverseMaterial = selectedPartsWithMaterial.get(partName);
+            selectedPartsWithMaterial.remove(partName);
+        } else {
+            reverseMaterial = selectionMaterial;
+            selectedPartsWithMaterial.put(partName, currentMaterial.copy());
+        }
+        return reverseMaterial;
     }
 }
