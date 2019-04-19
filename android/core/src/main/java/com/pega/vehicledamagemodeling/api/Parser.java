@@ -17,51 +17,57 @@ package com.pega.vehicledamagemodeling.api;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
 import java.util.HashSet;
 
 public class Parser {
+    private static final String MAIN_SCREEN_TEXT = "mainScreenText";
+    private static final String SELECTION = "selection";
+    private static final String ID = "id";
 
-    private static final String Main_Screen_Text = "mainScreenText";
-    private static final String Selection = "selection";
-    private static final String Id = "id";
-
-    public final String parseToMainScreenText(JsonObject jsonObject){
-        JsonElement jsonText = jsonObject.get(Main_Screen_Text);
+    public String parseToMainScreenText(JsonObject jsonObject) {
+        JsonElement jsonText = jsonObject.get(MAIN_SCREEN_TEXT);
         String text = "";
-        if(jsonText != null){
+
+        if (jsonText != null) {
             text = jsonText.getAsString();
         }
+
         return text;
     }
 
-    public final HashSet<String> parseToSelectedParts(JsonObject jsonObject){
-        JsonArray partsArray = jsonObject.getAsJsonArray(Selection);
+    public HashSet<String> parseToSelectedParts(JsonObject jsonObject) {
         HashSet<String> selectedParts = new HashSet<>();
-        if(partsArray != null) {
-            for (int i = 0; i < partsArray.size(); i++) {
-                String selection = partsArray.get(i)
-                        .getAsJsonObject()
-                        .get(Id)
-                        .getAsString();
-                selectedParts.add(selection);
+
+        if (jsonObject != null) {
+            JsonArray partsArray = jsonObject.getAsJsonArray(SELECTION);
+
+            if (partsArray != null) {
+                for (int i = 0; i < partsArray.size(); i++) {
+                    String selection = partsArray.get(i)
+                            .getAsJsonObject()
+                            .get(ID)
+                            .getAsString();
+                    selectedParts.add(selection);
+                }
             }
         }
+
         return selectedParts;
     }
 
-    public final JsonObject parseToJson(String text, HashSet<String> parts){
+    public JsonObject parseToJson(String text, HashSet<String> parts) {
         JsonObject parsed = new JsonObject();
         JsonArray parsedArray = new JsonArray();
 
-        for(String s : parts){
+        for (String part : parts) {
             JsonObject jsonProperty = new JsonObject();
-            jsonProperty.addProperty(Id, s);
+            jsonProperty.addProperty(ID, part);
             parsedArray.add(jsonProperty);
         }
 
-        parsed.addProperty(Main_Screen_Text, text);
-        parsed.add(Selection,parsedArray);
+        parsed.addProperty(MAIN_SCREEN_TEXT, text);
+        parsed.add(SELECTION, parsedArray);
+
         return parsed;
     }
 }

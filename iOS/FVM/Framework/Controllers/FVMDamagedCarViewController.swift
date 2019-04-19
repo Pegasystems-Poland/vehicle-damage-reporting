@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import UIKit
+import SceneKit
 
 public class FVMDamagedCarViewController: UIViewController {
     @IBOutlet weak var damageSelector: FVMCarModelViewController!
@@ -33,6 +34,10 @@ public class FVMDamagedCarViewController: UIViewController {
     override public func viewDidLayoutSubviews() {
         setupButtonShape(closeButton)
         setupButtonShape(acceptButton)
+    }
+    
+    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        damageSelector.scnCamera.camera!.multiplyFOV(by: size.height / self.view.bounds.height)
     }
     
     @IBAction internal func closeButtonTapped(_ sender: UIButton) {
@@ -93,7 +98,7 @@ public class FVMDamagedCarViewController: UIViewController {
     fileprivate func hideRotationPrompt() {
         for view in self.view.subviews {
             if view.restorationIdentifier?.isEqual(ROTATION_PROMPT) ?? false as Bool {
-                view.removeFromSuperview()
+                view.alpha = 0
             }
         }
     }

@@ -26,11 +26,7 @@ extension FVMCarModelViewController {
                 currentFOV = CGFloat(scnCamera.camera!.yFov)
             }
             if currentFOV * scale < ZoomConstraint.maxFOV && currentFOV * scale > ZoomConstraint.minFOV {
-                if #available(iOS 11.0, *) {
-                    scnCamera.camera!.fieldOfView *= scale
-                } else {
-                    scnCamera.camera!.yFov *= Double(scale)
-                }
+                scnCamera.camera!.multiplyFOV(by: scale)
             }
             gestureRecognizer.scale = 1.0
         default: break

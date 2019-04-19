@@ -20,6 +20,7 @@ internal class FVMCarModelViewController : SCNView {
         return damagedPartsService.originalSelectionRoot?.mainScreenText
     }
     internal var damagedPartsService: DamagedPartsServiceProtocol!
+    internal var modelScaleProvider: ModelScaleProviderProtocol!
     internal var nodeHelper: NodeHelperProtocol?
     internal var scnScene: SCNScene!
     internal var scnCamera: SCNNode!
@@ -28,12 +29,14 @@ internal class FVMCarModelViewController : SCNView {
     private let CAR_MODEL_NAME = "carModel"
     
     public func onStartup(configuration: String) {
-        nodeHelper = NodeHelper(highlightHandler: highlightHandler)
+        setupScene()
+        modelScaleProvider = ModelScaleProvider(scnScene.rootNode.childNode(withName: CAR_MODEL_NAME, recursively: false)!)
         
         setupGestures()
-        setupScene()
         setupCamera()
         setupLights()
+        
+        nodeHelper = NodeHelper(highlightHandler: highlightHandler)
         setupInitialSelection(configuration: configuration)
     }
     
@@ -72,21 +75,22 @@ internal class FVMCarModelViewController : SCNView {
     private func setupCamera() {
         scnCamera = scnScene.rootNode.childNode(withName: "camera", recursively: false)
         
+        let modelScale = modelScaleProvider.getModelScale()
+        scnCamera.camera!.zFar *= Double(modelScale)
+        scnCamera.camera!.zNear *= Double(modelScale)
+        scnCamera.position *= modelScale
+        
         scnCameraOrbit = SCNNode()
         scnCameraOrbit.eulerAngles.x = 0.0
         scnCameraOrbit.eulerAngles.y = -1.1
         
-        if #available(iOS 11.0, *) {
-            scnCamera.camera!.fieldOfView = ZoomConstraint.maxFOV
-        } else {
-            scnCamera.camera!.yFov = Double(ZoomConstraint.maxFOV)
-        }
+        scnCamera.camera!.setFOV(ZoomConstraint.maxFOV)
         
         scnCameraOrbit.addChildNode(scnCamera)
         scnScene.rootNode.addChildNode(scnCameraOrbit)
     }
     
-    private func setupLights(){
+    private func setupLights() {
         let lightManager = LightManager(scene: scnScene)
         lightManager.setup()
     }

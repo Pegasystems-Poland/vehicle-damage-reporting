@@ -13,18 +13,23 @@
 // limitations under the License.
 
 fileprivate struct NumberOfTouches {
-    static let min: Int = 1
-    static let max: Int = 2
+    internal static let min: Int = 1
+    internal static let max: Int = 2
 }
 
 fileprivate struct RotateConstraint {
-    static let minAngle: Float = -0.15
-    static let maxAngle: Float = 0.35
+    internal static let minAngle: Float = -0.15
+    internal static let maxAngle: Float = 0.35
 }
 
 fileprivate struct LastRatio {
-    static var width: Float = 1.1
-    static var height: Float = 0.0
+    internal static var width: Float = 1.1
+    internal static var height: Float = 0.0
+    
+    internal static func reset() {
+        width = 1.1
+        height = 0.0
+    }
 }
 
 extension FVMCarModelViewController {
@@ -47,6 +52,7 @@ extension FVMCarModelViewController {
     }
     
     internal func configurePanGestureRecognizer(_ panGestureRecognizer: inout UIPanGestureRecognizer) {
+        LastRatio.reset()
         panGestureRecognizer.minimumNumberOfTouches = NumberOfTouches.min
         panGestureRecognizer.maximumNumberOfTouches = NumberOfTouches.max
     }

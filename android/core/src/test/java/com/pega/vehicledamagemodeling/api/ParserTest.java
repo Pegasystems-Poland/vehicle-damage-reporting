@@ -16,124 +16,136 @@ package com.pega.vehicledamagemodeling.api;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.junit.Before;
 import org.junit.Test;
 import java.util.HashSet;
+
 import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
+    private Parser parser;
+    private JsonObject initJson;
+    private static final String SELECTION = "selection";
+    private static final String ID = "id";
+    private static final String MAIN_SCREEN_TEXT = "mainScreenText";
+    private static final String NOTHING = "nothing";
+    private static final String ROOF = "roof";
+    private static final String FRONT_BUMPER = "front bumper";
 
-    private static String Selection = "selection";
-    private static String Id = "id";
-    private static String MainScreenText = "mainScreenText";
+    @Before
+    public void setUp() {
+        parser = new Parser();
+        initJson = new JsonObject();
+    }
 
     @Test
-    public void whenJsonContainsTwoPartsThenReturnSelectedParts(){
+    public void whenJsonIsNullThenHashSetIsEmpty() {
         //given
-        JsonObject initJson = new JsonObject();
+        initJson = null;
+
+        //when
+        HashSet<String> hashSet = parser.parseToSelectedParts(initJson);
+
+        //then
+        assertEquals(hashSet, new HashSet<>());
+    }
+
+    @Test
+    public void whenJsonContainsTwoPartsThenReturnSelectedParts() {
+        //given
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
-        jsonProperty.addProperty(Id,"roof");
+        jsonProperty.addProperty(ID, ROOF);
         partsArray.add(jsonProperty);
         JsonObject jsonProperty2 = new JsonObject();
-        jsonProperty2.addProperty(Id,"front bumper");
+        jsonProperty2.addProperty(ID, FRONT_BUMPER);
         partsArray.add(jsonProperty2);
-        initJson.add(Selection,partsArray);
-        Parser parser = new Parser();
+        initJson.add(SELECTION, partsArray);
         HashSet<String> list = new HashSet<>();
-        list.add("roof");
-        list.add("front bumper");
+        list.add(ROOF);
+        list.add(FRONT_BUMPER);
 
         //when
         HashSet<String> result = parser.parseToSelectedParts(initJson);
 
         //then
-        assertEquals(list,result);
+        assertEquals(list, result);
     }
 
     @Test
-    public void whenJsonIsNullThenReturnEmptyHashSet() {
+    public void whenJsonIsEmptyThenReturnEmptyHashSet() {
         //given
-        JsonObject initJson = new JsonObject();
         HashSet<String> expected = new HashSet<>();
-        Parser parser = new Parser();
 
         //when
         HashSet<String> result = parser.parseToSelectedParts(initJson);
 
         //then
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
     @Test
-    public void whenHashSetContainsTwoPartsThenReturnJson(){
+    public void whenHashSetContainsTwoPartsThenReturnJson() {
         //given
         HashSet<String> hashSet = new HashSet<>();
-        hashSet.add("roof");
-        hashSet.add("front bumper");
-        Parser parser = new Parser();
+        hashSet.add(ROOF);
+        hashSet.add(FRONT_BUMPER);
         JsonObject expectedJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
-        jsonProperty.addProperty(Id,"roof");
+        jsonProperty.addProperty(ID, ROOF);
         partsArray.add(jsonProperty);
         JsonObject jsonProperty2 = new JsonObject();
-        jsonProperty2.addProperty(Id,"front bumper");
+        jsonProperty2.addProperty(ID, FRONT_BUMPER);
         partsArray.add(jsonProperty2);
-        expectedJson.addProperty(MainScreenText, "nothing");
-        expectedJson.add(Selection,partsArray);
+        expectedJson.addProperty(MAIN_SCREEN_TEXT, NOTHING);
+        expectedJson.add(SELECTION, partsArray);
 
         //when
-        JsonObject result = parser.parseToJson("nothing",hashSet);
+        JsonObject result = parser.parseToJson(NOTHING, hashSet);
 
         //then
-        assertEquals(expectedJson,result);
+        assertEquals(expectedJson, result);
     }
 
     @Test
-    public void whenHashSetIsNullThenReturnJsonWithoutParts(){
+    public void whenHashSetIsEmptyThenReturnJsonWithoutParts() {
         //given
         HashSet<String> parts = new HashSet<>();
-        Parser parser = new Parser();
         JsonObject expectedJson = new JsonObject();
-        expectedJson.addProperty(MainScreenText, "nothing");
+        expectedJson.addProperty(MAIN_SCREEN_TEXT, NOTHING);
         JsonArray partsArray = new JsonArray();
-        expectedJson.add(Selection,partsArray);
+        expectedJson.add(SELECTION, partsArray);
 
         //when
-        JsonObject result = parser.parseToJson("nothing",parts);
+        JsonObject result = parser.parseToJson(NOTHING, parts);
 
         //then
-        assertEquals(expectedJson,result);
+        assertEquals(expectedJson, result);
     }
 
     @Test
     public void whenMainScreenTextInJsonIsNotNullThenReturnCorrectText() {
         //given
-        String expectedText = "nothing";
-        JsonObject initJson = new JsonObject();
-        initJson.addProperty(MainScreenText,"nothing");
-        Parser parser = new Parser();
+        String expectedText = NOTHING;
+        initJson.addProperty(MAIN_SCREEN_TEXT, NOTHING);
 
         //when
         String result = parser.parseToMainScreenText(initJson);
 
         //then
-        assertEquals(expectedText,result);
+        assertEquals(expectedText, result);
     }
 
     @Test
-    public void whenJsonDoesNotContainMainScreenTextThenReturnEmptyText(){
+    public void whenJsonDoesNotContainMainScreenTextThenReturnEmptyText() {
         //given
-        JsonObject initJson = new JsonObject();
         String expectedText = "";
-        Parser parser = new Parser();
 
         //when
         String result = parser.parseToMainScreenText(initJson);
 
         //then
-        assertEquals(expectedText,result);
+        assertEquals(expectedText, result);
     }
 }
-
-

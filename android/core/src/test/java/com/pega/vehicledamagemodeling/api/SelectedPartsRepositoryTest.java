@@ -17,86 +17,88 @@ package com.pega.vehicledamagemodeling.api;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
+import org.junit.Before;
 import org.junit.Test;
-
 import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 
-public class SelectedPartsTest {
+public class SelectedPartsRepositoryTest {
+    private SelectedPartsRepository selectedPartsRepository;
+    private static final String SELECTION = "selection";
+    private static final String ID = "id";
+    private static final String ROOF = "roof";
+    private static final String FRONT_BUMPER = "front bumper";
+    private static final String TEST = "test";
+    private static final String SAMPLE_TEXT = "the text";
 
-    private static String Selection = "selection";
-    private static String Id = "id";
+    @Before
+    public void setUp() {
+        selectedPartsRepository = new SelectedPartsRepository();
+    }
 
     @Test
     public void whenPartDoesNotExistThenReturnNull(){
-        //initJson
+        //given
         JsonObject initJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
-        jsonProperty.addProperty(Id,"roof");
+        jsonProperty.addProperty(ID, ROOF);
         partsArray.add(jsonProperty);
         JsonObject jsonProperty2 = new JsonObject();
-        jsonProperty2.addProperty(Id,"front bumper");
+        jsonProperty2.addProperty(ID,FRONT_BUMPER);
         partsArray.add(jsonProperty2);
-        initJson.add(Selection,partsArray);
-
-        //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
+        initJson.add(SELECTION, partsArray);
         selectedPartsRepository.setInitJson(initJson);
         Material expected = null;
 
         //when
-        Material result = selectedPartsRepository.remove("test");
+        Material result = selectedPartsRepository.remove(TEST);
 
         //then
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
     @Test
     public void whenSelectionContainsTwoPartsThenReturnCorrectParts() {
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
-        selectedPartsRepository.add("roof",new Material());
-        selectedPartsRepository.add("front bumper",new Material());
+        selectedPartsRepository.add(ROOF, new Material());
+        selectedPartsRepository.add(FRONT_BUMPER, new Material());
 
         HashSet<String> expected = new HashSet<>();
-        expected.add("roof");
-        expected.add("front bumper");
+        expected.add(ROOF);
+        expected.add(FRONT_BUMPER);
 
         //when
         HashSet<String> result = selectedPartsRepository.getSelectedParts();
 
         //then
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
     @Test
     public void whenSelectionIsEmptyThenReturnEmptyHashSet(){
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         HashSet<String> expected = new HashSet<>();
 
         //when
         HashSet<String> result = selectedPartsRepository.getSelectedParts();
 
         //then
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
     @Test
     public void whenJsonIsEmptyThenReturnEmptyJson(){
         //given
         JsonObject initJson = new JsonObject();
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.setInitJson(initJson);
 
         //when
         JsonObject result = selectedPartsRepository.getInitJson();
 
         //then
-        assertEquals(initJson,result);
+        assertEquals(initJson, result);
     }
 
     @Test
@@ -105,26 +107,23 @@ public class SelectedPartsTest {
         JsonObject initJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
         JsonObject jsonProperty = new JsonObject();
-        jsonProperty.addProperty(Id,"roof");
+        jsonProperty.addProperty(ID, ROOF);
         partsArray.add(jsonProperty);
-        initJson.add(Selection,partsArray);
-
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
+        initJson.add(SELECTION, partsArray);
         selectedPartsRepository.setInitJson(initJson);
 
         //when
         JsonObject result = selectedPartsRepository.getInitJson();
 
         //then
-        assertEquals(initJson,result);
+        assertEquals(initJson, result);
     }
 
     @Test
     public void whenTextIsNotEmptyThenReturnCorrectText(){
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
-        selectedPartsRepository.setMainScreenText("The text");
-        String expected = "The text";
+        selectedPartsRepository.setMainScreenText(SAMPLE_TEXT);
+        String expected = SAMPLE_TEXT;
 
         //when
         String result = selectedPartsRepository.getMainScreenText();
@@ -136,44 +135,41 @@ public class SelectedPartsTest {
     @Test
     public void whenTextIsEmptyThenReturnEmptyText(){
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
         selectedPartsRepository.setMainScreenText("");
 
         //when
         String result = selectedPartsRepository.getMainScreenText();
 
         //then
-        assertEquals("",result);
+        assertEquals("", result);
     }
 
     @Test
     public void whenPartExistThenDoNotAdd(){
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
-        selectedPartsRepository.add("roof",new Material());
-        selectedPartsRepository.add("roof",new Material());
+        selectedPartsRepository.add(ROOF, new Material());
+        selectedPartsRepository.add(ROOF, new Material());
         HashSet<String> expected = new HashSet<>();
-        expected.add("roof");
+        expected.add(ROOF);
 
         //when
         HashSet<String> result = selectedPartsRepository.getSelectedParts();
 
         //then
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
     @Test
     public void whenPartDoesNotExistThenAdd(){
         //given
-        SelectedPartsRepository selectedPartsRepository = new SelectedPartsRepository();
-        selectedPartsRepository.add("roof", new Material());
+        selectedPartsRepository.add(ROOF, new Material());
         HashSet<String> expected = new HashSet<>();
-        expected.add("roof");
+        expected.add(ROOF);
 
         //when
         HashSet<String> result = selectedPartsRepository.getSelectedParts();
 
         //then
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 }

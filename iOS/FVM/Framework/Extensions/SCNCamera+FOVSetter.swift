@@ -13,21 +13,22 @@
 // limitations under the License.
 
 import Foundation
-import UIKit
+import SceneKit
 
-internal struct ZoomConstraint {
-    private static let scale: CGFloat = UIScreen.main.nativeBounds.height / UIScreen.main.nativeBounds.width
-    private static var minFovBase: CGFloat = 20
-    private static var maxFovBase: CGFloat = 70
-    
-    internal static var minFOV: CGFloat {
-        return UIDevice.current.orientation.isLandscape
-            ? minFovBase / scale
-            : minFovBase
+extension SCNCamera {
+    public func setFOV(_ value: CGFloat) {
+        if #available(iOS 11.0, *) {
+            fieldOfView = value
+        } else {
+            yFov *= Double(value)
+        }
     }
-    internal static var maxFOV: CGFloat {
-        return UIDevice.current.orientation.isLandscape
-            ? maxFovBase / scale
-            : maxFovBase
+    
+    public func multiplyFOV(by multiplier: CGFloat) {
+        if #available(iOS 11.0, *) {
+            fieldOfView *= multiplier
+        } else {
+            yFov *= Double(multiplier)
+        }
     }
 }
