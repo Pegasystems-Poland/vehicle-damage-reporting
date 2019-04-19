@@ -19,6 +19,7 @@ package com.pega.android.vehicledamagemodeling;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -69,5 +70,9 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
 
     public void crossButtonOnClick(View view) {
         finish();
+    }
+
+    public void promptIconOnClick(View view) {
+        view.setVisibility(View.INVISIBLE);
     }
 }
