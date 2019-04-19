@@ -23,7 +23,7 @@ import java.util.HashSet;
 
 public class SelectedPartsRepository{
     private JsonObject initJson;
-    private String mainScreenText;
+    private String mainScreenText = "";
     private HashMap<String, Material> selectedPartsWithMaterial = new HashMap<>();
 
     private static final Material selectionMaterial = new Material(ColorAttribute.createDiffuse(Color.RED));

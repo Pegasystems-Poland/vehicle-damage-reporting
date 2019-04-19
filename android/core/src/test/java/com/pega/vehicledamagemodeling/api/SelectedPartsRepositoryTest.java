@@ -22,6 +22,7 @@ import org.junit.Test;
 import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class SelectedPartsRepositoryTest {
     private SelectedPartsRepository selectedPartsRepository;
@@ -62,8 +63,8 @@ public class SelectedPartsRepositoryTest {
     @Test
     public void whenSelectionContainsTwoPartsThenReturnCorrectParts() {
         //given
-        selectedPartsRepository.add(ROOF, new Material());
-        selectedPartsRepository.add(FRONT_BUMPER, new Material());
+        selectedPartsRepository.getReverseMaterial(ROOF, new Material());
+        selectedPartsRepository.getReverseMaterial(FRONT_BUMPER, new Material());
 
         HashSet<String> expected = new HashSet<>();
         expected.add(ROOF);
@@ -145,12 +146,11 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenPartExistThenDoNotAdd(){
+    public void whenPartIsAddedTwoTimesThenPartIsNotInRepo(){
         //given
-        selectedPartsRepository.add(ROOF, new Material());
-        selectedPartsRepository.add(ROOF, new Material());
+        selectedPartsRepository.getReverseMaterial(ROOF, new Material());
+        selectedPartsRepository.getReverseMaterial(ROOF, new Material());
         HashSet<String> expected = new HashSet<>();
-        expected.add(ROOF);
 
         //when
         HashSet<String> result = selectedPartsRepository.getSelectedParts();
@@ -162,7 +162,7 @@ public class SelectedPartsRepositoryTest {
     @Test
     public void whenPartDoesNotExistThenAdd(){
         //given
-        selectedPartsRepository.add(ROOF, new Material());
+        selectedPartsRepository.getReverseMaterial(ROOF, new Material());
         HashSet<String> expected = new HashSet<>();
         expected.add(ROOF);
 
@@ -171,5 +171,30 @@ public class SelectedPartsRepositoryTest {
 
         //then
         assertEquals(expected, result);
+    }
+
+    @Test
+    public void whenMaterialIsRevertedOnceThenReturnNoOriginalMaterial(){
+        //given
+        Material notexpectedMaterial = new Material();
+
+        //when
+        Material result = selectedPartsRepository.getReverseMaterial(ROOF,notexpectedMaterial);
+
+        //then
+        assertNotEquals(notexpectedMaterial,result);
+    }
+
+    @Test
+    public void whenMateiralIsRevertedTwoTimesThenReturnOriginalMaterial(){
+        //given
+        Material expectedMaterial = new Material();
+        selectedPartsRepository.getReverseMaterial(ROOF,expectedMaterial);
+
+        //when
+        Material result = selectedPartsRepository.getReverseMaterial(ROOF,expectedMaterial);
+
+        //then
+        assertEquals(expectedMaterial,result);
     }
 }
