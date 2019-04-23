@@ -17,7 +17,7 @@ import UIKit
 extension ViewController : UITextViewDelegate {
     fileprivate static let TERMINATING_CHAR = "\n"
     fileprivate static let DESCRIPTION_ID = "Description"
-    fileprivate static let DESCRIPTION_VALUE = "FVM description"
+    fileprivate static let DESCRIPTION_VALUE = "Rotate model and select damaged parts with a tap on the model. If completed press button."
     fileprivate static let DAMAGED_PARTS_ID = "DamagedCarParts"
     fileprivate static let DAMAGED_PARTS_VALUE = "Hood; Roof;"
     fileprivate static let DEFAULT_RESULT =
