@@ -25,7 +25,6 @@ public class PartSelectedDetector extends InputAdapter{
         this.selectionService = selectionService;
     }
 
-
     @Override
     public boolean touchDown (int screenX, int screenY, int pointer, int button) {
         screenTouchedMarker.set(screenX, screenY);

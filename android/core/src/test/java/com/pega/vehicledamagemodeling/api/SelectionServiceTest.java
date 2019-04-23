@@ -16,11 +16,12 @@
 
 package com.pega.vehicledamagemodeling.api;
 
+import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +38,7 @@ public class SelectionServiceTest {
     private static final String SELECTION = "selection";
     private static final String ID = "id";
     private static final String MAIN_SCREEN_TEXT = "mainScreenText";
-    private static final String LOREM_IPSUM = "lorem ipsum dolor sit amet consectetur adipiscing elit";
+    private static final String NOTHING = "nothing";
     private static final String ROOF = "roof";
     private static final String FRONT_BUMPER = "front bumper";
 
@@ -71,7 +72,7 @@ public class SelectionServiceTest {
     }
 
     @Test
-    public void whenJsonIsEmptyThenReturnEmptyInitJson() {
+    public void whenJsonIsEmptyThenReturnEmptyInitJson(){
         //given
         when(selectedPartsRepository.getInitJson()).thenReturn(initJson);
         SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
@@ -86,15 +87,60 @@ public class SelectionServiceTest {
     @Test
     public void whenInitJsonContainTextThenReturnCorrectText() {
         //given
-        initJson.addProperty(MAIN_SCREEN_TEXT, LOREM_IPSUM);
-        when(selectedPartsRepository.getMainScreenText()).thenReturn(LOREM_IPSUM);
+        initJson.addProperty(MAIN_SCREEN_TEXT, NOTHING);
+        when(selectedPartsRepository.getMainScreenText()).thenReturn(NOTHING);
         SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
 
         //when
         String result = selectionService.getMainScreenText();
 
         //then
-        assertEquals(LOREM_IPSUM, result);
+        assertEquals(NOTHING, result);
+    }
+
+    @Test
+    public void whenJsonIsEmptyAndNewPartIsAddedThenReturnModifiedJson(){
+        //given
+        JsonObject expectedJson = new JsonObject();
+        JsonArray partsArray = new JsonArray();
+        JsonObject jsonProperty = new JsonObject();
+        Array<ModelInstance> arrayOfInstance = new Array<>();
+        jsonProperty.addProperty(ID, ROOF);
+        partsArray.add(jsonProperty);
+        expectedJson.addProperty(MAIN_SCREEN_TEXT, "");
+        expectedJson.add(SELECTION, partsArray);
+        ModelInstance modelInstance = mock(ModelInstance.class);
+        when(modelInstance.model).thenReturn(new Model());
+        when(modelInstance.nodes.get(0).id).thenReturn(ROOF);
+        when(modelInstance.materials.get(0)).thenReturn(new Material());
+        SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), parser);
+        selectionService.attachJson(initJson, arrayOfInstance);
+        selectionService.setSelectedPart(modelInstance);
+
+        //when
+        JsonObject result = selectionService.getModifiedJson();
+
+        //then
+        assertEquals(expectedJson, result);
+    }
+
+    @Test
+    public void whenModelInstanceIsNullThenNoPartIsSelected(){
+        //given
+        ModelInstance modelInstance = null;
+        SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
+        selectionService.attachJson(initJson, new Array<>());
+        when(selectedPartsRepository.getMainScreenText()).thenReturn("");
+        selectionService.setSelectedPart(modelInstance);
+        JsonObject expectedJson = new JsonObject();
+        expectedJson.addProperty(MAIN_SCREEN_TEXT, "");
+        expectedJson.add(SELECTION, new JsonArray());
+
+        //when
+        JsonObject result = selectionService.getModifiedJson();
+
+        //then
+        assertEquals(expectedJson,result);
     }
 
     @Test
@@ -114,7 +160,7 @@ public class SelectionServiceTest {
         selectionService.attachJson(json, instances);
 
         //then
-        assertEquals(LOREM_IPSUM, selectionService.getMainScreenText());
+        assertEquals(NOTHING, selectionService.getMainScreenText());
         assertEquals(selectionService.getInitJson(), selectionService.getInitJson());
     }
 }
