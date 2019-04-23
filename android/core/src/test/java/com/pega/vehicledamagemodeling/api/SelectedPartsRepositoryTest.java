@@ -60,23 +60,6 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenSelectionContainsTwoPartsThenReturnCorrectParts() {
-        //given
-        selectedPartsRepository.add(ROOF, new Material());
-        selectedPartsRepository.add(FRONT_BUMPER, new Material());
-
-        HashSet<String> expected = new HashSet<>();
-        expected.add(ROOF);
-        expected.add(FRONT_BUMPER);
-
-        //when
-        HashSet<String> result = selectedPartsRepository.getSelectedParts();
-
-        //then
-        assertEquals(expected, result);
-    }
-
-    @Test
     public void whenSelectionIsEmptyThenReturnEmptyHashSet(){
         //given
         HashSet<String> expected = new HashSet<>();
@@ -142,34 +125,5 @@ public class SelectedPartsRepositoryTest {
 
         //then
         assertEquals("", result);
-    }
-
-    @Test
-    public void whenPartExistThenDoNotAdd(){
-        //given
-        selectedPartsRepository.add(ROOF, new Material());
-        selectedPartsRepository.add(ROOF, new Material());
-        HashSet<String> expected = new HashSet<>();
-        expected.add(ROOF);
-
-        //when
-        HashSet<String> result = selectedPartsRepository.getSelectedParts();
-
-        //then
-        assertEquals(expected, result);
-    }
-
-    @Test
-    public void whenPartDoesNotExistThenAdd(){
-        //given
-        selectedPartsRepository.add(ROOF, new Material());
-        HashSet<String> expected = new HashSet<>();
-        expected.add(ROOF);
-
-        //when
-        HashSet<String> result = selectedPartsRepository.getSelectedParts();
-
-        //then
-        assertEquals(expected, result);
     }
 }

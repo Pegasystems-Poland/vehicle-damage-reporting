@@ -16,10 +16,15 @@
 
 package com.pega.vehicledamagemodeling.api;
 
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -32,7 +37,7 @@ public class SelectionServiceTest {
     private static final String SELECTION = "selection";
     private static final String ID = "id";
     private static final String MAIN_SCREEN_TEXT = "mainScreenText";
-    private static final String NOTHING = "nothing";
+    private static final String LOREM_IPSUM = "lorem ipsum dolor sit amet consectetur adipiscing elit";
     private static final String ROOF = "roof";
     private static final String FRONT_BUMPER = "front bumper";
 
@@ -66,7 +71,7 @@ public class SelectionServiceTest {
     }
 
     @Test
-    public void whenJsonIsEmptyThenReturnEmptyInitJson(){
+    public void whenJsonIsEmptyThenReturnEmptyInitJson() {
         //given
         when(selectedPartsRepository.getInitJson()).thenReturn(initJson);
         SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
@@ -81,35 +86,35 @@ public class SelectionServiceTest {
     @Test
     public void whenInitJsonContainTextThenReturnCorrectText() {
         //given
-        initJson.addProperty(MAIN_SCREEN_TEXT, NOTHING);
-        when(selectedPartsRepository.getMainScreenText()).thenReturn(NOTHING);
+        initJson.addProperty(MAIN_SCREEN_TEXT, LOREM_IPSUM);
+        when(selectedPartsRepository.getMainScreenText()).thenReturn(LOREM_IPSUM);
         SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
 
         //when
         String result = selectionService.getMainScreenText();
 
         //then
-        assertEquals(NOTHING, result);
+        assertEquals(LOREM_IPSUM, result);
     }
 
     @Test
-    public void whenJsonIsEmptyAndNewPartIsAddedThenReturnModifiedJson(){
+    public void whenAttachingEmptyJson() {
         //given
-        JsonObject expectedJson = new JsonObject();
-        JsonArray partsArray = new JsonArray();
-        JsonObject jsonProperty = new JsonObject();
-        jsonProperty.addProperty(ID, ROOF);
-        partsArray.add(jsonProperty);
-        expectedJson.addProperty(MAIN_SCREEN_TEXT, "");
-        expectedJson.add(SELECTION, partsArray);
+        JsonObject json = new JsonObject();
+
+        parser = mock(Parser.class);
+        Array<ModelInstance> instances = new Array<>();
+        when(parser.parseToMainScreenText(json)).thenReturn(LOREM_IPSUM);
+        HashSet<String> list = new HashSet<>();
+        when(parser.parseToSelectedParts(json)).thenReturn(list);
+
         SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), parser);
-        selectionService.attachJson(initJson);
-        selectionService.setSelectedPart(ROOF);
 
         //when
-        JsonObject result = selectionService.getModifiedJson();
+        selectionService.attachJson(json, instances);
 
         //then
-        assertEquals(expectedJson, result);
+        assertEquals(LOREM_IPSUM, selectionService.getMainScreenText());
+        assertEquals(selectionService.getInitJson(), selectionService.getInitJson());
     }
 }

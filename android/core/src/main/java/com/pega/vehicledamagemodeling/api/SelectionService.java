@@ -28,6 +28,20 @@ public class SelectionService {
         this.parser = parser;
     }
 
+    public JsonObject getModifiedJson() {
+        return parser.parseToJson(
+                selectedPartsRepository.getMainScreenText(),
+                selectedPartsRepository.getSelectedParts());
+    }
+
+    public JsonObject getInitJson() {
+        return selectedPartsRepository.getInitJson();
+    }
+
+    public String getMainScreenText() {
+        return selectedPartsRepository.getMainScreenText();
+    }
+
     public void attachJson(JsonObject json, Array<ModelInstance> parts) {
         selectedPartsRepository.setInitJson(json);
         selectedPartsRepository.setMainScreenText(parser.parseToMainScreenText(json));
@@ -62,20 +76,6 @@ public class SelectionService {
 
     private Material getPartMaterial(ModelInstance part) {
         return part.materials.get(0);
-    }
-
-    public JsonObject getModifiedJson() {
-        return parser.parseToJson(
-                selectedPartsRepository.getMainScreenText(),
-                selectedPartsRepository.getSelectedParts());
-    }
-
-    public JsonObject getInitJson() {
-        return selectedPartsRepository.getInitJson();
-    }
-
-    public String getMainScreenText() {
-        return selectedPartsRepository.getMainScreenText();
     }
 
 
