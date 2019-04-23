@@ -27,9 +27,11 @@ public class LimitedCameraInputController extends CameraInputController {
     private static final float ROTATE_UP_LIMIT = 0.5f;
     private Vector3 tmpV1 = new Vector3();
     private Vector3 tmpV2 = new Vector3();
+    private UIUpdateCallback uiUpdateCallback;
 
-    public LimitedCameraInputController(final Camera camera) {
+    public LimitedCameraInputController(final Camera camera, UIUpdateCallback uiUpdateCallback) {
         super(camera);
+        this.uiUpdateCallback = uiUpdateCallback;
         super.pinchZoomFactor = 15f;
     }
 
@@ -74,6 +76,8 @@ public class LimitedCameraInputController extends CameraInputController {
 
     @Override
     protected boolean process (float deltaX, float deltaY, int button) {
+        uiUpdateCallback.hideRotationPrompt();
+
         float deltaYRotate = deltaY * rotateAngle;
 
         tmpV1.set(camera.direction)

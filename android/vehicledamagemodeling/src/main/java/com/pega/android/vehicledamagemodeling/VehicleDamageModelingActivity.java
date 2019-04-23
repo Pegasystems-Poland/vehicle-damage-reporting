@@ -18,17 +18,22 @@ package com.pega.android.vehicledamagemodeling;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.OrientationEventListener;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.pega.vehicledamagemodeling.UIUpdateCallback;
 import com.pega.vehicledamagemodeling.VehicleDamageModeling;
 import com.pega.vehicledamagemodeling.VehicleDamageReportCallback;
 
+import static com.pega.android.vehicledamagemodeling.R.id.roatation_prompt;
+import static com.pega.android.vehicledamagemodeling.R.id.user_text;
 import static com.pega.android.vehicledamagemodeling.R.id.vehicle_damage_modeling_content;
 import static com.pega.android.vehicledamagemodeling.R.layout.vehicle_damage_modeling_activity;
 
@@ -57,14 +62,40 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
                 setResult(RESULT_OK, intent);
                 finish();
             }
+
+            @Override
+            public void onFilledMainScreenText(final String mainScreenText) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Button userText = findViewById(user_text);
+                        Log.d("Text", "Fill Main Screen Text");
+                        userText.setText("Missing text?");
+                        // userText.setText(mainScreenText);
+                    }
+                });
+            }
+        };
+
+        final UIUpdateCallback uiUpdateCallback = new UIUpdateCallback() {
+            @Override
+            public void hideRotationPrompt() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Button rotationPrompt = findViewById(roatation_prompt);
+                        rotationPrompt.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
         };
 
         String report = getIntent().getStringExtra(REPORT_EXTRA);
         if (report == null || report.isEmpty()) {
-            vehicleDamageModeling = new VehicleDamageModeling(callback);
+            vehicleDamageModeling = new VehicleDamageModeling(callback, uiUpdateCallback);
         } else {
             vehicleDamageModeling = new VehicleDamageModeling(
-                    new JsonParser().parse(report).getAsJsonObject(), callback);
+                    new JsonParser().parse(report).getAsJsonObject(), callback, uiUpdateCallback);
         }
         viewGroup.addView(initializeForView(vehicleDamageModeling, config));
 
@@ -72,10 +103,6 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
 
     public void crossButtonOnClick(View view) {
         vehicleDamageModeling.end();
-    }
-
-    public void promptIconOnClick(View view) {
-        view.setVisibility(View.INVISIBLE);
     }
 
     public void chechButtonOnClick(View view){

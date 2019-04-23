@@ -44,14 +44,17 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private boolean loading;
     private SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), new Parser());
     private final VehicleDamageReportCallback callback;
+    private final UIUpdateCallback uiUpdateCallback;
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
 
-    public VehicleDamageModeling(VehicleDamageReportCallback callback) {
+
+    public VehicleDamageModeling(VehicleDamageReportCallback callback, UIUpdateCallback uiUpdateCallback) {
         this.callback = callback;
+        this.uiUpdateCallback = uiUpdateCallback;
     }
 
-    public VehicleDamageModeling(JsonObject report, VehicleDamageReportCallback callback) {
-        this(callback);
+    public VehicleDamageModeling(JsonObject report, VehicleDamageReportCallback callback, UIUpdateCallback uiUpdateCallback) {
+        this(callback, uiUpdateCallback);
         selectionService.attachJson(report);
     }
 
@@ -67,7 +70,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         perspectiveCamera.lookAt(0,0,0);
         perspectiveCamera.update();
 
-        cameraController = new LimitedCameraInputController(perspectiveCamera);
+        cameraController = new LimitedCameraInputController(perspectiveCamera, uiUpdateCallback);
         Gdx.input.setInputProcessor(cameraController);
 
         assets = new AssetManager();
@@ -80,6 +83,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         ModelInstance carInstance = new ModelInstance(car, 0 , 0, 0);
         instances.add(carInstance);
         loading = false;
+        callback.onFilledMainScreenText(selectionService.getMainScreenText());
     }
 
     @Override
