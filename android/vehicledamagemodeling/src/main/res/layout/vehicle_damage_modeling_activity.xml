@@ -50,6 +50,7 @@
         android:layout_marginBottom="3dp"
         android:background="@drawable/check_button"
         android:foreground="@drawable/check_ui_foreground"
+        android:onClick="chechButtonOnClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintLeft_toLeftOf="parent"

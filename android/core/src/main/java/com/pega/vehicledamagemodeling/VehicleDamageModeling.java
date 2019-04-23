@@ -42,7 +42,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Array<ModelInstance> instances = new Array<>();
     private Environment environment;
     private boolean loading;
-    private SelectionService selections = new SelectionService(new SelectedPartsRepository(), new Parser());
+    private SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), new Parser());
     private final VehicleDamageReportCallback callback;
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
 
@@ -52,7 +52,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
     public VehicleDamageModeling(JsonObject report, VehicleDamageReportCallback callback) {
         this(callback);
-        selections.attachJson(report);
+        selectionService.attachJson(report);
     }
 
     @Override
@@ -110,5 +110,13 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         perspectiveCamera.viewportHeight = height;
         perspectiveCamera.viewportWidth = width;
         perspectiveCamera.update();
+    }
+
+    public void end(){
+        callback.onFinished(selectionService.getInitJson());
+    }
+
+    public void endWithModification(){
+        callback.onFinished(selectionService.getModifiedJson());
     }
 }
