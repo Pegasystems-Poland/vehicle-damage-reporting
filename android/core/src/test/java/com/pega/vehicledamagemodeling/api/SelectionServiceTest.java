@@ -16,12 +16,11 @@
 
 package com.pega.vehicledamagemodeling.api;
 
-import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -99,32 +98,6 @@ public class SelectionServiceTest {
     }
 
     @Test
-    public void whenJsonIsEmptyAndNewPartIsAddedThenReturnModifiedJson(){
-        //given
-        JsonObject expectedJson = new JsonObject();
-        JsonArray partsArray = new JsonArray();
-        JsonObject jsonProperty = new JsonObject();
-        Array<ModelInstance> arrayOfInstance = new Array<>();
-        jsonProperty.addProperty(ID, ROOF);
-        partsArray.add(jsonProperty);
-        expectedJson.addProperty(MAIN_SCREEN_TEXT, "");
-        expectedJson.add(SELECTION, partsArray);
-        ModelInstance modelInstance = mock(ModelInstance.class);
-        when(modelInstance.model).thenReturn(new Model());
-        when(modelInstance.nodes.get(0).id).thenReturn(ROOF);
-        when(modelInstance.materials.get(0)).thenReturn(new Material());
-        SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), parser);
-        selectionService.attachJson(initJson, arrayOfInstance);
-        selectionService.setSelectedPart(modelInstance);
-
-        //when
-        JsonObject result = selectionService.getModifiedJson();
-
-        //then
-        assertEquals(expectedJson, result);
-    }
-
-    @Test
     public void whenModelInstanceIsNullThenNoPartIsSelected(){
         //given
         ModelInstance modelInstance = null;
@@ -150,7 +123,7 @@ public class SelectionServiceTest {
 
         parser = mock(Parser.class);
         Array<ModelInstance> instances = new Array<>();
-        when(parser.parseToMainScreenText(json)).thenReturn(LOREM_IPSUM);
+        when(parser.parseToMainScreenText(json)).thenReturn(NOTHING);
         HashSet<String> list = new HashSet<>();
         when(parser.parseToSelectedParts(json)).thenReturn(list);
 
