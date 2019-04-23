@@ -23,7 +23,6 @@ public class FVMDamagedCarViewController: UIViewController {
     @IBOutlet weak var acceptButton: UIButton!
     public var configuration: String!
     public var completionAction: ((String) -> Void)?
-    private let ROTATION_PROMPT = "RotationPrompt"
     
     override public func viewDidLoad() {
         setupDamagedCarScene()
