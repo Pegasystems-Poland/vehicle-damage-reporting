@@ -30,6 +30,7 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonObject;
 import com.pega.vehicledamagemodeling.api.Parser;
+import com.pega.vehicledamagemodeling.api.PartSelectionDetector;
 import com.pega.vehicledamagemodeling.api.SelectedPartsRepository;
 import com.pega.vehicledamagemodeling.api.SelectionService;
 
@@ -76,9 +77,9 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         camera.lookAt(0,0,0);
         camera.update();
 
-        PartSelectedDetector partSelectedDetector = new PartSelectedDetector(camera, instances, selectionService);
+        PartSelectionDetector partSelectionDetector = new PartSelectionDetector(camera, instances, selectionService);
         cameraController = new LimitedCameraInputController(camera);
-        Gdx.input.setInputProcessor(new InputMultiplexer(partSelectedDetector, cameraController));
+        Gdx.input.setInputProcessor(new InputMultiplexer(partSelectionDetector, cameraController));
 
         assets = new AssetManager();
         assets.load(MODEL_FILE_NAME, Model.class);

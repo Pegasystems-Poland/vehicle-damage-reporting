@@ -1,4 +1,4 @@
-package com.pega.vehicledamagemodeling;
+package com.pega.vehicledamagemodeling.api;
 
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
@@ -9,9 +9,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
-import com.pega.vehicledamagemodeling.api.SelectionService;
 
-public class PartSelectedDetector extends InputAdapter{
+public class PartSelectionDetector extends InputAdapter{
     private Camera camera;
     private Array<ModelInstance> parts;
     private SelectionService selectionService;
@@ -19,7 +18,9 @@ public class PartSelectedDetector extends InputAdapter{
     private static final Vector2 screenTouchedMarker = new Vector2();
     private static final Vector3 intersectionPoint = new Vector3();
 
-    public PartSelectedDetector(Camera camera, Array<ModelInstance> parts, SelectionService selectionService) {
+    private static final float SENSITIVITY = 7f;
+
+    public PartSelectionDetector(Camera camera, Array<ModelInstance> parts, SelectionService selectionService) {
         this.camera = camera;
         this.parts = parts;
         this.selectionService = selectionService;
@@ -33,7 +34,7 @@ public class PartSelectedDetector extends InputAdapter{
 
     @Override
     public boolean touchUp (int screenX, int screenY, int pointer, int button) {
-        if (screenTouchedMarker.epsilonEquals(screenX, screenY)) {
+        if (screenTouchedMarker.epsilonEquals(screenX, screenY, SENSITIVITY)) {
             ModelInstance selectedPart = getSelectedPartId(screenX, screenY);
 
             if (selectedPart != null) {

@@ -122,6 +122,7 @@ public class SelectionServiceTest {
         JsonObject json = new JsonObject();
 
         parser = mock(Parser.class);
+
         Array<ModelInstance> instances = new Array<>();
         when(parser.parseToMainScreenText(json)).thenReturn(NOTHING);
         HashSet<String> list = new HashSet<>();
