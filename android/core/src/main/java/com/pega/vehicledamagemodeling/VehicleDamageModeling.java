@@ -55,12 +55,12 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
 
-    public VehicleDamageModeling(VehicleDamageReportCallback callback) {
+    public VehicleDamageModeling(VehicleDamageReportCallback callback, UIUpdateCallback uiUpdateCallback) {
         this.callback = callback;
         this.uiUpdateCallback = uiUpdateCallback;
     }
 
-    public VehicleDamageModeling(JsonObject jsonWithSelectedParts, VehicleDamageReportCallback callback) {
+    public VehicleDamageModeling(JsonObject jsonWithSelectedParts, VehicleDamageReportCallback callback, UIUpdateCallback uiUpdateCallback) {
         this(callback, uiUpdateCallback);
         this.jsonWithSelectedParts = jsonWithSelectedParts;
     }

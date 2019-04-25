@@ -33,12 +33,13 @@
     <Button
         android:id="@+id/user_text"
         android:layout_width="420dp"
-        android:layout_height="127dp"
+        android:layout_height="82dp"
+        android:layout_marginBottom="88dp"
         android:background="@android:color/transparent"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/mainScreenText"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
