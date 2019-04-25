@@ -15,6 +15,8 @@
 package com.pega.vehicledamagemodeling.api;
 
 import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonObject;
 
 public class SelectionService {
@@ -26,22 +28,46 @@ public class SelectionService {
         this.parser = parser;
     }
 
-    public void attachJson(JsonObject json) {
+    public void attachJson(JsonObject json, Array<ModelInstance> parts) {
         selectedPartsRepository.setInitJson(json);
         selectedPartsRepository.setMainScreenText(parser.parseToMainScreenText(json));
 
-        for (String part : parser.parseToSelectedParts(json)) {
-            setSelectedPart(part);
+        for (String partName : parser.parseToSelectedParts(json)) {
+            ModelInstance part = getPartByName(partName, parts);
+            if (part != null) {
+                setSelectedPart(part);
+            }
         }
     }
 
-    public void setSelectedPart(String name) {
-        selectedPartsRepository.add(name, new Material());
-        //TODO implement method which get name of part and add it to hashmap in SelectedPartsRepository
+    private ModelInstance getPartByName(String partName, Array<ModelInstance> parts) {
+        for (ModelInstance part: parts) {
+            if (getPartName(part).equals(partName)) {
+                return part;
+            }
+        }
+        return null;
+    }
+
+    public void setSelectedPart(ModelInstance part) {
+        String partName = getPartName(part);
+        Material currentMaterial = getPartMaterial(part);
+        Material reverseMaterial = selectedPartsRepository.getReverseMaterial(partName, currentMaterial);
+        getPartMaterial(part).set(reverseMaterial);
+    }
+
+    private String getPartName(ModelInstance part) {
+        return part.nodes.get(0).id;
+    }
+
+    private Material getPartMaterial(ModelInstance part) {
+        return part.materials.get(0);
     }
 
     public JsonObject getModifiedJson() {
-        return parser.parseToJson(selectedPartsRepository.getMainScreenText(), selectedPartsRepository.getSelectedParts());
+        return parser.parseToJson(
+                selectedPartsRepository.getMainScreenText(),
+                selectedPartsRepository.getSelectedParts());
     }
 
     public JsonObject getInitJson() {
@@ -51,4 +77,6 @@ public class SelectionService {
     public String getMainScreenText() {
         return selectedPartsRepository.getMainScreenText();
     }
+
+
 }
