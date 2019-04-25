@@ -46,17 +46,20 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private Array<ModelInstance> instances = new Array<>();
     private Environment environment;
     private boolean loading;
-    private SelectionService selections = new SelectionService(new SelectedPartsRepository(), new Parser());
+    private SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), new Parser());
     private final VehicleDamageReportCallback callback;
+    private final UIUpdateCallback uiUpdateCallback;
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
 
-    public VehicleDamageModeling(VehicleDamageReportCallback callback) {
+
+    public VehicleDamageModeling(VehicleDamageReportCallback callback, UIUpdateCallback uiUpdateCallback) {
         this.callback = callback;
+        this.uiUpdateCallback = uiUpdateCallback;
     }
 
-    public VehicleDamageModeling(JsonObject report, VehicleDamageReportCallback callback) {
-        this(callback);
-        selections.attachJson(report);
+    public VehicleDamageModeling(JsonObject report, VehicleDamageReportCallback callback, UIUpdateCallback uiUpdateCallback) {
+        this(callback, uiUpdateCallback);
+        selectionService.attachJson(report);
     }
 
     @Override
@@ -71,7 +74,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         perspectiveCamera.lookAt(0,0,0);
         perspectiveCamera.update();
 
-        cameraController = new LimitedCameraInputController(perspectiveCamera);
+        cameraController = new LimitedCameraInputController(perspectiveCamera, uiUpdateCallback);
         Gdx.input.setInputProcessor(cameraController);
 
         assets = new AssetManager();
@@ -84,6 +87,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         ModelInstance carInstance = new ModelInstance(car, 0 , 0, 0);
         instances.add(carInstance);
         loading = false;
+        callback.onFilledMainScreenText(selectionService.getMainScreenText());
     }
 
     @Override
@@ -114,5 +118,13 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         perspectiveCamera.viewportHeight = height;
         perspectiveCamera.viewportWidth = width;
         perspectiveCamera.update();
+    }
+
+    public void end(){
+        callback.onFinished(selectionService.getInitJson());
+    }
+
+    public void endWithModification(){
+        callback.onFinished(selectionService.getModifiedJson());
     }
 }
