@@ -1,92 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/vehicle_damage_modeling_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="450px"
-        android:background="#DEDEDE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+    <FrameLayout
+        android:id="@+id/vdm_model_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#3C38912E"
+        app:layout_constraintBottom_toTopOf="@+id/vdm_bottom_overlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/white_box"
-        android:layout_width="match_parent"
-        android:layout_height="449px"
-        android:background="@android:color/white"
+    <View
+        android:id="@+id/vdm_bottom_overlay"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:background="@drawable/border"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/user_text"
-        android:layout_width="420dp"
-        android:layout_height="82dp"
-        android:layout_marginBottom="88dp"
-        android:background="@android:color/transparent"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="@string/mainScreenText"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <Button
-        android:id="@+id/check_button"
+        android:id="@+id/vdm_bottom_check_button"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/check_button"
         android:foreground="@drawable/check_ui_foreground"
-        android:onClick="chechButtonOnClick"
+        android:onClick="onCheckButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.97"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="UnusedAttribute" />
 
     <Button
-        android:id="@+id/cross_button"
+        android:id="@+id/vdm_bottom_cancel_button"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/cross_button"
         android:foreground="@drawable/cross_ui_foreground"
-        android:onClick="crossButtonOnClick"
+        android:onClick="onCancelButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="UnusedAttribute" />
 
-    <Button
-        android:id="@+id/roatation_prompt"
+    <TextView
+        android:id="@+id/vdm_bottom_info_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:text="@string/vdm_description"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/vdm_bottom_overlay" />
+
+    <ImageView
+        android:id="@+id/vdm_rotation_prompt"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501" />
+        app:layout_constraintBottom_toTopOf="@+id/vdm_bottom_overlay"
+        app:layout_constraintEnd_toEndOf="@+id/vdm_model_container"
+        app:layout_constraintStart_toStartOf="@+id/vdm_model_container"
+        app:layout_constraintTop_toTopOf="@+id/vdm_model_container"
+        tools:ignore="ContentDescription" />
 
 </android.support.constraint.ConstraintLayout>

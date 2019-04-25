@@ -2,10 +2,7 @@
     package="com.pega.android.vehicledamagemodeling">
 
     <application>
-        <activity
-            android:name=".VehicleDamageModelingActivity"
-            android:screenOrientation="fullSensor"
-            android:configChanges="keyboard|keyboardHidden|navigation|screenSize|screenLayout|orientation" />
+        <activity android:name=".VehicleDamageModelingActivity" />
     </application>
 
 </manifest>

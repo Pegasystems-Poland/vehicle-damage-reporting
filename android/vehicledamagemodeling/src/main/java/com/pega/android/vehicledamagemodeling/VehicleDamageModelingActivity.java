@@ -18,10 +18,8 @@ package com.pega.android.vehicledamagemodeling;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
@@ -32,13 +30,9 @@ import com.pega.vehicledamagemodeling.UIUpdateCallback;
 import com.pega.vehicledamagemodeling.VehicleDamageModeling;
 import com.pega.vehicledamagemodeling.VehicleDamageReportCallback;
 
-import static com.pega.android.vehicledamagemodeling.R.id.roatation_prompt;
-import static com.pega.android.vehicledamagemodeling.R.id.user_text;
-import static com.pega.android.vehicledamagemodeling.R.id.vehicle_damage_modeling_content;
-import static com.pega.android.vehicledamagemodeling.R.layout.vehicle_damage_modeling_activity;
-
 public class VehicleDamageModelingActivity extends AndroidApplication {
-    public static VehicleDamageModeling vehicleDamageModeling;
+
+    public VehicleDamageModeling vehicleDamageModeling;
 
     public static final int REQUEST_CODE = 123;
     public static final String REPORT_EXTRA = "vehicle_damage_report_extra";
@@ -46,66 +40,84 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(vehicle_damage_modeling_activity);
+        setContentView(R.layout.vehicle_damage_modeling_activity);
+
+        initVDM();
+    }
+
+    public void onCancelButtonClick(View view) {
+        vehicleDamageModeling.end();
+    }
+
+    public void onCheckButtonClick(View view) {
+        vehicleDamageModeling.endWithModification();
+    }
+
+    private void initVDM() {
+        vehicleDamageModeling = createVDM();
+
+        ViewGroup viewGroup = findViewById(R.id.vdm_model_container);
+        viewGroup.addView(initializeForView(vehicleDamageModeling, createAppConfig()));
+    }
+
+    private VehicleDamageModeling createVDM() {
+        VehicleDamageReportCallback reportCallback = new VDMReportCallback();
+        final UIUpdateCallback uiCallback = new VDMUICallback();
+
+        String report = getIntent().getStringExtra(REPORT_EXTRA);
+        if (report == null || report.isEmpty()) {
+            return new VehicleDamageModeling(reportCallback, uiCallback);
+        } else {
+            JsonObject jsonWithSelectedParts = new JsonParser().parse(report).getAsJsonObject();
+            return new VehicleDamageModeling(jsonWithSelectedParts, reportCallback, uiCallback);
+        }
+    }
+
+    private AndroidApplicationConfiguration createAppConfig() {
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useAccelerometer = false;
         config.useCompass = false;
         config.disableAudio = true;
-        ViewGroup viewGroup = findViewById(vehicle_damage_modeling_content);
+        return config;
+    }
 
-        final VehicleDamageReportCallback callback = new VehicleDamageReportCallback() {
-            @Override
-            public void onFinished(JsonObject result) {
+    private class VDMReportCallback implements VehicleDamageReportCallback {
+        @Override
+        public void onFinished(JsonObject result) {
+            Intent intent = new Intent();
+            if (result != null) {
                 String report = new GsonBuilder().setPrettyPrinting().create().toJson(result);
-                Intent intent = new Intent();
                 intent.putExtra(REPORT_EXTRA, report);
-                setResult(RESULT_OK, intent);
-                finish();
             }
-
-            @Override
-            public void onFilledMainScreenText(final String mainScreenText) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Button userText = findViewById(user_text);
-                        Log.d("Text", "Fill Main Screen Text");
-                        userText.setText("Missing text?");
-                        // userText.setText(mainScreenText);
-                    }
-                });
-            }
-        };
-
-        final UIUpdateCallback uiUpdateCallback = new UIUpdateCallback() {
-            @Override
-            public void hideRotationPrompt() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Button rotationPrompt = findViewById(roatation_prompt);
-                        rotationPrompt.setVisibility(View.INVISIBLE);
-                    }
-                });
-            }
-        };
-
-        String report = getIntent().getStringExtra(REPORT_EXTRA);
-        if (report == null || report.isEmpty()) {
-            vehicleDamageModeling = new VehicleDamageModeling(callback, uiUpdateCallback);
-        } else {
-            vehicleDamageModeling = new VehicleDamageModeling(
-                    new JsonParser().parse(report).getAsJsonObject(), callback, uiUpdateCallback);
+            setResult(RESULT_OK, intent);
+            finish();
         }
-        viewGroup.addView(initializeForView(vehicleDamageModeling, config));
 
+        @Override
+        public void onFilledMainScreenText(final String mainScreenText) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    // TODO change
+//                        Button userText = findViewById(R.id.user_text);
+//                        Log.d("Text", "Fill Main Screen Text");
+//                        userText.setText("Missing text?");
+                    // userText.setText(mainScreenText);
+                }
+            });
+        }
     }
 
-    public void crossButtonOnClick(View view) {
-        vehicleDamageModeling.end();
-    }
-
-    public void chechButtonOnClick(View view){
-        vehicleDamageModeling.endWithModification();
+    private class VDMUICallback implements UIUpdateCallback {
+        @Override
+        public void hideRotationPrompt() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    View rotationPrompt = findViewById(R.id.vdm_rotation_prompt);
+                    rotationPrompt.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
     }
 }

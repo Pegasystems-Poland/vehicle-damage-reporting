@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">vdm</string>
-    <string name="mainScreenText">Rotate model</string>
+    <string name="vdm_description">Rotate model and select damaged parts with a tap on the model. If completed press button.</string>
 </resources>

@@ -20,13 +20,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import com.pega.android.vehicledamagemodeling.VehicleDamageModelingActivity;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.pega.android.vehicledamagemodeling.VehicleDamageModelingActivity;
 
 import static com.pega.android.vehicledamagemodeling.app.R.layout.main_activity;
 
 public class MainActivity extends AppCompatActivity {
+
     private TextView textView;
 
     @Override
@@ -39,12 +42,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case (VehicleDamageModelingActivity.REQUEST_CODE): {
-                if (resultCode == RESULT_OK) {
-                    String returnValue = data.getStringExtra(VehicleDamageModelingActivity.REPORT_EXTRA);
-                    textView.setText(returnValue);
-                }
+        if (requestCode == VehicleDamageModelingActivity.REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                String returnValue = data.getStringExtra(VehicleDamageModelingActivity.REPORT_EXTRA);
+                textView.setText(returnValue);
             }
         }
     }
