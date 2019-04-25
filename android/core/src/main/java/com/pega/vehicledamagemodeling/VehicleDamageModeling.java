@@ -78,7 +78,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         camera.lookAt(0,0,0);
         camera.update();
 
-        PartSelectedDetector partSelectedDetector = new PartSelectedDetector(camera, instances, selectionService);
+        PartSelectedDetector partSelectedDetector = new PartSelectedDetector(camera, instances, selectionService, uiUpdateCallback);
         cameraController = new LimitedCameraInputController(camera, uiUpdateCallback);
         Gdx.input.setInputProcessor(new InputMultiplexer(partSelectedDetector, cameraController));
 
@@ -102,7 +102,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         }
 
         loading = false;
-        callback.onFilledMainScreenText(selectionService.getMainScreenText());
+        uiUpdateCallback.fillMainScreenText(selectionService.getMainScreenText());
     }
 
     @Override

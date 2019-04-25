@@ -18,8 +18,10 @@ package com.pega.android.vehicledamagemodeling;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
@@ -33,6 +35,7 @@ import com.pega.vehicledamagemodeling.VehicleDamageReportCallback;
 public class VehicleDamageModelingActivity extends AndroidApplication {
 
     public VehicleDamageModeling vehicleDamageModeling;
+    private Button checkButton;
 
     public static final int REQUEST_CODE = 123;
     public static final String REPORT_EXTRA = "vehicle_damage_report_extra";
@@ -41,6 +44,9 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vehicle_damage_modeling_activity);
+
+        checkButton = findViewById(R.id.vdm_bottom_check_button);
+        disableCheckButton();
 
         initVDM();
     }
@@ -81,6 +87,11 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
         return config;
     }
 
+    private void disableCheckButton() {
+        checkButton.setClickable(false);
+        checkButton.setPressed(false);
+    }
+
     private class VDMReportCallback implements VehicleDamageReportCallback {
         @Override
         public void onFinished(JsonObject result) {
@@ -92,9 +103,22 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
             setResult(RESULT_OK, intent);
             finish();
         }
+    }
+
+    private class VDMUICallback implements UIUpdateCallback {
+        @Override
+        public void hideRotationPrompt() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    View rotationPrompt = findViewById(R.id.vdm_rotation_prompt);
+                    rotationPrompt.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
 
         @Override
-        public void onFilledMainScreenText(final String mainScreenText) {
+        public void fillMainScreenText(final String mainScreenText) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -106,16 +130,14 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
                 }
             });
         }
-    }
 
-    private class VDMUICallback implements UIUpdateCallback {
         @Override
-        public void hideRotationPrompt() {
+        public void enableCheckButton() {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    View rotationPrompt = findViewById(R.id.vdm_rotation_prompt);
-                    rotationPrompt.setVisibility(View.INVISIBLE);
+                    checkButton.setClickable(true);
+                    checkButton.setPressed(true);
                 }
             });
         }
