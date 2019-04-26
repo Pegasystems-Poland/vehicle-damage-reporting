@@ -179,10 +179,10 @@ public class SelectedPartsRepositoryTest {
         Material notexpectedMaterial = new Material();
 
         //when
-        Material result = selectedPartsRepository.getReverseMaterial(ROOF,notexpectedMaterial);
+        Material result = selectedPartsRepository.getReverseMaterial(ROOF, notexpectedMaterial);
 
         //then
-        assertNotEquals(notexpectedMaterial,result);
+        assertNotEquals(notexpectedMaterial, result);
     }
 
     @Test
@@ -192,9 +192,9 @@ public class SelectedPartsRepositoryTest {
         selectedPartsRepository.getReverseMaterial(ROOF,expectedMaterial);
 
         //when
-        Material result = selectedPartsRepository.getReverseMaterial(ROOF,expectedMaterial);
+        Material result = selectedPartsRepository.getReverseMaterial(ROOF, expectedMaterial);
 
         //then
-        assertEquals(expectedMaterial,result);
+        assertEquals(expectedMaterial, result);
     }
 }

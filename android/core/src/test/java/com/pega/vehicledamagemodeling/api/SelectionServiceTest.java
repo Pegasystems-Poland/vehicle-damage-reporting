@@ -20,12 +20,9 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.HashSet;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -71,7 +68,7 @@ public class SelectionServiceTest {
     }
 
     @Test
-    public void whenJsonIsEmptyThenReturnEmptyInitJson(){
+    public void whenJsonIsEmptyThenReturnEmptyInitJson() {
         //given
         when(selectedPartsRepository.getInitJson()).thenReturn(initJson);
         SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
@@ -98,7 +95,7 @@ public class SelectionServiceTest {
     }
 
     @Test
-    public void whenModelInstanceIsNullThenNoPartIsSelected(){
+    public void whenModelInstanceIsNullThenNoPartIsSelected() {
         //given
         ModelInstance modelInstance = null;
         SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
@@ -113,14 +110,13 @@ public class SelectionServiceTest {
         JsonObject result = selectionService.getModifiedJson();
 
         //then
-        assertEquals(expectedJson,result);
+        assertEquals(expectedJson, result);
     }
 
     @Test
     public void whenAttachingEmptyJson() {
         //given
         JsonObject json = new JsonObject();
-
         parser = mock(Parser.class);
 
         Array<ModelInstance> instances = new Array<>();
