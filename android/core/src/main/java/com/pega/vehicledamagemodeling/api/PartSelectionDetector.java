@@ -30,6 +30,7 @@ public class PartSelectionDetector extends InputAdapter {
     private Camera camera;
     private Array<ModelInstance> parts;
     private SelectionService selectionService;
+
     private static final Vector2 screenTouchedMarker = new Vector2();
     private static final Vector3 intersectionPoint = new Vector3();
     private static final float SENSITIVITY = 7f;
@@ -50,7 +51,6 @@ public class PartSelectionDetector extends InputAdapter {
     public boolean touchUp (int screenX, int screenY, int pointer, int button) {
         if (screenTouchedMarker.epsilonEquals(screenX, screenY, SENSITIVITY)) {
             ModelInstance selectedPart = getSelectedPartId(screenX, screenY);
-
             if (selectedPart != null) {
                 selectionService.setSelectedPart(selectedPart);
             }
@@ -58,23 +58,16 @@ public class PartSelectionDetector extends InputAdapter {
         return false;
     }
 
-
     private ModelInstance getSelectedPartId(int screenX, int screenY) {
         ModelInstance closestHitPart = null;
         float minDistance = Float.MAX_VALUE;
-
         Ray ray = camera.getPickRay(screenX, screenY);
-
         BoundingBox boundingBox = new BoundingBox();
 
         for (ModelInstance part: parts) {
-
             boundingBox = part.calculateBoundingBox(boundingBox);
-
             if (Intersector.intersectRayBounds(ray, boundingBox, intersectionPoint)) {
-
                 float distanceCurrentInstance = intersectionPoint.dst(ray.origin);
-
                 if (distanceCurrentInstance < minDistance) {
                     minDistance = distanceCurrentInstance;
                     closestHitPart = part;

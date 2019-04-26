@@ -64,7 +64,7 @@ public class SelectionService {
     }
 
     public void setSelectedPart(ModelInstance part) {
-        if(part != null) {
+        if (part != null) {
             String partName = getPartName(part);
             Material currentMaterial = getPartMaterial(part);
             Material reverseMaterial = selectedPartsRepository.getReverseMaterial(partName, currentMaterial);

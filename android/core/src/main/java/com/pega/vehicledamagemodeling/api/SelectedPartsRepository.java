@@ -14,19 +14,20 @@
 
 package com.pega.vehicledamagemodeling.api;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.google.gson.JsonObject;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class SelectedPartsRepository{
+import static com.badlogic.gdx.graphics.Color.RED;
+import static com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute.createDiffuse;
+
+public class SelectedPartsRepository {
     private JsonObject initJson;
     private String mainScreenText = "";
     private HashMap<String, Material> selectedPartsWithMaterial = new HashMap<>();
 
-    private static final Material selectionMaterial = new Material(ColorAttribute.createDiffuse(Color.RED));
+    private static final Material selectionMaterial = new Material(createDiffuse(RED));
 
     public HashSet<String> getSelectedParts() {
         return new HashSet<>(selectedPartsWithMaterial.keySet());

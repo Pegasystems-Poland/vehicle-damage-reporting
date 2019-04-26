@@ -39,7 +39,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenPartDoesNotExistThenReturnNull(){
+    public void whenPartDoesNotExistThenReturnNull() {
         //given
         JsonObject initJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
@@ -47,7 +47,7 @@ public class SelectedPartsRepositoryTest {
         jsonProperty.addProperty(ID, ROOF);
         partsArray.add(jsonProperty);
         JsonObject jsonProperty2 = new JsonObject();
-        jsonProperty2.addProperty(ID,FRONT_BUMPER);
+        jsonProperty2.addProperty(ID, FRONT_BUMPER);
         partsArray.add(jsonProperty2);
         initJson.add(SELECTION, partsArray);
         selectedPartsRepository.setInitJson(initJson);
@@ -78,7 +78,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenSelectionIsEmptyThenReturnEmptyHashSet(){
+    public void whenSelectionIsEmptyThenReturnEmptyHashSet() {
         //given
         HashSet<String> expected = new HashSet<>();
 
@@ -90,7 +90,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenJsonIsEmptyThenReturnEmptyJson(){
+    public void whenJsonIsEmptyThenReturnEmptyJson() {
         //given
         JsonObject initJson = new JsonObject();
         selectedPartsRepository.setInitJson(initJson);
@@ -103,7 +103,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenJsonIsNotEmptyThenReturnCorrectJson(){
+    public void whenJsonIsNotEmptyThenReturnCorrectJson() {
         //given
         JsonObject initJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
@@ -121,7 +121,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenTextIsNotEmptyThenReturnCorrectText(){
+    public void whenTextIsNotEmptyThenReturnCorrectText() {
         //given
         selectedPartsRepository.setMainScreenText(SAMPLE_TEXT);
         String expected = SAMPLE_TEXT;
@@ -134,7 +134,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenTextIsEmptyThenReturnEmptyText(){
+    public void whenTextIsEmptyThenReturnEmptyText() {
         //given
         selectedPartsRepository.setMainScreenText("");
 
@@ -146,7 +146,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenPartIsAddedTwoTimesThenPartIsNotInRepo(){
+    public void whenPartIsAddedTwoTimesThenPartIsNotInRepo() {
         //given
         selectedPartsRepository.getReverseMaterial(ROOF, new Material());
         selectedPartsRepository.getReverseMaterial(ROOF, new Material());
@@ -160,7 +160,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenPartDoesNotExistThenAdd(){
+    public void whenPartDoesNotExistThenAdd() {
         //given
         selectedPartsRepository.getReverseMaterial(ROOF, new Material());
         HashSet<String> expected = new HashSet<>();
@@ -174,7 +174,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenMaterialIsRevertedOnceThenReturnNoOriginalMaterial(){
+    public void whenMaterialIsRevertedOnceThenReturnNoOriginalMaterial() {
         //given
         Material notExpectedMaterial = new Material();
 
@@ -186,7 +186,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenMateiralIsRevertedTwoTimesThenReturnOriginalMaterial(){
+    public void whenMateiralIsRevertedTwoTimesThenReturnOriginalMaterial() {
         //given
         Material expectedMaterial = new Material();
         selectedPartsRepository.getReverseMaterial(ROOF, expectedMaterial);
