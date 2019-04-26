@@ -18,10 +18,10 @@ package com.pega.android.vehicledamagemodeling;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
@@ -123,10 +123,10 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
                 @Override
                 public void run() {
                     // TODO change
-//                        Button userText = findViewById(R.id.user_text);
-//                        Log.d("Text", "Fill Main Screen Text");
-//                        userText.setText("Missing text?");
-                    // userText.setText(mainScreenText);
+                    TextView userText = findViewById(R.id.vdm_bottom_info_text);
+                    if(mainScreenText != null && mainScreenText != "") {
+                        userText.setText(mainScreenText);
+                    }
                 }
             });
         }

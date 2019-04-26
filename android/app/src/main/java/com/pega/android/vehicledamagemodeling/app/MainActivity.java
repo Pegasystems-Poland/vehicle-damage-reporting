@@ -32,11 +32,19 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
 
+    private static String mainScreenText = "Rotate model and select damaged parts with a tap on the model. If completed press button.";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(main_activity);
         textView = findViewById(R.id.result_text_view);
+        textView.setText("{\n" +
+                "      \"mainScreenText\": \"" +
+                mainScreenText +
+                "\",\n" +
+                "      \"selection\": []\n" +
+                "    }");
     }
 
     @Override
