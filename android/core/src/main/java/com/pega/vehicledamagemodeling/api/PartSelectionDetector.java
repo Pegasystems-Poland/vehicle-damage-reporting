@@ -30,7 +30,6 @@ public class PartSelectionDetector extends InputAdapter {
     private Camera camera;
     private Array<ModelInstance> parts;
     private SelectionService selectionService;
-
     private static final Vector2 screenTouchedMarker = new Vector2();
     private static final Vector3 intersectionPoint = new Vector3();
     private static final float SENSITIVITY = 7f;
