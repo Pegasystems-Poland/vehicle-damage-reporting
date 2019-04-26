@@ -176,25 +176,25 @@ public class SelectedPartsRepositoryTest {
     @Test
     public void whenMaterialIsRevertedOnceThenReturnNoOriginalMaterial(){
         //given
-        Material notexpectedMaterial = new Material();
+        Material notExpectedMaterial = new Material();
 
         //when
-        Material result = selectedPartsRepository.getReverseMaterial(ROOF,notexpectedMaterial);
+        Material result = selectedPartsRepository.getReverseMaterial(ROOF, notExpectedMaterial);
 
         //then
-        assertNotEquals(notexpectedMaterial,result);
+        assertNotEquals(notExpectedMaterial, result);
     }
 
     @Test
     public void whenMateiralIsRevertedTwoTimesThenReturnOriginalMaterial(){
         //given
         Material expectedMaterial = new Material();
-        selectedPartsRepository.getReverseMaterial(ROOF,expectedMaterial);
+        selectedPartsRepository.getReverseMaterial(ROOF, expectedMaterial);
 
         //when
-        Material result = selectedPartsRepository.getReverseMaterial(ROOF,expectedMaterial);
+        Material result = selectedPartsRepository.getReverseMaterial(ROOF, expectedMaterial);
 
         //then
-        assertEquals(expectedMaterial,result);
+        assertEquals(expectedMaterial, result);
     }
 }

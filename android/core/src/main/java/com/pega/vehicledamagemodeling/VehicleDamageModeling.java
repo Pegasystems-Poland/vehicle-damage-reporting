@@ -48,10 +48,9 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), new Parser());
     private AssetManager assets;
     private Array<ModelInstance> instances = new Array<>();
-    private final VehicleDamageReportCallback callback;
     private JsonObject jsonWithSelectedParts;
-
     private boolean loading;
+    private final VehicleDamageReportCallback callback;
 
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
 
@@ -67,7 +66,6 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     @Override
     public void create () {
         modelBatch = new ModelBatch();
-
         environment = new Environment();
         environment.set(new ColorAttribute(AmbientLight, 0.6f, 0.6f, 0.6f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.8f, -0.8f, -0.8f));

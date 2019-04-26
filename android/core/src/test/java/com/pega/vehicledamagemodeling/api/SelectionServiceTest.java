@@ -20,10 +20,8 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
@@ -113,21 +111,18 @@ public class SelectionServiceTest {
         JsonObject result = selectionService.getModifiedJson();
 
         //then
-        assertEquals(expectedJson,result);
+        assertEquals(expectedJson, result);
     }
 
     @Test
     public void whenAttachingEmptyJson() {
         //given
         JsonObject json = new JsonObject();
-
         parser = mock(Parser.class);
-
         Array<ModelInstance> instances = new Array<>();
         when(parser.parseToMainScreenText(json)).thenReturn(NOTHING);
         HashSet<String> list = new HashSet<>();
         when(parser.parseToSelectedParts(json)).thenReturn(list);
-
         SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), parser);
 
         //when
