@@ -32,7 +32,6 @@ public class SelectionServiceTest {
     private Parser parser;
     private JsonObject initJson;
     private SelectedPartsRepository selectedPartsRepository;
-
     private static final String SELECTION = "selection";
     private static final String ID = "id";
     private static final String MAIN_SCREEN_TEXT = "mainScreenText";

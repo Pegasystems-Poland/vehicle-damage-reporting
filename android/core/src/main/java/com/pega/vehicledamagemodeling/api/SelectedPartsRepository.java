@@ -26,7 +26,6 @@ public class SelectedPartsRepository {
     private JsonObject initJson;
     private String mainScreenText = "";
     private HashMap<String, Material> selectedPartsWithMaterial = new HashMap<>();
-
     private static final Material selectionMaterial = new Material(createDiffuse(RED));
 
     public HashSet<String> getSelectedParts() {
