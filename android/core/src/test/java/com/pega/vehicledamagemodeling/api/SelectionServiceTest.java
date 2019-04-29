@@ -16,10 +16,13 @@
 
 package com.pega.vehicledamagemodeling.api;
 
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -66,7 +69,7 @@ public class SelectionServiceTest {
     }
 
     @Test
-    public void whenJsonIsEmptyThenReturnEmptyInitJson(){
+    public void whenJsonIsEmptyThenReturnEmptyInitJson() {
         //given
         when(selectedPartsRepository.getInitJson()).thenReturn(initJson);
         SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
@@ -93,23 +96,40 @@ public class SelectionServiceTest {
     }
 
     @Test
-    public void whenJsonIsEmptyAndNewPartIsAddedThenReturnModifiedJson(){
+    public void whenModelInstanceIsNullThenNoPartIsSelected() {
         //given
+        ModelInstance modelInstance = null;
+        SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
+        selectionService.attachJson(initJson, new Array<>());
+        when(selectedPartsRepository.getMainScreenText()).thenReturn("");
+        selectionService.setSelectedPart(modelInstance);
         JsonObject expectedJson = new JsonObject();
-        JsonArray partsArray = new JsonArray();
-        JsonObject jsonProperty = new JsonObject();
-        jsonProperty.addProperty(ID, ROOF);
-        partsArray.add(jsonProperty);
         expectedJson.addProperty(MAIN_SCREEN_TEXT, "");
-        expectedJson.add(SELECTION, partsArray);
-        SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), parser);
-        selectionService.attachJson(initJson);
-        selectionService.setSelectedPart(ROOF);
+        expectedJson.add(SELECTION, new JsonArray());
 
         //when
         JsonObject result = selectionService.getModifiedJson();
 
         //then
         assertEquals(expectedJson, result);
+    }
+
+    @Test
+    public void whenAttachingEmptyJson() {
+        //given
+        JsonObject json = new JsonObject();
+        parser = mock(Parser.class);
+        Array<ModelInstance> instances = new Array<>();
+        when(parser.parseToMainScreenText(json)).thenReturn(NOTHING);
+        HashSet<String> list = new HashSet<>();
+        when(parser.parseToSelectedParts(json)).thenReturn(list);
+        SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), parser);
+
+        //when
+        selectionService.attachJson(json, instances);
+
+        //then
+        assertEquals(NOTHING, selectionService.getMainScreenText());
+        assertEquals(selectionService.getInitJson(), selectionService.getInitJson());
     }
 }
