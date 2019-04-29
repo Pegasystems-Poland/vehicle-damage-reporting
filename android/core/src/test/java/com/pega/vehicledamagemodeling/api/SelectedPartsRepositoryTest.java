@@ -22,6 +22,7 @@ import org.junit.Test;
 import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class SelectedPartsRepositoryTest {
     private SelectedPartsRepository selectedPartsRepository;
@@ -38,7 +39,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenPartDoesNotExistThenReturnNull(){
+    public void whenPartDoesNotExistThenReturnNull() {
         //given
         JsonObject initJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
@@ -46,7 +47,7 @@ public class SelectedPartsRepositoryTest {
         jsonProperty.addProperty(ID, ROOF);
         partsArray.add(jsonProperty);
         JsonObject jsonProperty2 = new JsonObject();
-        jsonProperty2.addProperty(ID,FRONT_BUMPER);
+        jsonProperty2.addProperty(ID, FRONT_BUMPER);
         partsArray.add(jsonProperty2);
         initJson.add(SELECTION, partsArray);
         selectedPartsRepository.setInitJson(initJson);
@@ -62,8 +63,8 @@ public class SelectedPartsRepositoryTest {
     @Test
     public void whenSelectionContainsTwoPartsThenReturnCorrectParts() {
         //given
-        selectedPartsRepository.add(ROOF, new Material());
-        selectedPartsRepository.add(FRONT_BUMPER, new Material());
+        selectedPartsRepository.getReverseMaterial(ROOF, new Material());
+        selectedPartsRepository.getReverseMaterial(FRONT_BUMPER, new Material());
 
         HashSet<String> expected = new HashSet<>();
         expected.add(ROOF);
@@ -77,7 +78,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenSelectionIsEmptyThenReturnEmptyHashSet(){
+    public void whenSelectionIsEmptyThenReturnEmptyHashSet() {
         //given
         HashSet<String> expected = new HashSet<>();
 
@@ -89,7 +90,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenJsonIsEmptyThenReturnEmptyJson(){
+    public void whenJsonIsEmptyThenReturnEmptyJson() {
         //given
         JsonObject initJson = new JsonObject();
         selectedPartsRepository.setInitJson(initJson);
@@ -102,7 +103,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenJsonIsNotEmptyThenReturnCorrectJson(){
+    public void whenJsonIsNotEmptyThenReturnCorrectJson() {
         //given
         JsonObject initJson = new JsonObject();
         JsonArray partsArray = new JsonArray();
@@ -120,7 +121,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenTextIsNotEmptyThenReturnCorrectText(){
+    public void whenTextIsNotEmptyThenReturnCorrectText() {
         //given
         selectedPartsRepository.setMainScreenText(SAMPLE_TEXT);
         String expected = SAMPLE_TEXT;
@@ -133,7 +134,7 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenTextIsEmptyThenReturnEmptyText(){
+    public void whenTextIsEmptyThenReturnEmptyText() {
         //given
         selectedPartsRepository.setMainScreenText("");
 
@@ -145,10 +146,23 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenPartExistThenDoNotAdd(){
+    public void whenPartIsAddedTwoTimesThenPartIsNotInRepo() {
         //given
-        selectedPartsRepository.add(ROOF, new Material());
-        selectedPartsRepository.add(ROOF, new Material());
+        selectedPartsRepository.getReverseMaterial(ROOF, new Material());
+        selectedPartsRepository.getReverseMaterial(ROOF, new Material());
+        HashSet<String> expected = new HashSet<>();
+
+        //when
+        HashSet<String> result = selectedPartsRepository.getSelectedParts();
+
+        //then
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void whenPartDoesNotExistThenAdd() {
+        //given
+        selectedPartsRepository.getReverseMaterial(ROOF, new Material());
         HashSet<String> expected = new HashSet<>();
         expected.add(ROOF);
 
@@ -160,16 +174,27 @@ public class SelectedPartsRepositoryTest {
     }
 
     @Test
-    public void whenPartDoesNotExistThenAdd(){
+    public void whenMaterialIsRevertedOnceThenReturnNoOriginalMaterial() {
         //given
-        selectedPartsRepository.add(ROOF, new Material());
-        HashSet<String> expected = new HashSet<>();
-        expected.add(ROOF);
+        Material notExpectedMaterial = new Material();
 
         //when
-        HashSet<String> result = selectedPartsRepository.getSelectedParts();
+        Material result = selectedPartsRepository.getReverseMaterial(ROOF, notExpectedMaterial);
 
         //then
-        assertEquals(expected, result);
+        assertNotEquals(notExpectedMaterial, result);
+    }
+
+    @Test
+    public void whenMateiralIsRevertedTwoTimesThenReturnOriginalMaterial() {
+        //given
+        Material expectedMaterial = new Material();
+        selectedPartsRepository.getReverseMaterial(ROOF, expectedMaterial);
+
+        //when
+        Material result = selectedPartsRepository.getReverseMaterial(ROOF, expectedMaterial);
+
+        //then
+        assertEquals(expectedMaterial, result);
     }
 }

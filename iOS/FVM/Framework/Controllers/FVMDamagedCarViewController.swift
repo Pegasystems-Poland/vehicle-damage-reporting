@@ -23,7 +23,6 @@ public class FVMDamagedCarViewController: UIViewController {
     @IBOutlet weak var acceptButton: UIButton!
     public var configuration: String!
     public var completionAction: ((String) -> Void)?
-    private let ROTATION_PROMPT = "RotationPrompt"
     
     override public func viewDidLoad() {
         setupDamagedCarScene()
@@ -59,7 +58,6 @@ public class FVMDamagedCarViewController: UIViewController {
     }
     
     private func showRotationPrompt() {
-        self.view.addSubview(rotationPrompt)
         NotificationCenter.default.addObserver(self, selector: #selector(hideRotationPrompt), name: .hideRotationPrompt, object: nil)
     }
     
@@ -81,25 +79,21 @@ public class FVMDamagedCarViewController: UIViewController {
     }
     
     @objc
-    fileprivate func disableAcceptButton() {
+    private func disableAcceptButton() {
         acceptButton.setTitleColor(UIColor.lightGray, for: .disabled)
         acceptButton.alpha = 0.5
         acceptButton.isEnabled = false
     }
     
     @objc
-    fileprivate func enableAcceptButton() {
+    private func enableAcceptButton() {
         acceptButton.setTitleColor(UIColor.blue, for: .normal)
         acceptButton.alpha = 1.0
         acceptButton.isEnabled = true
     }
     
     @objc
-    fileprivate func hideRotationPrompt() {
-        for view in self.view.subviews {
-            if view.restorationIdentifier?.isEqual(ROTATION_PROMPT) ?? false as Bool {
-                view.alpha = 0
-            }
-        }
+    private func hideRotationPrompt() {
+        rotationPrompt.alpha = 0
     }
 }

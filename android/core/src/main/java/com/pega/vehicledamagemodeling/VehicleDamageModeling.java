@@ -30,6 +30,7 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonObject;
 import com.pega.vehicledamagemodeling.api.Parser;
+import com.pega.vehicledamagemodeling.api.PartSelectionDetector;
 import com.pega.vehicledamagemodeling.api.SelectedPartsRepository;
 import com.pega.vehicledamagemodeling.api.SelectionService;
 
@@ -47,10 +48,9 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), new Parser());
     private AssetManager assets;
     private Array<ModelInstance> instances = new Array<>();
-    private final VehicleDamageReportCallback callback;
     private JsonObject jsonWithSelectedParts;
-
     private boolean loading;
+    private final VehicleDamageReportCallback callback;
     private final UIUpdateCallback uiUpdateCallback;
 
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
@@ -68,7 +68,6 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     @Override
     public void create () {
         modelBatch = new ModelBatch();
-
         environment = new Environment();
         environment.set(new ColorAttribute(AmbientLight, 0.6f, 0.6f, 0.6f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.8f, -0.8f, -0.8f));
@@ -78,9 +77,9 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         camera.lookAt(0,0,0);
         camera.update();
 
-        PartSelectedDetector partSelectedDetector = new PartSelectedDetector(camera, instances, selectionService, uiUpdateCallback);
+        PartSelectionDetector partSelectionDetector = new PartSelectionDetector(camera, instances, selectionService, uiUpdateCallback);
         cameraController = new LimitedCameraInputController(camera, uiUpdateCallback);
-        Gdx.input.setInputProcessor(new InputMultiplexer(partSelectedDetector, cameraController));
+        Gdx.input.setInputProcessor(new InputMultiplexer(partSelectionDetector, cameraController));
 
         assets = new AssetManager();
         assets.load(MODEL_FILE_NAME, Model.class);
