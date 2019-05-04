@@ -21,13 +21,13 @@ public class FVMDamagedCarViewController: UIViewController {
     @IBOutlet weak var userPromptText: UITextView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var userInteractionElemsView: UIView!
     public var configuration: String!
     public var completionAction: ((String) -> Void)?
-    
+
     override public func viewDidLoad() {
         setupDamagedCarScene()
-        showRotationPrompt()
-        
+
         super.viewDidLoad()
     }
     
@@ -53,13 +53,20 @@ public class FVMDamagedCarViewController: UIViewController {
     private func setupDamagedCarScene() {
         damageSelector.onStartup(configuration: configuration)
         
+        showRotationPrompt()
         fillUserPromptTextView()
         disableAcceptButton()
         addAcceptButtonObservers()
+        addBordersForView(userInteractionElemsView)
     }
     
     private func showRotationPrompt() {
         NotificationCenter.default.addObserver(self, selector: #selector(hideRotationPrompt), name: .hideRotationPrompt, object: nil)
+    }
+    
+    private func addBordersForView(_ view: UIView) {
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     private func addAcceptButtonObservers() {
