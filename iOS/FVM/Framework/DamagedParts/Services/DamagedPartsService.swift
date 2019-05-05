@@ -35,7 +35,7 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol {
     
     internal func createAndGetCollectionOfDamagedParts(json: String) -> [Selection] {
         if (initialConfiguration == nil) {
-            initialConfiguration = json.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "")
+            initialConfiguration = json
         }
         createCollectionOfDamagedParts(json: json)
         return getCollectionOfDamagedParts()
