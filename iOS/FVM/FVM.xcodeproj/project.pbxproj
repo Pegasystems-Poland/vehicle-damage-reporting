@@ -38,7 +38,7 @@
 		D7BD084C2233A97400D36DD4 /* DamagedPartsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BD084B2233A97400D36DD4 /* DamagedPartsServiceProtocol.swift */; };
 		D7BD08522233ACF300D36DD4 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BD08512233ACF300D36DD4 /* Selection.swift */; };
 		D7BD08562233B44A00D36DD4 /* NodeHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BD08552233B44A00D36DD4 /* NodeHelperProtocol.swift */; };
-		D7C88820222702F600EB3375 /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8880E222702F600EB3375 /* JsonParser.swift */; };
+		D7C88820222702F600EB3375 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8880E222702F600EB3375 /* Serializer.swift */; };
 		D7C88821222702F600EB3375 /* DamagedPartsNamesProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88810222702F600EB3375 /* DamagedPartsNamesProviderProtocol.swift */; };
 		D7C88822222702F600EB3375 /* DamagedPartsNamesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88811222702F600EB3375 /* DamagedPartsNamesProvider.swift */; };
 		D7C88823222702F600EB3375 /* DamagedPartsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88813222702F600EB3375 /* DamagedPartsRepositoryProtocol.swift */; };
@@ -50,7 +50,7 @@
 		D7C8882B222702F600EB3375 /* DamagedPartsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8881F222702F600EB3375 /* DamagedPartsService.swift */; };
 		D7C888462227033200EB3375 /* DamagedParstsRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8882F2227033200EB3375 /* DamagedParstsRepositoryTests.swift */; };
 		D7C888472227033200EB3375 /* DamagedPartsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C888312227033200EB3375 /* DamagedPartsServiceTests.swift */; };
-		D7C88863222706B700EB3375 /* JsonParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88858222706B700EB3375 /* JsonParserTests.swift */; };
+		D7C88863222706B700EB3375 /* SerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C88858222706B700EB3375 /* SerializerTests.swift */; };
 		D7C88864222706B700EB3375 /* DamagePartsNamesProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8885A222706B700EB3375 /* DamagePartsNamesProviderTests.swift */; };
 		D7C88865222706B700EB3375 /* ProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8885D222706B700EB3375 /* ProviderMock.swift */; };
 		D7C88866222706B700EB3375 /* DamagePartsValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8885E222706B700EB3375 /* DamagePartsValidatorTests.swift */; };
@@ -106,7 +106,7 @@
 		D7BD084B2233A97400D36DD4 /* DamagedPartsServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsServiceProtocol.swift; sourceTree = "<group>"; };
 		D7BD08512233ACF300D36DD4 /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		D7BD08552233B44A00D36DD4 /* NodeHelperProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeHelperProtocol.swift; sourceTree = "<group>"; };
-		D7C8880E222702F600EB3375 /* JsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
+		D7C8880E222702F600EB3375 /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		D7C88810222702F600EB3375 /* DamagedPartsNamesProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsNamesProviderProtocol.swift; sourceTree = "<group>"; };
 		D7C88811222702F600EB3375 /* DamagedPartsNamesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsNamesProvider.swift; sourceTree = "<group>"; };
 		D7C88813222702F600EB3375 /* DamagedPartsRepositoryProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsRepositoryProtocol.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 		D7C8881F222702F600EB3375 /* DamagedPartsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsService.swift; sourceTree = "<group>"; };
 		D7C8882F2227033200EB3375 /* DamagedParstsRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedParstsRepositoryTests.swift; sourceTree = "<group>"; };
 		D7C888312227033200EB3375 /* DamagedPartsServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagedPartsServiceTests.swift; sourceTree = "<group>"; };
-		D7C88858222706B700EB3375 /* JsonParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParserTests.swift; sourceTree = "<group>"; };
+		D7C88858222706B700EB3375 /* SerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializerTests.swift; sourceTree = "<group>"; };
 		D7C8885A222706B700EB3375 /* DamagePartsNamesProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagePartsNamesProviderTests.swift; sourceTree = "<group>"; };
 		D7C8885D222706B700EB3375 /* ProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderMock.swift; sourceTree = "<group>"; };
 		D7C8885E222706B700EB3375 /* DamagePartsValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DamagePartsValidatorTests.swift; sourceTree = "<group>"; };
@@ -311,7 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				D7B875F92233E49500E6B09B /* Helpers */,
-				D7C8880D222702F600EB3375 /* Parsers */,
+				D7C8880D222702F600EB3375 /* Serializers */,
 				D7C8880F222702F600EB3375 /* Providers */,
 				D7C88812222702F600EB3375 /* Repositories */,
 				D7C88815222702F600EB3375 /* Models */,
@@ -324,12 +324,12 @@
 			path = DamagedParts;
 			sourceTree = "<group>";
 		};
-		D7C8880D222702F600EB3375 /* Parsers */ = {
+		D7C8880D222702F600EB3375 /* Serializers */ = {
 			isa = PBXGroup;
 			children = (
-				D7C8880E222702F600EB3375 /* JsonParser.swift */,
+				D7C8880E222702F600EB3375 /* Serializer.swift */,
 			);
-			path = Parsers;
+			path = Serializers;
 			sourceTree = "<group>";
 		};
 		D7C8880F222702F600EB3375 /* Providers */ = {
@@ -421,7 +421,7 @@
 		D7C88856222706B700EB3375 /* DamagedParts */ = {
 			isa = PBXGroup;
 			children = (
-				D7C88857222706B700EB3375 /* Parsers */,
+				D7C88857222706B700EB3375 /* Serializers */,
 				D7C88859222706B700EB3375 /* Providers */,
 				D7C8885B222706B700EB3375 /* Validators */,
 				D7C8885F222706B700EB3375 /* Services */,
@@ -430,12 +430,12 @@
 			path = DamagedParts;
 			sourceTree = "<group>";
 		};
-		D7C88857222706B700EB3375 /* Parsers */ = {
+		D7C88857222706B700EB3375 /* Serializers */ = {
 			isa = PBXGroup;
 			children = (
-				D7C88858222706B700EB3375 /* JsonParserTests.swift */,
+				D7C88858222706B700EB3375 /* SerializerTests.swift */,
 			);
-			path = Parsers;
+			path = Serializers;
 			sourceTree = "<group>";
 		};
 		D7C88859222706B700EB3375 /* Providers */ = {
@@ -613,7 +613,7 @@
 				BA5B809F2261166B002C2D08 /* SCNCamera+FOVSetter.swift in Sources */,
 				05706873223BCC7E00D2A78A /* FVMDamagedCarViewController.swift in Sources */,
 				39A45862224A55BC000721D5 /* LightManagerProtocol.swift in Sources */,
-				D7C88820222702F600EB3375 /* JsonParser.swift in Sources */,
+				D7C88820222702F600EB3375 /* Serializer.swift in Sources */,
 				D7C88827222702F600EB3375 /* DamagePartsServiceFactory.swift in Sources */,
 				05CDF820221034F400069640 /* PanGestureHandler.swift in Sources */,
 				BA5250D322662E9C00F47F8D /* SCNVector3+Geometry.swift in Sources */,
@@ -645,7 +645,7 @@
 				D7C888462227033200EB3375 /* DamagedParstsRepositoryTests.swift in Sources */,
 				BAD9FEC022664AF100F2139A /* ModelScaleProviderTests.swift in Sources */,
 				D7C88864222706B700EB3375 /* DamagePartsNamesProviderTests.swift in Sources */,
-				D7C88863222706B700EB3375 /* JsonParserTests.swift in Sources */,
+				D7C88863222706B700EB3375 /* SerializerTests.swift in Sources */,
 				BA1FBE122208CB0800DBFB9E /* MaterialProcessorTests.swift in Sources */,
 				D7C88866222706B700EB3375 /* DamagePartsValidatorTests.swift in Sources */,
 			);
