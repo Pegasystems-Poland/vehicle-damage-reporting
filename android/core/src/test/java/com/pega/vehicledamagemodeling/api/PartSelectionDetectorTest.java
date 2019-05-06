@@ -70,7 +70,7 @@ public class PartSelectionDetectorTest {
         BoundingBox boundingBox = new BoundingBox(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
         when(modelInstance.calculateBoundingBox(any(BoundingBox.class))).thenReturn(boundingBox);
         modelInstances.add(modelInstance);
-        PartSelectionDetector selectedDetector = new PartSelectionDetector(camera, modelInstances, selectionService,mock(UIUpdateCallback.class));
+        PartSelectionDetector selectedDetector = new PartSelectionDetector(camera, modelInstances, selectionService, mock(UIUpdateCallback.class));
 
         // when
         selectedDetector.touchDown(screenX, screenY, 0, 0);
