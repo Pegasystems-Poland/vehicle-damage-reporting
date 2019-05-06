@@ -13,22 +13,11 @@
 // limitations under the License.
 
 import Foundation
-import SceneKit
 
-extension SCNCamera {
-    public func setFOV(_ value: CGFloat) {
-        if #available(iOS 11.0, *) {
-            fieldOfView = value
-        } else {
-            yFov = Double(value)
-        }
-    }
-    
-    public func multiplyFOV(by multiplier: CGFloat) {
-        if #available(iOS 11.0, *) {
-            fieldOfView *= multiplier
-        } else {
-            yFov *= Double(multiplier)
-        }
+extension UITextView {
+    internal func centerTextVertically() {
+        var topCorrect = (self.bounds.size.height - self.contentSize.height * self.zoomScale) / 2
+        topCorrect = max(topCorrect, 0.0)
+        self.contentInset.top = topCorrect
     }
 }
