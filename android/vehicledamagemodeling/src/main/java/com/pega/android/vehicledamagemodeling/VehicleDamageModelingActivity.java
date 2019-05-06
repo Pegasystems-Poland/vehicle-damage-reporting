@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.gson.GsonBuilder;
@@ -33,10 +32,8 @@ import com.pega.vehicledamagemodeling.VehicleDamageModeling;
 import com.pega.vehicledamagemodeling.VehicleDamageReportCallback;
 
 public class VehicleDamageModelingActivity extends AndroidApplication {
-
     public VehicleDamageModeling vehicleDamageModeling;
     private Button checkButton;
-
     public static final int REQUEST_CODE = 123;
     public static final String REPORT_EXTRA = "vehicle_damage_report_extra";
 
@@ -124,7 +121,7 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
                 public void run() {
                     // TODO change
                     TextView userText = findViewById(R.id.vdm_bottom_info_text);
-                    if(mainScreenText != null && mainScreenText != "") {
+                    if (mainScreenText != null && mainScreenText != "") {
                         userText.setText(mainScreenText);
                     }
                 }

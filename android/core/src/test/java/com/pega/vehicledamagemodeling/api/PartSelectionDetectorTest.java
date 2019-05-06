@@ -23,6 +23,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
+import com.pega.vehicledamagemodeling.UIUpdateCallback;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -47,7 +49,7 @@ public class PartSelectionDetectorTest {
     @Test
     public void whenSwipeThenIgnoreAction() {
         // given
-        PartSelectionDetector selectedDetector = new PartSelectionDetector(null, null, selectionService);
+        PartSelectionDetector selectedDetector = new PartSelectionDetector(null, null, selectionService, mock(UIUpdateCallback.class));
 
         // when
         selectedDetector.touchDown(screenX, screenY, 0, 0);
@@ -68,7 +70,7 @@ public class PartSelectionDetectorTest {
         BoundingBox boundingBox = new BoundingBox(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
         when(modelInstance.calculateBoundingBox(any(BoundingBox.class))).thenReturn(boundingBox);
         modelInstances.add(modelInstance);
-        PartSelectionDetector selectedDetector = new PartSelectionDetector(camera, modelInstances, selectionService);
+        PartSelectionDetector selectedDetector = new PartSelectionDetector(camera, modelInstances, selectionService,mock(UIUpdateCallback.class));
 
         // when
         selectedDetector.touchDown(screenX, screenY, 0, 0);

@@ -21,13 +21,13 @@ import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
 
 public class LimitedCameraInputController extends CameraInputController {
+    private Vector3 tmpV1 = new Vector3();
+    private Vector3 tmpV2 = new Vector3();
+    private UIUpdateCallback uiUpdateCallback;
     private static final float ZOOM_IN_LIMIT = 18f;
     private static final float ZOOM_OUT_LIMIT = 40f;
     private static final float ROTATE_DOWN_LIMIT = 3.0f;
     private static final float ROTATE_UP_LIMIT = 0.5f;
-    private Vector3 tmpV1 = new Vector3();
-    private Vector3 tmpV2 = new Vector3();
-    private UIUpdateCallback uiUpdateCallback;
 
     public LimitedCameraInputController(final Camera camera, UIUpdateCallback uiUpdateCallback) {
         super(camera);
@@ -42,7 +42,9 @@ public class LimitedCameraInputController extends CameraInputController {
 
     @Override
     public boolean zoom(float amount) {
-        if (amount == 0f) return false;
+        if (amount == 0f) {
+            return false;
+        }
 
         camera.translate(createZoom(amount));
         camera.update();
@@ -77,9 +79,7 @@ public class LimitedCameraInputController extends CameraInputController {
     @Override
     protected boolean process (float deltaX, float deltaY, int button) {
         uiUpdateCallback.hideRotationPrompt();
-
         float deltaYRotate = deltaY * rotateAngle;
-
         tmpV1.set(camera.direction)
                 .crs(camera.up)
                 .y = 0f;
@@ -92,7 +92,9 @@ public class LimitedCameraInputController extends CameraInputController {
         camera.rotateAround(target, tmpV1, deltaYRotate);
         camera.rotateAround(target, Vector3.Y, deltaX * -rotateAngle);
 
-        if (autoUpdate) camera.update();
+        if (autoUpdate) {
+            camera.update();
+        }
 
         return true;
     }
@@ -109,6 +111,4 @@ public class LimitedCameraInputController extends CameraInputController {
         tmpV2.rotate(rotateVector, deltaYRotate);
         return tmpV2.y < ROTATE_UP_LIMIT;
     }
-
-
 }
