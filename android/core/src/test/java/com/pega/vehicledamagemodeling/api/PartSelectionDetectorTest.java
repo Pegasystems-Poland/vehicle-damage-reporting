@@ -24,7 +24,6 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
 import com.pega.vehicledamagemodeling.UIUpdateCallback;
-
 import org.junit.Before;
 import org.junit.Test;
 

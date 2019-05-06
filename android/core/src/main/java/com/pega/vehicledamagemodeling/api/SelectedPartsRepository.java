@@ -19,7 +19,6 @@ import com.google.gson.JsonObject;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute.createDiffuse;
 
 public class SelectedPartsRepository {
