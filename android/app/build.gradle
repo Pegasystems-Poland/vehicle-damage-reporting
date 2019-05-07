@@ -15,7 +15,7 @@ android {
     defaultConfig {
         buildToolsVersion "28.0.3"
         applicationId "com.pega.vehicledemagemodelig"
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"

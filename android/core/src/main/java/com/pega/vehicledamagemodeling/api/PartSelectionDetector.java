@@ -25,19 +25,22 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
+import com.pega.vehicledamagemodeling.UIUpdateCallback;
 
 public class PartSelectionDetector extends InputAdapter {
     private Camera camera;
     private Array<ModelInstance> parts;
     private SelectionService selectionService;
+    private UIUpdateCallback uiUpdateCallback;
     private static final Vector2 screenTouchedMarker = new Vector2();
     private static final Vector3 intersectionPoint = new Vector3();
     private static final float SENSITIVITY = 7f;
 
-    public PartSelectionDetector(Camera camera, Array<ModelInstance> parts, SelectionService selectionService) {
+    public PartSelectionDetector(Camera camera, Array<ModelInstance> parts, SelectionService selectionService, UIUpdateCallback uiUpdateCallback) {
         this.camera = camera;
         this.parts = parts;
         this.selectionService = selectionService;
+        this.uiUpdateCallback = uiUpdateCallback;
     }
 
     @Override
@@ -51,6 +54,7 @@ public class PartSelectionDetector extends InputAdapter {
         if (screenTouchedMarker.epsilonEquals(screenX, screenY, SENSITIVITY)) {
             ModelInstance selectedPart = getSelectedPartId(screenX, screenY);
             if (selectedPart != null) {
+                uiUpdateCallback.enableCheckButton();
                 selectionService.setSelectedPart(selectedPart);
             }
         }

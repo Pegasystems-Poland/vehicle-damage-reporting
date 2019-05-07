@@ -19,14 +19,13 @@ import com.google.gson.JsonObject;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute.createDiffuse;
 
 public class SelectedPartsRepository {
     private JsonObject initJson;
     private String mainScreenText = "";
     private HashMap<String, Material> selectedPartsWithMaterial = new HashMap<>();
-    private static final Material selectionMaterial = new Material(createDiffuse(RED));
+    private static final Material selectionMaterial = new Material(createDiffuse(0.859f,0.447f,0.447f,1));
 
     public HashSet<String> getSelectedParts() {
         return new HashSet<>(selectedPartsWithMaterial.keySet());
