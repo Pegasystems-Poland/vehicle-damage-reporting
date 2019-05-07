@@ -10,7 +10,6 @@ buildscript {
 apply plugin: 'com.android.library'
 apply plugin: 'jacoco-android'
 
-///////////////////////////////////////////////
 apply plugin: 'maven-publish'
 
 project.group = 'com.pega.mobile.vehicle-damage-modeling.android'
@@ -26,9 +25,8 @@ publishing {
             artifact "${project.buildDir}/outputs/aar/vehicledamagemodeling-release.aar"
 
             pom.withXml {
-                def dependenciesNode = asNode().appendNode("dependencies")//.getAt("dependencies")[0]
+                def dependenciesNode = asNode().appendNode("dependencies")
 
-                //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
                 configurations.implementation.allDependencies.each {
                     def dependencyNode = dependenciesNode.appendNode('dependency')
                     dependencyNode.appendNode('groupId', it.group)
@@ -39,8 +37,6 @@ publishing {
         }
     }
 }
-
-//////////////////////////////////////////////
 
 android {
     compileSdkVersion 28
@@ -68,7 +64,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 configurations {
