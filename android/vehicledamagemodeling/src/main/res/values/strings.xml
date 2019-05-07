@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">vdm</string>
+    <string name="vdm_description">ScreenText</string>
 </resources>

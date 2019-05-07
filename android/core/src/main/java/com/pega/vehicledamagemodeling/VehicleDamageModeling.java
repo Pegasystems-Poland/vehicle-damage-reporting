@@ -51,14 +51,16 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private JsonObject jsonWithSelectedParts;
     private boolean loading;
     private final VehicleDamageReportCallback callback;
+    private final UIUpdateCallback uiUpdateCallback;
     private static final String MODEL_FILE_NAME = "model.2.1.obj";
 
-    public VehicleDamageModeling(VehicleDamageReportCallback callback) {
+    public VehicleDamageModeling(VehicleDamageReportCallback callback, UIUpdateCallback uiUpdateCallback) {
         this.callback = callback;
+        this.uiUpdateCallback = uiUpdateCallback;
     }
 
-    public VehicleDamageModeling(JsonObject jsonWithSelectedParts, VehicleDamageReportCallback callback) {
-        this(callback);
+    public VehicleDamageModeling(JsonObject jsonWithSelectedParts, VehicleDamageReportCallback callback, UIUpdateCallback uiUpdateCallback) {
+        this(callback, uiUpdateCallback);
         this.jsonWithSelectedParts = jsonWithSelectedParts;
     }
 
@@ -74,8 +76,8 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         camera.lookAt(0,0,0);
         camera.update();
 
-        PartSelectionDetector partSelectionDetector = new PartSelectionDetector(camera, instances, selectionService);
-        cameraController = new LimitedCameraInputController(camera);
+        PartSelectionDetector partSelectionDetector = new PartSelectionDetector(camera, instances, selectionService, uiUpdateCallback);
+        cameraController = new LimitedCameraInputController(camera, uiUpdateCallback);
         Gdx.input.setInputProcessor(new InputMultiplexer(partSelectionDetector, cameraController));
 
         assets = new AssetManager();
@@ -98,6 +100,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         }
 
         loading = false;
+        uiUpdateCallback.fillMainScreenText(selectionService.getMainScreenText());
     }
 
     @Override
@@ -109,7 +112,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
         gl.glViewport(0, 0, graphics.getWidth(), graphics.getHeight());
         gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        Gdx.gl.glClearColor(255/255f, 255/255f, 255/255f, 1);
+        gl.glClearColor(1,1,1,1);
 
         modelBatch.begin(camera);
         modelBatch.render(instances, environment);
@@ -128,5 +131,13 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         camera.viewportHeight = height;
         camera.viewportWidth = width;
         camera.update();
+    }
+
+    public void end(){
+        callback.onFinished(selectionService.getInitJson());
+    }
+
+    public void endWithModification(){
+        callback.onFinished(selectionService.getModifiedJson());
     }
 }

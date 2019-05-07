@@ -79,6 +79,4 @@ public class SelectionService {
     private Material getPartMaterial(ModelInstance part) {
         return part.materials.get(0);
     }
-
-
 }

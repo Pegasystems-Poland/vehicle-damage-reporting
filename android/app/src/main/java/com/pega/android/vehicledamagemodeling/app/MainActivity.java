@@ -20,31 +20,36 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import com.pega.android.vehicledamagemodeling.VehicleDamageModelingActivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import com.pega.android.vehicledamagemodeling.VehicleDamageModelingActivity;
 
 import static com.pega.android.vehicledamagemodeling.app.R.layout.main_activity;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView;
+    private static final String MAIN_SCREEN_TEXT = "Rotate model and select damaged parts with a tap on the model. If completed press button.";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(main_activity);
         textView = findViewById(R.id.result_text_view);
+        textView.setText("{\n" +
+                "      \"mainScreenText\": \"" +
+                MAIN_SCREEN_TEXT +
+                "\",\n" +
+                "      \"selection\": []\n" +
+                "    }");
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case (VehicleDamageModelingActivity.REQUEST_CODE): {
-                if (resultCode == RESULT_OK) {
-                    String returnValue = data.getStringExtra(VehicleDamageModelingActivity.REPORT_EXTRA);
-                    textView.setText(returnValue);
-                }
+        if (requestCode == VehicleDamageModelingActivity.REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                String returnValue = data.getStringExtra(VehicleDamageModelingActivity.REPORT_EXTRA);
+                textView.setText(returnValue);
             }
         }
     }
