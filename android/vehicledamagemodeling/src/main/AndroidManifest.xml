@@ -4,6 +4,7 @@
     <application>
         <activity
             android:name=".VehicleDamageModelingActivity"
+            android:screenOrientation="fullSensor"
             android:configChanges="keyboard|keyboardHidden|navigation|screenSize|screenLayout|orientation" />
     </application>
 
