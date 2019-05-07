@@ -13,13 +13,17 @@ apply plugin: 'jacoco-android'
 ///////////////////////////////////////////////
 apply plugin: 'maven-publish'
 
+project.group = 'com.pega.mobile.vehicle-damage-modeling.android'
+project.version = '1.0'
+
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = 'com.pega.mobile'
-            artifactId = 'vehicledamagemodeling'
-            artifact '/Users/domaj/Desktop/Repo/vehicle-damage-modeling/android/vehicledamagemodeling/build/outputs/aar/vehicledamagemodeling-debug.aar'
-            version = '1.0'
+            groupId = project.group
+            version = project.version
+            artifactId = 'lib'
+
+            artifact "${project.buildDir}/outputs/aar/vehicledamagemodeling-release.aar"
 
             pom.withXml {
                 def dependenciesNode = asNode().appendNode("dependencies")//.getAt("dependencies")[0]
@@ -72,9 +76,7 @@ configurations {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":core")
-
     implementation 'com.google.code.gson:gson:2.8.5'
 
     // LibGDX
@@ -137,3 +139,5 @@ tasks.whenTaskAdded { packageTask ->
         packageTask.dependsOn 'copyAndroidNatives'
     }
 }
+
+publishToMavenLocal.dependsOn assemble
