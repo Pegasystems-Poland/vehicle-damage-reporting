@@ -15,6 +15,7 @@ apply plugin: 'maven-publish'
 project.group = 'com.pega.mobile.vehicle-damage-modeling.android'
 project.version = '1.0'
 
+
 publishing {
     artifactoryPublish.dependsOn('build')
     publications {
@@ -44,8 +45,10 @@ artifactory {
     publish {
         repository {
             repoKey = 'VehicleDamageModelingMaven'
-            username = project.property('jFrogUser')
-            password = project.property('jFrogPassword')
+            if (project.hasProperty('jFrogUser') && project.hasProperty('jFrogPassword')) {
+                username = project.property('jFrogUser')
+                password = project.property('jFrogPassword')
+            }
         }
         defaults {
             publishArtifacts = true

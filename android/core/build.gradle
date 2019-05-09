@@ -18,13 +18,16 @@ publishing {
     }
 }
 
+
 artifactory {
     contextUrl = 'https://pegasystemskrakow.jfrog.io/pegasystemskrakow/'
     publish {
         repository {
             repoKey = 'VehicleDamageModelingMaven'
-            username = project.property('jFrogUser')
-            password = project.property('jFrogPassword')
+            if (project.hasProperty('jFrogUser') && project.hasProperty('jFrogPassword')) {
+                username = project.property('jFrogUser')
+                password = project.property('jFrogPassword')
+            }
         }
         defaults {
             publishArtifacts = true
