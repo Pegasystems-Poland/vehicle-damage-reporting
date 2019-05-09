@@ -94,8 +94,7 @@ configurations {
 }
 
 dependencies {
-    //implementation 'com.pega.mobile.vehicle-damage-modeling.android:core:1.0'
-    implementation project(":core")
+    implementation 'com.pega.mobile.vehicle-damage-modeling.android:core:1.0'
 
     implementation 'com.google.code.gson:gson:2.8.5'
 
