@@ -9,15 +9,16 @@ buildscript {
 
 apply plugin: 'com.android.library'
 apply plugin: 'jacoco-android'
-
+apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'maven-publish'
 
 project.group = 'com.pega.mobile.vehicle-damage-modeling.android'
 project.version = '1.0'
 
 publishing {
+    artifactoryPublish.dependsOn('build')
     publications {
-        maven(MavenPublication) {
+        lib(MavenPublication) {
             groupId = project.group
             version = project.version
             artifactId = 'lib'
@@ -36,6 +37,25 @@ publishing {
             }
         }
     }
+}
+
+artifactory {
+    contextUrl = 'https://pegasystemskrakow.jfrog.io/pegasystemskrakow/'
+    publish {
+        repository {
+            repoKey = 'VehicleDamageModelingMaven'
+            username = project.property('jFrogUser')
+            password = project.property('jFrogPassword')
+        }
+        defaults {
+            publishArtifacts = true
+            publishPom = true
+        }
+    }
+}
+
+artifactoryPublish {
+    publications(publishing.publications.lib)
 }
 
 android {
@@ -138,5 +158,3 @@ tasks.whenTaskAdded { packageTask ->
         packageTask.dependsOn 'copyAndroidNatives'
     }
 }
-
-publishToMavenLocal.dependsOn assemble
