@@ -16,7 +16,7 @@ import XCTest
 @testable import FVM
 
 class DamagedPartsServiceTests: XCTestCase {
-    private var parser: JsonParser<SelectionRoot>?
+    private var parser: Serializer<SelectionRoot>?
     private var validator: DamagedPartsValidator?
     private var partsNamesProvider: DamagedPartsNamesProvider?
     private var repository: DamagedPartsRepository?
@@ -28,7 +28,7 @@ class DamagedPartsServiceTests: XCTestCase {
         partsNamesProvider = DamagedPartsNamesProvider(validPartsNames: validPartsNames)
         validator = DamagedPartsValidator(provider: partsNamesProvider!)
         repository = DamagedPartsRepository()
-        parser = JsonParser<SelectionRoot>()
+        parser = Serializer<SelectionRoot>()
 
         sut = DamagedPartsService(parser: parser!, validator: validator!, repository: repository!)
     }

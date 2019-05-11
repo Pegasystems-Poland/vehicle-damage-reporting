@@ -15,11 +15,11 @@
 import XCTest
 @testable import FVM
 
-class JsonParserTests: XCTestCase {
-    private var sut : JsonParser<SelectionRoot>?
+class SerializerTests: XCTestCase {
+    private var sut : Serializer<SelectionRoot>?
     
     override func setUp() {
-      sut = JsonParser<SelectionRoot>()
+      sut = Serializer<SelectionRoot>()
     }
 
     func testIfReturnsNillWhenJsonIsInvalid() {
@@ -27,7 +27,7 @@ class JsonParserTests: XCTestCase {
         let invalidJson = "{invalid{"
         
         //Act
-        let actual = sut!.parse(jsonData: invalidJson)
+        let actual = sut!.deserialize(jsonData: invalidJson)
         
         //Assert
         XCTAssertNil(actual)
@@ -38,7 +38,7 @@ class JsonParserTests: XCTestCase {
         let oneElementJson = simpleJsonWithOnePart.0
 
         //Act
-        let actual = sut!.parse(jsonData: oneElementJson)
+        let actual = sut!.deserialize(jsonData: oneElementJson)
         
         //Assert
         XCTAssert(actual?.selection.count == 1)
@@ -50,7 +50,7 @@ class JsonParserTests: XCTestCase {
         let expected = simpleJsonWithOnePart.1[0].id
         
         //Act
-        let actual = sut!.parse(jsonData: oneElementJson)
+        let actual = sut!.deserialize(jsonData: oneElementJson)
         
         //Assert
         XCTAssertEqual(actual?.selection[0].id, expected)
@@ -62,7 +62,7 @@ class JsonParserTests: XCTestCase {
         let expected = "{\"mainScreenText\":\"\",\"selection\":[]}"
         
         //Act
-        let actual = sut!.parse(element: selectionRoot)
+        let actual = sut!.serialize(element: selectionRoot)
         
         //Assert
         XCTAssertEqual(expected, actual)
@@ -74,7 +74,7 @@ class JsonParserTests: XCTestCase {
         let expected = "{\"mainScreenText\":\"sampleText with spaces!\",\"selection\":[]}"
         
         //Act
-        let actual = sut!.parse(element: selectionRoot)
+        let actual = sut!.serialize(element: selectionRoot)
         
         //Assert
         XCTAssertEqual(expected, actual)
@@ -86,7 +86,7 @@ class JsonParserTests: XCTestCase {
         let expected = "{\"mainScreenText\":\"\",\"selection\":[{\"id\":\"Roof\"},{\"id\":\"Hood\"}]}"
         
         //Act
-        let actual = sut!.parse(element: selectionRoot);
+        let actual = sut!.serialize(element: selectionRoot);
         
         //Assert
         XCTAssertEqual(expected, actual)
