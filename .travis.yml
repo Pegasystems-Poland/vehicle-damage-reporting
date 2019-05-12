@@ -24,6 +24,6 @@ matrix:
     after_success:
     - cd android
     - bash <(curl -s https://codecov.io/bash)
-    - if [ $TRAVIS_BRANCH = "master" ]; then  
+    - if [[ $TRAVIS_BRANCH = "master" && $TRAVIS_PULL_REQUEST = false ]]; then  
       ./gradlew assembleRelease artifactoryPublish -P jFrogUser=$J_FROG_USER -P jFrogPassword=$J_FROG_PASSWORD;
       fi
