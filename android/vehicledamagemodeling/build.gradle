@@ -15,7 +15,6 @@ apply plugin: 'maven-publish'
 project.group = 'com.pega.mobile.vehicle-damage-modeling.android'
 project.version = '1.0'
 
-
 publishing {
     artifactoryPublish.dependsOn('build')
     publications {
@@ -94,7 +93,7 @@ configurations {
 }
 
 dependencies {
-    implementation 'com.pega.mobile.vehicle-damage-modeling.android:core:1.0'
+    implementation project(":core")
 
     implementation 'com.google.code.gson:gson:2.8.5'
 
