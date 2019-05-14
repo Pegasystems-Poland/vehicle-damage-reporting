@@ -14,7 +14,7 @@ buildscript {
 }
 
 allprojects {
-    version = '1.0'
+    version = '1.0-SNAPSHOT'
     ext {
         appName = "vehicle-damage-modeling"
         gdxVersion = '1.9.8'

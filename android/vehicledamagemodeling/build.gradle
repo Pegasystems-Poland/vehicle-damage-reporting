@@ -13,7 +13,7 @@ apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'maven-publish'
 
 project.group = 'com.pega.mobile.vehicle-damage-modeling.android'
-project.version = '1.0'
+project.version = '1.0-SNAPSHOT'
 
 publishing {
     artifactoryPublish.dependsOn('build')
@@ -117,11 +117,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     //instrumented tests
-    testImplementation 'androidx.test.ext:junit:1.1.0'
-    testImplementation 'androidx.test.ext:truth:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.ext:truth:1.1.0'
-    androidTestImplementation 'androidx.test:core:1.1.0'
     androidTestImplementation 'androidx.test:runner:1.1.1'
 }
 

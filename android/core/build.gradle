@@ -4,7 +4,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.artifactory'
 
 project.group = 'com.pega.mobile.vehicle-damage-modeling.android'
-project.version = '1.0'
+project.version = '1.0-SNAPSHOT'
 
 publishing {
     artifactoryPublish.dependsOn('jacocoTestReport')
@@ -17,7 +17,6 @@ publishing {
         }
     }
 }
-
 
 artifactory {
     contextUrl = 'https://pegasystemskrakow.jfrog.io/pegasystemskrakow/'
@@ -51,7 +50,6 @@ dependencies {
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
 
 jacocoTestReport {
     reports {
