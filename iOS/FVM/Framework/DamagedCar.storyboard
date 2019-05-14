@@ -21,6 +21,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WiH-O5-VH5">
                                 <rect key="frame" x="0.0" y="904" width="768" height="120"/>
                                 <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Rotate model and select damaged parts with a tap on the model. If completed press button." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWF-SY-VfI">
+                                        <rect key="frame" x="-12" y="50" width="780" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kK-jZ-ioB">
                                         <rect key="frame" x="701" y="50" width="50" height="50"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,11 +50,6 @@
                                             <action selector="closeButtonTapped:" destination="ios-2y-x77" eventType="touchUpInside" id="aGK-39-jma"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Rotate model and select damaged parts with a tap on the model. If completed press button." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nWF-SY-VfI">
-                                        <rect key="frame" x="-12" y="50" width="780" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="3kK-jZ-ioB" firstAttribute="leading" secondItem="nWF-SY-VfI" secondAttribute="trailing" constant="-70" id="32U-cW-7wY">
