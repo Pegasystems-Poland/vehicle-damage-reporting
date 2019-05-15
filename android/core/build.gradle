@@ -1,5 +1,43 @@
 apply plugin: 'java'
 apply plugin: 'jacoco'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
+
+project.group = 'com.pega.mobile.vehicle-damage-modeling.android'
+project.version = '1.0-SNAPSHOT'
+
+publishing {
+    artifactoryPublish.dependsOn('jacocoTestReport')
+    publications {
+        core(MavenPublication) {
+            groupId = project.group
+            version = project.version
+            artifactId = 'core'
+            from components.java
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'https://pegasystemskrakow.jfrog.io/pegasystemskrakow/'
+    publish {
+        repository {
+            repoKey = 'VehicleDamageModelingMaven'
+            if (project.hasProperty('jFrogUser') && project.hasProperty('jFrogPassword')) {
+                username = project.property('jFrogUser')
+                password = project.property('jFrogPassword')
+            }
+        }
+        defaults {
+            publishArtifacts = true
+            publishPom = true
+        }
+    }
+}
+
+artifactoryPublish {
+    publications(publishing.publications.core)
+}
 
 dependencies {
     implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -12,7 +50,6 @@ dependencies {
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
 
 jacocoTestReport {
     reports {

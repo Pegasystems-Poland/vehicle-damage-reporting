@@ -9,11 +9,12 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.9.6"
     }
 }
 
 allprojects {
-    version = '1.0'
+    version = '1.0-SNAPSHOT'
     ext {
         appName = "vehicle-damage-modeling"
         gdxVersion = '1.9.8'
