@@ -61,8 +61,4 @@ extension FVMCarModelViewController {
         heightRatio = min(heightRatio, RotateConstraint.maxAngle)
         heightRatio = max(heightRatio, RotateConstraint.minAngle)
     }
-    
-    fileprivate func hideRotationPrompt() {
-        NotificationCenter.default.post(name: .hideRotationPrompt, object: FVMDamagedCarViewController.self)
-    }
 }

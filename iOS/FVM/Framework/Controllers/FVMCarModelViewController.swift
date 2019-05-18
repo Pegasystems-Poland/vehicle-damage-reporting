@@ -48,6 +48,10 @@ internal class FVMCarModelViewController : SCNView {
         return damagedPartsService.originalConfiguration
     }
     
+    internal func hideRotationPrompt() {
+        NotificationCenter.default.post(name: .hideRotationPrompt, object: FVMDamagedCarViewController.self)
+    }
+    
     private func setupInitialSelection(configuration: String) {
         let carModelNode = scnScene.rootNode.childNode(withName: CAR_MODEL_NAME, recursively: false)
         let validNodesNames = nodeHelper?.createValidNamesArray(carModel: carModelNode!)

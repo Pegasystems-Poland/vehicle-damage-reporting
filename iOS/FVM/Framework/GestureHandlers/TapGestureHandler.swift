@@ -24,6 +24,7 @@ extension FVMCarModelViewController {
                 Log.warning("Can't highlight part without name")
                 return
             }
+            hideRotationPrompt()
             if (highlightHandler.isHighlighted(nodeName: nodeName)) {
                 setHighlightOff(nodeName: nodeName)
             } else {
