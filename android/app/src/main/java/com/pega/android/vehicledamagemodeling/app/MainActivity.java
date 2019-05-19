@@ -70,6 +70,5 @@ public class MainActivity extends AppCompatActivity {
                 "\",\n" +
                 "      \"selection\": []\n" +
                 "    }");
-        showVehicleModel(view);
     }
 }
