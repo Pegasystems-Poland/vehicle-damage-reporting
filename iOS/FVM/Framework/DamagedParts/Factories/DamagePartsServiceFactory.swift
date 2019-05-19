@@ -17,7 +17,7 @@ import Foundation
 internal class DamagePartsServiceFactory {
     public static func create(validPartsNames: [String]) -> DamagedPartsService {
         let parser = Serializer<SelectionRoot>()
-        let partsNamesProvider = DamagedPartsNamesProvider(validPartsNames: validPartsNames)
+        let partsNamesProvider = DamagedPartsNamesProvider()
         let validator = DamagedPartsValidator(provider: partsNamesProvider)
         let repository = DamagedPartsRepository()
         return DamagedPartsService(parser: parser, validator: validator, repository: repository)

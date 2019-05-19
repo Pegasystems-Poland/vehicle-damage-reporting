@@ -15,11 +15,35 @@
 import Foundation
 
 internal class DamagedPartsNamesProvider : DamagedPartsNamesProviderProtocol {
-    private var validPartsNames: [String]
-    
-    init(validPartsNames: [String]) {
-        self.validPartsNames = validPartsNames
-    }
+    private let validPartsNames: [String] = [
+        "bumper-front",
+        "bumper-rear",
+        "door-front-left",
+        "door-front-right",
+        "door-rear-left",
+        "door-rear-right",
+        "fender-front-left",
+        "fender-front-right",
+        "fender-rear-left",
+        "fender-rear-right",
+        "hood",
+        "lamp-front-right",
+        "lamp-rear-left",
+        "lamp-rear-right",
+        "lamp-front-left",
+        "roof",
+        "trunk",
+        "wheel-front-left",
+        "wheel-front-right",
+        "wheel-rear-left",
+        "wheel-rear-right",
+        "window-front",
+        "window-front-left",
+        "window-front-right",
+        "window-rear",
+        "window-rear-left",
+        "window-rear-right"
+    ]
     
     public func getValidNames() -> [String]{
         return validPartsNames

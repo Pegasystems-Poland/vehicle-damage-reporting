@@ -17,15 +17,14 @@ import XCTest
 
 class DamagePartsNamesProviderTests: XCTestCase {
     private var sut: DamagedPartsNamesProvider?
-    private let validNames = ["Roof", "Mirror", "ValidName"]
     
     override func setUp() {
-        sut = DamagedPartsNamesProvider(validPartsNames: validNames)
+        sut = DamagedPartsNamesProvider()
     }
     
     func testIfValidNamesHaveCorrectCount(){
         // Arrange
-        let expected = validNames.count
+        let expected = 27
         
         // Act
         let actual = sut?.getValidNames().count

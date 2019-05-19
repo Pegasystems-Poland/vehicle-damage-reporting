@@ -16,9 +16,18 @@ import SceneKit
 
 internal class HighlightHandler {
     private let materialProcessor = MaterialProcessor()
+    private let supportedNames: [String]
     private let animationDuration: CFTimeInterval = 0.5
     
+    init(_ supportedNamesProvider: DamagedPartsNamesProviderProtocol) {
+        self.supportedNames = supportedNamesProvider.getValidNames()
+    }
+    
     internal func setHighlightOn(node: SCNNode) {
+        if (!supportedNames.contains(node.name!)) {
+            return
+        }
+        
         runAnimatedAction {
             materialProcessor.highlightNewMaterial(forNode: node)
         }
