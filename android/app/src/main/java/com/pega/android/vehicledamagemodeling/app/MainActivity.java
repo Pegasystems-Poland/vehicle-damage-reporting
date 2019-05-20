@@ -62,4 +62,13 @@ public class MainActivity extends AppCompatActivity {
         }
         startActivityForResult(intent, VehicleDamageModelingActivity.REQUEST_CODE);
     }
+
+    public void showEmptyModel(View view){
+        textView.setText("{\n" +
+                "      \"mainScreenText\": \"" +
+                MAIN_SCREEN_TEXT +
+                "\",\n" +
+                "      \"selection\": []\n" +
+                "    }");
+    }
 }
