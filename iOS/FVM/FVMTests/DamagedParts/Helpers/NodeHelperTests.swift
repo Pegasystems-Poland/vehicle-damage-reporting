@@ -22,8 +22,8 @@ class NodeHelperTests: XCTestCase {
     private var sut: NodeHelper?
     
     override func setUp() {
-        hightlightHandlerMock = HightlightHandlerMock()
-        sut = NodeHelper(highlightHandler: hightlightHandlerMock!)
+        hightlightHandlerMock = HightlightHandlerMock(DamagedPartsNamesProviderMock())
+        sut = NodeHelper(highlightHandler: hightlightHandlerMock!, supportedNamesProvider: DamagedPartsNamesProviderMock())
     }
     
     func testIfResultContainsProperNumberOfIds(){
@@ -41,7 +41,7 @@ class NodeHelperTests: XCTestCase {
     func testIfResultContainsProperNumberOfNames(){
         // Arrange
         let nodeOne = SCNNode()
-        nodeOne.name = "name"
+        nodeOne.name = "hood"
         let nodes = [nodeOne]
         let expected = nodes.count;
         

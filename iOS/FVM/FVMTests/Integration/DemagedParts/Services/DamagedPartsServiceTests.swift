@@ -18,14 +18,12 @@ import XCTest
 class DamagedPartsServiceTests: XCTestCase {
     private var parser: Serializer<SelectionRoot>?
     private var validator: DamagedPartsValidator?
-    private var partsNamesProvider: DamagedPartsNamesProvider?
+    private var partsNamesProvider: DamagedPartsNamesProviderMock?
     private var repository: DamagedPartsRepository?
     private var sut: DamagedPartsService?
-    
-    let validPartsNames = ["MirrorRight", "MirrorLeft", "Roof"]
 
     override func setUp() {
-        partsNamesProvider = DamagedPartsNamesProvider(validPartsNames: validPartsNames)
+        partsNamesProvider = DamagedPartsNamesProviderMock()
         validator = DamagedPartsValidator(provider: partsNamesProvider!)
         repository = DamagedPartsRepository()
         parser = Serializer<SelectionRoot>()
@@ -40,7 +38,7 @@ class DamagedPartsServiceTests: XCTestCase {
             "mainScreenText": "text",
             "selection":[
             {
-                "id":"MirrorRight"
+                "id":"hood"
             }
             ]
         }
@@ -52,7 +50,7 @@ class DamagedPartsServiceTests: XCTestCase {
         // Assert
         
         assert(actual?.count == 1)
-        assert(actual?[0].id == "MirrorRight")
+        assert(actual?[0].id == "hood")
     }
     
     func testIfRemovesInvalidParts() {
@@ -62,7 +60,7 @@ class DamagedPartsServiceTests: XCTestCase {
             "mainScreenText": "text",
             "selection":[
             {
-                "id":"MirrorRight"
+                "id":"hood"
             },
             {
                 "id":"invalidName"
@@ -81,7 +79,7 @@ class DamagedPartsServiceTests: XCTestCase {
         
         // Assert
         XCTAssert(actual?.count == 1)
-        XCTAssert(actual?[0].id == "MirrorRight" )
+        XCTAssert(actual?[0].id == "hood" )
     }
     
     func testIfReturnsEmptyArrayWhenJsonIsInvalid() {
@@ -98,7 +96,7 @@ class DamagedPartsServiceTests: XCTestCase {
     
     func testIfAddsOnePartProperly() {
         // Arrange
-        let part = Selection(newName: "MirrorRight")
+        let part = Selection(newName: "hood")
         
         // Act
         sut?.addPart(part: part)
@@ -111,16 +109,16 @@ class DamagedPartsServiceTests: XCTestCase {
     
     func testIfRemovesPartProperly() {
         // Arrange
-        let partToRemove = "MirrorRight"
+        let partToRemove = "hood"
         let jsonWithInvalidParts = """
         {
             "mainScreenText": "text",
             "selection":[
             {
-                "id":"MirrorRight"
+                "id":"hood"
             },
             {
-                "id":"MirrorLeft"
+                "id":"trunk"
             },
             {
                 "id":"invalidName2"
@@ -137,7 +135,7 @@ class DamagedPartsServiceTests: XCTestCase {
         // Assert
         
         XCTAssert(actual!.count == 1)
-        XCTAssert(actual![0].id == "MirrorLeft")
+        XCTAssert(actual![0].id == "trunk")
     }
     
     func testIfItdoesntAddInvalidPart() {
@@ -160,7 +158,7 @@ class DamagedPartsServiceTests: XCTestCase {
             "mainScreenText": "text",
             "selection":[
             {
-                "id":"MirrorRight"
+                "id":"trunk"
             }
             ]
         }
@@ -172,7 +170,7 @@ class DamagedPartsServiceTests: XCTestCase {
             "selection":[
 
             {
-                "id":"Roof"
+                "id":"hood"
             }
 
             ]
@@ -184,12 +182,12 @@ class DamagedPartsServiceTests: XCTestCase {
         
         // Assert
         XCTAssert(actual?.count == 1)
-        XCTAssert(actual![0].id == "Roof")
+        XCTAssert(actual![0].id == "hood")
     }
     
     func testIfReturnsSelectionProperly() {
         //Arrange
-        let expected = "{\"mainScreenText\":\"\",\"selection\":[{\"id\":\"Roof\"},{\"id\":\"MirrorLeft\"},{\"id\":\"MirrorRight\"}]}"
+        let expected = "{\"mainScreenText\":\"\",\"selection\":[{\"id\":\"hood\"},{\"id\":\"trunk\"},{\"id\":\"roof\"}]}"
         sut?.createCollectionOfDamagedParts(json: expected)
         
         //Act
@@ -201,10 +199,10 @@ class DamagedPartsServiceTests: XCTestCase {
     
     func testIfReturnsSelectionProperlyAfterAddingNewElement() {
         //Arrange
-        let json = "{\"mainScreenText\":\"\",\"selection\":[{\"id\":\"Roof\"},{\"id\":\"MirrorLeft\"}]}"
-        let expected = "{\"mainScreenText\":\"\",\"selection\":[{\"id\":\"Roof\"},{\"id\":\"MirrorLeft\"},{\"id\":\"MirrorRight\"}]}"
+        let json = "{\"mainScreenText\":\"\",\"selection\":[{\"id\":\"roof\"},{\"id\":\"trunk\"}]}"
+        let expected = "{\"mainScreenText\":\"\",\"selection\":[{\"id\":\"roof\"},{\"id\":\"trunk\"},{\"id\":\"hood\"}]}"
         sut?.createCollectionOfDamagedParts(json: json)
-        sut?.addPart(part: Selection(newName: "MirrorRight"))
+        sut?.addPart(part: Selection(newName: "hood"))
         
         //Act
         let actual = sut!.getSerializedParts()

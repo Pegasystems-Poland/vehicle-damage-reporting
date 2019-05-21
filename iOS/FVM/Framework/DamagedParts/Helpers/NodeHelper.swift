@@ -17,9 +17,11 @@ import SceneKit
 
 internal class NodeHelper : NodeHelperProtocol {
     private var highlightHandler: HighlightHandler
+    private var supportedNamesProvider: DamagedPartsNamesProviderProtocol
     
-    init(highlightHandler: HighlightHandler) {
+    init(highlightHandler: HighlightHandler, supportedNamesProvider: DamagedPartsNamesProviderProtocol) {
         self.highlightHandler = highlightHandler
+        self.supportedNamesProvider = supportedNamesProvider
     }
     
     internal func updateDamagedPartsOnUI(damagedPartsNames: [String], carModel: SCNNode){
@@ -35,8 +37,17 @@ internal class NodeHelper : NodeHelperProtocol {
         return validNodesNames
     }
     
-    internal func getNodesNames(nodes: [SCNNode]) -> [String]{
-        return nodes.map{$0.name ?? ""};
+    internal func getNodesNames(nodes: [SCNNode]) -> [String] {
+        var validNames = [String]()
+        let supportedNames = supportedNamesProvider.getValidNames()
+        for node in nodes {
+            if let nodeName = node.name {
+                if supportedNames.contains(nodeName) {
+                    validNames.append(nodeName)
+                }
+            }
+        }
+        return validNames
     }
 
     internal func getIdsOfSelection(selections: [Selection]?) -> [String] {

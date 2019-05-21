@@ -25,7 +25,7 @@ internal class FVMCarModelViewController : SCNView {
     internal var scnScene: SCNScene!
     internal var scnCamera: SCNNode!
     internal var scnCameraOrbit: SCNNode!
-    internal let highlightHandler = HighlightHandler()
+    internal let highlightHandler = HighlightHandler(DamagedPartsNamesProvider())
     private let CAR_MODEL_NAME = "carModel"
     
     public func onStartup(configuration: String) {
@@ -36,7 +36,7 @@ internal class FVMCarModelViewController : SCNView {
         setupCamera()
         setupLights()
         
-        nodeHelper = NodeHelper(highlightHandler: highlightHandler)
+        nodeHelper = NodeHelper(highlightHandler: highlightHandler, supportedNamesProvider: DamagedPartsNamesProvider())
         setupInitialSelection(configuration: configuration)
     }
     
@@ -46,6 +46,10 @@ internal class FVMCarModelViewController : SCNView {
     
     public func onCancel() -> String {
         return damagedPartsService.originalConfiguration
+    }
+    
+    internal func hideRotationPrompt() {
+        NotificationCenter.default.post(name: .hideRotationPrompt, object: FVMDamagedCarViewController.self)
     }
     
     private func setupInitialSelection(configuration: String) {

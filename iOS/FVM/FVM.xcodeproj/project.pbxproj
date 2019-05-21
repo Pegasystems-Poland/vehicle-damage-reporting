@@ -28,6 +28,9 @@
 		BAAD17F722064BD600574F2C /* PinchGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD17F622064BD600574F2C /* PinchGestureHandler.swift */; };
 		BAD9FEBC2266436600F2139A /* ModelScaleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9FEBB2266436600F2139A /* ModelScaleProvider.swift */; };
 		BAD9FEC022664AF100F2139A /* ModelScaleProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9FEBF22664AF100F2139A /* ModelScaleProviderTests.swift */; };
+		BAE04BEA2294524C00525919 /* supported-parts.txt in Resources */ = {isa = PBXBuildFile; fileRef = BAE04BE92294524C00525919 /* supported-parts.txt */; };
+		BAE04BF42294611C00525919 /* supported-parts.txt in Resources */ = {isa = PBXBuildFile; fileRef = BAE04BE92294524C00525919 /* supported-parts.txt */; };
+		BAE04BF62294629800525919 /* DamagedPartsNamesProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE04BF52294629800525919 /* DamagedPartsNamesProviderMock.swift */; };
 		BAF81BE22222D36A001768B0 /* ZoomConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */; };
 		BAF81BEF2235CE95001768B0 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BEE2235CE95001768B0 /* Log.swift */; };
 		BAF81BF32235D211001768B0 /* LogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BF22235D211001768B0 /* LogEvent.swift */; };
@@ -97,6 +100,8 @@
 		BAAD17F622064BD600574F2C /* PinchGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchGestureHandler.swift; sourceTree = "<group>"; };
 		BAD9FEBB2266436600F2139A /* ModelScaleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelScaleProvider.swift; sourceTree = "<group>"; };
 		BAD9FEBF22664AF100F2139A /* ModelScaleProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelScaleProviderTests.swift; sourceTree = "<group>"; };
+		BAE04BE92294524C00525919 /* supported-parts.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "supported-parts.txt"; sourceTree = "<group>"; };
+		BAE04BF52294629800525919 /* DamagedPartsNamesProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamagedPartsNamesProviderMock.swift; sourceTree = "<group>"; };
 		BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomConstraint.swift; sourceTree = "<group>"; };
 		BAF81BEE2235CE95001768B0 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		BAF81BF22235D211001768B0 /* LogEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEvent.swift; sourceTree = "<group>"; };
@@ -169,6 +174,7 @@
 		0535F31C21C4389F00CD6C44 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				BAE04BE7229451B800525919 /* Resources */,
 				BA5250D42266335C00F47F8D /* ViewHandlers */,
 				BA5B809D226115A1002C2D08 /* Extensions */,
 				39E1264C224AB5E400EC6C33 /* Lighting */,
@@ -279,6 +285,22 @@
 				BAD9FEBF22664AF100F2139A /* ModelScaleProviderTests.swift */,
 			);
 			path = ViewHandlers;
+			sourceTree = "<group>";
+		};
+		BAE04BE7229451B800525919 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BAE04BE92294524C00525919 /* supported-parts.txt */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BAE04BF3229460A400525919 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				BAE04BF52294629800525919 /* DamagedPartsNamesProviderMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		BAF81BE02222D34C001768B0 /* Constraints */ = {
@@ -441,6 +463,7 @@
 		D7C88859222706B700EB3375 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				BAE04BF3229460A400525919 /* Mocks */,
 				D7C8885A222706B700EB3375 /* DamagePartsNamesProviderTests.swift */,
 			);
 			path = Providers;
@@ -574,6 +597,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05FECD61223D423400F8C371 /* Images.xcassets in Resources */,
+				BAE04BEA2294524C00525919 /* supported-parts.txt in Resources */,
 				BA9E20A621D58B830013E388 /* art.scnassets in Resources */,
 				05706878223BCD5800D2A78A /* DamagedCar.storyboard in Resources */,
 			);
@@ -583,6 +607,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAE04BF42294611C00525919 /* supported-parts.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,6 +672,7 @@
 				D7C88864222706B700EB3375 /* DamagePartsNamesProviderTests.swift in Sources */,
 				D7C88863222706B700EB3375 /* SerializerTests.swift in Sources */,
 				BA1FBE122208CB0800DBFB9E /* MaterialProcessorTests.swift in Sources */,
+				BAE04BF62294629800525919 /* DamagedPartsNamesProviderMock.swift in Sources */,
 				D7C88866222706B700EB3375 /* DamagePartsValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

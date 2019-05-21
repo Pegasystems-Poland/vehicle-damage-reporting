@@ -22,9 +22,9 @@ public class FVMDamagedCarViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var userInteractionElemsView: UIView!
-    private var userInteractionElemsViewWidth: CGFloat?
     public var configuration: String!
     public var completionAction: ((String) -> Void)?
+    private let MAX_LINE_LENGHT: CGFloat = 2000.0
 
     override public func viewDidLoad() {
         setupDamagedCarScene()
@@ -39,7 +39,6 @@ public class FVMDamagedCarViewController: UIViewController {
     
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         damageSelector.scnCamera.camera!.multiplyFOV(by: size.height / self.view.bounds.height)
-        adjustUserInteractionElemsViewWidth()
     }
     
     @IBAction internal func closeButtonTapped(_ sender: UIButton) {
@@ -54,7 +53,6 @@ public class FVMDamagedCarViewController: UIViewController {
     
     private func setupDamagedCarScene() {
         damageSelector.onStartup(configuration: configuration)
-        adjustUserInteractionElemsViewWidth()
         showRotationPrompt()
         fillUserPromptTextView()
         disableAcceptButton()
@@ -67,7 +65,7 @@ public class FVMDamagedCarViewController: UIViewController {
     }
     
     private func addTopBorderForUserInteractionElemsView() {
-        let line = UIView(frame: CGRect(x: 0, y: 0, width: userInteractionElemsViewWidth!, height: 1))
+        let line = UIView(frame: CGRect(x: 0, y: 0, width: MAX_LINE_LENGHT, height: 1))
         line.backgroundColor = UIColor.lightGray
         userInteractionElemsView.addSubview(line)
     }
@@ -80,10 +78,6 @@ public class FVMDamagedCarViewController: UIViewController {
     private func fillUserPromptTextView() {
         userPromptText.text = damageSelector.userPromptText
         userPromptText.centerTextVertically()
-    }
-    
-    private func adjustUserInteractionElemsViewWidth() {
-        userInteractionElemsViewWidth = userInteractionElemsView.frame.size.width
     }
     
     private func setupButtonShape(_ button: UIButton) {
