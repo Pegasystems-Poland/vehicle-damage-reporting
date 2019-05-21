@@ -13,13 +13,15 @@
 // limitations under the License.
 
 import Foundation
+@testable import FVM
 
-internal class DamagedPartsNamesProvider : DamagedPartsNamesProviderProtocol {
+internal class DamagedPartsNamesProviderMock : DamagedPartsNamesProviderProtocol {
     private var validPartsNames: [String]
     
     init() {
         validPartsNames = [String]()
-        let path = Bundle.main.path(forResource: "supported-parts", ofType: "txt")
+        let bundle = Bundle(for: type(of: self))
+        let path = bundle.path(forResource: "supported-parts", ofType: "txt")
         if let path = path {
             do {
                 let content = try String(contentsOfFile: path).replacingOccurrences(of: "\n", with: "").split(separator: ",")

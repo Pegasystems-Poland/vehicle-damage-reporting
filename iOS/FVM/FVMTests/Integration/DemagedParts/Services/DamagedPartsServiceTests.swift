@@ -18,14 +18,12 @@ import XCTest
 class DamagedPartsServiceTests: XCTestCase {
     private var parser: Serializer<SelectionRoot>?
     private var validator: DamagedPartsValidator?
-    private var partsNamesProvider: DamagedPartsNamesProvider?
+    private var partsNamesProvider: DamagedPartsNamesProviderMock?
     private var repository: DamagedPartsRepository?
     private var sut: DamagedPartsService?
-    
-    let validPartsNames = ["MirrorRight", "MirrorLeft", "Roof"]
 
     override func setUp() {
-        partsNamesProvider = DamagedPartsNamesProvider()
+        partsNamesProvider = DamagedPartsNamesProviderMock()
         validator = DamagedPartsValidator(provider: partsNamesProvider!)
         repository = DamagedPartsRepository()
         parser = Serializer<SelectionRoot>()

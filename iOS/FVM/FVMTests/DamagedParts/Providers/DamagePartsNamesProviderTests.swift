@@ -16,13 +16,13 @@ import XCTest
 @testable import FVM
 
 class DamagePartsNamesProviderTests: XCTestCase {
-    private var sut: DamagedPartsNamesProvider?
+    private var sut: DamagedPartsNamesProviderMock?
     
     override func setUp() {
-        sut = DamagedPartsNamesProvider()
+        sut = DamagedPartsNamesProviderMock()
     }
     
-    func testIfValidNamesHaveCorrectCount(){
+    func testIfValidNamesHaveCorrectCount() {
         // Arrange
         let expected = 27
         
