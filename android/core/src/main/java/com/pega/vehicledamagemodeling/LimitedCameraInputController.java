@@ -17,22 +17,27 @@
 package com.pega.vehicledamagemodeling;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 
 public class LimitedCameraInputController extends CameraInputController {
     private Vector3 tmpV1 = new Vector3();
     private Vector3 tmpV2 = new Vector3();
     private UIUpdateCallback uiUpdateCallback;
-    private static final float ZOOM_IN_LIMIT = 18f;
-    private static final float ZOOM_OUT_LIMIT = 40f;
+
+    private static final float ZOOM_IN_LIMIT = 0f;
+    private static final float ZOOM_OUT_LIMIT = 200f;
     private static final float ROTATE_DOWN_LIMIT = 3.0f;
     private static final float ROTATE_UP_LIMIT = 0.5f;
+    public final boolean isStartOrientationVertical;
 
-    public LimitedCameraInputController(final Camera camera, UIUpdateCallback uiUpdateCallback) {
+    public LimitedCameraInputController(final PerspectiveCamera camera, UIUpdateCallback uiUpdateCallback) {
         super(camera);
         this.uiUpdateCallback = uiUpdateCallback;
         super.pinchZoomFactor = 15f;
+        this.isStartOrientationVertical = camera.viewportHeight > camera.viewportWidth;
     }
 
     @Override
@@ -110,5 +115,41 @@ public class LimitedCameraInputController extends CameraInputController {
         tmpV2.set(camera.up);
         tmpV2.rotate(rotateVector, deltaYRotate);
         return tmpV2.y < ROTATE_UP_LIMIT;
+    }
+
+    public void setUpPosition(BoundingBox boundingBox, int width, int height) {
+        float distanceModelToCamera = Math.max(boundingBox.getDepth(), boundingBox.getWidth());
+        float xPositionByPythagorasTriangle = distanceModelToCamera * 12 / 13;
+        float yPositionByPythagorasTriangle = distanceModelToCamera * 5 / 13;
+        camera.position.set(xPositionByPythagorasTriangle, yPositionByPythagorasTriangle,0f);
+        camera.lookAt(0f,0f, 0f);
+
+        // TODO: 22/05/2019 ustawic limity IN i OUT w relacji do distanceModelToCamera
+
+        camera.update();
+    }
+
+    public float getMatchingFiledOfView(int width, int height) {
+        int min = Math.min(width, height);
+        int max = Math.max(width, height);
+        float div = (float) min / max;
+        float abs = 1f - Math.abs(div - 1f);
+        if (isStartOrientationVertical) {
+            if (isCurrentOrientationVertical(width, height)) {
+                return 90;
+            } else {
+                return 40 + abs * 50;
+            }
+        } else {
+            if (isCurrentOrientationVertical(width, height)) {
+                return 60;
+            } else {
+                return abs * 90;
+            }
+        }
+    }
+
+    private boolean isCurrentOrientationVertical(int width, int height) {
+        return width < height;
     }
 }
