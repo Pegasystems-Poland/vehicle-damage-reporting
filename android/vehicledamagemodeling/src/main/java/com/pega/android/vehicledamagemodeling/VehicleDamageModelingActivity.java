@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.pega.vehicledamagemodeling.UIUpdateCallback;
@@ -44,6 +45,7 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
         setContentView(R.layout.vehicle_damage_modeling_activity);
 
         checkButton = findViewById(R.id.vdm_bottom_check_button);
+
         disableCheckButton();
 
         initVDM();
@@ -73,6 +75,12 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
             return new VehicleDamageModeling(reportCallback, uiCallback);
         } else {
             JsonObject jsonWithSelectedParts = new JsonParser().parse(report).getAsJsonObject();
+            TextView userText = findViewById(R.id.vdm_bottom_info_text);
+            JsonElement prompt = jsonWithSelectedParts.get("prompt");
+            if (prompt != null) {
+                userText.setText(prompt.getAsString());
+            }
+
             return new VehicleDamageModeling(jsonWithSelectedParts, reportCallback, uiCallback);
         }
     }
@@ -122,7 +130,7 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
                 public void run() {
                     // TODO change
                     TextView userText = findViewById(R.id.vdm_bottom_info_text);
-                    if (mainScreenText != null && mainScreenText != "") {
+                    if (mainScreenText != null && !mainScreenText.equals("")) {
                         userText.setText(mainScreenText);
                     }
                 }

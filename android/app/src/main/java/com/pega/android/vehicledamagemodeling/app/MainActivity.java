@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(main_activity);
         textView = findViewById(R.id.result_text_view);
         textView.setText("{\n" +
-                "      \"mainScreenText\": \"" +
+                "      \"prompt\": \"" +
                 MAIN_SCREEN_TEXT +
                 "\",\n" +
                 "      \"selection\": []\n" +
@@ -61,5 +61,14 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(VehicleDamageModelingActivity.REPORT_EXTRA, report);
         }
         startActivityForResult(intent, VehicleDamageModelingActivity.REQUEST_CODE);
+    }
+
+    public void showEmptyModel(View view){
+        textView.setText("{\n" +
+                "      \"prompt\": \"" +
+                MAIN_SCREEN_TEXT +
+                "\",\n" +
+                "      \"selection\": []\n" +
+                "    }");
     }
 }

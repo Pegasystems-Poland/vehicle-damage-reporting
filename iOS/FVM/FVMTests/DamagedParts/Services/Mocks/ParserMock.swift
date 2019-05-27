@@ -15,14 +15,14 @@
 import Foundation
 @testable import FVM
 
-class ParserMock : JsonParser <SelectionRoot> {
+class ParserMock : Serializer <SelectionRoot> {
     public var parseCalls = 0
     
-    public override func parse(data: Data?) -> SelectionRoot? {
+    public override func deserialize(data: Data?) -> SelectionRoot? {
         return SelectionRoot(selectionArray: [Selection](), text: "")
     }
     
-    public override func parse(jsonData: String) -> SelectionRoot?{
+    public override func deserialize(jsonData: String) -> SelectionRoot?{
         let simpleJson = simpleJsonWithOnePart.0
         let expectedValue = simpleJsonWithOnePart.1[0].id
         parseCalls += 1

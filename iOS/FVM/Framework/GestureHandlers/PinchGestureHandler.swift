@@ -18,6 +18,7 @@ extension FVMCarModelViewController {
         switch gestureRecognizer.state {
         case .changed: fallthrough
         case .ended:
+            hideRotationPrompt()
             let scale = 2 - gestureRecognizer.scale
             var currentFOV: CGFloat
             if #available(iOS 11.0, *) {
