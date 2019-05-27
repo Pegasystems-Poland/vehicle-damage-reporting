@@ -122,8 +122,8 @@ public class LimitedCameraInputController extends CameraInputController {
         camera.position.set(xPositionByPythagorasTriangle, yPositionByPythagorasTriangle, 0f);
         camera.lookAt(0f, 0f, 0f);
 
-        ZOOM_IN_LIMIT = distanceModelToCamera * 0.6f;
-        ZOOM_OUT_LIMIT = distanceModelToCamera * 1.2f;
+        ZOOM_IN_LIMIT = distanceModelToCamera * 0.7f;
+        ZOOM_OUT_LIMIT = distanceModelToCamera * 1.4f;
 
         camera.update();
     }
