@@ -67,6 +67,6 @@ internal class DamagedPartsService: DamagedPartsServiceProtocol {
     }
     
     internal func getSerializedParts() -> String {
-        return parser.serialize(element: SelectionRoot(selectionArray: repository.getAll(), text: initialSelectionRoot?.mainScreenText ?? ""))
+        return parser.serialize(element: SelectionRoot(selectionArray: repository.getAll(), text: initialSelectionRoot?.prompt ?? ""))
     }
 }
