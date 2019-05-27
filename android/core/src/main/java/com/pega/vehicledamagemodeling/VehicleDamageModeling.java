@@ -53,7 +53,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private boolean loading;
     private final VehicleDamageReportCallback callback;
     private final UIUpdateCallback uiUpdateCallback;
-    private static final String MODEL_FILE_NAME = "model.obj";
+    private static final String MODEL_FILE_NAME = "model.2.1.obj";
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback, UIUpdateCallback uiUpdateCallback) {
         this.callback = callback;
@@ -66,7 +66,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     }
 
     @Override
-    public void create () {
+    public void create() {
         modelBatch = new ModelBatch();
         environment = new Environment();
         environment.set(new ColorAttribute(AmbientLight, 0.6f, 0.6f, 0.6f, 1f));
@@ -105,7 +105,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     }
 
     @Override
-    public void render () {
+    public void render() {
         if (loading && assets.update()) {
             doneLoading();
         }
@@ -113,7 +113,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
         gl.glViewport(0, 0, graphics.getWidth(), graphics.getHeight());
         gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        gl.glClearColor(1,1,1,1);
+        gl.glClearColor(1, 1, 1, 1);
 
         modelBatch.begin(camera);
         modelBatch.render(instances, environment);
@@ -121,7 +121,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     }
 
     @Override
-    public void dispose () {
+    public void dispose() {
         modelBatch.dispose();
         instances.clear();
         assets.dispose();
@@ -131,7 +131,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     public void resize(int width, int height) {
         camera.viewportWidth = width;
         camera.viewportHeight = height;
-        camera.fieldOfView = cameraController.getMatchingFiledOfView(width, height);
+        camera.fieldOfView = cameraController.getMatchingFieldOfView(width, height);
         camera.update();
     }
 

@@ -16,7 +16,6 @@
 
 package com.pega.vehicledamagemodeling;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
@@ -26,12 +25,11 @@ public class LimitedCameraInputController extends CameraInputController {
     private Vector3 tmpV1 = new Vector3();
     private Vector3 tmpV2 = new Vector3();
     private UIUpdateCallback uiUpdateCallback;
-
-    private static final float ZOOM_IN_LIMIT = 0f;
-    private static final float ZOOM_OUT_LIMIT = 200f;
+    private static float ZOOM_IN_LIMIT = 0f;
+    private static float ZOOM_OUT_LIMIT = 200f;
+    private final boolean isStartOrientationVertical;
     private static final float ROTATE_DOWN_LIMIT = 3.0f;
     private static final float ROTATE_UP_LIMIT = 0.5f;
-    public final boolean isStartOrientationVertical;
 
     public LimitedCameraInputController(final PerspectiveCamera camera, UIUpdateCallback uiUpdateCallback) {
         super(camera);
@@ -41,7 +39,7 @@ public class LimitedCameraInputController extends CameraInputController {
     }
 
     @Override
-    protected boolean pinchZoom (float amount) {
+    protected boolean pinchZoom(float amount) {
         return zoom(pinchZoomFactor * amount);
     }
 
@@ -60,9 +58,9 @@ public class LimitedCameraInputController extends CameraInputController {
         Vector3 zoom = tmpV1.set(camera.direction).scl(amount);
 
         if (isZoomIn(amount)) {
-            return limitZoom (zoom, ZOOM_IN_LIMIT);
+            return limitZoom(zoom, ZOOM_IN_LIMIT);
         }
-        return limitZoom (zoom, ZOOM_OUT_LIMIT);
+        return limitZoom(zoom, ZOOM_OUT_LIMIT);
     }
 
     private boolean isZoomIn(float amount) {
@@ -82,7 +80,7 @@ public class LimitedCameraInputController extends CameraInputController {
     }
 
     @Override
-    protected boolean process (float deltaX, float deltaY, int button) {
+    protected boolean process(float deltaX, float deltaY, int button) {
         uiUpdateCallback.hideRotationPrompt();
         float deltaYRotate = deltaY * rotateAngle;
         tmpV1.set(camera.direction)
@@ -121,15 +119,16 @@ public class LimitedCameraInputController extends CameraInputController {
         float distanceModelToCamera = Math.max(boundingBox.getDepth(), boundingBox.getWidth());
         float xPositionByPythagorasTriangle = distanceModelToCamera * 12 / 13;
         float yPositionByPythagorasTriangle = distanceModelToCamera * 5 / 13;
-        camera.position.set(xPositionByPythagorasTriangle, yPositionByPythagorasTriangle,0f);
-        camera.lookAt(0f,0f, 0f);
+        camera.position.set(xPositionByPythagorasTriangle, yPositionByPythagorasTriangle, 0f);
+        camera.lookAt(0f, 0f, 0f);
 
-        // TODO: 22/05/2019 ustawic limity IN i OUT w relacji do distanceModelToCamera
+        ZOOM_IN_LIMIT = distanceModelToCamera * 0.6f;
+        ZOOM_OUT_LIMIT = distanceModelToCamera * 1.2f;
 
         camera.update();
     }
 
-    public float getMatchingFiledOfView(int width, int height) {
+    public float getMatchingFieldOfView(int width, int height) {
         int min = Math.min(width, height);
         int max = Math.max(width, height);
         float div = (float) min / max;
