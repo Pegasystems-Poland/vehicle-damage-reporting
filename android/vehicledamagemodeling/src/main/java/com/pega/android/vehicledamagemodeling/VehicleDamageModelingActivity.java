@@ -36,8 +36,7 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
     public VehicleDamageModeling vehicleDamageModeling;
     private Button checkButton;
     public static final int REQUEST_CODE = 123;
-    public static String REPORT_EXTRA = "vehicle_damage_report_extra";
-    private static String report;
+    public static final String REPORT_EXTRA = "vehicle_damage_report_extra";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +102,7 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
         public void onFinished(JsonObject result) {
             Intent intent = new Intent();
             if (result != null) {
-                report = new GsonBuilder().setPrettyPrinting().create().toJson(result);
+                String report = new GsonBuilder().setPrettyPrinting().create().toJson(result);
                 intent.putExtra(REPORT_EXTRA, report);
             }
             setResult(RESULT_OK, intent);
@@ -147,9 +146,5 @@ public class VehicleDamageModelingActivity extends AndroidApplication {
                 }
             });
         }
-    }
-
-    public static String getReport() {
-        return report;
     }
 }
