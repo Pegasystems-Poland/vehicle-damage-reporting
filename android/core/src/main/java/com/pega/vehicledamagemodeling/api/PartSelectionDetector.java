@@ -53,13 +53,15 @@ public class PartSelectionDetector extends InputAdapter {
     public boolean touchUp (int screenX, int screenY, int pointer, int button) {
         if (screenTouchedMarker.epsilonEquals(screenX, screenY, SENSITIVITY)) {
             ModelInstance selectedPart = getSelectedPartId(screenX, screenY);
-            if (selectedPart != null && !selectedPart.materials.get(0).id.equals("landing-gear")) {
+            if (selectedPart != null && !selectionService.isExcludedPart(selectedPart)) {
                 uiUpdateCallback.enableCheckButton();
                 selectionService.setSelectedPart(selectedPart);
             }
         }
         return false;
     }
+
+
 
     private ModelInstance getSelectedPartId(int screenX, int screenY) {
         ModelInstance closestHitPart = null;

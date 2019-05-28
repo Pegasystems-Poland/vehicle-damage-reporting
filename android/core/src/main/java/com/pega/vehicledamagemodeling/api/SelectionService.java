@@ -79,4 +79,8 @@ public class SelectionService {
     private Material getPartMaterial(ModelInstance part) {
         return part.materials.get(0);
     }
+
+    public boolean isExcludedPart(ModelInstance selectedPart) {
+        return "landing-gear".equals(selectedPart.materials.get(0).id);
+    }
 }
