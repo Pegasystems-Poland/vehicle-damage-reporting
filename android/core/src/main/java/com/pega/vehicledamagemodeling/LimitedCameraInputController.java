@@ -22,14 +22,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 
 public class LimitedCameraInputController extends CameraInputController {
-
     private Vector3 tmpV1 = new Vector3();
     private Vector3 tmpV2 = new Vector3();
     private UIUpdateCallback uiUpdateCallback;
     private float zoomInLimit;
     private float zoomOutLimit;
     private final boolean isStartOrientationVertical;
-
     private static final float VERTICAL_FILED_OF_VIEW = 90f;
     private static final float HORIZONTAL_FILED_OF_VIEW = 60f;
     private static final int PYTHAGORAS_TRIANGLE_5_12_13_A = 5;
