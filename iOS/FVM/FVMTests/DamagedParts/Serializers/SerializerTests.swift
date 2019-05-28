@@ -59,7 +59,7 @@ class SerializerTests: XCTestCase {
     func testIfJsonIsCorrectlyBuiltWhenSelectionRootIsEmpty() {
         //Arrange
         let selectionRoot = SelectionRoot(selectionArray: [Selection](), text: "")
-        let expected = "{\"prompt\":\"\",\"selection\":[]}"
+        let expected = "{\"selection\":[],\"prompt\":\"\"}"
         
         //Act
         let actual = sut!.serialize(element: selectionRoot)
@@ -71,7 +71,7 @@ class SerializerTests: XCTestCase {
     func testIfJsonIsCorrectlyBuildWhenSelectionRootHasText() {
         //Arrange
         let selectionRoot = SelectionRoot(selectionArray: [Selection](), text: "sampleText with spaces!")
-        let expected = "{\"prompt\":\"sampleText with spaces!\",\"selection\":[]}"
+        let expected = "{\"selection\":[],\"prompt\":\"sampleText with spaces!\"}"
         
         //Act
         let actual = sut!.serialize(element: selectionRoot)
@@ -83,7 +83,7 @@ class SerializerTests: XCTestCase {
     func testIfJsonIsCorrectlyBuildWhenSelectionRootHasSelections() {
         //Arrange
         let selectionRoot = SelectionRoot(selectionArray: [Selection(newName: "Roof"), Selection(newName: "Hood")], text: "")
-        let expected = "{\"prompt\":\"\",\"selection\":[{\"id\":\"Roof\"},{\"id\":\"Hood\"}]}"
+        let expected = "{\"selection\":[{\"id\":\"Roof\"},{\"id\":\"Hood\"}],\"prompt\":\"\"}"
         
         //Act
         let actual = sut!.serialize(element: selectionRoot);
