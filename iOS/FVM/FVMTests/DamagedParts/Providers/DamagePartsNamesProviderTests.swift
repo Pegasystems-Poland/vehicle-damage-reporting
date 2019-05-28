@@ -24,7 +24,7 @@ class DamagePartsNamesProviderTests: XCTestCase {
     
     func testIfValidNamesHaveCorrectCount() {
         // Arrange
-        let expected = 27
+        let expected = 29
         
         // Act
         let actual = sut?.getValidNames().count
