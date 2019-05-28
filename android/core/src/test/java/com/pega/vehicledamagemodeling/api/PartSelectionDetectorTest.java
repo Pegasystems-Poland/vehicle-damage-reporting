@@ -48,7 +48,8 @@ public class PartSelectionDetectorTest {
     @Test
     public void whenSwipeThenIgnoreAction() {
         // given
-        PartSelectionDetector selectedDetector = new PartSelectionDetector(null, null, selectionService, mock(UIUpdateCallback.class));
+        PartSelectionDetector selectedDetector =
+                new PartSelectionDetector(null, null, selectionService, mock(UIUpdateCallback.class));
 
         // when
         selectedDetector.touchDown(screenX, screenY, 0, 0);
@@ -70,7 +71,8 @@ public class PartSelectionDetectorTest {
         when(modelInstance.calculateBoundingBox(any(BoundingBox.class))).thenReturn(boundingBox);
         modelInstances.add(modelInstance);
         when(selectionService.isExcludedPart(modelInstance)).thenReturn(false);
-        PartSelectionDetector selectedDetector = new PartSelectionDetector(camera, modelInstances, selectionService, mock(UIUpdateCallback.class));
+        PartSelectionDetector selectedDetector =
+                new PartSelectionDetector(camera, modelInstances, selectionService, mock(UIUpdateCallback.class));
 
         // when
         selectedDetector.touchDown(screenX, screenY, 0, 0);
@@ -92,7 +94,8 @@ public class PartSelectionDetectorTest {
         when(modelInstance.calculateBoundingBox(any(BoundingBox.class))).thenReturn(boundingBox);
         modelInstances.add(modelInstance);
         when(selectionService.isExcludedPart(modelInstance)).thenReturn(true);
-        PartSelectionDetector selectedDetector = new PartSelectionDetector(camera, modelInstances, selectionService, mock(UIUpdateCallback.class));
+        PartSelectionDetector selectedDetector =
+                new PartSelectionDetector(camera, modelInstances, selectionService, mock(UIUpdateCallback.class));
 
         // when
         selectedDetector.touchDown(screenX, screenY, 0, 0);

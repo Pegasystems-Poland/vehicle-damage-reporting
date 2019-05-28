@@ -124,8 +124,10 @@ public class LimitedCameraInputController extends CameraInputController {
 
     public void setUpPosition(BoundingBox boundingBox) {
         float distanceModelToCamera = Math.max(boundingBox.getDepth(), boundingBox.getWidth());
-        float xPositionByPythagorasTriangle = distanceModelToCamera * PYTHAGORAS_TRIANGLE_5_12_13_B / PYTHAGORAS_TRIANGLE_5_12_13_C;
-        float yPositionByPythagorasTriangle = distanceModelToCamera * PYTHAGORAS_TRIANGLE_5_12_13_A / PYTHAGORAS_TRIANGLE_5_12_13_C;
+        float xPositionByPythagorasTriangle = distanceModelToCamera *
+                PYTHAGORAS_TRIANGLE_5_12_13_B / PYTHAGORAS_TRIANGLE_5_12_13_C;
+        float yPositionByPythagorasTriangle = distanceModelToCamera *
+                PYTHAGORAS_TRIANGLE_5_12_13_A / PYTHAGORAS_TRIANGLE_5_12_13_C;
         camera.position.set(xPositionByPythagorasTriangle, yPositionByPythagorasTriangle, 0f);
         camera.lookAt(0f, 0f, 0f);
 

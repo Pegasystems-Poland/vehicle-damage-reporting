@@ -61,8 +61,6 @@ public class PartSelectionDetector extends InputAdapter {
         return false;
     }
 
-
-
     private ModelInstance getSelectedPartId(int screenX, int screenY) {
         ModelInstance closestHitPart = null;
         float minDistance = Float.MAX_VALUE;
