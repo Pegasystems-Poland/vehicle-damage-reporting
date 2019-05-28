@@ -87,7 +87,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         Model model = assets.get(MODEL_FILE_NAME, Model.class);
 
         BoundingBox boundingBox = model.calculateBoundingBox(new BoundingBox());
-        cameraController.setUpPosition(boundingBox, graphics.getWidth(), graphics.getHeight());
+        cameraController.setUpPosition(boundingBox);
 
         for (int i = 0; i < model.nodes.size; i++) {
             String id = model.nodes.get(i).id;
