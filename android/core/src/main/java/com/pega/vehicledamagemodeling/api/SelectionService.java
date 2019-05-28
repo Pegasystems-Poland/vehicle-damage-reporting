@@ -23,6 +23,7 @@ public class SelectionService {
     private SelectedPartsRepository selectedPartsRepository;
     private Parser parser;
 
+
     public SelectionService(SelectedPartsRepository selectedPartsRepository, Parser parser) {
         this.selectedPartsRepository = selectedPartsRepository;
         this.parser = parser;
@@ -81,6 +82,6 @@ public class SelectionService {
     }
 
     public boolean isExcludedPart(ModelInstance selectedPart) {
-        return "landing-gear".equals(selectedPart.materials.get(0).id);
+        return "undercarriage".equals(selectedPart.materials.get(0).id);
     }
 }
