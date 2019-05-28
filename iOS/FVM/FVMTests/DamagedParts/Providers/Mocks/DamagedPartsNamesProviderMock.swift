@@ -16,15 +16,37 @@ import Foundation
 @testable import FVM
 
 internal class DamagedPartsNamesProviderMock : DamagedPartsNamesProviderProtocol {
-    private var validPartsNames: [String]
-    
-    init() {
-        validPartsNames = [String]()
-        validPartsNames.append("hood")
-        validPartsNames.append("roof")
-    }
-    
+    private static let validPartsNames = [ "bumper-front",
+                                           "bumper-rear",
+                                           "door-front-left",
+                                           "door-front-right",
+                                           "door-rear-left",
+                                           "door-rear-right",
+                                           "fender-front-left",
+                                           "fender-front-right",
+                                           "fender-rear-left",
+                                           "fender-rear-right",
+                                           "hood",
+                                           "lamp-front-right",
+                                           "lamp-rear-left",
+                                           "lamp-rear-right",
+                                           "lamp-front-left",
+                                           "roof",
+                                           "pillar-left",
+                                           "pillar-right",
+                                           "trunk",
+                                           "wheel-front-left",
+                                           "wheel-front-right",
+                                           "wheel-rear-left",
+                                           "wheel-rear-right",
+                                           "window-front",
+                                           "window-front-left",
+                                           "window-front-right",
+                                           "window-rear",
+                                           "window-rear-left",
+                                           "window-rear-right" ]
+
     public func getValidNames() -> [String] {
-        return validPartsNames
+        return DamagedPartsNamesProviderMock.validPartsNames
     }
 }
