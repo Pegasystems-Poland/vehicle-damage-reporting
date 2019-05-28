@@ -20,20 +20,8 @@ internal class DamagedPartsNamesProviderMock : DamagedPartsNamesProviderProtocol
     
     init() {
         validPartsNames = [String]()
-        let bundle = Bundle(for: type(of: self))
-        let path = bundle.path(forResource: "supported-parts", ofType: "txt")
-        if let path = path {
-            do {
-                let content = try String(contentsOfFile: path).replacingOccurrences(of: "\n", with: "").split(separator: ",")
-                for partName in content {
-                    validPartsNames.append(String(partName.replacingOccurrences(of: "\"", with: "")))
-                }
-            } catch {
-                Log.error("File couldn't be read: supported-parts.txt")
-            }
-        } else {
-            Log.error("File not found: supported-parts.txt")
-        }
+        validPartsNames.append("hood")
+        validPartsNames.append("roof")
     }
     
     public func getValidNames() -> [String] {
