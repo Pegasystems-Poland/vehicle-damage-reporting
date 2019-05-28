@@ -187,7 +187,7 @@ class DamagedPartsServiceTests: XCTestCase {
     
     func testIfReturnsSelectionProperly() {
         //Arrange
-        let expected = "{\"prompt\":\"\",\"selection\":[{\"id\":\"hood\"},{\"id\":\"trunk\"},{\"id\":\"roof\"}]}"
+        let expected = "{\"selection\":[{\"id\":\"hood\"},{\"id\":\"trunk\"},{\"id\":\"roof\"}],\"prompt\":\"\"}"
         sut?.createCollectionOfDamagedParts(json: expected)
         
         //Act
@@ -200,7 +200,7 @@ class DamagedPartsServiceTests: XCTestCase {
     func testIfReturnsSelectionProperlyAfterAddingNewElement() {
         //Arrange
         let json = "{\"prompt\":\"\",\"selection\":[{\"id\":\"roof\"},{\"id\":\"trunk\"}]}"
-        let expected = "{\"prompt\":\"\",\"selection\":[{\"id\":\"roof\"},{\"id\":\"trunk\"},{\"id\":\"hood\"}]}"
+        let expected = "{\"selection\":[{\"id\":\"roof\"},{\"id\":\"trunk\"},{\"id\":\"hood\"}],\"prompt\":\"\"}"
         sut?.createCollectionOfDamagedParts(json: json)
         sut?.addPart(part: Selection(newName: "hood"))
         
