@@ -73,7 +73,7 @@ public class SelectionService {
     }
 
     private String getPartName(ModelInstance part) {
-        return part.nodes.get(0).id;
+        return getPartMaterial(part).id;
     }
 
     private Material getPartMaterial(ModelInstance part) {
