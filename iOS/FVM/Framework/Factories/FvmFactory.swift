@@ -15,7 +15,7 @@
 import Foundation
 
 public class FvmFactory {
-    public class func create(_ initialConfiguration: String) -> FVMDamagedCarViewController {
+    public class func create(_ initialConfiguration: String, _ completionAction: ((String) -> Void)?) -> FVMDamagedCarViewController {
         let bundle = Bundle(for: FVMDamagedCarViewController.self)
         let storyboard = UIStoryboard(name: "DamagedCar", bundle: bundle)
         guard let fvmViewController = storyboard.instantiateInitialViewController() as? FVMDamagedCarViewController else {
@@ -23,6 +23,7 @@ public class FvmFactory {
             fatalError()
         }
         fvmViewController.configuration = initialConfiguration
+        fvmViewController.completionAction = completionAction
         fvmViewController.loadViewIfNeeded()
         return fvmViewController
     }

@@ -31,8 +31,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func runFVM(_ sender: UIButton) {
-        let vc = FvmFactory.create(getConfigurationData())
-        vc.completionAction = { result in
+        let vc = FvmFactory.create(getConfigurationData()) { result in
             let formattedParts = self.getReadableDamagedParts(result)
             ResultContainer.damagedCarParts = formattedParts ?? ""
             self.partsTextView.text = formattedParts
