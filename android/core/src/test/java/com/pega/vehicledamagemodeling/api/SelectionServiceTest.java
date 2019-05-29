@@ -29,6 +29,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class SelectionServiceTest {
+    public static final String SCHEMA_JSON = "/schema.json";
     private Parser parser;
     private JsonObject initJson;
     private SelectedPartsRepository selectedPartsRepository;
@@ -100,7 +101,7 @@ public class SelectionServiceTest {
         //given
         ModelInstance modelInstance = null;
         SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
-        selectionService.attachJson(initJson, new Array<>(), "../common/schema.json");
+        selectionService.attachJson(initJson, new Array<>(), SCHEMA_JSON);
         when(selectedPartsRepository.getMainScreenText()).thenReturn("");
         selectionService.setSelectedPart(modelInstance);
         JsonObject expectedJson = new JsonObject();
@@ -126,7 +127,7 @@ public class SelectionServiceTest {
         SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), parser);
 
         //when
-        selectionService.attachJson(json, instances, "../common/schema.json");
+        selectionService.attachJson(json, instances, SCHEMA_JSON);
 
         //then
         assertEquals(NOTHING, selectionService.getMainScreenText());
