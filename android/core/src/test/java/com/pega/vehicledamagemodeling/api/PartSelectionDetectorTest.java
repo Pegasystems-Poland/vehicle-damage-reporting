@@ -69,7 +69,7 @@ public class PartSelectionDetectorTest {
         BoundingBox boundingBox = new BoundingBox(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
         when(modelInstance.calculateBoundingBox(any(BoundingBox.class))).thenReturn(boundingBox);
         modelInstances.add(modelInstance);
-        when(selectionService.isExcludedPart(modelInstance)).thenReturn(false);
+        when(selectionService.isIncludedPart(modelInstance)).thenReturn(false);
         PartSelectionDetector selectedDetector = new PartSelectionDetector(camera, modelInstances, selectionService, mock(UIUpdateCallback.class));
 
         // when
@@ -91,7 +91,7 @@ public class PartSelectionDetectorTest {
         BoundingBox boundingBox = new BoundingBox(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
         when(modelInstance.calculateBoundingBox(any(BoundingBox.class))).thenReturn(boundingBox);
         modelInstances.add(modelInstance);
-        when(selectionService.isExcludedPart(modelInstance)).thenReturn(true);
+        when(selectionService.isIncludedPart(modelInstance)).thenReturn(true);
         PartSelectionDetector selectedDetector = new PartSelectionDetector(camera, modelInstances, selectionService, mock(UIUpdateCallback.class));
 
         // when

@@ -54,6 +54,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private final VehicleDamageReportCallback callback;
     private final UIUpdateCallback uiUpdateCallback;
     private static final String MODEL_FILE_NAME = "model.obj";
+    private static final String INCLUDED_PARTS_FILE_NAME = "/schema.json";
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback, UIUpdateCallback uiUpdateCallback) {
         this.callback = callback;
@@ -97,7 +98,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         }
 
         if (jsonWithSelectedParts != null) {
-            selectionService.attachJson(jsonWithSelectedParts, instances);
+            selectionService.attachJson(jsonWithSelectedParts, instances, INCLUDED_PARTS_FILE_NAME);
         }
 
         loading = false;

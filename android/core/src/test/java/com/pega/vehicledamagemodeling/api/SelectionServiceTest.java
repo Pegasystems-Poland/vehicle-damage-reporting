@@ -100,7 +100,7 @@ public class SelectionServiceTest {
         //given
         ModelInstance modelInstance = null;
         SelectionService selectionService = new SelectionService(selectedPartsRepository, parser);
-        selectionService.attachJson(initJson, new Array<>());
+        selectionService.attachJson(initJson, new Array<>(), "../common/schema.json");
         when(selectedPartsRepository.getMainScreenText()).thenReturn("");
         selectionService.setSelectedPart(modelInstance);
         JsonObject expectedJson = new JsonObject();
@@ -126,7 +126,7 @@ public class SelectionServiceTest {
         SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), parser);
 
         //when
-        selectionService.attachJson(json, instances);
+        selectionService.attachJson(json, instances, "../common/schema.json");
 
         //then
         assertEquals(NOTHING, selectionService.getMainScreenText());
