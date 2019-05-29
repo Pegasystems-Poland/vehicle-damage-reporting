@@ -48,7 +48,8 @@ public class PartSelectionDetectorTest {
     @Test
     public void whenSwipeThenIgnoreAction() {
         // given
-        PartSelectionDetector selectedDetector = new PartSelectionDetector(null, null, selectionService, mock(UIUpdateCallback.class));
+        PartSelectionDetector selectedDetector =
+                new PartSelectionDetector(null, null, selectionService, mock(UIUpdateCallback.class));
 
         // when
         selectedDetector.touchDown(screenX, screenY, 0, 0);
@@ -69,7 +70,9 @@ public class PartSelectionDetectorTest {
         BoundingBox boundingBox = new BoundingBox(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
         when(modelInstance.calculateBoundingBox(any(BoundingBox.class))).thenReturn(boundingBox);
         modelInstances.add(modelInstance);
-        PartSelectionDetector selectedDetector = new PartSelectionDetector(camera, modelInstances, selectionService, mock(UIUpdateCallback.class));
+        when(selectionService.isIncludedPart(modelInstance)).thenReturn(true);
+        PartSelectionDetector selectedDetector =
+                new PartSelectionDetector(camera, modelInstances, selectionService, mock(UIUpdateCallback.class));
 
         // when
         selectedDetector.touchDown(screenX, screenY, 0, 0);
@@ -77,5 +80,28 @@ public class PartSelectionDetectorTest {
 
         // then
         verify(selectionService, times(1)).setSelectedPart(any());
+    }
+
+    @Test
+    public void whenTappingUndercarriageThenDoNotDetectAction() {
+        // given
+        Camera camera = mock(PerspectiveCamera.class);
+        Ray ray = new Ray(new Vector3(0, -2, 0), new Vector3(0, 2, 0));
+        when(camera.getPickRay(screenX, screenY)).thenReturn(ray);
+        Array<ModelInstance> modelInstances = new Array<>();
+        ModelInstance modelInstance = mock(ModelInstance.class);
+        BoundingBox boundingBox = new BoundingBox(new Vector3(-1, -1, -1), new Vector3(1, 1, 1));
+        when(modelInstance.calculateBoundingBox(any(BoundingBox.class))).thenReturn(boundingBox);
+        modelInstances.add(modelInstance);
+        when(selectionService.isIncludedPart(modelInstance)).thenReturn(false);
+        PartSelectionDetector selectedDetector =
+                new PartSelectionDetector(camera, modelInstances, selectionService, mock(UIUpdateCallback.class));
+
+        // when
+        selectedDetector.touchDown(screenX, screenY, 0, 0);
+        selectedDetector.touchUp(screenX, screenY, 0, 0);
+
+        // then
+        verify(selectionService, times(0)).setSelectedPart(any());
     }
 }

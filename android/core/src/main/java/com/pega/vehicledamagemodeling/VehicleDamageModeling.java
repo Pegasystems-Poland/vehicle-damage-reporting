@@ -27,6 +27,7 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 import com.google.gson.JsonObject;
 import com.pega.vehicledamagemodeling.api.Parser;
@@ -53,6 +54,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private final VehicleDamageReportCallback callback;
     private final UIUpdateCallback uiUpdateCallback;
     private static final String MODEL_FILE_NAME = "model.obj";
+    private static final String INCLUDED_PARTS_FILE_NAME = "/schema.json";
 
     public VehicleDamageModeling(VehicleDamageReportCallback callback, UIUpdateCallback uiUpdateCallback) {
         this.callback = callback;
@@ -65,16 +67,13 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     }
 
     @Override
-    public void create () {
+    public void create() {
         modelBatch = new ModelBatch();
         environment = new Environment();
         environment.set(new ColorAttribute(AmbientLight, 0.6f, 0.6f, 0.6f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.8f, -0.8f, -0.8f));
 
-        camera = new PerspectiveCamera(60, graphics.getWidth(), graphics.getHeight());
-        camera.position.set(20f, 20f, 20f);
-        camera.lookAt(0,0,0);
-        camera.update();
+        camera = new PerspectiveCamera(90, graphics.getWidth(), graphics.getHeight());
 
         PartSelectionDetector partSelectionDetector = new PartSelectionDetector(camera, instances, selectionService, uiUpdateCallback);
         cameraController = new LimitedCameraInputController(camera, uiUpdateCallback);
@@ -88,6 +87,9 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     private void doneLoading() {
         Model model = assets.get(MODEL_FILE_NAME, Model.class);
 
+        BoundingBox boundingBox = model.calculateBoundingBox(new BoundingBox());
+        cameraController.setUpPosition(boundingBox);
+
         for (int i = 0; i < model.nodes.size; i++) {
             String id = model.nodes.get(i).id;
             ModelInstance instance = new ModelInstance(model, id, true);
@@ -96,7 +98,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
         }
 
         if (jsonWithSelectedParts != null) {
-            selectionService.attachJson(jsonWithSelectedParts, instances);
+            selectionService.attachJson(jsonWithSelectedParts, instances, INCLUDED_PARTS_FILE_NAME);
         }
 
         loading = false;
@@ -104,7 +106,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     }
 
     @Override
-    public void render () {
+    public void render() {
         if (loading && assets.update()) {
             doneLoading();
         }
@@ -112,7 +114,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
         gl.glViewport(0, 0, graphics.getWidth(), graphics.getHeight());
         gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        gl.glClearColor(1,1,1,1);
+        gl.glClearColor(1, 1, 1, 1);
 
         modelBatch.begin(camera);
         modelBatch.render(instances, environment);
@@ -120,7 +122,7 @@ public class VehicleDamageModeling extends ApplicationAdapter {
     }
 
     @Override
-    public void dispose () {
+    public void dispose() {
         modelBatch.dispose();
         instances.clear();
         assets.dispose();
@@ -128,16 +130,17 @@ public class VehicleDamageModeling extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
-        camera.viewportHeight = height;
         camera.viewportWidth = width;
+        camera.viewportHeight = height;
+        camera.fieldOfView = cameraController.getMatchingFieldOfView(width, height);
         camera.update();
     }
 
-    public void end(){
+    public void end() {
         callback.onFinished(selectionService.getInitJson());
     }
 
-    public void endWithModification(){
+    public void endWithModification() {
         callback.onFinished(selectionService.getModifiedJson());
     }
 }

@@ -16,27 +16,39 @@
 
 package com.pega.vehicledamagemodeling;
 
-import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 
 public class LimitedCameraInputController extends CameraInputController {
     private Vector3 tmpV1 = new Vector3();
     private Vector3 tmpV2 = new Vector3();
     private UIUpdateCallback uiUpdateCallback;
-    private static final float ZOOM_IN_LIMIT = 18f;
-    private static final float ZOOM_OUT_LIMIT = 40f;
-    private static final float ROTATE_DOWN_LIMIT = 3.0f;
-    private static final float ROTATE_UP_LIMIT = 0.5f;
+    private float zoomInLimit;
+    private float zoomOutLimit;
+    private final boolean isStartOrientationVertical;
+    private static final float VERTICAL_FILED_OF_VIEW = 90f;
+    private static final float HORIZONTAL_FILED_OF_VIEW = 60f;
 
-    public LimitedCameraInputController(final Camera camera, UIUpdateCallback uiUpdateCallback) {
+    // with this constants start position and zooms looks natural
+    private static final int PYTHAGORAS_TRIANGLE_5_12_13_A = 5;
+    private static final int PYTHAGORAS_TRIANGLE_5_12_13_B = 12;
+    private static final int PYTHAGORAS_TRIANGLE_5_12_13_C = 13;
+    private static final float ZOOM_IN_LIMIT_FACTOR = 0.7f;
+    private static final float ZOOM_OUT_LIMIT_FACTOR = 1.4f;
+    private static final float ROTATE_UP_LIMIT = 0.5f;
+    private static final float ROTATE_DOWN_LIMIT = 3.0f;
+
+    public LimitedCameraInputController(final PerspectiveCamera camera, UIUpdateCallback uiUpdateCallback) {
         super(camera);
         this.uiUpdateCallback = uiUpdateCallback;
         super.pinchZoomFactor = 15f;
+        this.isStartOrientationVertical = camera.viewportHeight > camera.viewportWidth;
     }
 
     @Override
-    protected boolean pinchZoom (float amount) {
+    protected boolean pinchZoom(float amount) {
         return zoom(pinchZoomFactor * amount);
     }
 
@@ -55,9 +67,9 @@ public class LimitedCameraInputController extends CameraInputController {
         Vector3 zoom = tmpV1.set(camera.direction).scl(amount);
 
         if (isZoomIn(amount)) {
-            return limitZoom (zoom, ZOOM_IN_LIMIT);
+            return limitZoom(zoom, zoomInLimit);
         }
-        return limitZoom (zoom, ZOOM_OUT_LIMIT);
+        return limitZoom(zoom, zoomOutLimit);
     }
 
     private boolean isZoomIn(float amount) {
@@ -77,7 +89,7 @@ public class LimitedCameraInputController extends CameraInputController {
     }
 
     @Override
-    protected boolean process (float deltaX, float deltaY, int button) {
+    protected boolean process(float deltaX, float deltaY, int button) {
         uiUpdateCallback.hideRotationPrompt();
         float deltaYRotate = deltaY * rotateAngle;
         tmpV1.set(camera.direction)
@@ -110,5 +122,55 @@ public class LimitedCameraInputController extends CameraInputController {
         tmpV2.set(camera.up);
         tmpV2.rotate(rotateVector, deltaYRotate);
         return tmpV2.y < ROTATE_UP_LIMIT;
+    }
+
+    public void setUpPosition(BoundingBox boundingBox) {
+        float distanceModelToCamera = Math.max(boundingBox.getDepth(), boundingBox.getWidth());
+        setCameraStartPosition(distanceModelToCamera);
+        zoomInLimit = distanceModelToCamera * ZOOM_IN_LIMIT_FACTOR;
+        zoomOutLimit = distanceModelToCamera * ZOOM_OUT_LIMIT_FACTOR;
+
+        camera.update();
+    }
+
+    private void setCameraStartPosition(float distanceModelToCamera) {
+        float xPositionByPythagorasTriangle = distanceModelToCamera *
+                PYTHAGORAS_TRIANGLE_5_12_13_B / PYTHAGORAS_TRIANGLE_5_12_13_C;
+        float yPositionByPythagorasTriangle = distanceModelToCamera *
+                PYTHAGORAS_TRIANGLE_5_12_13_A / PYTHAGORAS_TRIANGLE_5_12_13_C;
+        camera.position.set(xPositionByPythagorasTriangle, yPositionByPythagorasTriangle, 0f);
+        camera.lookAt(0f, 0f, 0f);
+    }
+
+    public float getMatchingFieldOfView(int width, int height) {
+        float factor = getFactor(width, height);
+        if (isStartOrientationVertical) {
+            if (isCurrentOrientationVertical(width, height)) {
+                return VERTICAL_FILED_OF_VIEW;
+            } else {
+                return getChangedFiledOfView(factor, VERTICAL_FILED_OF_VIEW, 2);
+            }
+        } else {
+            if (isCurrentOrientationVertical(width, height)) {
+                return HORIZONTAL_FILED_OF_VIEW;
+            } else {
+                return getChangedFiledOfView(factor, HORIZONTAL_FILED_OF_VIEW, 3);
+            }
+        }
+    }
+
+    private float getFactor(int width, int height) {
+        int min = Math.min(width, height);
+        int max = Math.max(width, height);
+        float div = (float) min / max;
+        return 1f - Math.abs(div - 1f);
+    }
+
+    private float getChangedFiledOfView(float factor, float filedOfView, float ratio) {
+        return (filedOfView / ratio) + factor * (filedOfView * (ratio - 1)  / ratio);
+    }
+
+    private boolean isCurrentOrientationVertical(int width, int height) {
+        return width < height;
     }
 }

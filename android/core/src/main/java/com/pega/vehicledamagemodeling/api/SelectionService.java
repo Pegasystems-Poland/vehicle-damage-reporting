@@ -17,11 +17,20 @@ package com.pega.vehicledamagemodeling.api;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.utils.Array;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SelectionService {
     private SelectedPartsRepository selectedPartsRepository;
     private Parser parser;
+    private List<String> includedParts;
 
     public SelectionService(SelectedPartsRepository selectedPartsRepository, Parser parser) {
         this.selectedPartsRepository = selectedPartsRepository;
@@ -42,9 +51,10 @@ public class SelectionService {
         return selectedPartsRepository.getMainScreenText();
     }
 
-    public void attachJson(JsonObject json, Array<ModelInstance> parts) {
+    public void attachJson(JsonObject json, Array<ModelInstance> parts, String includedPartsPath) {
         selectedPartsRepository.setInitJson(json);
         selectedPartsRepository.setMainScreenText(parser.parseToMainScreenText(json));
+        includedParts = getIncludedParts(includedPartsPath);
 
         for (String partName : parser.parseToSelectedParts(json)) {
             ModelInstance part = getPartByName(partName, parts);
@@ -52,6 +62,63 @@ public class SelectionService {
                 setSelectedPart(part);
             }
         }
+    }
+
+    private List<String> getIncludedParts(String includedPartsPath) {
+        String fileText = tryReadFile(includedPartsPath);
+        JsonArray jsonArrayIncludedParts = parseToJSONArray(fileText);
+        return covertJSONArrayToList(jsonArrayIncludedParts);
+    }
+
+    private String tryReadFile(String includedPartsPath) {
+        String fileText = "";
+        try {
+            fileText = readFile(includedPartsPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fileText;
+    }
+
+    private String readFile(String includedPartsPath) throws IOException {
+        InputStream resourceAsStream = SelectionService.class.getResourceAsStream(includedPartsPath);
+        return readFromInputStream(resourceAsStream);
+    }
+
+    private String readFromInputStream(InputStream inputStream) throws IOException {
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
+        }
+        return resultStringBuilder.toString();
+    }
+
+    private JsonArray parseToJSONArray(String fileText) {
+        JsonParser parser = new JsonParser();
+        JsonObject o = parser.parse(fileText).getAsJsonObject();
+        return getJSONArrayIncludedParts(o);
+    }
+
+    private JsonArray getJSONArrayIncludedParts(JsonObject jsonObject) {
+        return jsonObject.getAsJsonObject("properties")
+                .getAsJsonObject("selection")
+                .getAsJsonObject("items")
+                .getAsJsonObject("properties")
+                .getAsJsonObject("id")
+                .getAsJsonArray("enum");
+    }
+
+    private List<String> covertJSONArrayToList(JsonArray jsonArray) {
+        List<String> elements = new ArrayList<>();
+        if (jsonArray != null) {
+            for (int i = 0; i < jsonArray.size(); i++) {
+                elements.add(jsonArray.get(i).getAsString());
+            }
+        }
+        return elements;
     }
 
     private ModelInstance getPartByName(String partName, Array<ModelInstance> parts) {
@@ -70,6 +137,10 @@ public class SelectionService {
             Material reverseMaterial = selectedPartsRepository.getReverseMaterial(partName, currentMaterial);
             getPartMaterial(part).set(reverseMaterial);
         }
+    }
+
+    public boolean isIncludedPart(ModelInstance part) {
+        return includedParts.contains(getPartName(part));
     }
 
     private String getPartName(ModelInstance part) {

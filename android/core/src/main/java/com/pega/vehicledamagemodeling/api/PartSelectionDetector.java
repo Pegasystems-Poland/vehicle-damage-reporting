@@ -53,7 +53,7 @@ public class PartSelectionDetector extends InputAdapter {
     public boolean touchUp (int screenX, int screenY, int pointer, int button) {
         if (screenTouchedMarker.epsilonEquals(screenX, screenY, SENSITIVITY)) {
             ModelInstance selectedPart = getSelectedPartId(screenX, screenY);
-            if (selectedPart != null) {
+            if (selectedPart != null && selectionService.isIncludedPart(selectedPart)) {
                 uiUpdateCallback.enableCheckButton();
                 selectionService.setSelectedPart(selectedPart);
             }
