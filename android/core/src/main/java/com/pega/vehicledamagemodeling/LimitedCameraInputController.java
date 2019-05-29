@@ -30,6 +30,8 @@ public class LimitedCameraInputController extends CameraInputController {
     private final boolean isStartOrientationVertical;
     private static final float VERTICAL_FILED_OF_VIEW = 90f;
     private static final float HORIZONTAL_FILED_OF_VIEW = 60f;
+
+    // with this constants start position and zooms looks natural
     private static final int PYTHAGORAS_TRIANGLE_5_12_13_A = 5;
     private static final int PYTHAGORAS_TRIANGLE_5_12_13_B = 12;
     private static final int PYTHAGORAS_TRIANGLE_5_12_13_C = 13;
