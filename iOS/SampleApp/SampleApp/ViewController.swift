@@ -31,15 +31,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func runFVM(_ sender: UIButton) {
-        let sb = UIStoryboard(name: "DamagedCar", bundle: Bundle(for: FVMDamagedCarViewController.self))
-        let vc = sb.instantiateInitialViewController() as! FVMDamagedCarViewController
-        vc.configuration = getConfigurationData()
+        let vc = FvmFactory.create(getConfigurationData())
         vc.completionAction = { result in
             let formattedParts = self.getReadableDamagedParts(result)
             ResultContainer.damagedCarParts = formattedParts ?? ""
             self.partsTextView.text = formattedParts
             self.resultTextView.text = result
         }
-        self.show(vc, sender: nil)
+        present(vc, animated: true, completion: nil)
     }
 }
