@@ -17,7 +17,7 @@ import SceneKit
 
 internal class FVMCarModelViewController : SCNView {
     internal var userPromptText: String? {
-        return damagedPartsService.originalSelectionRoot?.mainScreenText
+        return damagedPartsService.originalSelectionRoot?.prompt
     }
     internal var damagedPartsService: DamagedPartsServiceProtocol!
     internal var modelScaleProvider: ModelScaleProviderProtocol!

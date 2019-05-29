@@ -22,14 +22,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 
 public class LimitedCameraInputController extends CameraInputController {
-
     private Vector3 tmpV1 = new Vector3();
     private Vector3 tmpV2 = new Vector3();
     private UIUpdateCallback uiUpdateCallback;
     private float zoomInLimit;
     private float zoomOutLimit;
     private final boolean isStartOrientationVertical;
-
     private static final float VERTICAL_FILED_OF_VIEW = 90f;
     private static final float HORIZONTAL_FILED_OF_VIEW = 60f;
     private static final int PYTHAGORAS_TRIANGLE_5_12_13_A = 5;
@@ -126,8 +124,10 @@ public class LimitedCameraInputController extends CameraInputController {
 
     public void setUpPosition(BoundingBox boundingBox) {
         float distanceModelToCamera = Math.max(boundingBox.getDepth(), boundingBox.getWidth());
-        float xPositionByPythagorasTriangle = distanceModelToCamera * PYTHAGORAS_TRIANGLE_5_12_13_B / PYTHAGORAS_TRIANGLE_5_12_13_C;
-        float yPositionByPythagorasTriangle = distanceModelToCamera * PYTHAGORAS_TRIANGLE_5_12_13_A / PYTHAGORAS_TRIANGLE_5_12_13_C;
+        float xPositionByPythagorasTriangle = distanceModelToCamera *
+                PYTHAGORAS_TRIANGLE_5_12_13_B / PYTHAGORAS_TRIANGLE_5_12_13_C;
+        float yPositionByPythagorasTriangle = distanceModelToCamera *
+                PYTHAGORAS_TRIANGLE_5_12_13_A / PYTHAGORAS_TRIANGLE_5_12_13_C;
         camera.position.set(xPositionByPythagorasTriangle, yPositionByPythagorasTriangle, 0f);
         camera.lookAt(0f, 0f, 0f);
 

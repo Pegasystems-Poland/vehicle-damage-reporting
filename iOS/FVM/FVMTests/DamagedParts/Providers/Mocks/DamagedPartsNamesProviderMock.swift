@@ -16,27 +16,37 @@ import Foundation
 @testable import FVM
 
 internal class DamagedPartsNamesProviderMock : DamagedPartsNamesProviderProtocol {
-    private var validPartsNames: [String]
-    
-    init() {
-        validPartsNames = [String]()
-        let bundle = Bundle(for: type(of: self))
-        let path = bundle.path(forResource: "supported-parts", ofType: "txt")
-        if let path = path {
-            do {
-                let content = try String(contentsOfFile: path).replacingOccurrences(of: "\n", with: "").split(separator: ",")
-                for partName in content {
-                    validPartsNames.append(String(partName.replacingOccurrences(of: "\"", with: "")))
-                }
-            } catch {
-                Log.error("File couldn't be read: supported-parts.txt")
-            }
-        } else {
-            Log.error("File not found: supported-parts.txt")
-        }
-    }
-    
+    private static let validPartsNames = [ "bumper-front",
+                                           "bumper-rear",
+                                           "door-front-left",
+                                           "door-front-right",
+                                           "door-rear-left",
+                                           "door-rear-right",
+                                           "fender-front-left",
+                                           "fender-front-right",
+                                           "fender-rear-left",
+                                           "fender-rear-right",
+                                           "hood",
+                                           "lamp-front-right",
+                                           "lamp-rear-left",
+                                           "lamp-rear-right",
+                                           "lamp-front-left",
+                                           "roof",
+                                           "pillar-left",
+                                           "pillar-right",
+                                           "trunk",
+                                           "wheel-front-left",
+                                           "wheel-front-right",
+                                           "wheel-rear-left",
+                                           "wheel-rear-right",
+                                           "window-front",
+                                           "window-front-left",
+                                           "window-front-right",
+                                           "window-rear",
+                                           "window-rear-left",
+                                           "window-rear-right" ]
+
     public func getValidNames() -> [String] {
-        return validPartsNames
+        return DamagedPartsNamesProviderMock.validPartsNames
     }
 }

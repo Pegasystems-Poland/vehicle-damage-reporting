@@ -23,7 +23,6 @@
 		BA60E9312247990C00B5C566 /* SelectionFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60E9302247990C00B5C566 /* SelectionFormatter.swift */; };
 		BA60E9352247996800B5C566 /* SelectionFormatterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60E9342247996800B5C566 /* SelectionFormatterProtocol.swift */; };
 		BA9E20A921D591450013E388 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = BA9E20A721D591450013E388 /* art.scnassets */; };
-		BAE04BEE229456E800525919 /* supported-parts.txt in Resources */ = {isa = PBXBuildFile; fileRef = BAE04BED229456E800525919 /* supported-parts.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +81,6 @@
 		BA60E9302247990C00B5C566 /* SelectionFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFormatter.swift; sourceTree = "<group>"; };
 		BA60E9342247996800B5C566 /* SelectionFormatterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFormatterProtocol.swift; sourceTree = "<group>"; };
 		BA9E20A721D591450013E388 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = art.scnassets; path = ../FVM/Framework/art.scnassets; sourceTree = "<group>"; };
-		BAE04BED229456E800525919 /* supported-parts.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "supported-parts.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +117,6 @@
 		B52DB80921BA8EEF00C6CC36 = {
 			isa = PBXGroup;
 			children = (
-				BAE04BED229456E800525919 /* supported-parts.txt */,
 				BA60E9192242AFBA00B5C566 /* Images.xcassets */,
 				05706879223BCE2400D2A78A /* DamagedCar.storyboard */,
 				BA9E20A721D591450013E388 /* art.scnassets */,
@@ -261,7 +258,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAE04BEE229456E800525919 /* supported-parts.txt in Resources */,
 				BA60E91B2242AFBA00B5C566 /* Images.xcassets in Resources */,
 				0570687A223BCE2400D2A78A /* DamagedCar.storyboard in Resources */,
 				BA9E20A921D591450013E388 /* art.scnassets in Resources */,

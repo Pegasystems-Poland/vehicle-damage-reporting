@@ -140,15 +140,15 @@ public class SelectionService {
         }
     }
 
+    public boolean isIncludedPart(ModelInstance part) {
+        return includedParts.contains(getPartName(part));
+    }
+
     private String getPartName(ModelInstance part) {
         return getPartMaterial(part).id;
     }
 
     private Material getPartMaterial(ModelInstance part) {
         return part.materials.get(0);
-    }
-
-    public boolean isIncludedPart(ModelInstance selectedPart) {
-        return includedParts.contains(selectedPart.materials.get(0).id);
     }
 }
