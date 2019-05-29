@@ -29,7 +29,6 @@
 		BAD9FEBC2266436600F2139A /* ModelScaleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9FEBB2266436600F2139A /* ModelScaleProvider.swift */; };
 		BAD9FEC022664AF100F2139A /* ModelScaleProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9FEBF22664AF100F2139A /* ModelScaleProviderTests.swift */; };
 		BAE04BF62294629800525919 /* DamagedPartsNamesProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE04BF52294629800525919 /* DamagedPartsNamesProviderMock.swift */; };
-		BAE04C03229EEF5F00525919 /* FvmFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE04C02229EEF5F00525919 /* FvmFactory.swift */; };
 		BAF81BE22222D36A001768B0 /* ZoomConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */; };
 		BAF81BEF2235CE95001768B0 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BEE2235CE95001768B0 /* Log.swift */; };
 		BAF81BF32235D211001768B0 /* LogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF81BF22235D211001768B0 /* LogEvent.swift */; };
@@ -100,7 +99,6 @@
 		BAD9FEBB2266436600F2139A /* ModelScaleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelScaleProvider.swift; sourceTree = "<group>"; };
 		BAD9FEBF22664AF100F2139A /* ModelScaleProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelScaleProviderTests.swift; sourceTree = "<group>"; };
 		BAE04BF52294629800525919 /* DamagedPartsNamesProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamagedPartsNamesProviderMock.swift; sourceTree = "<group>"; };
-		BAE04C02229EEF5F00525919 /* FvmFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FvmFactory.swift; sourceTree = "<group>"; };
 		BAF81BE12222D36A001768B0 /* ZoomConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomConstraint.swift; sourceTree = "<group>"; };
 		BAF81BEE2235CE95001768B0 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		BAF81BF22235D211001768B0 /* LogEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEvent.swift; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 		0535F31C21C4389F00CD6C44 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				BAE04C01229EEF5200525919 /* Factories */,
 				BA5250D42266335C00F47F8D /* ViewHandlers */,
 				BA5B809D226115A1002C2D08 /* Extensions */,
 				39E1264C224AB5E400EC6C33 /* Lighting */,
@@ -292,14 +289,6 @@
 				BAE04BF52294629800525919 /* DamagedPartsNamesProviderMock.swift */,
 			);
 			path = Mocks;
-			sourceTree = "<group>";
-		};
-		BAE04C01229EEF5200525919 /* Factories */ = {
-			isa = PBXGroup;
-			children = (
-				BAE04C02229EEF5F00525919 /* FvmFactory.swift */,
-			);
-			path = Factories;
 			sourceTree = "<group>";
 		};
 		BAF81BE02222D34C001768B0 /* Constraints */ = {
@@ -635,7 +624,6 @@
 				BA5B809F2261166B002C2D08 /* SCNCamera+FOVSetter.swift in Sources */,
 				05706873223BCC7E00D2A78A /* FVMDamagedCarViewController.swift in Sources */,
 				39A45862224A55BC000721D5 /* LightManagerProtocol.swift in Sources */,
-				BAE04C03229EEF5F00525919 /* FvmFactory.swift in Sources */,
 				D7C88820222702F600EB3375 /* Serializer.swift in Sources */,
 				D7C88827222702F600EB3375 /* DamagePartsServiceFactory.swift in Sources */,
 				05CDF820221034F400069640 /* PanGestureHandler.swift in Sources */,
