@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <state key="normal" title="Run FVM"/>
                                 <connections>
-                                    <segue destination="54P-Qk-o0X" kind="show" id="Skh-Zm-B1k"/>
+                                    <action selector="runFVM:" destination="8bG-13-ouU" eventType="touchUpInside" id="QcA-oM-8Go"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="Description" text="Your description for FVM" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="egy-tL-5h5" userLabel="Description">
@@ -106,14 +106,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRo-9X-vxN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1004" y="121"/>
-        </scene>
-        <!--DamagedCar-->
-        <scene sceneID="qo0-br-vpq">
-            <objects>
-                <viewControllerPlaceholder storyboardName="DamagedCar" referencedIdentifier="DamagedCar" id="54P-Qk-o0X" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bwc-9j-lvF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1668" y="120.53973013493254"/>
         </scene>
     </scenes>
 </document>

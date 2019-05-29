@@ -30,17 +30,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is FVMDamagedCarViewController {
-            let fvmController = segue.destination as! FVMDamagedCarViewController
-            fvmController.configuration = getConfigurationData()
-            
-            fvmController.completionAction = { result in
-                let formattedParts = self.getReadableDamagedParts(result)
-                ResultContainer.damagedCarParts = formattedParts ?? ""
-                self.partsTextView.text = formattedParts
-                self.resultTextView.text = result
-            }
+    @IBAction func runFVM(_ sender: UIButton) {
+        let vc = FVMDamagedCarViewController.create(getConfigurationData()) { result in
+            let formattedParts = self.getReadableDamagedParts(result)
+            ResultContainer.damagedCarParts = formattedParts ?? ""
+            self.partsTextView.text = formattedParts
+            self.resultTextView.text = result
         }
+        present(vc, animated: true, completion: nil)
     }
 }

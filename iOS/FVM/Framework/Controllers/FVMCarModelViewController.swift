@@ -72,7 +72,8 @@ internal class FVMCarModelViewController : SCNView {
     }
     
     private func setupScene() {
-        scnScene = SCNScene(named: "art.scnassets/model.scn")
+        let url = Bundle(for: FVMCarModelViewController.self).url(forResource: "art.scnassets/model", withExtension: "scn")
+        scnScene = SCNSceneSource(url: url!)?.scene()
         self.scene = scnScene
     }
     

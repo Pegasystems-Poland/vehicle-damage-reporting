@@ -26,6 +26,19 @@ public class FVMDamagedCarViewController: UIViewController {
     public var completionAction: ((String) -> Void)?
     private let MAX_LINE_LENGHT: CGFloat = 2000.0
 
+    public class func create(_ initialConfiguration: String, _ completionAction: ((String) -> Void)?) -> FVMDamagedCarViewController {
+        let bundle = Bundle(for: FVMDamagedCarViewController.self)
+        let storyboard = UIStoryboard(name: "DamagedCar", bundle: bundle)
+        guard let fvmViewController = storyboard.instantiateInitialViewController() as? FVMDamagedCarViewController else {
+            Log.error("No initial view controller found.")
+            fatalError()
+        }
+        fvmViewController.configuration = initialConfiguration
+        fvmViewController.completionAction = completionAction
+        fvmViewController.loadViewIfNeeded()
+        return fvmViewController
+    }
+    
     override public func viewDidLoad() {
         setupDamagedCarScene()
 
