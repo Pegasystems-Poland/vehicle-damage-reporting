@@ -124,17 +124,20 @@ public class LimitedCameraInputController extends CameraInputController {
 
     public void setUpPosition(BoundingBox boundingBox) {
         float distanceModelToCamera = Math.max(boundingBox.getDepth(), boundingBox.getWidth());
+        setCameraStartPosition(distanceModelToCamera);
+        zoomInLimit = distanceModelToCamera * ZOOM_IN_LIMIT_FACTOR;
+        zoomOutLimit = distanceModelToCamera * ZOOM_OUT_LIMIT_FACTOR;
+
+        camera.update();
+    }
+
+    private void setCameraStartPosition(float distanceModelToCamera) {
         float xPositionByPythagorasTriangle = distanceModelToCamera *
                 PYTHAGORAS_TRIANGLE_5_12_13_B / PYTHAGORAS_TRIANGLE_5_12_13_C;
         float yPositionByPythagorasTriangle = distanceModelToCamera *
                 PYTHAGORAS_TRIANGLE_5_12_13_A / PYTHAGORAS_TRIANGLE_5_12_13_C;
         camera.position.set(xPositionByPythagorasTriangle, yPositionByPythagorasTriangle, 0f);
         camera.lookAt(0f, 0f, 0f);
-
-        zoomInLimit = distanceModelToCamera * ZOOM_IN_LIMIT_FACTOR;
-        zoomOutLimit = distanceModelToCamera * ZOOM_OUT_LIMIT_FACTOR;
-
-        camera.update();
     }
 
     public float getMatchingFieldOfView(int width, int height) {
