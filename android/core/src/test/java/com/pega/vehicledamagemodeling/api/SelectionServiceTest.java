@@ -121,7 +121,7 @@ public class SelectionServiceTest {
         JsonObject json = new JsonObject();
         parser = mock(Parser.class);
         Array<ModelInstance> instances = new Array<>();
-        when(parser.parseToMainScreenText(json)).thenReturn(NOTHING);
+        when(parser.parseToMainScreenText(json)).thenReturn("");
         HashSet<String> list = new HashSet<>();
         when(parser.parseToSelectedParts(json)).thenReturn(list);
         SelectionService selectionService = new SelectionService(new SelectedPartsRepository(), parser);
@@ -130,7 +130,7 @@ public class SelectionServiceTest {
         selectionService.attachJson(json, instances, SCHEMA_JSON);
 
         //then
-        assertEquals(NOTHING, selectionService.getMainScreenText());
-        assertEquals(selectionService.getInitJson(), selectionService.getInitJson());
+        assertEquals("", selectionService.getMainScreenText());
+        assertEquals(json, selectionService.getInitJson());
     }
 }
